@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/JD3PT3</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <mapping resource="com/JD/InitData/Hibernate/config/Initdata.hbm.xml"/>
+    <mapping resource="com/JD/Login/Hibernate/config/Login.hbm.xml"/>
+    <mapping resource="com/JD/Master/Hibernate/config/Machinemaster.hbm.xml"/>
+    <mapping resource="com/JD/Master/Hibernate/config/Currentdisellog.hbm.xml"/>
+    <mapping resource="com/JD/Master/Hibernate/config/Partymaster.hbm.xml"/>
+    <mapping resource="com/JD/Master/Hibernate/config/Drivermaster.hbm.xml"/>
+    <mapping resource="com/JD/Master/Hibernate/config/Productmaster.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>
