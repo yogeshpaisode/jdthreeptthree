@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 30, 2014 2:40:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.JD.Master.Hibernate.config.Currentdisellog" table="currentdisellog" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="openingQuantity" type="java.lang.Double">
+            <column name="openingQuantity" precision="22" scale="0" />
+        </property>
+        <property name="currentQuantity" type="java.lang.Double">
+            <column name="currentQuantity" precision="22" scale="0" />
+        </property>
+        <property name="currentDateOfStatus" type="date">
+            <column name="currentDateOfStatus" length="10" />
+        </property>
+        <property name="location" type="string">
+            <column name="Location" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="string">
+            <column name="rawField6" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

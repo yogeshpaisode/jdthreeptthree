@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 30, 2014 2:37:59 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.JD.InitData.Hibernate.config.Initdata" table="initdata" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="location" type="string">
+            <column name="location" length="65535" />
+        </property>
+        <property name="prSrNo" type="string">
+            <column name="prSrNo" length="65535" />
+        </property>
+        <property name="srNo" type="java.lang.Integer">
+            <column name="srNo" />
+        </property>
+        <property name="registrationNumber" type="string">
+            <column name="registrationNumber" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="java.lang.Integer">
+            <column name="rawField6" />
+        </property>
+        <property name="rawField7" type="java.lang.Integer">
+            <column name="rawField7" />
+        </property>
+        <property name="rawField8" type="java.lang.Integer">
+            <column name="rawField8" />
+        </property>
+        <property name="rawField9" type="java.lang.Integer">
+            <column name="rawField9" />
+        </property>
+        <property name="rawField10" type="java.lang.Integer">
+            <column name="rawField10" />
+        </property>
+    </class>
+</hibernate-mapping>

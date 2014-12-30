@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 30, 2014 2:39:38 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.JD.Login.Hibernate.config.Login" table="login" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="userName" type="string">
+            <column name="userName" length="65535" />
+        </property>
+        <property name="userId" type="string">
+            <column name="userId" length="65535" />
+        </property>
+        <property name="userPassword" type="string">
+            <column name="userPassword" length="65535" />
+        </property>
+        <property name="userPriority" type="java.lang.Integer">
+            <column name="userPriority" />
+        </property>
+        <property name="userEmail" type="string">
+            <column name="userEmail" length="65535" />
+        </property>
+        <property name="userMob" type="string">
+            <column name="userMob" length="65535" />
+        </property>
+        <property name="userLastAccountAccess" type="date">
+            <column name="userLastAccountAccess" length="10" />
+        </property>
+        <property name="userAddress" type="string">
+            <column name="userAddress" length="65535" />
+        </property>
+        <property name="userDateOfAddition" type="date">
+            <column name="userDateOfAddition" length="10" />
+        </property>
+        <property name="userTimeOfAddition" type="time">
+            <column name="userTimeOfAddition" length="8" />
+        </property>
+        <property name="userLocation" type="string">
+            <column name="userLocation" length="65535" />
+        </property>
+        <property name="userAddedByPersonName" type="string">
+            <column name="userAddedByPersonName" length="65535" />
+        </property>
+        <property name="userAddedWithRight" type="string">
+            <column name="userAddedWithRight" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="string">
+            <column name="rawField6" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>
