@@ -57,7 +57,11 @@ public class JD_Home extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         hideUnhide_Lable = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        currentWindow_Lable = new javax.swing.JLabel();
+        currentWindow_Labe = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        user_Lable = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        logout_Lable = new javax.swing.JLabel();
         menuItem_Panel = new javax.swing.JPanel();
         master_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -94,10 +98,27 @@ public class JD_Home extends javax.swing.JFrame {
         jLabel2.setText("      ");
         jToolBar1.add(jLabel2);
 
-        currentWindow_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/down.jpg"))); // NOI18N
-        currentWindow_Lable.setText("Current Page You Are Viewing is ");
-        currentWindow_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-        jToolBar1.add(currentWindow_Lable);
+        currentWindow_Labe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/down.jpg"))); // NOI18N
+        currentWindow_Labe.setText("Current Page You Are Viewing is ");
+        currentWindow_Labe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        jToolBar1.add(currentWindow_Labe);
+
+        jLabel3.setText("                                                                                                                                                                                                                   ");
+        jToolBar1.add(jLabel3);
+
+        user_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/user.png"))); // NOI18N
+        user_Lable.setText(" Welcome Yogesh Paisode ");
+        user_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        jToolBar1.add(user_Lable);
+
+        jLabel4.setText("             ");
+        jToolBar1.add(jLabel4);
+
+        logout_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/logout.jpg"))); // NOI18N
+        logout_Lable.setText(" Logout ");
+        logout_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        logout_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jToolBar1.add(logout_Lable);
 
         menuItem_Panel.setBackground(new java.awt.Color(51, 102, 255));
         menuItem_Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
@@ -159,7 +180,7 @@ public class JD_Home extends javax.swing.JFrame {
         );
         parentComponentHolder_PanelLayout.setVerticalGroup(
             parentComponentHolder_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
@@ -227,7 +248,7 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.add(masterHome.getMasterHome_TabbedPane());
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
-        currentWindow_Lable.setText(" Master Window ");
+        currentWindow_Labe.setText(" Master Window ");
         
 
     }//GEN-LAST:event_master_ButtonActionPerformed
@@ -315,11 +336,13 @@ public class JD_Home extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel currentWindow_Lable;
+    private javax.swing.JLabel currentWindow_Labe;
     private javax.swing.JButton dm_Button;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -327,8 +350,10 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JLabel logout_Lable;
     private javax.swing.JButton master_Button;
     private javax.swing.JPanel menuItem_Panel;
     private javax.swing.JPanel parentComponentHolder_Panel;
+    private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
 }
