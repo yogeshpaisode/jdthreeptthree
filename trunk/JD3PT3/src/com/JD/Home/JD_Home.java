@@ -304,6 +304,7 @@ public class JD_Home extends javax.swing.JFrame {
         // parentComponentHolder_Panel.add(null);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Print Receipt/DM Window ");
 
     }//GEN-LAST:event_dm_ButtonActionPerformed
 
