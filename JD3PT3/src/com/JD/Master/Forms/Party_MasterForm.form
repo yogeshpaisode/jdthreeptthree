@@ -100,7 +100,7 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="search_TextField" min="-2" pref="146" max="-2" attributes="0"/>
+                  <Component id="search_TextField" min="-2" pref="153" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -157,7 +157,7 @@
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="exportToExcel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="print_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="search_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="search_TextField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -410,6 +410,13 @@
         <Component class="javax.swing.JTextField" name="search_TextField">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search.................."/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true">
+                  <Color PropertyName="color" blue="ff" green="33" red="33" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="search_TextFieldMouseClicked"/>
