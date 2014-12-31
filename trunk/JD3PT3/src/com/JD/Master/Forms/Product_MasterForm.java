@@ -5,6 +5,7 @@
 package com.JD.Master.Forms;
 
 import com.JD.Master.Forms.*;
+import java.util.Date;
 import javax.swing.JInternalFrame;
 
 /**
@@ -16,6 +17,23 @@ public class Product_MasterForm extends javax.swing.JFrame {
     /**
      * Creates new form Party_MasterForm
      */
+    //----- DataBase Data -----//
+    String productName = "";
+    String productSize = "";
+    String productMeasurement = "";
+    Date productDateOfAddition = null;
+    Date productTimeOfAddition = null;
+    String productLocation = "";
+    String productAddedByPersonName = "";
+    String productAddedWithRight = "";
+    String rawField1 = "";
+    String rawField2 = "";
+    String rawField3 = "";
+    String rawField4 = "";
+    String rawField5 = "";
+    String rawField6 = "";
+//----- DataBase Data -----//
+
     public Product_MasterForm() {
         initComponents();
     }
@@ -32,6 +50,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
         productMaster_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,16 +69,24 @@ public class Product_MasterForm extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setText("* Product Name :");
+
         javax.swing.GroupLayout productMaster_PanelLayout = new javax.swing.GroupLayout(productMaster_Panel);
         productMaster_Panel.setLayout(productMaster_PanelLayout);
         productMaster_PanelLayout.setHorizontalGroup(
             productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addGroup(productMaster_PanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addContainerGap())
         );
         productMaster_PanelLayout.setVerticalGroup(
             productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productMaster_PanelLayout.createSequentialGroup()
-                .addGap(0, 288, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -119,10 +146,9 @@ public class Product_MasterForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     public javax.swing.JPanel productMaster_Panel;
     // End of variables declaration//GEN-END:variables
-
-   
 }
