@@ -77,6 +77,7 @@ public class JD_Home extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         notification_Lable = new javax.swing.JLabel();
+        fuelQuantity_Lable = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -195,8 +196,11 @@ public class JD_Home extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Login/Form/statonary2.gif"))); // NOI18N
 
-        notification_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
-        notification_Lable.setText("jLabel6");
+        notification_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/notification.png"))); // NOI18N
+
+        fuelQuantity_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
+        fuelQuantity_Lable.setText(" +134.99 LTR ");
+        fuelQuantity_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,6 +208,8 @@ public class JD_Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(notification_Lable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fuelQuantity_Lable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -212,9 +218,11 @@ public class JD_Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(notification_Lable)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(fuelQuantity_Lable)
+                        .addComponent(notification_Lable))))
         );
 
         jMenu1.setText("File");
@@ -352,6 +360,7 @@ public class JD_Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel currentWindow_Labe;
     private javax.swing.JButton dm_Button;
+    private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
