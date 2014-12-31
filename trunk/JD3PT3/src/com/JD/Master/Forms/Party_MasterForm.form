@@ -90,17 +90,17 @@
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="mobile_TextField" max="32767" attributes="0"/>
-                          <Component id="emailID_TextField" pref="198" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="mobile_TextField" max="32767" attributes="0"/>
+                      <Component id="emailID_TextField" pref="198" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="exportToExcel_Button" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="print_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="print_Button" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="search_TextField" min="-2" pref="146" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -157,6 +157,7 @@
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="exportToExcel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="print_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="search_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -404,6 +405,17 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="print_ButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="search_TextField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Search.................."/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="search_TextFieldMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="search_TextFieldMouseEntered"/>
+            <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="search_TextFieldMousePressed"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="search_TextFieldKeyReleased"/>
           </Events>
         </Component>
       </SubComponents>

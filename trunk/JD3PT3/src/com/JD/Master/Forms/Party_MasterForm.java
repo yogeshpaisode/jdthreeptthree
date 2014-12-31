@@ -113,6 +113,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         reset_Button = new javax.swing.JButton();
         exportToExcel_Button = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
+        search_TextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -258,6 +259,24 @@ public class Party_MasterForm extends javax.swing.JFrame {
             }
         });
 
+        search_TextField.setText("Search..................");
+        search_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                search_TextFieldMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                search_TextFieldMouseEntered(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                search_TextFieldMousePressed(evt);
+            }
+        });
+        search_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_TextFieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout partyMaster_PanelLayout = new javax.swing.GroupLayout(partyMaster_Panel);
         partyMaster_Panel.setLayout(partyMaster_PanelLayout);
         partyMaster_PanelLayout.setHorizontalGroup(
@@ -296,14 +315,15 @@ public class Party_MasterForm extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(mobile_TextField)
-                        .addComponent(emailID_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mobile_TextField)
+                    .addComponent(emailID_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addGroup(partyMaster_PanelLayout.createSequentialGroup()
                         .addComponent(exportToExcel_Button)
                         .addGap(18, 18, 18)
-                        .addComponent(print_Button)))
+                        .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         partyMaster_PanelLayout.setVerticalGroup(
@@ -346,7 +366,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
                         .addComponent(reset_Button))
                     .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(exportToExcel_Button)
-                        .addComponent(print_Button)))
+                        .addComponent(print_Button)
+                        .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE))
         );
@@ -511,7 +532,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
         try {
-             party_Table.print();
+            party_Table.print();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Printer Error,Can't Print.");
         }
@@ -519,10 +540,60 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
     private void exportToExcel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportToExcel_ButtonActionPerformed
         // TODO add your handling code here:  party_Table
-        
+
         new com.JD.ExportToExcel.ExportToExcel().saveToExcel(party_Table);
-        
+
     }//GEN-LAST:event_exportToExcel_ButtonActionPerformed
+
+    private void search_TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseClicked
+        // TODO add your handling code here:
+        search_TextField.setText("");
+    }//GEN-LAST:event_search_TextFieldMouseClicked
+
+    private void search_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseEntered
+        // TODO add your handling code here:
+        search_TextField.setText("");
+    }//GEN-LAST:event_search_TextFieldMouseEntered
+
+    private void search_TextFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMousePressed
+        // TODO add your handling code here:
+        search_TextField.setText("");
+    }//GEN-LAST:event_search_TextFieldMousePressed
+
+    private void search_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldKeyReleased
+        // TODO add your handling code here:
+
+        String pName = search_TextField.getText().toUpperCase()+"%";
+        search_TextField.setText(search_TextField.getText().toUpperCase());
+        resetJtableOnSEARCH();
+        indexJTable = -1;
+        String partName = name_ComboBox.getSelectedItem().toString();
+
+        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
+        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
+        cr.add(Restrictions.like("partyName", pName));
+        List results = cr.list();
+        //JOptionPane.showMessageDialog(null,results.size());
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;           
+            indexJTable = indexJTable + 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
+        }
+        session.close();
+
+
+    }//GEN-LAST:event_search_TextFieldKeyReleased
+
+    void resetJtableOnSEARCH() {
+
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+
+    }
+
     void reset() {
         name_TextField.setText("");
         address_TextField.setText("");
@@ -532,6 +603,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         emailID_TextField.setText("");
         modification_ButtonGroup.clearSelection();
         name_ComboBox.setSelectedIndex(0);
+        search_TextField.setText("Search..................");
 
     }
 
@@ -554,8 +626,11 @@ public class Party_MasterForm extends javax.swing.JFrame {
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{partyName, partyAddress, partyCity, partyMobile, partyPhone, partyEmail, partyAddedByPersonName, partyAddedWithRight, partyDateOfAddition, partyTimeOfAddition, partyLocation});
             JOptionPane.showMessageDialog(null, "Party " + partyName + " Added Successfully..");
+            //--- Update Party Name Combobox ---//
             name_ComboBox.addItem(partyName);
+            //--- Update Party Name Combobox ---//
             reset();
+            resetJTable();
         } else {
             JOptionPane.showMessageDialog(null, "Entry " + partyName + " Already Exist..");
         }
@@ -695,6 +770,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     private javax.swing.JTextField phone_TextField;
     private javax.swing.JButton print_Button;
     private javax.swing.JButton reset_Button;
+    private javax.swing.JTextField search_TextField;
     private javax.swing.JCheckBox updateData_CheacBox;
     // End of variables declaration//GEN-END:variables
 }
