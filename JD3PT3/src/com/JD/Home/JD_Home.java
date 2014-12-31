@@ -56,6 +56,8 @@ public class JD_Home extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         hideUnhide_Lable = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        currentWindow_Lable = new javax.swing.JLabel();
         menuItem_Panel = new javax.swing.JPanel();
         master_Button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -88,6 +90,14 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(hideUnhide_Lable);
+
+        jLabel2.setText("      ");
+        jToolBar1.add(jLabel2);
+
+        currentWindow_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/down.jpg"))); // NOI18N
+        currentWindow_Lable.setText("Current Page You Are Viewing is ");
+        currentWindow_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
+        jToolBar1.add(currentWindow_Lable);
 
         menuItem_Panel.setBackground(new java.awt.Color(51, 102, 255));
         menuItem_Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
@@ -217,6 +227,8 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.add(masterHome.getMasterHome_TabbedPane());
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
+        currentWindow_Lable.setText(" Master Window ");
+        
 
     }//GEN-LAST:event_master_ButtonActionPerformed
 
@@ -303,9 +315,11 @@ public class JD_Home extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel currentWindow_Lable;
     private javax.swing.JButton dm_Button;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
