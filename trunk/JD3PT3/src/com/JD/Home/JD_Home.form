@@ -107,7 +107,7 @@
             <Property name="text" type="java.lang.String" value="      "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="currentWindow_Lable">
+        <Component class="javax.swing.JLabel" name="currentWindow_Labe">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/JD/Home/down.jpg"/>
@@ -119,6 +119,49 @@
                   <Color PropertyName="color" blue="0" green="0" red="cc" type="rgb"/>
                 </LineBorder>
               </Border>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="                                                                                                                                                                                                                   "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="user_Lable">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/JD/Home/user.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Welcome Yogesh Paisode "/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="             "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="logout_Lable">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/com/JD/Home/logout.jpg"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Logout "/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder>
+                  <Color PropertyName="color" blue="0" green="0" red="ff" type="rgb"/>
+                </LineBorder>
+              </Border>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
             </Property>
           </Properties>
         </Component>
@@ -216,7 +259,7 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="455" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
