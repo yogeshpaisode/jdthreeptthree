@@ -28,6 +28,11 @@ public class JD_Home extends javax.swing.JFrame {
     Toolkit unHideImageNametk = Toolkit.getDefaultToolkit();
     Image unHideImage = unHideImageNametk.getImage(unHideImageNameURL);
     ImageIcon unHideICO = new ImageIcon(unHideImage);
+    //-- User Name--//
+    String userNameTemp=com.JD.StaticData.Static_DATA.logIn_UserName;
+    String dataTemp[]=userNameTemp.split(" ");
+    
+    //-- User Name--//
     //------ Default Width and Height of parentComponentHolder_Panel------//
     int width = 00;
     int height = 00;
@@ -43,6 +48,7 @@ public class JD_Home extends javax.swing.JFrame {
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
+        user_Lable.setText("Welcome "+dataTemp[0]+" ");
     }
 
     /**
@@ -70,6 +76,7 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        notification_Lable = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -188,12 +195,16 @@ public class JD_Home extends javax.swing.JFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Login/Form/statonary2.gif"))); // NOI18N
 
+        notification_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
+        notification_Lable.setText("jLabel6");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(notification_Lable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -201,7 +212,9 @@ public class JD_Home extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(notification_Lable)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         jMenu1.setText("File");
@@ -353,6 +366,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel logout_Lable;
     private javax.swing.JButton master_Button;
     private javax.swing.JPanel menuItem_Panel;
+    private javax.swing.JLabel notification_Lable;
     private javax.swing.JPanel parentComponentHolder_Panel;
     private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
