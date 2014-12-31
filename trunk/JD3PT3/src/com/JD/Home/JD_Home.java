@@ -197,6 +197,7 @@ public class JD_Home extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Login/Form/statonary2.gif"))); // NOI18N
 
         notification_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/notification.png"))); // NOI18N
+        notification_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
 
         fuelQuantity_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
         fuelQuantity_Lable.setText(" +134.99 LTR ");
