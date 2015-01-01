@@ -626,8 +626,31 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         Session session = masterFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.eq("machineNumber", machineNumber));
+        machineDateOfAddition = new Date();
+        machineTimeOfAddition = new Date();
+        List results = cr.list();
 
-        session.close();
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Machinemaster m=(com.JD.Master.Hibernate.config.Machinemaster)object;
+            m.setMachinePartyLink(machinePartyLink);
+            m.setMachineType(machineType);
+            m.setMachineName(machineName);
+            m.setMachineNumber(machineNumber);
+           
+            m.setMachineFuel(machineFuel);
+            m.setMachineCurrentReading(machineCurrentReading);
+            m.setMachineServicingLog(machineServicingLog);
+            m.setMachineExpectedAvg(machineExpectedAVG);
+            session.save(m);
+            
+        }        
+        transaction.commit();
+        session.close();        
+        JOptionPane.showMessageDialog(null, "Machine Number "+machineNumber+" Updated Successfully.");
+        reset();
+        resetJTable();
     }
 
     void delete() {
