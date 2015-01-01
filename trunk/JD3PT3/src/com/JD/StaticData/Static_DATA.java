@@ -43,10 +43,13 @@ public class Static_DATA {
     
     public static int logIn_Priority=0;
     public static String logIn_UserName=null;
-    public static String logIn_Right=null;
-    
+    public static String logIn_Right=null;   
     
     
     //------ Login Form ------//
     //------------------------------------------------------------------------//
+    
+    //-----Master ComboBoxFill-----//
+    public static javax.swing.JComboBox machinePartyName_ComboBox=null; 
+    //-----Master ComboBoxFill-----//
 }

@@ -6,6 +6,9 @@ package com.JD.Master.Forms;
 
 import com.JD.Master.Forms.*;
 import javax.swing.JInternalFrame;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -13,11 +16,36 @@ import javax.swing.JInternalFrame;
  */
 public class Machine_MasterForm extends javax.swing.JFrame {
 
+    //--- INIT SESSION FACTORY ---//
+    SessionFactory masterFactory=com.JD.StaticData.Static_DATA.master_SessionFactory;
+    //--- INIT SESSION FACTORY ---//
+    
+    
+    
     /**
      * Creates new form Party_MasterForm
      */
     public Machine_MasterForm() {
         initComponents();
+        //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
+        com.JD.StaticData.Static_DATA.machinePartyName_ComboBox = machinePartyName_ComboBox;
+        //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
+        
+        
+        Session  session=masterFactory.openSession();
+        
+        Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+        
+        for (Object object : q.list()) {
+            
+            com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
+            
+           machinePartyName_ComboBox.addItem(p.getPartyName());
+            
+        }
+        
+        session.close();
+        
     }
 
     /**
@@ -31,13 +59,15 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         machineMaster_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        machine_JTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        machinePartyName_ComboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         machineMaster_Panel.setBackground(new java.awt.Color(255, 255, 51));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        machine_JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -48,18 +78,32 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(machine_JTable);
+
+        jLabel1.setText("* Party Name:");
+
+        machinePartyName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
 
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
         machineMaster_PanelLayout.setHorizontalGroup(
             machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         machineMaster_PanelLayout.setVerticalGroup(
             machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
-                .addGap(0, 288, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -119,10 +163,10 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     public javax.swing.JPanel machineMaster_Panel;
+    private javax.swing.JComboBox machinePartyName_ComboBox;
+    private javax.swing.JTable machine_JTable;
     // End of variables declaration//GEN-END:variables
-
-   
 }
