@@ -122,6 +122,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
         addDataToDatabase_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
         search_Button = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,6 +200,10 @@ public class Product_MasterForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
+        jLabel5.setText(" Enter Product Name To Search ");
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
         javax.swing.GroupLayout productMaster_PanelLayout = new javax.swing.GroupLayout(productMaster_Panel);
         productMaster_Panel.setLayout(productMaster_PanelLayout);
         productMaster_PanelLayout.setHorizontalGroup(
@@ -225,8 +230,10 @@ public class Product_MasterForm extends javax.swing.JFrame {
                         .addComponent(jLabel3))
                     .addGroup(productMaster_PanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap(519, Short.MAX_VALUE))
         );
         productMaster_PanelLayout.setVerticalGroup(
             productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +255,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
                 .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDataToDatabase_Button)
                     .addComponent(reset_Button)
-                    .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
@@ -437,6 +445,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox measurement_ComboBox;
     private javax.swing.JTable prductTable_JTable;
