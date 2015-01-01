@@ -5,7 +5,10 @@
 package com.JD.Master.Forms;
 
 import com.JD.Master.Forms.*;
+import java.awt.Color;
+import java.util.Date;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,12 +22,54 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     //--- INIT SESSION FACTORY ---//
     SessionFactory masterFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
     //--- INIT SESSION FACTORY ---//
+    //---- Data For DataBase ---//
+    String machinePartyLink = "";
+    String machineIdentification = "";
+    String machineType = "";
+    String machineName = "";
+    String machineNumber = "";
+    String machineServicingLogIn = "";
+    int machineServicingLog = 00;
+    double machineExpectedAVG = 0.0;
+    String machineStatus = "";
+    int machineCurrentReading = 00;
+    double machineFuel = 00;
+    //----------------------------------------//
+    Date machineDateOfAddition = null;
+    Date machineTimeOfAddition = null;
+    String productLocation = com.JD.StaticData.Static_DATA.location;
+    String productAddedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String productAddedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
+    String rawField1 = "";
+    String rawField2 = "";
+    String rawField3 = "";
+    String rawField4 = "";
+    String rawField5 = "";
+    String rawField6 = "";
+    //---- Data For DataBase ---//
+    //--- Table Model Object And Index---//
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+    //--- Table Model Object And Index---//
 
     /**
      * Creates new form Party_MasterForm
      */
     public Machine_MasterForm() {
         initComponents();
+        //--- Disable TextField---//
+        fuelAvilable_TextField.setEnabled(false);
+        currentReading_TextField.setEnabled(false);
+        servicingStatus_TextField.setEnabled(false);
+        expectedAverage_TextField.setEnabled(false);
+
+        currentReading_TextField.setBackground(Color.lightGray);
+        servicingStatus_TextField.setBackground(Color.lightGray);
+        expectedAverage_TextField.setBackground(Color.lightGray);
+        fuelAvilable_TextField.setBackground(Color.lightGray);
+
+        //--- Disable TextField---//
+
         //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
         com.JD.StaticData.Static_DATA.machinePartyName_ComboBox = machinePartyName_ComboBox;
         //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
@@ -37,8 +82,15 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         for (Object object : q.list()) {
 
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
-
             machinePartyName_ComboBox.addItem(p.getPartyName());
+        }
+
+        q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
+
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            indexJTable = indexJTable + 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
 
         }
 
@@ -55,11 +107,30 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        design_ButtonGroup = new javax.swing.ButtonGroup();
         machineMaster_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         machine_JTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         machinePartyName_ComboBox = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        type_ComboBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        machineName_Combobox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        model_TextField = new javax.swing.JTextField();
+        fuel_Lable = new javax.swing.JLabel();
+        fuelAvilable_TextField = new javax.swing.JTextField();
+        reading_Lable = new javax.swing.JLabel();
+        currentReading_TextField = new javax.swing.JTextField();
+        servicing_Lable = new javax.swing.JLabel();
+        servicingStatus_TextField = new javax.swing.JTextField();
+        average_Lable = new javax.swing.JLabel();
+        expectedAverage_TextField = new javax.swing.JTextField();
+        update_CheackBox = new javax.swing.JCheckBox();
+        delete_CheackBox = new javax.swing.JCheckBox();
+        clear_CheackBox = new javax.swing.JCheckBox();
+        addDataToDatabase_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,20 +138,91 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         machine_JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Party Name", "Machine Type", "Machine Name", "Machine Number", "Fuel Avilable", "Current Reading", "Expected Average", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(machine_JTable);
 
         jLabel1.setText("* Party Name:");
 
         machinePartyName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+        machinePartyName_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                machinePartyName_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("* Machine Type:");
+
+        type_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Type", "DG", "CRUSHER", "VEHICLE", "HYDRAULIC EXCAVATOR", "ROAD ROLLER", "VIBRATOR ROLLER", "BULDOZZER", "BATCHING PLANT", "CRANE", "OTHER" }));
+        type_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                type_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("* Machine Name:");
+
+        machineName_Combobox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Name" }));
+
+        jLabel4.setText("* Machine Number:");
+
+        fuel_Lable.setText("Fuel Avilable:");
+
+        reading_Lable.setText("Current Reading:");
+
+        servicing_Lable.setText("Servicing After Hrs :");
+
+        average_Lable.setText("Expected Average:");
+
+        design_ButtonGroup.add(update_CheackBox);
+        update_CheackBox.setText("Update");
+        update_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        design_ButtonGroup.add(delete_CheackBox);
+        delete_CheackBox.setText("Delete");
+        delete_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delete_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        design_ButtonGroup.add(clear_CheackBox);
+        clear_CheackBox.setText("Clear");
+        clear_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        addDataToDatabase_Button.setText("Add Machine");
+        addDataToDatabase_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDataToDatabase_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
@@ -89,10 +231,59 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(53, 53, 53)
+                        .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(fuel_Lable))
+                                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                            .addGap(43, 43, 43)
+                                            .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                    .addComponent(average_Lable)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(reading_Lable)
+                                .addGap(18, 18, 18)
+                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(update_CheackBox)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(delete_CheackBox)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(clear_CheackBox)))))
+                        .addGap(18, 18, 18)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(model_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(servicing_Lable)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(279, 279, 279))))
         );
         machineMaster_PanelLayout.setVerticalGroup(
             machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,8 +292,33 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(model_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fuel_Lable)
+                    .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reading_Lable)
+                    .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(servicing_Lable)
+                    .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(average_Lable)
+                    .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(update_CheackBox)
+                    .addComponent(delete_CheackBox)
+                    .addComponent(clear_CheackBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addDataToDatabase_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -118,6 +334,246 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void type_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        String item = type_ComboBox.getSelectedItem().toString();
+
+        if (item.equals("VEHICLE")) {
+            servicing_Lable.setText("Servicing After KM :");
+            machineServicingLogIn = "KM";
+        } else {
+            servicing_Lable.setText("Servicing After Hrs :");
+            machineServicingLogIn = "HRS";
+        }
+
+        machineName_Combobox.removeAllItems();
+        machineName_Combobox.addItem("Select Machine Name");
+        if (item.equals("VEHICLE")) {
+
+            machineName_Combobox.addItem("Tipper 6 Wheel");
+            machineName_Combobox.addItem("Tipper 10 Wheel");
+            machineName_Combobox.addItem("Tipper 14 Wheel");
+            machineName_Combobox.addItem("TATA 407 6 Wheel");
+            machineName_Combobox.addItem("TATA 407 10 Wheel");
+            machineName_Combobox.addItem("TATA 407 14 Wheel");
+            machineName_Combobox.addItem("Mahindra 5506 6 Wheel");
+            machineName_Combobox.addItem("Mahindra 5506 10 Wheel");
+            machineName_Combobox.addItem("Mahindra 5506 12 Wheel");
+            machineName_Combobox.addItem("Mahindra 5506 14 Wheel");
+
+
+        }
+
+        if (item.equals("DG")) {
+
+            machineName_Combobox.addItem("DG 50 KVA");
+            machineName_Combobox.addItem("DG 100 KVA");
+            machineName_Combobox.addItem("DG 200 KVA");
+            machineName_Combobox.addItem("DG 300 KVA");
+            machineName_Combobox.addItem("DG 400 KVA");
+            machineName_Combobox.addItem("DG 500 KVA");
+            machineName_Combobox.addItem("DG 600 KVA");
+            machineName_Combobox.addItem("DG 700 KVA");
+            machineName_Combobox.addItem("DG 800 KVA");
+            machineName_Combobox.addItem("DG 900 KVA");
+            machineName_Combobox.addItem("DG 1000 KVA");
+        }
+
+        if (item.equals("CRUSHER")) {
+
+            machineName_Combobox.addItem("CRUSHER 1");
+            machineName_Combobox.addItem("CRUSHER 1");
+            machineName_Combobox.addItem("CRUSHER 1");
+            machineName_Combobox.addItem("CRUSHER 1");
+            machineName_Combobox.addItem("CRUSHER 1");
+
+        }
+
+        if (item.equals("HYDRAULIC EXCAVATOR")) {
+
+            machineName_Combobox.addItem("HYUNDAI 1");
+            machineName_Combobox.addItem("HYUNDAI 2");
+            machineName_Combobox.addItem("HYUNDAI 3");
+        }
+
+        if (item.equals("ROAD ROLLER")) {
+            machineName_Combobox.addItem("HYUNDAI ROLLER 1");
+            machineName_Combobox.addItem("HYUNDAI ROLLER 1");
+            machineName_Combobox.addItem("HYUNDAI ROLLER 1");
+            machineName_Combobox.addItem("HYUNDAI ROLLER 1");
+        }
+        if (item.equals("VIBRATOR ROLLER")) {
+            machineName_Combobox.addItem("VIBRATOR ROLLER 1");
+            machineName_Combobox.addItem("VIBRATOR ROLLER 2");
+        }
+        if (item.equals("BULDOZZER")) {
+            machineName_Combobox.addItem("BULDOZZER 1");
+            machineName_Combobox.addItem("BULDOZZER 2");
+        }
+        if (item.equals("BATCHING PLANT")) {
+            machineName_Combobox.addItem("BATCHING PLANT 1");
+        }
+        if (item.equals("CRANE")) {
+            machineName_Combobox.addItem("CRANE 6 wheel");
+        }
+    }//GEN-LAST:event_type_ComboBoxActionPerformed
+
+    private void machinePartyName_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machinePartyName_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        String partyNameTemp = machinePartyName_ComboBox.getSelectedItem().toString();
+
+        if (partyNameTemp.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
+
+            fuelAvilable_TextField.setEnabled(true);
+            currentReading_TextField.setEnabled(true);
+            servicingStatus_TextField.setEnabled(true);
+            expectedAverage_TextField.setEnabled(true);
+            currentReading_TextField.setBackground(Color.white);
+            servicingStatus_TextField.setBackground(Color.white);
+            expectedAverage_TextField.setBackground(Color.white);
+            fuel_Lable.setText("* Fuel Avilable:");
+            reading_Lable.setText("* Current Reading:");
+            servicing_Lable.setText("* Servicing After Hrs :");
+            average_Lable.setText("* Expected Average:");
+
+            fuelAvilable_TextField.setBackground(Color.white);
+        } else {
+            fuelAvilable_TextField.setEnabled(false);
+            currentReading_TextField.setEnabled(false);
+            servicingStatus_TextField.setEnabled(false);
+            expectedAverage_TextField.setEnabled(false);
+            currentReading_TextField.setBackground(Color.lightGray);
+            servicingStatus_TextField.setBackground(Color.lightGray);
+            expectedAverage_TextField.setBackground(Color.lightGray);
+            fuelAvilable_TextField.setBackground(Color.lightGray);
+            fuel_Lable.setText("Fuel Avilable:");
+            reading_Lable.setText("Current Reading:");
+            servicing_Lable.setText("Servicing After Hrs :");
+            average_Lable.setText("Expected Average:");
+        }
+
+
+    }//GEN-LAST:event_machinePartyName_ComboBoxActionPerformed
+
+    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (clear_CheackBox.isSelected()) {
+            addDataToDatabase_Button.setText("Add Machine");
+        }
+    }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    private void delete_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (delete_CheackBox.isSelected()) {
+            addDataToDatabase_Button.setText("Delete Machine");
+        }
+    }//GEN-LAST:event_delete_CheackBoxActionPerformed
+
+    private void update_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (update_CheackBox.isSelected()) {
+            addDataToDatabase_Button.setText("Update Machine");
+        }
+    }//GEN-LAST:event_update_CheackBoxActionPerformed
+
+    private void addDataToDatabase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDatabase_ButtonActionPerformed
+        // TODO add your handling code here:
+//---------------------------------------------------------------------------------------------------------------------        
+        String partyNameTemp = machinePartyName_ComboBox.getSelectedItem().toString();
+        boolean flag = true;
+        machinePartyLink = machinePartyName_ComboBox.getSelectedItem().toString();
+
+        machineType = type_ComboBox.getSelectedItem().toString();
+        machineName = machineName_Combobox.getSelectedItem().toString();
+        machineNumber = model_TextField.getText();
+//------------------------------------------------------------------------------------------------------------------
+        if (partyNameTemp.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
+            flag = false;
+        } else {
+            machineIdentification = "OTHER";
+        }
+
+//---------------------------------------------------------------------------------------------------------------------
+        if (machinePartyLink.equals("Select Party Name")) {
+            JOptionPane.showMessageDialog(null, "Please Select Party Name");
+        } else {
+            if (machineType.equals("Select Machine Type")) {
+                JOptionPane.showMessageDialog(null, "Please Select Machine Type");
+            } else {
+                if (machineName.equals("Select Machine Name")) {
+                    JOptionPane.showMessageDialog(null, "Please Select Machine Name");
+                } else {
+                    if (model_TextField.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Please Enter Machine Number");
+                    } else {
+
+                        if (flag) {
+                            chkOperation();
+                        } else {
+
+                            if (fuelAvilable_TextField.getText().equals("")) {
+                                JOptionPane.showMessageDialog(null, "Please Enter Machine Fuel");
+                            } else {
+                                if (currentReading_TextField.getText().equals("")) {
+                                    JOptionPane.showMessageDialog(null, "Please Enter Machine Current Reading");
+                                } else {
+                                    if (servicingStatus_TextField.getText().equals("")) {
+                                        JOptionPane.showMessageDialog(null, "Please Enter Machine Servicing Log");
+                                    } else {
+                                        if (expectedAverage_TextField.getText().equals("")) {
+                                            JOptionPane.showMessageDialog(null, "Please Enter Machine Expected Average");
+                                        } else {
+                                            machineServicingLog = Integer.parseInt(servicingStatus_TextField.getText());
+                                            machineExpectedAVG = Double.parseDouble(expectedAverage_TextField.getText());
+                                            machineStatus = "OFF";
+                                            machineCurrentReading = Integer.parseInt(currentReading_TextField.getText());
+                                            machineFuel = Double.parseDouble(fuelAvilable_TextField.getText());
+                                            machineIdentification = "SELF";
+                                            chkOperation();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+//---------------------------------------------------------------------------------------------------------------------        
+
+    }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
+
+    void chkOperation() {
+        JOptionPane.showMessageDialog(null, "OK");
+    }
+
+    void reset() {
+        fuelAvilable_TextField.setEnabled(false);
+        currentReading_TextField.setEnabled(false);
+        servicingStatus_TextField.setEnabled(false);
+        expectedAverage_TextField.setEnabled(false);
+        currentReading_TextField.setBackground(Color.lightGray);
+        servicingStatus_TextField.setBackground(Color.lightGray);
+        expectedAverage_TextField.setBackground(Color.lightGray);
+        fuelAvilable_TextField.setBackground(Color.lightGray);
+        fuel_Lable.setText("Fuel Avilable:");
+        reading_Lable.setText("Current Reading:");
+        servicing_Lable.setText("Servicing After Hrs :");
+        average_Lable.setText("Expected Average:");
+        machinePartyName_ComboBox.setSelectedIndex(0);
+        type_ComboBox.setSelectedIndex(0);
+        machineName_Combobox.removeAllItems();
+        machineName_Combobox.addItem("Select Machine Name");
+        model_TextField.setText("");
+        fuelAvilable_TextField.setText("");
+        currentReading_TextField.setText("");
+        servicingStatus_TextField.setText("");
+        expectedAverage_TextField.setText("");
+        design_ButtonGroup.clearSelection();
+        addDataToDatabase_Button.setText("Add Machine");
+
+    }
 
     /**
      * @param args the command line arguments
@@ -161,10 +617,29 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDataToDatabase_Button;
+    private javax.swing.JLabel average_Lable;
+    private javax.swing.JCheckBox clear_CheackBox;
+    private javax.swing.JTextField currentReading_TextField;
+    private javax.swing.JCheckBox delete_CheackBox;
+    private javax.swing.ButtonGroup design_ButtonGroup;
+    private javax.swing.JTextField expectedAverage_TextField;
+    private javax.swing.JTextField fuelAvilable_TextField;
+    private javax.swing.JLabel fuel_Lable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel machineMaster_Panel;
+    private javax.swing.JComboBox machineName_Combobox;
     private javax.swing.JComboBox machinePartyName_ComboBox;
     private javax.swing.JTable machine_JTable;
+    private javax.swing.JTextField model_TextField;
+    private javax.swing.JLabel reading_Lable;
+    private javax.swing.JTextField servicingStatus_TextField;
+    private javax.swing.JLabel servicing_Lable;
+    private javax.swing.JComboBox type_ComboBox;
+    private javax.swing.JCheckBox update_CheackBox;
     // End of variables declaration//GEN-END:variables
 }
