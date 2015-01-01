@@ -5,13 +5,16 @@
 package com.JD.Master.Forms;
 
 import com.JD.Master.Forms.*;
+import com.JD.Master.Hibernate.config.Machinemaster;
 import java.awt.Color;
+import java.lang.InstantiationException;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -37,9 +40,9 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     //----------------------------------------//
     Date machineDateOfAddition = null;
     Date machineTimeOfAddition = null;
-    String productLocation = com.JD.StaticData.Static_DATA.location;
-    String productAddedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
-    String productAddedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
+    String machineLocation = com.JD.StaticData.Static_DATA.location;
+    String machineAddedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String machineAddedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
     String rawField1 = "";
     String rawField2 = "";
     String rawField3 = "";
@@ -57,6 +60,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
      */
     public Machine_MasterForm() {
         initComponents();
+        defaultTableModel = (DefaultTableModel) machine_JTable.getModel();
         //--- Disable TextField---//
         fuelAvilable_TextField.setEnabled(false);
         currentReading_TextField.setEnabled(false);
@@ -90,12 +94,10 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(),m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
 
         }
-
         session.close();
-
     }
 
     /**
@@ -141,14 +143,14 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Machine Type", "Machine Name", "Machine Number", "Fuel Avilable", "Current Reading", "Expected Average", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
+                "Party Name", "Machine Type", "Machine Name", "Machine Number", "Identification", "Fuel Avilable", "Current Reading", "Expected Average", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -160,6 +162,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(machine_JTable);
+        machine_JTable.getColumnModel().getColumn(0).setPreferredWidth(130);
 
         jLabel1.setText("* Party Name:");
 
@@ -545,7 +548,62 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
 
     void chkOperation() {
-        JOptionPane.showMessageDialog(null, "OK");
+        if (update_CheackBox.isSelected()) {
+            update();
+        } else if (delete_CheackBox.isSelected()) {
+            delete();
+        } else {
+            insert();
+        }
+    }
+
+    void insert() {
+        Session session = masterFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.eq("machineNumber", machineNumber));
+        machineDateOfAddition = new Date();
+        machineTimeOfAddition = new Date();
+        List results = cr.list();
+
+        if (results.isEmpty()) {
+            Transaction transaction = session.beginTransaction();
+            com.JD.Master.Hibernate.config.Machinemaster m = new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+            session.save(m);
+            transaction.commit();
+            reset();
+            resetJTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Data For Machine Number " + machineNumber + " Already Exist.");
+        }
+        session.close();
+    }
+
+    void update() {
+        Session session = masterFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+
+        session.close();
+    }
+
+    void delete() {
+    }
+
+    void resetJTable() {
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+        Session session = masterFactory.openSession();
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
+
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            indexJTable = indexJTable + 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(),m.getMachineIdentification(),m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+
+        }
+        session.close();
     }
 
     void reset() {
