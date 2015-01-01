@@ -4,9 +4,13 @@
  */
 package com.JD.Master.Forms;
 
-import com.JD.Master.Forms.*;
+import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JInternalFrame;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -32,10 +36,64 @@ public class Product_MasterForm extends javax.swing.JFrame {
     String rawField4 = "";
     String rawField5 = "";
     String rawField6 = "";
-//----- DataBase Data -----//
+    //----- DataBase Data -----//
+    //--- Table Model Object And Index---//
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+    //--- Table Model Object And Index---//
+    //--- INIT SESSION FACTORY ---//
+    //SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory masterSessionFactory =com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory();
+    //----- Data Collection -----//
+    String productNameList = "Raw,Aggrigate,Crush Sand,Bricks";
+    String productMeasurementList = "CFT,BRASS,NO,TON,CUM";
+    //----- Data Collection -----//
 
     public Product_MasterForm() {
         initComponents();
+        
+        defaultTableModel = (DefaultTableModel) prductTable_JTable.getModel();
+        Session session = masterSessionFactory.openSession();
+        
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
+        
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
+            indexJTable = indexJTable + 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
+            
+            
+            if (productNameList.contains(p.getProductName())) {
+                
+            } else {
+                productNameList = productNameList + "," + p.getProductName();
+            }
+            
+            if (productMeasurementList.contains(p.getProductMeasurement())) {
+                
+            } else {
+                productMeasurementList = productMeasurementList + "," + p.getProductMeasurement();
+            }
+            
+        }
+        session.close();
+        
+        String productNameTemp[] = productNameList.split(",");
+        
+        for (String string : productNameTemp) {
+            
+            productName_ComboBox.addItem(string);
+            
+        }
+        
+        String productMeasurementTemp[] = productMeasurementList.split(",");
+        for (String string : productMeasurementTemp) {
+            measurement_ComboBox.addItem(string);
+        }
+        
+        
+        
+        
     }
 
     /**
@@ -49,27 +107,67 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
         productMaster_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        prductTable_JTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        productName_ComboBox = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        measurement_ComboBox = new javax.swing.JComboBox();
+        size_TextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        addDataToDatabase_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         productMaster_Panel.setBackground(new java.awt.Color(255, 255, 51));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        prductTable_JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Product Name", "Size", "Measurement", "DOA", "TOA", "AddedBy", "UserRight", "Location"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(prductTable_JTable);
 
         jLabel1.setText("* Product Name :");
+
+        productName_ComboBox.setEditable(true);
+        productName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Product Name" }));
+
+        jLabel2.setText("* Size:");
+
+        jLabel4.setText("* Measurement:");
+
+        measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
+
+        jLabel3.setText("IN MM");
+
+        addDataToDatabase_Button.setText("Add Product");
+
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout productMaster_PanelLayout = new javax.swing.GroupLayout(productMaster_Panel);
         productMaster_Panel.setLayout(productMaster_PanelLayout);
@@ -78,16 +176,46 @@ public class Product_MasterForm extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(productMaster_PanelLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(productMaster_PanelLayout.createSequentialGroup()
+                        .addComponent(addDataToDatabase_Button)
+                        .addGap(18, 18, 18)
+                        .addComponent(reset_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                    .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(productName_ComboBox, 0, 238, Short.MAX_VALUE)
+                        .addComponent(measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(size_TextField)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
                 .addContainerGap())
         );
         productMaster_PanelLayout.setVerticalGroup(
             productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, productMaster_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 263, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(productName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(measurement_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(size_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addDataToDatabase_Button)
+                    .addComponent(reset_Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,6 +231,16 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+    
+    void reset() {
+        productName_ComboBox.setSelectedItem("Select Product Name");
+        size_TextField.setText("");
+        measurement_ComboBox.setSelectedItem("size_ComboBox");
+    }
 
     /**
      * @param args the command line arguments
@@ -139,16 +277,24 @@ public class Product_MasterForm extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new Product_MasterForm().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDataToDatabase_Button;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox measurement_ComboBox;
+    private javax.swing.JTable prductTable_JTable;
     public javax.swing.JPanel productMaster_Panel;
+    private javax.swing.JComboBox productName_ComboBox;
+    private javax.swing.JButton reset_Button;
+    private javax.swing.JTextField size_TextField;
     // End of variables declaration//GEN-END:variables
 }
