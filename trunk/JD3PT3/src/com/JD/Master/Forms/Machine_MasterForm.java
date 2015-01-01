@@ -136,6 +136,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         loadData_ComboBox = new javax.swing.JComboBox();
         reset_Button = new javax.swing.JButton();
         search_TextFields = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -257,11 +258,15 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
+        jLabel5.setText(" Enter Machine Number To Search");
+        jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
         machineMaster_PanelLayout.setHorizontalGroup(
             machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,16 +320,21 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(clear_CheackBox))
                                             .addComponent(search_TextFields))))))
-                        .addGap(18, 18, 18)
-                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(model_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(model_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(servicing_Lable)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                .addComponent(servicing_Lable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel5)))
                         .addGap(279, 279, 279))))
         );
         machineMaster_PanelLayout.setVerticalGroup(
@@ -363,7 +373,9 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                     .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addDataToDatabase_Button)
                         .addComponent(reset_Button))
-                    .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -816,6 +828,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox loadData_ComboBox;
     public javax.swing.JPanel machineMaster_Panel;
