@@ -34,7 +34,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     String partyLocation = com.JD.StaticData.Static_DATA.location;
     String partyAddedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
     String partyAddedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
-    String rawField1 = "";
+    String rawField1 = "OTHER";
     String rawField2 = "";
     String rawField3 = "";
     String rawField4 = "";
@@ -124,11 +124,11 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA", "TOA", "Location"
+                "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA/U", "TOA/U", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false
@@ -293,8 +293,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
                     .addGroup(partyMaster_PanelLayout.createSequentialGroup()
                         .addComponent(updateData_CheacBox, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(deleteData_CheacBox, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(deleteData_CheacBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(clear_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
                     .addComponent(name_TextField)
                     .addComponent(jScrollPane2))
@@ -564,7 +564,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     private void search_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldKeyReleased
         // TODO add your handling code here:
 
-        String pName = search_TextField.getText().toUpperCase()+"%";
+        String pName = search_TextField.getText().toUpperCase() + "%";
         search_TextField.setText(search_TextField.getText().toUpperCase());
         resetJtableOnSEARCH();
         indexJTable = -1;
@@ -578,7 +578,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         List results = cr.list();
         //JOptionPane.showMessageDialog(null,results.size());
         for (Object object : results) {
-            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;           
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
         }
@@ -645,6 +645,12 @@ public class Party_MasterForm extends javax.swing.JFrame {
         Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.eq("partyName", partyName));
+
+        if (partyName.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
+            rawField1 = "SELF";
+        }
+        partyDateOfAddition = new Date();
+        partyTimeOfAddition = new Date();
         List results = cr.list();
 
         if (results.isEmpty()) {
@@ -661,6 +667,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
                 p.setPartyMobile(partyMobile);
                 p.setPartyCity(partyCity);
                 p.setPartyEmail(partyEmail);
+                p.setPartyDateOfAddition(partyDateOfAddition);
+                p.setPartyTimeOfAddition(partyTimeOfAddition);
 
                 session.save(p);
             }

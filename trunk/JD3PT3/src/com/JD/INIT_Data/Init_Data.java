@@ -33,7 +33,8 @@ public class Init_Data implements Runnable{
             com.JD.StaticData.Static_DATA.location=id.getLocation();
             com.JD.StaticData.Static_DATA.prSrNo=id.getPrSrNo();
             com.JD.StaticData.Static_DATA.srNo=id.getSrNo();
-            com.JD.StaticData.Static_DATA.registrationNumber=id.getRegistrationNumber();           
+            com.JD.StaticData.Static_DATA.registrationNumber=id.getRegistrationNumber();  
+            com.JD.StaticData.Static_DATA.selfPartyname=id.getRawField1();
             
         }
         

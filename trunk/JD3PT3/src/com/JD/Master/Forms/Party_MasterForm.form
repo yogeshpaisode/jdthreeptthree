@@ -61,8 +61,8 @@
                       <Group type="102" attributes="0">
                           <Component id="updateData_CheacBox" min="-2" pref="95" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="deleteData_CheacBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="deleteData_CheacBox" min="-2" pref="93" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="clear_CheackBox" pref="57" max="32767" attributes="0"/>
                       </Group>
                       <Component id="name_TextField" alignment="0" max="32767" attributes="0"/>
@@ -186,9 +186,9 @@
                     <Column editable="false" title="Email ID" type="java.lang.String"/>
                     <Column editable="false" title="Added By" type="java.lang.String"/>
                     <Column editable="false" title="User Right" type="java.lang.String"/>
-                    <Column editable="false" title="DOA" type="java.lang.String"/>
-                    <Column editable="false" title="TOA" type="java.lang.Object"/>
-                    <Column editable="false" title="Location" type="java.lang.Object"/>
+                    <Column editable="false" title="DOA/U" type="java.lang.String"/>
+                    <Column editable="false" title="TOA/U" type="java.lang.String"/>
+                    <Column editable="false" title="Location" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
