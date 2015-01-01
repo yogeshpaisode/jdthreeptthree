@@ -135,6 +135,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         addDataToDatabase_Button = new javax.swing.JButton();
         loadData_ComboBox = new javax.swing.JComboBox();
         reset_Button = new javax.swing.JButton();
+        search_TextFields = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -243,6 +244,19 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             }
         });
 
+        search_TextFields.setText("Search......");
+        search_TextFields.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        search_TextFields.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                search_TextFieldsMouseClicked(evt);
+            }
+        });
+        search_TextFields.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_TextFieldsKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
         machineMaster_PanelLayout.setHorizontalGroup(
@@ -286,20 +300,21 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                                         .addComponent(reading_Lable)
                                         .addGap(18, 18, 18)
                                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(currentReading_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                                                 .addComponent(update_CheackBox)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(delete_CheackBox)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(clear_CheackBox))))
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(clear_CheackBox))
+                                            .addComponent(search_TextFields))))))
                         .addGap(18, 18, 18)
                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
@@ -344,11 +359,13 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                     .addComponent(delete_CheackBox)
                     .addComponent(clear_CheackBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addDataToDatabase_Button)
-                    .addComponent(reset_Button))
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addDataToDatabase_Button)
+                        .addComponent(reset_Button))
+                    .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -609,6 +626,31 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
 
+    private void search_TextFieldsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldsKeyReleased
+        // TODO add your handling code here:
+
+        String macineNumberTemp = search_TextFields.getText().toUpperCase();
+        Session session = masterFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.like("machineNumber", macineNumberTemp + "%"));
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+        List results = cr.list();
+        indexJTable+=1;
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+        }
+        session.close();
+    }//GEN-LAST:event_search_TextFieldsKeyReleased
+
+    private void search_TextFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldsMouseClicked
+        // TODO add your handling code here:
+        search_TextFields.setText("");
+    }//GEN-LAST:event_search_TextFieldsMouseClicked
+
     void chkOperation() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -651,22 +693,22 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         List results = cr.list();
 
         for (Object object : results) {
-            com.JD.Master.Hibernate.config.Machinemaster m=(com.JD.Master.Hibernate.config.Machinemaster)object;
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             m.setMachinePartyLink(machinePartyLink);
             m.setMachineType(machineType);
             m.setMachineName(machineName);
             m.setMachineNumber(machineNumber);
-           
+
             m.setMachineFuel(machineFuel);
             m.setMachineCurrentReading(machineCurrentReading);
             m.setMachineServicingLog(machineServicingLog);
             m.setMachineExpectedAvg(machineExpectedAVG);
             session.save(m);
-            
-        }        
+
+        }
         transaction.commit();
-        session.close();        
-        JOptionPane.showMessageDialog(null, "Machine Number "+machineNumber+" Updated Successfully.");
+        session.close();
+        JOptionPane.showMessageDialog(null, "Machine Number " + machineNumber + " Updated Successfully.");
         reset();
         resetJTable();
     }
@@ -715,6 +757,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         expectedAverage_TextField.setText("");
         design_ButtonGroup.clearSelection();
         addDataToDatabase_Button.setText("Add Machine");
+        search_TextFields.setText("Search......");
 
     }
 
@@ -782,6 +825,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private javax.swing.JTextField model_TextField;
     private javax.swing.JLabel reading_Lable;
     private javax.swing.JButton reset_Button;
+    private javax.swing.JTextField search_TextFields;
     private javax.swing.JTextField servicingStatus_TextField;
     private javax.swing.JLabel servicing_Lable;
     private javax.swing.JComboBox type_ComboBox;
