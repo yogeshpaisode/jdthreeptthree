@@ -17,11 +17,9 @@ import org.hibernate.SessionFactory;
 public class Machine_MasterForm extends javax.swing.JFrame {
 
     //--- INIT SESSION FACTORY ---//
-    SessionFactory masterFactory=com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory masterFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
     //--- INIT SESSION FACTORY ---//
-    
-    
-    
+
     /**
      * Creates new form Party_MasterForm
      */
@@ -30,22 +28,22 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
         com.JD.StaticData.Static_DATA.machinePartyName_ComboBox = machinePartyName_ComboBox;
         //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
-        
-        
-        Session  session=masterFactory.openSession();
-        
-        Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
-        
+
+
+        Session session = masterFactory.openSession();
+
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+
         for (Object object : q.list()) {
-            
-            com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
-            
-           machinePartyName_ComboBox.addItem(p.getPartyName());
-            
+
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
+
+            machinePartyName_ComboBox.addItem(p.getPartyName());
+
         }
-        
+
         session.close();
-        
+
     }
 
     /**
