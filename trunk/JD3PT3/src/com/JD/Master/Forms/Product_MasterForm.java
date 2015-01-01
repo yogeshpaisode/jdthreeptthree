@@ -57,47 +57,47 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
     public Product_MasterForm() {
         initComponents();
-
+        
         defaultTableModel = (DefaultTableModel) prductTable_JTable.getModel();
         Session session = masterSessionFactory.openSession();
-
+        
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
-
+        
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
-
-
+            
+            
             if (productNameList.contains(p.getProductName())) {
             } else {
                 productNameList = productNameList + "," + p.getProductName();
             }
-
+            
             if (productMeasurementList.contains(p.getProductMeasurement())) {
             } else {
                 productMeasurementList = productMeasurementList + "," + p.getProductMeasurement();
             }
-
+            
         }
         session.close();
-
+        
         String productNameTemp[] = productNameList.split(",");
-
+        
         for (String string : productNameTemp) {
-
+            
             productName_ComboBox.addItem(string);
-
+            
         }
-
+        
         String productMeasurementTemp[] = productMeasurementList.split(",");
         for (String string : productMeasurementTemp) {
             measurement_ComboBox.addItem(string);
         }
-
-
-
-
+        
+        
+        
+        
     }
 
     /**
@@ -161,6 +161,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
         jLabel4.setText("* Size:");
 
+        measurement_ComboBox.setEditable(true);
         measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Measurement" }));
 
         size_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -269,24 +270,24 @@ public class Product_MasterForm extends javax.swing.JFrame {
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_reset_ButtonActionPerformed
-
+    
     private void size_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_size_TextFieldKeyReleased
         // TODO add your handling code here:
         size_TextField.setText(valid.intTypeNumberValidator(size_TextField.getText()));
     }//GEN-LAST:event_size_TextFieldKeyReleased
-
+    
     private void addDataToDatabase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDatabase_ButtonActionPerformed
         // TODO add your handling code here:
 
         try {
-
+            
             productSize = Integer.parseInt(size_TextField.getText());
             productMeasurement = measurement_ComboBox.getSelectedItem().toString();
             productName = productName_ComboBox.getSelectedItem().toString();
             productTimeOfAddition = new Date();
             productDateOfAddition = new Date();
-
-
+            
+            
             if (productName.equals("Select Product Name")) {
                 JOptionPane.showMessageDialog(null, "Please Select Product Name");
             } else {
@@ -304,14 +305,14 @@ public class Product_MasterForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please Select Product Size" + e);
         }
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
-
+    
     private void search_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_ButtonMouseEntered
         // TODO add your handling code here:
 
         search_Button.setText("");
-
+        
     }//GEN-LAST:event_search_ButtonMouseEntered
-
+    
     private void search_ButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_ButtonKeyReleased
         // TODO add your handling code here:
 
@@ -319,7 +320,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
         Session session = masterSessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Productmaster.class);
         cr.add(Restrictions.like("productName", productNameTemp + "%"));
-
+        
         List results = cr.list();
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
@@ -329,12 +330,12 @@ public class Product_MasterForm extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
-
+            
         }
         session.close();
-
+        
     }//GEN-LAST:event_search_ButtonKeyReleased
-
+    
     void addData() {
         Session session = masterSessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Productmaster.class);
@@ -342,7 +343,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
         cr.add(Restrictions.eq("productSize", productSize));
         cr.add(Restrictions.eq("productMeasurement", productMeasurement));
         List results = cr.list();
-
+        
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
             indexJTable = indexJTable + 1;
@@ -351,18 +352,28 @@ public class Product_MasterForm extends javax.swing.JFrame {
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Product Name " + productName + " Added Successfully");
             reset();
-
+            
         } else {
-
+            
             JOptionPane.showMessageDialog(null, "Data Product Name : " + productName + " , Measurement : " + productMeasurement + " , And Size : " + productSize + " Already Exist ");
         }
         session.close();
-
+        
+        if (productNameList.contains(productName)) {
+        } else {
+            productName_ComboBox.addItem(productName);
+        }        
+        if (productMeasurementList.contains(productMeasurement)) {            
+        } else {
+            measurement_ComboBox.addItem(productMeasurement);
+        }      
+        
+        
     }
-
+    
     void reset() {
         productName_ComboBox.setSelectedItem("Select Product Name");
-        size_TextField.setText("");        
+        size_TextField.setText("");
         measurement_ComboBox.setSelectedItem("Select Measurement");
         search_Button.setText("Search.........");
         indexJTable = -1;
@@ -414,7 +425,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new Product_MasterForm().setVisible(true);
             }
