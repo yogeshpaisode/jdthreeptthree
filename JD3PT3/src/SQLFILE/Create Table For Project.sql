@@ -88,7 +88,7 @@ VALUES ( 'Operator Name Goes Here','Operator','Operator','3','Operator Email Goe
 
 
 INSERT INTO InitData (location,prSrNo,srNo,registrationNumber,rawField1,rawField2,rawField3,rawField4,rawField5,rawField6,rawField7,rawField8,rawField9,rawField10)
-VALUES ('Nagpur', 'NA',6000,'DMV76355K','NO','NO','NO','NO','NO',0,0,0,0,0);
+VALUES ('Nagpur', 'NA',6000,'DMV76355K','FIBERTECH INFRACON','NO','NO','NO','NO',0,0,0,0,0);
 
 
 
@@ -117,6 +117,10 @@ create table PartyMaster (
    
    PRIMARY KEY (id)
 );
+
+INSERT INTO PartyMaster (partyName,partyAddress,partyCity,partyPhone,partyMobile,partyEmail,partyDateOfAddition,partyTimeOfAddition,partyLocation,partyAddedByPersonName,partyAddedWithRight,rawField1,rawField2,rawField3,rawField4,rawField5,rawField6)
+VALUES ('FIBERTECH INFRACON','AKOLA','AKOLA','0714-87676534','9865465533','xyz@fibetechInfracon.com',null,null,'Nagpur','Administrator','Administrator','SELF','Not Inserted','Not Inserted','Not Inserted','Not Inserted','Not Inserted');
+
 
 create table ProductMaster (
    id INT NOT NULL auto_increment,

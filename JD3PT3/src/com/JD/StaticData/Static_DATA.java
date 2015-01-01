@@ -20,6 +20,7 @@ public class Static_DATA {
     public static String prSrNo = null;
     public static int srNo = 00;
     public static String registrationNumber = null;
+    public static String selfPartyname=null;
     //------ INIT DATA ------//
     //------------------------------------------------------------------------//
     //------ Master Hibernate Config ------//
