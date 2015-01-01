@@ -134,6 +134,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         clear_CheackBox = new javax.swing.JCheckBox();
         addDataToDatabase_Button = new javax.swing.JButton();
         loadData_ComboBox = new javax.swing.JComboBox();
+        reset_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -235,6 +236,13 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             }
         });
 
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
         machineMaster_PanelLayout.setHorizontalGroup(
@@ -254,23 +262,26 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(loadData_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, machineMaster_PanelLayout.createSequentialGroup()
-                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                            .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel2)
-                                                .addComponent(fuel_Lable))
-                                            .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                                    .addGap(43, 43, 43)
-                                                    .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                            .addComponent(average_Lable)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(fuel_Lable))
+                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                                .addGap(43, 43, 43)
+                                                .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(average_Lable)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                                .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(reset_Button))
                                             .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -333,7 +344,9 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                     .addComponent(delete_CheackBox)
                     .addComponent(clear_CheackBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addDataToDatabase_Button)
+                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addDataToDatabase_Button)
+                    .addComponent(reset_Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
         );
@@ -591,6 +604,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         session.close();
     }//GEN-LAST:event_loadData_ComboBoxActionPerformed
 
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
     void chkOperation() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -763,6 +781,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private javax.swing.JTable machine_JTable;
     private javax.swing.JTextField model_TextField;
     private javax.swing.JLabel reading_Lable;
+    private javax.swing.JButton reset_Button;
     private javax.swing.JTextField servicingStatus_TextField;
     private javax.swing.JLabel servicing_Lable;
     private javax.swing.JComboBox type_ComboBox;
