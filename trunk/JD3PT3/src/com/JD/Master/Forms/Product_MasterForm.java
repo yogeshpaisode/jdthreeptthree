@@ -185,8 +185,18 @@ public class Product_MasterForm extends javax.swing.JFrame {
             }
         });
 
-        search_Button.setText("Search......");
+        search_Button.setText("Search.........");
         search_Button.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        search_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                search_ButtonMouseEntered(evt);
+            }
+        });
+        search_Button.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_ButtonKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout productMaster_PanelLayout = new javax.swing.GroupLayout(productMaster_Panel);
         productMaster_Panel.setLayout(productMaster_PanelLayout);
@@ -295,6 +305,36 @@ public class Product_MasterForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
 
+    private void search_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_ButtonMouseEntered
+        // TODO add your handling code here:
+
+        search_Button.setText("");
+
+    }//GEN-LAST:event_search_ButtonMouseEntered
+
+    private void search_ButtonKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_ButtonKeyReleased
+        // TODO add your handling code here:
+
+        String productNameTemp = search_Button.getText();
+        Session session = masterSessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Productmaster.class);
+        cr.add(Restrictions.like("productName", productNameTemp + "%"));
+
+        List results = cr.list();
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
+            indexJTable = indexJTable + 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
+
+        }
+        session.close();
+
+    }//GEN-LAST:event_search_ButtonKeyReleased
+
     void addData() {
         Session session = masterSessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Productmaster.class);
@@ -311,7 +351,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Product Name " + productName + " Added Successfully");
             reset();
-            
+
         } else {
 
             JOptionPane.showMessageDialog(null, "Data Product Name : " + productName + " , Measurement : " + productMeasurement + " , And Size : " + productSize + " Already Exist ");
@@ -322,8 +362,9 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
     void reset() {
         productName_ComboBox.setSelectedItem("Select Product Name");
-        size_TextField.setText("");
-        measurement_ComboBox.setSelectedItem("size_ComboBox");
+        size_TextField.setText("");        
+        measurement_ComboBox.setSelectedItem("Select Measurement");
+        search_Button.setText("Search.........");
         indexJTable = -1;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
