@@ -36,6 +36,8 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     double machineExpectedAVG = 0.0;
     String machineStatus = "";
     int machineCurrentReading = 00;
+    int machineServicingNumber = 00;
+    int machineServicingReadingPointer = 00;
     double machineFuel = 00;
     //----------------------------------------//
     Date machineDateOfAddition = null;
@@ -196,7 +198,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         reading_Lable.setText("Current Reading:");
 
-        servicing_Lable.setText("Servicing After Hrs :");
+        servicing_Lable.setText("Servicing After Reading :");
 
         average_Lable.setText("Expected Average:");
 
@@ -259,7 +261,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
-        jLabel5.setText(" Enter Machine Number To Search");
+        jLabel5.setText(" Enter Machine Number To Search ");
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
@@ -270,72 +272,63 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(53, 53, 53)
-                        .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
-                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(loadData_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, machineMaster_PanelLayout.createSequentialGroup()
-                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel2)
-                                            .addComponent(fuel_Lable))
-                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                                .addGap(43, 43, 43)
-                                                .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(average_Lable)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
-                                                .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(reset_Button))
-                                            .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(fuel_Lable))
                                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(reading_Lable)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(currentReading_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                                .addComponent(update_CheackBox)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(delete_CheackBox)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(clear_CheackBox))
-                                            .addComponent(search_TextFields))))))
+                                        .addGap(43, 43, 43)
+                                        .addComponent(type_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(fuelAvilable_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(average_Lable)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                        .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(reset_Button))
+                                    .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(reading_Lable))
+                        .addGap(237, 237, 237)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(servicing_Lable)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(model_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                            .addComponent(servicingStatus_TextField))
+                        .addGap(292, 292, 292))
+                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(model_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(servicing_Lable)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(machineMaster_PanelLayout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel5)))
-                        .addGap(279, 279, 279))))
+                                .addComponent(jLabel1)
+                                .addGap(53, 53, 53)
+                                .addComponent(machinePartyName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(116, 116, 116)
+                                .addComponent(loadData_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                                    .addComponent(update_CheackBox)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(delete_CheackBox)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(clear_CheackBox))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addContainerGap())))
         );
         machineMaster_PanelLayout.setVerticalGroup(
             machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,13 +391,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String item = type_ComboBox.getSelectedItem().toString();
 
-        if (item.equals("VEHICLE")) {
-            servicing_Lable.setText("Servicing After KM :");
-            machineServicingLogIn = "KM";
-        } else {
-            servicing_Lable.setText("Servicing After Hrs :");
-            machineServicingLogIn = "HRS";
-        }
+
 
         machineName_Combobox.removeAllItems();
         machineName_Combobox.addItem("Select Machine Name");
@@ -650,7 +637,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         }
         indexJTable = -1;
         List results = cr.list();
-        indexJTable+=1;
+        indexJTable += 1;
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
@@ -683,7 +670,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
-            com.JD.Master.Hibernate.config.Machinemaster m = new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+            com.JD.Master.Hibernate.config.Machinemaster m =new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6); 
             session.save(m);
             transaction.commit();
             reset();
