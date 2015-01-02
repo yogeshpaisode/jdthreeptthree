@@ -29,20 +29,13 @@ public class Init_Data implements Runnable {
         List list = q.list();
 
         for (Object object : list) {
-
+            new DeletTemp();
             com.JD.InitData.Hibernate.config.Initdata id = (com.JD.InitData.Hibernate.config.Initdata) object;
             com.JD.StaticData.Static_DATA.location = id.getLocation();
             com.JD.StaticData.Static_DATA.prSrNo = id.getPrSrNo();
             com.JD.StaticData.Static_DATA.srNo = id.getSrNo();
             com.JD.StaticData.Static_DATA.registrationNumber = id.getRegistrationNumber();
             com.JD.StaticData.Static_DATA.selfPartyname = id.getRawField1();
-            File file = new File("temp");
-            file.delete();
-            file = new File("temp");
-            file.mkdir();
-
         }
-
-
     }
 }
