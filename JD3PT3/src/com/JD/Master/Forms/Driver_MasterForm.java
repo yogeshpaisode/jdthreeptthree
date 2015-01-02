@@ -9,6 +9,7 @@ import com.JD.Master.Forms.*;
 import com.JD.Master.Hibernate.config.Drivermaster;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.InstantiationException;
 import java.net.URL;
@@ -42,6 +43,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     //---Call ImageCropper--//
     ImageCropper icroper = new ImageCropper();
     ImageIcon ico;
+    BufferedImage bimg;
     //---Call ImageCropper--//
     //---- Add Data To Database----//
     String driverPartyLink = "";
@@ -408,10 +410,21 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         switch (fc.showOpenDialog(this)) {
             case JFileChooser.APPROVE_OPTION:
                 path = fc.getSelectedFile() + "";
-                ImageIcon icon = new ImageIcon(path);
+                ico = new ImageIcon(path);
+                try {
+                    bimg = ImageIO.read(new File(path));
+                    int width = bimg.getWidth();
+                    int height = bimg.getHeight();
+                    if (width >= 200 && height >= 200) {
+                        JOptionPane.showMessageDialog(null, "Image is too big");
+                    } else {
+                        photo_Lable.setIcon(ico);
+                        outputPathTemp = path;
+                    }
+                } catch (Exception e) {
+                }
 
-                photo_Lable.setIcon(icon);
-                outputPathTemp = path;
+
 
                 break;
 
@@ -516,9 +529,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         List results = cr.list();
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
-            com.JD.Master.Hibernate.config.Drivermaster d=new Drivermaster(driverPartyLink, driverName, driverAddress, driverMobile, driverBloodGroup, driverDateOfJoining, driverPic, driverDateOfAddition, driverTimeOfAddition, driverLocation, driverAddedByPersonName, driverAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+            com.JD.Master.Hibernate.config.Drivermaster d = new Drivermaster(driverPartyLink, driverName, driverAddress, driverMobile, driverBloodGroup, driverDateOfJoining, driverPic, driverDateOfAddition, driverTimeOfAddition, driverLocation, driverAddedByPersonName, driverAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
             session.save(d);
-            transaction.commit();            
+            transaction.commit();
             reset();
             loadDate_ComboBox.addItem(driverName);
             JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Added Successfully");
