@@ -151,6 +151,10 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         reset_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         driverTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        print_Button = new javax.swing.JButton();
+        search_TextField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -290,6 +294,17 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(driverTable);
 
+        jButton1.setText("Export To Excel");
+
+        print_Button.setText("Print");
+
+        search_TextField.setText("Search.....");
+        search_TextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
+        jLabel10.setText(" Type Driver Name To Search. ");
+        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 0)));
+
         javax.swing.GroupLayout driverMaster_PanelLayout = new javax.swing.GroupLayout(driverMaster_Panel);
         driverMaster_Panel.setLayout(driverMaster_PanelLayout);
         driverMaster_PanelLayout.setHorizontalGroup(
@@ -312,44 +327,54 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addGap(308, 308, 308))
-                    .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel5))
+                        .addGap(11, 11, 11)
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(update_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(addDataToDatbase_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(delete_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(clear_CheackBox)
-                                .addGap(2, 2, Short.MAX_VALUE))
+                                .addComponent(bloodGroup_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(8, 8, 8))
                             .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel5))
-                                .addGap(11, 11, 11)
-                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                                        .addComponent(bloodGroup_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(8, 8, 8))
-                                    .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                                        .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(mobile_TextField)
-                                            .addComponent(licence_TextField)
-                                            .addComponent(loadDate_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                                    .addComponent(mobile_TextField)
+                                    .addComponent(licence_TextField)
+                                    .addComponent(loadDate_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
+                    .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(4, 4, 4)
+                                .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(update_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                                    .addComponent(addDataToDatbase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(delete_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(clear_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tack_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                             .addComponent(upload_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(162, 162, 162))))
+                        .addGap(162, 162, 162))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(308, 308, 308))
+                    .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                        .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addContainerGap())))
             .addComponent(jScrollPane1)
         );
         driverMaster_PanelLayout.setVerticalGroup(
@@ -390,29 +415,44 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
                                     .addComponent(licence_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(photo_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
+                            .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(photo_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
+                                            .addComponent(upload_Button)
+                                            .addGap(51, 51, 51)))
+                                    .addComponent(jLabel7)))
+                            .addGroup(driverMaster_PanelLayout.createSequentialGroup()
+                                .addGap(73, 73, 73)
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(update_CheackBox)
                                     .addComponent(delete_CheackBox)
-                                    .addComponent(clear_CheackBox)
-                                    .addComponent(upload_Button))
+                                    .addComponent(clear_CheackBox))
                                 .addGap(26, 26, 26)
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(addDataToDatbase_Button)
-                                    .addComponent(reset_Button)))))
+                                    .addComponent(reset_Button))
+                                .addGap(22, 22, 22)
+                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton1)
+                                    .addComponent(print_Button)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10))
+                                .addGap(8, 8, 8))))
                     .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                         .addComponent(webCan_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tack_Button)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -675,6 +715,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         operation_ButtonGroup.clearSelection();
         addDataToDatbase_Button.setText("Add Driver");
         loadDate_ComboBox.setSelectedItem("Load Data To Update");
+        search_TextField.setText("Search.....");
 
     }
 
@@ -729,7 +770,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     public javax.swing.JPanel driverMaster_Panel;
     private javax.swing.JComboBox driverPartyName_ComboBox;
     private javax.swing.JTable driverTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -746,7 +789,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private javax.swing.JTextField name_TextField;
     private javax.swing.ButtonGroup operation_ButtonGroup;
     private javax.swing.JLabel photo_Lable;
+    private javax.swing.JButton print_Button;
     private javax.swing.JButton reset_Button;
+    private javax.swing.JTextField search_TextField;
     private javax.swing.JButton tack_Button;
     private javax.swing.JCheckBox update_CheackBox;
     private javax.swing.JButton upload_Button;
