@@ -1,5 +1,5 @@
 package com.JD.Master.Hibernate.config;
-// Generated Dec 30, 2014 2:40:32 PM by Hibernate Tools 3.2.1.GA
+// Generated Jan 2, 2015 12:41:03 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
@@ -21,6 +21,8 @@ public class Machinemaster  implements java.io.Serializable {
      private Double machineExpectedAvg;
      private String machineStatus;
      private Integer machineCurrentReading;
+     private Integer machineServicingNumber;
+     private Integer machineServicingReadingPointer;
      private Double machineFuel;
      private Date machineDateOfAddition;
      private Date machineTimeOfAddition;
@@ -37,7 +39,7 @@ public class Machinemaster  implements java.io.Serializable {
     public Machinemaster() {
     }
 
-    public Machinemaster(String machinePartyLink, String machineIdentification, String machineType, String machineName, String machineNumber, String machineServicingLogIn, Integer machineServicingLog, Double machineExpectedAvg, String machineStatus, Integer machineCurrentReading, Double machineFuel, Date machineDateOfAddition, Date machineTimeOfAddition, String machineLocation, String machineAddedByPersonName, String machineAddedWithRight, String rawField1, String rawField2, String rawField3, String rawField4, String rawField5, String rawField6) {
+    public Machinemaster(String machinePartyLink, String machineIdentification, String machineType, String machineName, String machineNumber, String machineServicingLogIn, Integer machineServicingLog, Double machineExpectedAvg, String machineStatus, Integer machineCurrentReading, Integer machineServicingNumber, Integer machineServicingReadingPointer, Double machineFuel, Date machineDateOfAddition, Date machineTimeOfAddition, String machineLocation, String machineAddedByPersonName, String machineAddedWithRight, String rawField1, String rawField2, String rawField3, String rawField4, String rawField5, String rawField6) {
        this.machinePartyLink = machinePartyLink;
        this.machineIdentification = machineIdentification;
        this.machineType = machineType;
@@ -48,6 +50,8 @@ public class Machinemaster  implements java.io.Serializable {
        this.machineExpectedAvg = machineExpectedAvg;
        this.machineStatus = machineStatus;
        this.machineCurrentReading = machineCurrentReading;
+       this.machineServicingNumber = machineServicingNumber;
+       this.machineServicingReadingPointer = machineServicingReadingPointer;
        this.machineFuel = machineFuel;
        this.machineDateOfAddition = machineDateOfAddition;
        this.machineTimeOfAddition = machineTimeOfAddition;
@@ -138,6 +142,20 @@ public class Machinemaster  implements java.io.Serializable {
     
     public void setMachineCurrentReading(Integer machineCurrentReading) {
         this.machineCurrentReading = machineCurrentReading;
+    }
+    public Integer getMachineServicingNumber() {
+        return this.machineServicingNumber;
+    }
+    
+    public void setMachineServicingNumber(Integer machineServicingNumber) {
+        this.machineServicingNumber = machineServicingNumber;
+    }
+    public Integer getMachineServicingReadingPointer() {
+        return this.machineServicingReadingPointer;
+    }
+    
+    public void setMachineServicingReadingPointer(Integer machineServicingReadingPointer) {
+        this.machineServicingReadingPointer = machineServicingReadingPointer;
     }
     public Double getMachineFuel() {
         return this.machineFuel;

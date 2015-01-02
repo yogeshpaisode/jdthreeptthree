@@ -158,7 +158,9 @@ create table MachineMaster (
 
    machineStatus text,
    machineCurrentReading int,
-   machineFuel double,
+   machineServicingNumber int,
+   machineServicingReadingPointer int,   
+   machineFuel double, 
    
    machineDateOfAddition date,
    machineTimeOfAddition time,
