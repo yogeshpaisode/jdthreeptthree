@@ -5,6 +5,7 @@
 package com.JD.StaticData;
 
 import com.JD.INIT_Data.WebcamPanel;
+import com.github.sarxos.webcam.Webcam;
 import org.hibernate.SessionFactory;
 
 /**
@@ -36,6 +37,7 @@ public class Static_DATA {
     // ------ QR Code Scanner ------//
     // Class : com.JD.INIT_Data.Init_QRCodeScanner //
     public static WebcamPanel webPanel = null;
+    public static Webcam webcam=null;
     // ------ QR Code Scanner ------//
     //------------------------------------------------------------------------//
     // ------ Login Form ------//

@@ -70,6 +70,7 @@ public class Init_QRCodeScanner extends JFrame implements Runnable, ThreadFactor
                 add(panel);
                 add(textarea);
                 com.JD.StaticData.Static_DATA.webPanel = panel;
+                com.JD.StaticData.Static_DATA.webcam=webcam;
                 pack();
                 setVisible(false);
                 executor.execute(this);
