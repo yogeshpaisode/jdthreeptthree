@@ -36,9 +36,10 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     double machineExpectedAVG = 0.0;
     String machineStatus = "";
     int machineCurrentReading = 00;
-    int machineServicingNumber = 00;
+    double machineServicingNumber = 0.0;
     int machineServicingReadingPointer = 00;
     double machineFuel = 00;
+    String machineServicingFlag="FALSE";
     //----------------------------------------//
     Date machineDateOfAddition = null;
     Date machineTimeOfAddition = null;
@@ -391,8 +392,6 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         String item = type_ComboBox.getSelectedItem().toString();
 
-
-
         machineName_Combobox.removeAllItems();
         machineName_Combobox.addItem("Select Machine Name");
         if (item.equals("VEHICLE")) {
@@ -480,7 +479,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             expectedAverage_TextField.setBackground(Color.white);
             fuel_Lable.setText("* Fuel Avilable:");
             reading_Lable.setText("* Current Reading:");
-            servicing_Lable.setText("* Servicing After Hrs :");
+            servicing_Lable.setText("* Servicing After Reading :");
             average_Lable.setText("* Expected Average:");
 
             fuelAvilable_TextField.setBackground(Color.white);
@@ -495,7 +494,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             fuelAvilable_TextField.setBackground(Color.lightGray);
             fuel_Lable.setText("Fuel Avilable:");
             reading_Lable.setText("Current Reading:");
-            servicing_Lable.setText("Servicing After Hrs :");
+            servicing_Lable.setText("Servicing After Reading :");
             average_Lable.setText("Expected Average:");
         }
 
@@ -670,7 +669,8 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
-            com.JD.Master.Hibernate.config.Machinemaster m =new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6); 
+            com.JD.Master.Hibernate.config.Machinemaster m =new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineServicingFlag, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+            
             session.save(m);
             transaction.commit();
             reset();
