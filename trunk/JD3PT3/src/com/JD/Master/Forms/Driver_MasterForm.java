@@ -17,10 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.*;
@@ -71,13 +69,18 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     //-- Add Date Panel---//
     //------ Load Session Factory ------//        
     SessionFactory driverSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
-    //------ Load Session Factory ------//
+    //------ Load Session Factory ------//    
+    //----------javax.swing.DefaultComboBoxModel----//    
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+    //----------javax.swing.DefaultComboBoxModel----//
 
     /**
      * Creates new form Party_MasterForm
      */
     public Driver_MasterForm() {
         initComponents();
+        defaultTableModel = (DefaultTableModel) driverTable.getModel();
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
         com.JD.StaticData.Static_DATA.driverPartyName_ComboBox = driverPartyName_ComboBox;
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
@@ -101,12 +104,11 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
             loadDate_ComboBox.addItem(d.getDriverName());
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{d.getDriverPartyLink(), d.getDriverName(), d.getDriverAddress(), d.getDriverMobile(), d.getDriverBloodGroup(), d.getDriverDateOfJoining(), d.getRawField1(), d.getDriverDateOfAddition(), d.getDriverTimeOfAddition(), d.getDriverAddedByPersonName(), d.getDriverAddedWithRight(), d.getDriverLocation()});
         }
         session.close();
-
-
         //--- Load All Party Name ---//
-
     }
 
     /**
@@ -148,7 +150,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         addDataToDatbase_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        driverTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -263,18 +265,30 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        driverTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Party Name", "Driver Name", "Address", "Mobile", "Blood Group", "DOJ", "Licence No", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(driverTable);
 
         javax.swing.GroupLayout driverMaster_PanelLayout = new javax.swing.GroupLayout(driverMaster_Panel);
         driverMaster_Panel.setLayout(driverMaster_PanelLayout);
@@ -313,7 +327,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                     .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(clear_CheackBox)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(2, 2, Short.MAX_VALUE))
                             .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -330,10 +344,11 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                             .addComponent(licence_TextField)
                                             .addComponent(loadDate_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
-                        .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tack_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(upload_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                        .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tack_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                            .addComponent(upload_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(162, 162, 162))))
             .addComponent(jScrollPane1)
         );
@@ -384,7 +399,8 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(update_CheackBox)
                                     .addComponent(delete_CheackBox)
-                                    .addComponent(clear_CheackBox))
+                                    .addComponent(clear_CheackBox)
+                                    .addComponent(upload_Button))
                                 .addGap(26, 26, 26)
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(addDataToDatbase_Button)
@@ -394,9 +410,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tack_Button)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel9)
-                        .addGap(23, 23, 23)
-                        .addComponent(upload_Button)))
+                        .addComponent(jLabel9)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))
         );
@@ -450,7 +464,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                         outputPathTemp = path;
                     }
 //---------------------------------Decide Image Width Height--------------------------------------------------------------------------------                    
-                    
+
                 } catch (Exception e) {
                 }
 
@@ -557,7 +571,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         if (clear_CheackBox.isSelected()) {
             addDataToDatbase_Button.setText("Add Driver");
         }
-        
+
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
 
     void insert() {
@@ -571,6 +585,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             session.save(d);
             transaction.commit();
             reset();
+            resetJTable();
             loadDate_ComboBox.addItem(driverName);
             JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Added Successfully");
         } else {
@@ -631,6 +646,22 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         return imageString;
     }
 
+    void resetJTable() {
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+        Session session = driverSessionFactory.openSession();
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Drivermaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+            loadDate_ComboBox.addItem(d.getDriverName());
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{d.getDriverPartyLink(), d.getDriverName(), d.getDriverAddress(), d.getDriverMobile(), d.getDriverBloodGroup(), d.getDriverDateOfJoining(), d.getRawField1(), d.getDriverDateOfAddition(), d.getDriverTimeOfAddition(), d.getDriverAddedByPersonName(), d.getDriverAddedWithRight(), d.getDriverLocation()});
+        }
+        session.close();
+    }
+
     void reset() {
         ico = new ImageIcon(defaultImage);
         photo_Lable.setIcon(ico);
@@ -643,6 +674,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         licence_TextField.setText("");
         operation_ButtonGroup.clearSelection();
         addDataToDatbase_Button.setText("Add Driver");
+        loadDate_ComboBox.setSelectedItem("Load Data To Update");
 
     }
 
@@ -696,6 +728,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox delete_CheackBox;
     public javax.swing.JPanel driverMaster_Panel;
     private javax.swing.JComboBox driverPartyName_ComboBox;
+    private javax.swing.JTable driverTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -707,7 +740,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField licence_TextField;
     private javax.swing.JComboBox loadDate_ComboBox;
     private javax.swing.JTextField mobile_TextField;
