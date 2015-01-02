@@ -1,5 +1,5 @@
 package com.JD.Master.Hibernate.config;
-// Generated Jan 2, 2015 12:41:03 PM by Hibernate Tools 3.2.1.GA
+// Generated Jan 2, 2015 1:15:02 PM by Hibernate Tools 3.2.1.GA
 
 
 import java.util.Date;
