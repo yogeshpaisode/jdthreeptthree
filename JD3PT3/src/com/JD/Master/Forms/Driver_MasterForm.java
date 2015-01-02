@@ -6,12 +6,15 @@ package com.JD.Master.Forms;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import com.JD.Master.Hibernate.config.Drivermaster;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.*;
+import java.lang.InstantiationException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -19,9 +22,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.apache.commons.codec.binary.Base64;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -65,6 +67,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     JDatePickerImpl date1 = new com.JD.DatePicker.DatePicker().getDateObjectUp();
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     //-- Add Date Panel---//
+    //------ Load Session Factory ------//        
+    SessionFactory driverSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    //------ Load Session Factory ------//
 
     /**
      * Creates new form Party_MasterForm
@@ -75,33 +80,31 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.driverPartyName_ComboBox = driverPartyName_ComboBox;
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
-        //------ Load Session Factory ------//        
-        SessionFactory driverSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
-        //------ Load Session Factory ------//
+
         //--- Add Calender To DatePanel_Panel----//
         datePanel_Panel.add(date1);
         //--- Add Calender To DatePanel_Panel----//
-        
+
         //--- Load All Party Name ---//
-        
-        Session session=driverSessionFactory.openSession();        
-        Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");        
+
+        Session session = driverSessionFactory.openSession();
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             driverPartyName_ComboBox.addItem(p.getPartyName());
-        }             
-        session=driverSessionFactory.openSession();        
-        q=session.createQuery("from com.JD.Master.Hibernate.config.Drivermaster");
-        
+        }
+        session = driverSessionFactory.openSession();
+        q = session.createQuery("from com.JD.Master.Hibernate.config.Drivermaster");
+
         for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Drivermaster d=(com.JD.Master.Hibernate.config.Drivermaster)object;
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
             loadDate_ComboBox.addItem(d.getDriverName());
-        }             
+        }
         session.close();
-        
-        
+
+
         //--- Load All Party Name ---//
-        
+
     }
 
     /**
@@ -507,15 +510,35 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_addDataToDatbase_ButtonActionPerformed
 
     void insert() {
-        
-        
-        
-        
-        
-        reset();
+        Session session = driverSessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+        cr.add(Restrictions.eq("driverName", driverName));
+        List results = cr.list();
+        if (results.isEmpty()) {
+            Transaction transaction = session.beginTransaction();
+            com.JD.Master.Hibernate.config.Drivermaster d=new Drivermaster(driverPartyLink, driverName, driverAddress, driverMobile, driverBloodGroup, driverDateOfJoining, driverPic, driverDateOfAddition, driverTimeOfAddition, driverLocation, driverAddedByPersonName, driverAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+            session.save(d);
+            transaction.commit();            
+            reset();
+            loadDate_ComboBox.addItem(driverName);
+            JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Added Successfully");
+        } else {
+            JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Already Exist");
+        }
+        session.close();
     }
 
     void update() {
+        Session session = driverSessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+        cr.add(Restrictions.eq("driverName", driverName));
+        List results = cr.list();
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+        }
+        Transaction transaction = session.beginTransaction();
+        session.close();
+        reset();
     }
 
     void delete() {
