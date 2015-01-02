@@ -35,7 +35,7 @@ public class Static_DATA {
     //------------------------------------------------------------------------//
     // ------ QR Code Scanner ------//
     // Class : com.JD.INIT_Data.Init_QRCodeScanner //
-    public static WebcamPanel panel = null;
+    public static WebcamPanel webPanel = null;
     // ------ QR Code Scanner ------//
     //------------------------------------------------------------------------//
     // ------ Login Form ------//
@@ -50,6 +50,8 @@ public class Static_DATA {
     //------------------------------------------------------------------------//
     
     //-----Master ComboBoxFill-----//
-    public static javax.swing.JComboBox machinePartyName_ComboBox=null; 
+    public static javax.swing.JComboBox machinePartyName_ComboBox=null;
+    public static javax.swing.JComboBox driverPartyName_ComboBox=null;
+    
     //-----Master ComboBoxFill-----//
 }
