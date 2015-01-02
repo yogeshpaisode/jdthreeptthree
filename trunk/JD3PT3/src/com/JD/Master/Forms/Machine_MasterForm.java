@@ -69,7 +69,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         currentReading_TextField.setEnabled(false);
         servicingStatus_TextField.setEnabled(false);
         expectedAverage_TextField.setEnabled(false);
-        
+
         currentReading_TextField.setBackground(Color.lightGray);
         servicingStatus_TextField.setBackground(Color.lightGray);
         expectedAverage_TextField.setBackground(Color.lightGray);
@@ -81,19 +81,19 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.machinePartyName_ComboBox = machinePartyName_ComboBox;
         //----- Assign To com.JD.StaticData.Static_DATA.machinePartyName_ComboBox -----//
 
-        
+
         Session session = masterFactory.openSession();
-        
+
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
-        
+
         for (Object object : q.list()) {
-            
+
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             machinePartyName_ComboBox.addItem(p.getPartyName());
         }
-        
+
         q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
-        
+
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             indexJTable = indexJTable + 1;
@@ -397,11 +397,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private void type_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_type_ComboBoxActionPerformed
         // TODO add your handling code here:
         String item = type_ComboBox.getSelectedItem().toString();
-        
+
         machineName_Combobox.removeAllItems();
         machineName_Combobox.addItem("Select Machine Name");
         if (item.equals("VEHICLE")) {
-            
+
             machineName_Combobox.addItem("Tipper 6 Wheel");
             machineName_Combobox.addItem("Tipper 10 Wheel");
             machineName_Combobox.addItem("Tipper 14 Wheel");
@@ -412,12 +412,12 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             machineName_Combobox.addItem("Mahindra 5506 10 Wheel");
             machineName_Combobox.addItem("Mahindra 5506 12 Wheel");
             machineName_Combobox.addItem("Mahindra 5506 14 Wheel");
-            
-            
+
+
         }
-        
+
         if (item.equals("DG")) {
-            
+
             machineName_Combobox.addItem("DG 50 KVA");
             machineName_Combobox.addItem("DG 100 KVA");
             machineName_Combobox.addItem("DG 200 KVA");
@@ -430,24 +430,24 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             machineName_Combobox.addItem("DG 900 KVA");
             machineName_Combobox.addItem("DG 1000 KVA");
         }
-        
+
         if (item.equals("CRUSHER")) {
-            
+
             machineName_Combobox.addItem("CRUSHER 1");
             machineName_Combobox.addItem("CRUSHER 1");
             machineName_Combobox.addItem("CRUSHER 1");
             machineName_Combobox.addItem("CRUSHER 1");
             machineName_Combobox.addItem("CRUSHER 1");
-            
+
         }
-        
+
         if (item.equals("HYDRAULIC EXCAVATOR")) {
-            
+
             machineName_Combobox.addItem("HYUNDAI 1");
             machineName_Combobox.addItem("HYUNDAI 2");
             machineName_Combobox.addItem("HYUNDAI 3");
         }
-        
+
         if (item.equals("ROAD ROLLER")) {
             machineName_Combobox.addItem("HYUNDAI ROLLER 1");
             machineName_Combobox.addItem("HYUNDAI ROLLER 1");
@@ -469,13 +469,13 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             machineName_Combobox.addItem("CRANE 6 wheel");
         }
     }//GEN-LAST:event_type_ComboBoxActionPerformed
-    
+
     private void machinePartyName_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machinePartyName_ComboBoxActionPerformed
         // TODO add your handling code here:
         String partyNameTemp = machinePartyName_ComboBox.getSelectedItem().toString();
-        
+
         if (partyNameTemp.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
-            
+
             fuelAvilable_TextField.setEnabled(true);
             currentReading_TextField.setEnabled(true);
             servicingStatus_TextField.setEnabled(true);
@@ -487,7 +487,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             reading_Lable.setText("* Current Reading:");
             servicing_Lable.setText("* Servicing After Reading :");
             average_Lable.setText("* Expected Average:");
-            
+
             fuelAvilable_TextField.setBackground(Color.white);
         } else {
             fuelAvilable_TextField.setEnabled(false);
@@ -503,38 +503,38 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             servicing_Lable.setText("Servicing After Reading :");
             average_Lable.setText("Expected Average:");
         }
-        
-        
+
+
     }//GEN-LAST:event_machinePartyName_ComboBoxActionPerformed
-    
+
     private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (clear_CheackBox.isSelected()) {
             addDataToDatabase_Button.setText("Add Machine");
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
-    
+
     private void delete_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (delete_CheackBox.isSelected()) {
             addDataToDatabase_Button.setText("Delete Machine");
         }
     }//GEN-LAST:event_delete_CheackBoxActionPerformed
-    
+
     private void update_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (update_CheackBox.isSelected()) {
             addDataToDatabase_Button.setText("Update Machine");
         }
     }//GEN-LAST:event_update_CheackBoxActionPerformed
-    
+
     private void addDataToDatabase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDatabase_ButtonActionPerformed
         // TODO add your handling code here:
 //---------------------------------------------------------------------------------------------------------------------        
         String partyNameTemp = machinePartyName_ComboBox.getSelectedItem().toString();
         boolean flag = true;
         machinePartyLink = machinePartyName_ComboBox.getSelectedItem().toString();
-        
+
         machineType = type_ComboBox.getSelectedItem().toString();
         machineName = machineName_Combobox.getSelectedItem().toString();
         machineNumber = model_TextField.getText();
@@ -558,11 +558,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                     if (model_TextField.getText().equals("")) {
                         JOptionPane.showMessageDialog(null, "Please Enter Machine Number");
                     } else {
-                        
+
                         if (flag) {
                             chkOperation();
                         } else {
-                            
+
                             if (fuelAvilable_TextField.getText().equals("")) {
                                 JOptionPane.showMessageDialog(null, "Please Enter Machine Fuel");
                             } else {
@@ -581,6 +581,18 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                             machineCurrentReading = Integer.parseInt(currentReading_TextField.getText());
                                             machineFuel = Double.parseDouble(fuelAvilable_TextField.getText());
                                             machineIdentification = "SELF";
+//-----------------------------------------Servicing Logic----------------------------------------------------------------------------------------------------------------------//
+                                            int currentReadingTemp = machineCurrentReading;
+                                            int diff = machineServicingLog;
+                                            if (currentReadingTemp > diff) {
+                                                machineServicingNumber = currentReadingTemp / diff;
+                                                machineServicingReadingPointer = currentReadingTemp % diff;
+                                            } else if (currentReadingTemp < diff) {
+                                                machineServicingReadingPointer = currentReadingTemp;
+                                            } else {
+                                                machineServicingFlag = "TRUE";
+                                            }
+//-----------------------------------------Servicing Logic----------------------------------------------------------------------------------------------------------------------//                                            
                                             chkOperation();
                                         }
                                     }
@@ -594,7 +606,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 //---------------------------------------------------------------------------------------------------------------------        
 
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
-    
+
     private void loadData_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadData_ComboBoxActionPerformed
         // TODO add your handling code here:
         reset();
@@ -602,34 +614,34 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         Session session = masterFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", macineNumberTemp));
-        
+
         List results = cr.list();
-        
+
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             machinePartyName_ComboBox.setSelectedItem(m.getMachinePartyLink());
             type_ComboBox.setSelectedItem(m.getMachineType());
             machineName_Combobox.setSelectedItem(m.getMachineName());
             model_TextField.setText(m.getMachineNumber());
-            
-            
+
+
             if (m.getMachineIdentification().equals("SELF")) {
                 fuelAvilable_TextField.setText(m.getMachineFuel().toString());
                 currentReading_TextField.setText(m.getMachineCurrentReading().toString());
                 servicingStatus_TextField.setText(m.getMachineServicingLog().toString());
                 expectedAverage_TextField.setText(m.getMachineExpectedAvg().toString());
             }
-            
+
         }
-        
+
         session.close();
     }//GEN-LAST:event_loadData_ComboBoxActionPerformed
-    
+
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
-    
+
     private void search_TextFieldsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldsKeyReleased
         // TODO add your handling code here:
 
@@ -649,19 +661,19 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
         }
         session.close();
-        
+
     }//GEN-LAST:event_search_TextFieldsKeyReleased
-    
+
     private void search_TextFieldsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldsMouseClicked
         // TODO add your handling code here:
         search_TextFields.setText("");
     }//GEN-LAST:event_search_TextFieldsMouseClicked
-    
+
     private void model_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_model_TextFieldKeyReleased
         // TODO add your handling code here:
         model_TextField.setText(model_TextField.getText().toUpperCase());
     }//GEN-LAST:event_model_TextFieldKeyReleased
-    
+
     void chkOperation() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -671,7 +683,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             insert();
         }
     }
-    
+
     void insert() {
         Session session = masterFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
@@ -679,11 +691,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         machineDateOfAddition = new Date();
         machineTimeOfAddition = new Date();
         List results = cr.list();
-        
+
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
             com.JD.Master.Hibernate.config.Machinemaster m = new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineServicingFlag, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
-            
+
             session.save(m);
             transaction.commit();
             reset();
@@ -693,30 +705,30 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         }
         session.close();
     }
-    
+
     void update() {
         Session session = masterFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        
+
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", machineNumber));
         machineDateOfAddition = new Date();
         machineTimeOfAddition = new Date();
         List results = cr.list();
-        
+
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             m.setMachinePartyLink(machinePartyLink);
             m.setMachineType(machineType);
             m.setMachineName(machineName);
             m.setMachineNumber(machineNumber);
-            
+
             m.setMachineFuel(machineFuel);
             m.setMachineCurrentReading(machineCurrentReading);
             m.setMachineServicingLog(machineServicingLog);
             m.setMachineExpectedAvg(machineExpectedAVG);
             session.save(m);
-            
+
         }
         transaction.commit();
         session.close();
@@ -724,10 +736,10 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         reset();
         resetJTable();
     }
-    
+
     void delete() {
     }
-    
+
     void resetJTable() {
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
@@ -735,16 +747,16 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         indexJTable = -1;
         Session session = masterFactory.openSession();
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
-        
+
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
-            
+
         }
         session.close();
     }
-    
+
     void reset() {
         fuelAvilable_TextField.setEnabled(false);
         currentReading_TextField.setEnabled(false);
@@ -770,7 +782,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         design_ButtonGroup.clearSelection();
         addDataToDatabase_Button.setText("Add Machine");
         search_TextFields.setText("Search......");
-        
+        machineServicingFlag = "FALSE";
+        machineServicingNumber = 0.0;
+        machineServicingReadingPointer = 00;
+        machineServicingFlag = "FALSE";
+
     }
 
     /**
@@ -808,7 +824,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new Machine_MasterForm().setVisible(true);
             }
