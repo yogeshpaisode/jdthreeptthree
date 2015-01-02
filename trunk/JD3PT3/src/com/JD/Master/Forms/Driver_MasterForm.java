@@ -241,6 +241,11 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
         operation_ButtonGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
+        clear_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_CheackBoxActionPerformed(evt);
+            }
+        });
 
         addDataToDatbase_Button.setText("Add Driver");
         addDataToDatbase_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -415,12 +420,15 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                     bimg = ImageIO.read(new File(path));
                     int width = bimg.getWidth();
                     int height = bimg.getHeight();
+//---------------------------------Decide Image Width Height--------------------------------------------------------------------------------                    
                     if (width >= 200 && height >= 200) {
                         JOptionPane.showMessageDialog(null, "Image is too big");
                     } else {
                         photo_Lable.setIcon(ico);
                         outputPathTemp = path;
                     }
+//---------------------------------Decide Image Width Height--------------------------------------------------------------------------------                    
+                    
                 } catch (Exception e) {
                 }
 
@@ -521,6 +529,14 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_addDataToDatbase_ButtonActionPerformed
+
+    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (clear_CheackBox.isSelected()) {
+            addDataToDatbase_Button.setText("Add Driver");
+        }
+        
+    }//GEN-LAST:event_clear_CheackBoxActionPerformed
 
     void insert() {
         Session session = driverSessionFactory.openSession();
