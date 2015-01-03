@@ -760,6 +760,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (flag) {
+            flag2=false;
+            vehiclenumber_TextField.setText("");
             String partyNameTemp = party_ComboBox.getSelectedItem().toString();
             driverName_ComboBox.removeAllItems();
             vehicleNumber_ComboBox.removeAllItems();
