@@ -34,6 +34,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     int i = 0;
     int k = 0;
+    Date date = null;
     String prefix = "INPUT_";
     String outputPathTemp = "";
     URL defaultImageNameURL = getClass().getResource("default.jpg");
@@ -168,6 +169,11 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         jLabel1.setText("* Party Name:");
 
         driverPartyName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+        driverPartyName_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                driverPartyName_ComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("* Driver Name:");
 
@@ -618,7 +624,13 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                     if (outputPathTemp.equals("")) {
                                         JOptionPane.showMessageDialog(null, "Please Provide Driving Image");
                                     } else {
-                                        driverPic = convertImageToString(outputPathTemp);
+//----------------------------------------Cheack For Updated Image--------------------------------------//                                        
+                                        if (outputPathTemp.length() > 100) {
+                                            driverPic=outputPathTemp;
+                                        } else {
+                                            driverPic = convertImageToString(outputPathTemp);
+                                        }
+//----------------------------------------Cheack For Updated Image--------------------------------------//                                        
                                         if (update_CheackBox.isSelected()) {
                                             update();
                                         } else if (delete_CheackBox.isSelected()) {
@@ -687,6 +699,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             mobile_TextField.setText(d.getDriverMobile());
             bloodGroup_ComboBox.setSelectedItem(d.getDriverBloodGroup());
             licence_TextField.setText(d.getRawField1());
+            outputPathTemp = d.getDriverPic();
             ico = new ImageIcon(convertStringToImageByteArray(d.getDriverPic()));
             photo_Lable.setIcon(ico);
 
@@ -696,6 +709,10 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         session.close();
 
     }//GEN-LAST:event_loadDate_ComboBoxActionPerformed
+
+    private void driverPartyName_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driverPartyName_ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_driverPartyName_ComboBoxActionPerformed
 
     private String convertStringToImageByteArray(String imageString) {
         k += 1;
@@ -746,11 +763,30 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         cr.add(Restrictions.eq("driverName", driverName));
         List results = cr.list();
         for (Object object : results) {
+
+            Transaction transaction = session.beginTransaction();
             com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+            d.setDriverPartyLink(driverPartyLink);
+            d.setDriverName(driverName);
+            d.setDriverMobile(driverMobile);
+            d.setDriverAddress(driverAddress);
+            d.setDriverBloodGroup(driverBloodGroup);
+            d.setRawField1(rawField1);
+            d.setDriverDateOfAddition(driverDateOfAddition);
+            d.setDriverTimeOfAddition(driverTimeOfAddition);
+            d.setDriverAddedByPersonName(driverAddedByPersonName);
+            d.setDriverAddedWithRight(driverAddedWithRight);
+            d.setDriverDateOfJoining(driverDateOfJoining);
+            d.setDriverPic(driverPic);
+            session.save(d);
+            transaction.commit();
+            JOptionPane.showMessageDialog(null, "Driver " + driverName + "Updated Successfully.");
+
         }
-        Transaction transaction = session.beginTransaction();
+
         session.close();
         reset();
+        resetJTable();
     }
 
     void delete() {
@@ -801,7 +837,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Drivermaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
-            loadDate_ComboBox.addItem(d.getDriverName());
             indexJTable += 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{d.getDriverPartyLink(), d.getDriverName(), d.getDriverAddress(), d.getDriverMobile(), d.getDriverBloodGroup(), d.getDriverDateOfJoining(), d.getRawField1(), d.getDriverDateOfAddition(), d.getDriverTimeOfAddition(), d.getDriverAddedByPersonName(), d.getDriverAddedWithRight(), d.getDriverLocation()});
         }
@@ -822,7 +857,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         addDataToDatbase_Button.setText("Add Driver");
         loadDate_ComboBox.setSelectedItem("Load Data To Update");
         search_TextField.setText("Search.....");
-
     }
 
     /**
