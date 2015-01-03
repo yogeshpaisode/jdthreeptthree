@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 3, 2015 12:55:00 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm" table="printreceiptdm" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="partyLink" type="string">
+            <column name="partyLink" length="65535" />
+        </property>
+        <property name="productName" type="string">
+            <column name="productName" length="65535" />
+        </property>
+        <property name="productSize" type="java.lang.Integer">
+            <column name="productSize" />
+        </property>
+        <property name="productMeasurement" type="string">
+            <column name="productMeasurement" length="65535" />
+        </property>
+        <property name="productValue" type="java.lang.Integer">
+            <column name="productValue" />
+        </property>
+        <property name="totalAmount" type="java.lang.Integer">
+            <column name="totalAmount" />
+        </property>
+        <property name="paymentType" type="string">
+            <column name="paymentType" length="65535" />
+        </property>
+        <property name="payableAmount" type="java.lang.Integer">
+            <column name="payableAmount" />
+        </property>
+        <property name="twoPayAmount" type="java.lang.Integer">
+            <column name="twoPayAmount" />
+        </property>
+        <property name="driverName" type="string">
+            <column name="driverName" length="65535" />
+        </property>
+        <property name="vehicleName" type="string">
+            <column name="vehicleName" length="65535" />
+        </property>
+        <property name="vehicleNumber" type="string">
+            <column name="vehicleNumber" length="65535" />
+        </property>
+        <property name="royaltyNumber" type="string">
+            <column name="royaltyNumber" length="65535" />
+        </property>
+        <property name="printProxy" type="string">
+            <column name="printProxy" length="65535" />
+        </property>
+        <property name="netWeight" type="java.lang.Double">
+            <column name="netWeight" precision="22" scale="0" />
+        </property>
+        <property name="grossWeight" type="java.lang.Double">
+            <column name="grossWeight" precision="22" scale="0" />
+        </property>
+        <property name="pendingStatus" type="string">
+            <column name="pendingStatus" length="65535" />
+        </property>
+        <property name="preSrno" type="string">
+            <column name="preSRNO" length="65535" />
+        </property>
+        <property name="srno" type="java.lang.Integer">
+            <column name="SRNO" />
+        </property>
+        <property name="qrcode" type="string">
+            <column name="QRCode" length="65535" />
+        </property>
+        <property name="printingStatus" type="string">
+            <column name="printingStatus" length="65535" />
+        </property>
+        <property name="dateOfAddition" type="date">
+            <column name="dateOfAddition" length="10" />
+        </property>
+        <property name="timeOfAddition" type="time">
+            <column name="timeOfAddition" length="8" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="65535" />
+        </property>
+        <property name="addedByPersonName" type="string">
+            <column name="addedByPersonName" length="65535" />
+        </property>
+        <property name="addedWithRight" type="string">
+            <column name="addedWithRight" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="string">
+            <column name="rawField6" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

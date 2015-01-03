@@ -203,3 +203,44 @@ create table DriverMaster (
      
     PRIMARY KEY (id)
 );
+
+create table PrintReceiptDM (
+   id INT NOT NULL auto_increment,
+
+	partyLink text,
+	productName text,
+	productSize int,
+	productMeasurement text,
+	productValue int,
+	totalAmount int,
+	paymentType text,
+	payableAmount int,
+	twoPayAmount int,
+	driverName text,
+	vehicleName text,
+	vehicleNumber text,
+	royaltyNumber text,
+	printProxy text,
+	netWeight double,
+	grossWeight double,
+	pendingStatus text,
+	preSRNO text,
+	SRNO int,
+	QRCode text,
+	printingStatus text,
+	
+   dateOfAddition date,
+   timeOfAddition time,
+   location text,
+   addedByPersonName text,
+   addedWithRight text,    
+   rawField1 text,
+   rawField2 text,
+   rawField3 text,
+   rawField4 text,
+   rawField5 text,
+   rawField6 text,
+
+
+   PRIMARY KEY (id)
+);

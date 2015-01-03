@@ -4,6 +4,7 @@
  */
 package com.JD.Home;
 
+import com.JD.PrintReceiptDM.Form.DM_Home;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -39,6 +40,7 @@ public class JD_Home extends javax.swing.JFrame {
     //------ Default Width and Height of parentComponentHolder_Panel------//
     //---- All Menu Entry ------//
     com.JD.Master.Forms.MasterHome masterHome = new com.JD.Master.Forms.MasterHome();
+    com.JD.PrintReceiptDM.Form.DM_Home dM_Home=new DM_Home();
 
     //---- All Menu Entry ------//
     public JD_Home() {
@@ -303,6 +305,7 @@ public class JD_Home extends javax.swing.JFrame {
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         masterHome.masterHome_TabbedPane.setBounds(0, 0, width, height);
+        dM_Home.DM_Home_TabbedPane.setBounds(0, 0, width, height);
 
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
 
@@ -310,7 +313,7 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         parentComponentHolder_Panel.removeAll();
-        // parentComponentHolder_Panel.add(null);
+        parentComponentHolder_Panel.add(dM_Home.DM_Home_TabbedPane);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Print Receipt/DM Window ");
