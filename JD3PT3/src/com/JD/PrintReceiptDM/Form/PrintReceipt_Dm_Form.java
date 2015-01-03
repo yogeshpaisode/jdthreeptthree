@@ -26,7 +26,7 @@ import org.hibernate.criterion.Restrictions;
 public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
     boolean flag = false;
-    boolean flag2=false;
+    boolean flag2 = false;
     //--------------INIT Data for Database----------//
     String partyLink = "";
     String productName = "";
@@ -44,11 +44,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     String printProxy = "";
     double netWeight = 0.0;
     double grossWeight = 0.0;
-    String pendingStatus = "";
+    String pendingStatus = "FALSE";
     String preSRNO = com.JD.StaticData.Static_DATA.prSrNo;
     int SRNO = com.JD.StaticData.Static_DATA.srNo;
     String QRCode = "";
-    String printingStatus = "";
+    String printingStatus = "TRUE";
     Date dateOfAddition = null;
     Date timeOfAddition = null;
     String location = "";
@@ -85,7 +85,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
         grossWeight_TextField.setBackground(Color.lightGray);
-        presrNo_Lable.setText(preSRNO);
+        presrNo_Lable.setText(" "+preSRNO+"-");
         srNo_Lable.setText(preSRNO + "-" + SRNO);
         com.JD.StaticData.Static_DATA.dm_PartyName = party_ComboBox;
         com.JD.StaticData.Static_DATA.dm_ProductName = product_ComboBox;
@@ -184,7 +184,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         vehicleNumber_ComboBox = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
-        vehiclenumber_TextField = new javax.swing.JTextField();
+        vehicleName_TextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -194,7 +194,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         update_CheackBox = new javax.swing.JCheckBox();
         cancel_CheackBox = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        addDataToDataBase_Button = new javax.swing.JButton();
         pending_CheackBox = new javax.swing.JCheckBox();
         pending_ComboBox = new javax.swing.JComboBox();
         export_Button = new javax.swing.JButton();
@@ -208,6 +208,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         search_TextField = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         reset_Cheackbox = new javax.swing.JCheckBox();
+        clear_CheackBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -343,8 +344,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         jLabel12.setText("* Vehicle Name:");
 
-        vehiclenumber_TextField.setBackground(new java.awt.Color(255, 204, 255));
-        vehiclenumber_TextField.setEditable(false);
+        vehicleName_TextField.setBackground(new java.awt.Color(255, 204, 255));
+        vehicleName_TextField.setEditable(false);
 
         jLabel13.setText("Date:");
 
@@ -367,14 +368,28 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         operation_ButtonGroup.add(update_CheackBox);
         update_CheackBox.setText("Update");
         update_CheackBox.setEnabled(false);
+        update_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                update_CheackBoxActionPerformed(evt);
+            }
+        });
 
         operation_ButtonGroup.add(cancel_CheackBox);
         cancel_CheackBox.setText("Cancel");
         cancel_CheackBox.setEnabled(false);
+        cancel_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancel_CheackBoxActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Place Order");
+        addDataToDataBase_Button.setText("Place Order");
+        addDataToDataBase_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDataToDataBase_ButtonActionPerformed(evt);
+            }
+        });
 
-        operation_ButtonGroup.add(pending_CheackBox);
         pending_CheackBox.setText("Pending");
 
         pending_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Load Pending Order" }));
@@ -436,6 +451,15 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         });
 
+        operation_ButtonGroup.add(clear_CheackBox);
+        clear_CheackBox.setText("Clear");
+        clear_CheackBox.setEnabled(false);
+        clear_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_CheackBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout DM_PanelLayout = new javax.swing.GroupLayout(DM_Panel);
         DM_Panel.setLayout(DM_PanelLayout);
         DM_PanelLayout.setHorizontalGroup(
@@ -453,7 +477,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cancel_CheackBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pending_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
+                        .addComponent(clear_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE))
                     .addGroup(DM_PanelLayout.createSequentialGroup()
                         .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -476,19 +500,25 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(proxy_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel18)
-                    .addComponent(reset_Cheackbox))
-                .addGap(23, 23, 23)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel18))
+                        .addGap(23, 23, 23))
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addComponent(pending_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(reset_Cheackbox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DM_PanelLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(addDataToDataBase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(export_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -502,7 +532,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(cashAndTwoPay_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(twoPayAmount_TextField)
-                    .addComponent(vehiclenumber_TextField)
+                    .addComponent(vehicleName_TextField)
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pending_ComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DM_PanelLayout.createSequentialGroup()
@@ -574,7 +604,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             .addComponent(jLabel11)
                             .addComponent(vehicleNumber_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
-                            .addComponent(vehiclenumber_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vehicleName_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
@@ -599,13 +629,14 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                     .addComponent(update_CheackBox)
                     .addComponent(cancel_CheackBox)
                     .addComponent(pending_CheackBox)
-                    .addComponent(jButton1)
+                    .addComponent(addDataToDataBase_Button)
                     .addComponent(export_Button)
                     .addComponent(print_Button)
                     .addComponent(presrNo_Lable)
                     .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
-                    .addComponent(reset_Cheackbox))
+                    .addComponent(reset_Cheackbox)
+                    .addComponent(clear_CheackBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
         );
@@ -760,8 +791,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (flag) {
-            flag2=false;
-            vehiclenumber_TextField.setText("");
+            flag2 = false;
+            vehicleName_TextField.setText("");
             String partyNameTemp = party_ComboBox.getSelectedItem().toString();
             driverName_ComboBox.removeAllItems();
             vehicleNumber_ComboBox.removeAllItems();
@@ -786,7 +817,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 vehicleNumber_ComboBox.addItem(m.getMachineNumber());
             }
             session.close();
-            flag2=true;
+            flag2 = true;
         }
 
     }//GEN-LAST:event_party_ComboBoxActionPerformed
@@ -803,12 +834,104 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
-                vehiclenumber_TextField.setText(m.getMachineName());
+                vehicleName_TextField.setText(m.getMachineName());
             }
             session.close();
         }
 
     }//GEN-LAST:event_vehicleNumber_ComboBoxActionPerformed
+
+    private void addDataToDataBase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDataBase_ButtonActionPerformed
+        // TODO add your handling code here:
+
+        partyLink = party_ComboBox.getSelectedItem().toString();
+        productName = product_ComboBox.getSelectedItem().toString();
+        String productSizeTemp = size_ComboBox.getSelectedItem().toString();
+        String productValueTemp = value_TextField.getText();
+        String totalAmountTemp = totalAmount_TextField.getText();
+        driverName = driverName_ComboBox.getSelectedItem().toString();
+        vehicleNumber = vehicleNumber_ComboBox.getSelectedItem().toString();
+        vehicleName = vehicleName_TextField.getText();
+        productMeasurement = size_ComboBox.getSelectedItem().toString();
+
+        boolean proxy = proxyTest();
+        boolean payment = paymentOptionTest();
+        if (pending_CheackBox.isSelected()) {
+            pendingStatus = "TRUE";
+        }
+
+
+
+
+
+
+    }//GEN-LAST:event_addDataToDataBase_ButtonActionPerformed
+
+    private void update_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_CheackBoxActionPerformed
+        // TODO add your handling code here:
+
+        if (update_CheackBox.isSelected()) {
+            addDataToDataBase_Button.setText("Update Order");
+        }
+
+    }//GEN-LAST:event_update_CheackBoxActionPerformed
+
+    private void cancel_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (cancel_CheackBox.isSelected()) {
+            addDataToDataBase_Button.setText("Cancel Order");
+        }
+    }//GEN-LAST:event_cancel_CheackBoxActionPerformed
+
+    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (clear_CheackBox.isSelected()) {
+            addDataToDataBase_Button.setText("Place Order");
+        }
+    }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    void cheackOperationType() {
+        if (update_CheackBox.isSelected()) {
+            update();
+        } else if (cancel_CheackBox.isSelected()) {
+            cancel();
+
+        } else {
+            insert();
+        }
+    }
+
+    void insert() {
+    }
+
+    void update() {
+    }
+
+    void cancel() {
+    }
+
+    boolean proxyTest() {
+        String ntWtTemp = "";
+        String grWtTemp = "";
+        ntWtTemp = neightWeight_TextField.getText();
+        grWtTemp = grossWeight_TextField.getText();
+        if (ntWtTemp.equals("") || grWtTemp.equals("")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    boolean paymentOptionTest() {
+
+        boolean internalFlag = false;
+
+        if (cash_CheackBox.isSelected() || cashAndTwoPay_CheackBox.isSelected() || twoPay_CheackBox.isSelected()) {
+            internalFlag = true;
+        }
+
+        return internalFlag;
+    }
 
     void calculateAmount() {
         int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
@@ -840,7 +963,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         totalAmount_TextField.setText("");
         payAble_TextField.setText("");
         twoPayAmount_TextField.setText("");
-        vehiclenumber_TextField.setText("");
+        vehicleName_TextField.setText("");
         neightWeight_TextField.setText("");
         grossWeight_TextField.setText("");
         cashMode_ButtonGroup.clearSelection();
@@ -861,6 +984,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
         grossWeight_TextField.setBackground(Color.lightGray);
+        addDataToDataBase_Button.setText("Place Order");
+        pending_CheackBox.setSelected(false);
     }
 
     /**
@@ -906,15 +1031,16 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DM_Panel;
+    private javax.swing.JButton addDataToDataBase_Button;
     private javax.swing.JCheckBox cancel_CheackBox;
     private javax.swing.JCheckBox cashAndTwoPay_CheackBox;
     private javax.swing.ButtonGroup cashMode_ButtonGroup;
     private javax.swing.JCheckBox cash_CheackBox;
+    private javax.swing.JCheckBox clear_CheackBox;
     private javax.swing.JTable dm_Table;
     private javax.swing.JComboBox driverName_ComboBox;
     private javax.swing.JButton export_Button;
     private javax.swing.JTextField grossWeight_TextField;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -957,8 +1083,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private javax.swing.JCheckBox twoPay_CheackBox;
     private javax.swing.JCheckBox update_CheackBox;
     private javax.swing.JTextField value_TextField;
+    private javax.swing.JTextField vehicleName_TextField;
     private javax.swing.JComboBox vehicleNumber_ComboBox;
-    private javax.swing.JTextField vehiclenumber_TextField;
     private javax.swing.JPanel webCan_Panel;
     // End of variables declaration//GEN-END:variables
 

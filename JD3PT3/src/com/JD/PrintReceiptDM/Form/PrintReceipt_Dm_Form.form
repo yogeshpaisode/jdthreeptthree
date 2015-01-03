@@ -64,7 +64,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="cancel_CheackBox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="pending_CheackBox" pref="67" max="32767" attributes="0"/>
+                          <Component id="clear_CheackBox" pref="67" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -92,20 +92,29 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="reset_Cheackbox" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="pending_CheackBox" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="reset_Cheackbox" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jButton1" pref="104" max="32767" attributes="0"/>
+                          <Component id="addDataToDataBase_Button" pref="104" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="export_Button" min="-2" pref="119" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -121,7 +130,7 @@
                           <Component id="cashAndTwoPay_CheackBox" max="32767" attributes="0"/>
                       </Group>
                       <Component id="twoPayAmount_TextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="vehiclenumber_TextField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="vehicleName_TextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabel16" alignment="0" max="32767" attributes="0"/>
                       <Component id="pending_ComboBox" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
@@ -210,7 +219,7 @@
                               <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="vehicleNumber_ComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="vehiclenumber_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="vehicleName_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -242,13 +251,14 @@
                       <Component id="update_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cancel_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="pending_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="addDataToDataBase_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="export_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="print_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="presrNo_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="search_TextField" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="reset_Cheackbox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="clear_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="360" max="32767" attributes="0"/>
@@ -520,7 +530,7 @@
             <Property name="text" type="java.lang.String" value="* Vehicle Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="vehiclenumber_TextField">
+        <Component class="javax.swing.JTextField" name="vehicleName_TextField">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="ff" type="rgb"/>
@@ -595,6 +605,9 @@
             <Property name="text" type="java.lang.String" value="Update"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="update_CheackBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cancel_CheackBox">
           <Properties>
@@ -604,17 +617,20 @@
             <Property name="text" type="java.lang.String" value="Cancel"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancel_CheackBoxActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="addDataToDataBase_Button">
           <Properties>
             <Property name="text" type="java.lang.String" value="Place Order"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addDataToDataBase_ButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="pending_CheackBox">
           <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="operation_ButtonGroup"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Pending"/>
           </Properties>
         </Component>
@@ -717,6 +733,18 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reset_CheackboxActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="clear_CheackBox">
+          <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="operation_ButtonGroup"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Clear"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clear_CheackBoxActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
