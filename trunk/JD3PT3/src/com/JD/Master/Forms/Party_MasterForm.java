@@ -642,6 +642,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//
             com.JD.StaticData.Static_DATA.machinePartyName_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.driverPartyName_ComboBox.addItem(partyName);
+            com.JD.StaticData.Static_DATA.dm_PartyName.addItem(partyName);
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//     
                         
             reset();
