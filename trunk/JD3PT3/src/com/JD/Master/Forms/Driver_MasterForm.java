@@ -89,7 +89,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) driverTable.getModel();
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
         com.JD.StaticData.Static_DATA.driverPartyName_ComboBox = driverPartyName_ComboBox;
-        webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
+        webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
 
         //--- Add Calender To DatePanel_Panel----//
@@ -141,7 +141,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         bloodGroup_ComboBox = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         datePanel_Panel = new javax.swing.JPanel();
-        webCan_Panel = new javax.swing.JPanel();
+        webCam_Panel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         photo_Lable = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -220,17 +220,17 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             .addGap(0, 41, Short.MAX_VALUE)
         );
 
-        webCan_Panel.setBackground(new java.awt.Color(255, 255, 51));
-        webCan_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 0), 2, true));
+        webCam_Panel.setBackground(new java.awt.Color(255, 255, 51));
+        webCam_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 0), 2, true));
 
-        javax.swing.GroupLayout webCan_PanelLayout = new javax.swing.GroupLayout(webCan_Panel);
-        webCan_Panel.setLayout(webCan_PanelLayout);
-        webCan_PanelLayout.setHorizontalGroup(
-            webCan_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout webCam_PanelLayout = new javax.swing.GroupLayout(webCam_Panel);
+        webCam_Panel.setLayout(webCam_PanelLayout);
+        webCam_PanelLayout.setHorizontalGroup(
+            webCam_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        webCan_PanelLayout.setVerticalGroup(
-            webCan_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        webCam_PanelLayout.setVerticalGroup(
+            webCam_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 230, Short.MAX_VALUE)
         );
 
@@ -334,8 +334,18 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(driverTable);
 
         jButton1.setText("Export To Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         search_TextField.setText("Search.....");
         search_TextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -412,7 +422,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(webCam_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tack_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                             .addComponent(upload_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(162, 162, 162))
@@ -495,7 +505,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                     .addComponent(jLabel10))
                                 .addGap(8, 8, 8))))
                     .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                        .addComponent(webCan_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(webCam_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(tack_Button)
                         .addGap(18, 18, 18)
@@ -745,6 +755,15 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         session.close();
     }//GEN-LAST:event_search_TextFieldKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_print_ButtonActionPerformed
+
     private String convertStringToImageByteArray(String imageString) {
         k += 1;
         OutputStream outputStream = null;
@@ -966,6 +985,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private javax.swing.JButton tack_Button;
     private javax.swing.JCheckBox update_CheackBox;
     private javax.swing.JButton upload_Button;
-    private javax.swing.JPanel webCan_Panel;
+    private javax.swing.JPanel webCam_Panel;
     // End of variables declaration//GEN-END:variables
 }
