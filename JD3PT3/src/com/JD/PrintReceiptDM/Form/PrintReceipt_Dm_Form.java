@@ -9,9 +9,15 @@ import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
 import java.awt.Color;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -55,15 +61,85 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 //--------------INIT Data for Database----------//    
 //------ Load Session Factory ------//        
     SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory initSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory dm_SessionFactory = com.JD.StaticData.Static_DATA.dm_SessionFactory;
 //------ Load Session Factory ------//    
 //----------Call Validator----------------------//
     com.JD.Validator.Validator valid = new Validator();
-//----------Call Validator----------------------//    
+//----------Call Validator----------------------//   
+//----------Table Mode--------------------------//
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+//----------Table Mode--------------------------//
+//----------Temp Data--------------------------//
+    String productNameTemp = "";
+    String sizeTemp = "";
+    String measurementTemp = "";
+//----------Temp Data--------------------------//
+
     public PrintReceipt_Dm_Form() {
         initComponents();
-         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
+        payAble_TextField.setBackground(Color.lightGray);
+        twoPayAmount_TextField.setBackground(Color.lightGray);
+        neightWeight_TextField.setBackground(Color.lightGray);
+        grossWeight_TextField.setBackground(Color.lightGray);
+        presrNo_Lable.setText(preSRNO);
+        srNo_Lable.setText(preSRNO + "-" + SRNO);
+        com.JD.StaticData.Static_DATA.dm_PartyName=party_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_ProductName=product_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_Size=size_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_Measurement=measurement_ComboBox;
+        defaultTableModel = (DefaultTableModel) dm_Table.getModel();
+        //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
-         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
+        //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//   
+        //------Load Data From Master---------------------------------//
+
+        Session session = masterSessionFactory.openSession();
+
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
+            party_ComboBox.addItem(p.getPartyName());
+        }
+        q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
+            if (productNameTemp.contains(p.getProductName())) {
+            } else {
+                productNameTemp = productNameTemp + "##" + p.getProductName();
+                product_ComboBox.addItem(p.getProductName());
+            }
+
+            if (sizeTemp.contains(p.getProductSize() + "")) {
+            } else {
+                sizeTemp = sizeTemp + "##" + p.getProductSize() + "";
+                size_ComboBox.addItem(p.getProductSize() + "");
+            }
+
+            if (measurementTemp.contains(p.getProductMeasurement())) {
+            } else {
+                measurementTemp = measurementTemp + "##" + p.getProductMeasurement();
+                measurement_ComboBox.addItem(p.getProductMeasurement());
+            }
+
+        }
+
+        Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
+        cr.add(Restrictions.eq("pendingStatus", "TRUE"));
+        List results = cr.list();
+
+        for (Object object : results) {
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
+            pending_ComboBox.addItem(p.getSrno());
+        }
+
+        session.close();
+
+
+        //------Load Data From Master---------------------------------//
+
+
     }
 
     /**
@@ -79,7 +155,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         cashMode_ButtonGroup = new javax.swing.ButtonGroup();
         DM_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dm_Table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         party_ComboBox = new javax.swing.JComboBox();
         webCan_Panel = new javax.swing.JPanel();
@@ -135,7 +211,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         DM_Panel.setBackground(new java.awt.Color(255, 255, 51));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dm_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -146,7 +222,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dm_Table);
 
         jLabel1.setText("* Party Name:");
 
@@ -185,28 +261,65 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         jLabel5.setText("* Value:");
 
+        value_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                value_TextFieldKeyReleased(evt);
+            }
+        });
+
         jLabel6.setText("* Total Amount:");
+
+        totalAmount_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                totalAmount_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("* Payment Type:");
 
         cashMode_ButtonGroup.add(cash_CheackBox);
         cash_CheackBox.setText("Cash");
+        cash_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cash_CheackBoxActionPerformed(evt);
+            }
+        });
 
         cashMode_ButtonGroup.add(twoPay_CheackBox);
         twoPay_CheackBox.setText("Two Pay");
+        twoPay_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                twoPay_CheackBoxActionPerformed(evt);
+            }
+        });
 
         cashMode_ButtonGroup.add(cashAndTwoPay_CheackBox);
         cashAndTwoPay_CheackBox.setText("Cash And Two Pay");
+        cashAndTwoPay_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cashAndTwoPay_CheackBoxActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("* PayAble Amount:");
 
         payAble_TextField.setBackground(new java.awt.Color(255, 204, 255));
         payAble_TextField.setEditable(false);
+        payAble_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                payAble_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel9.setText("* TwoPay Amount:");
 
         twoPayAmount_TextField.setBackground(new java.awt.Color(255, 204, 255));
         twoPayAmount_TextField.setEditable(false);
+        twoPayAmount_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                twoPayAmount_TextFieldMouseEntered(evt);
+            }
+        });
 
         jLabel10.setText("* Driver Name:");
 
@@ -259,16 +372,31 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         print_Button.setText("Print");
 
         proxy_CheackBox.setText("Print Quantity In Ton ?");
+        proxy_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proxy_CheackBoxActionPerformed(evt);
+            }
+        });
 
         jLabel18.setText("NT WT:");
 
         neightWeight_TextField.setBackground(new java.awt.Color(255, 204, 255));
         neightWeight_TextField.setEnabled(false);
+        neightWeight_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                neightWeight_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel20.setText("GR WT:");
 
         grossWeight_TextField.setBackground(new java.awt.Color(255, 204, 255));
         grossWeight_TextField.setEnabled(false);
+        grossWeight_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                grossWeight_TextFieldKeyReleased(evt);
+            }
+        });
 
         presrNo_Lable.setText("NA- ");
 
@@ -277,6 +405,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         search_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 search_TextFieldMouseEntered(evt);
+            }
+        });
+        search_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_TextFieldKeyReleased(evt);
             }
         });
 
@@ -485,7 +618,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
     private void search_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseEntered
         // TODO add your handling code here:
-          search_TextField.setText("Search.......");
+        search_TextField.setText("Search.......");
     }//GEN-LAST:event_search_TextFieldMouseEntered
 
     private void reset_CheackboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_CheackboxActionPerformed
@@ -495,8 +628,141 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_reset_CheackboxActionPerformed
 
-    
-    void reset(){
+    private void cash_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (cash_CheackBox.isSelected()) {
+            twoPayAmount_TextField.setText("");
+            twoPayAmount_TextField.setEditable(false);
+            twoPayAmount_TextField.setBackground(Color.lightGray);
+            payAble_TextField.setText(totalAmount_TextField.getText());
+            payAble_TextField.setBackground(Color.white);
+            paymentType = "CASH";
+        }
+    }//GEN-LAST:event_cash_CheackBoxActionPerformed
+
+    private void totalAmount_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalAmount_TextFieldKeyReleased
+        // TODO add your handling code here:        
+        totalAmount_TextField.setText(valid.intTypeNumberValidator(totalAmount_TextField.getText()));
+        if (cash_CheackBox.isSelected()) {
+            payAble_TextField.setText(totalAmount_TextField.getText());
+        } else if (twoPay_CheackBox.isSelected()) {
+            twoPayAmount_TextField.setText(totalAmount_TextField.getText());
+        }
+
+    }//GEN-LAST:event_totalAmount_TextFieldKeyReleased
+
+    private void twoPay_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoPay_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (twoPay_CheackBox.isSelected()) {
+
+            twoPayAmount_TextField.setText(totalAmount_TextField.getText());
+            twoPayAmount_TextField.setEditable(false);
+            twoPayAmount_TextField.setBackground(Color.white);
+
+            payAble_TextField.setText("");
+            payAble_TextField.setBackground(Color.lightGray);
+            payAble_TextField.setEditable(false);
+
+            paymentType = "TWOPAY";
+        }
+    }//GEN-LAST:event_twoPay_CheackBoxActionPerformed
+
+    private void cashAndTwoPay_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashAndTwoPay_CheackBoxActionPerformed
+        // TODO add your handling code here:
+
+        if (cashAndTwoPay_CheackBox.isSelected()) {
+            twoPayAmount_TextField.setText("");
+            twoPayAmount_TextField.setEditable(false);
+            twoPayAmount_TextField.setBackground(Color.white);
+
+            payAble_TextField.setText("");
+            payAble_TextField.setBackground(Color.white);
+            payAble_TextField.setEditable(true);
+
+        }
+
+    }//GEN-LAST:event_cashAndTwoPay_CheackBoxActionPerformed
+
+    private void twoPayAmount_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_twoPayAmount_TextFieldMouseEntered
+        // TODO add your handling code here:
+
+        int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
+        int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
+
+        if (totalAmountTemp <= payAbleAmountTemp) {
+            cash_CheackBox.setSelected(true);
+            twoPayAmount_TextField.setText("");
+            twoPayAmount_TextField.setEditable(false);
+            twoPayAmount_TextField.setBackground(Color.lightGray);
+            payAble_TextField.setText(totalAmount_TextField.getText());
+            payAble_TextField.setBackground(Color.white);
+            paymentType = "CASH";
+        } else {
+            twoPayAmount = totalAmountTemp - payAbleAmountTemp;
+            twoPayAmount_TextField.setText(twoPayAmount + "");
+        }
+
+    }//GEN-LAST:event_twoPayAmount_TextFieldMouseEntered
+
+    private void value_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_value_TextFieldKeyReleased
+        // TODO add your handling code here:
+        value_TextField.setText(valid.intTypeNumberValidator(value_TextField.getText()));
+    }//GEN-LAST:event_value_TextFieldKeyReleased
+
+    private void payAble_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_payAble_TextFieldKeyReleased
+        // TODO add your handling code here:
+        payAble_TextField.setText(valid.intTypeNumberValidator(payAble_TextField.getText()));
+    }//GEN-LAST:event_payAble_TextFieldKeyReleased
+
+    private void neightWeight_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_neightWeight_TextFieldKeyReleased
+        // TODO add your handling code here:
+        neightWeight_TextField.setText(valid.numberValidator(neightWeight_TextField.getText()));
+    }//GEN-LAST:event_neightWeight_TextFieldKeyReleased
+
+    private void grossWeight_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grossWeight_TextFieldKeyReleased
+        // TODO add your handling code here:
+        grossWeight_TextField.setText(valid.numberValidator(grossWeight_TextField.getText()));
+    }//GEN-LAST:event_grossWeight_TextFieldKeyReleased
+
+    private void search_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldKeyReleased
+        // TODO add your handling code here:
+        search_TextField.setText(valid.intTypeNumberValidator(search_TextField.getText()));
+    }//GEN-LAST:event_search_TextFieldKeyReleased
+
+    private void proxy_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxy_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (proxy_CheackBox.isSelected()) {
+            neightWeight_TextField.setEditable(true);
+            neightWeight_TextField.setBackground(Color.white);
+            grossWeight_TextField.setEditable(true);
+            grossWeight_TextField.setBackground(Color.white);
+        } else {
+            neightWeight_TextField.setEditable(false);
+            neightWeight_TextField.setBackground(Color.lightGray);
+            grossWeight_TextField.setEditable(false);
+            grossWeight_TextField.setBackground(Color.lightGray);
+        }
+    }//GEN-LAST:event_proxy_CheackBoxActionPerformed
+
+    void calculateAmount() {
+        int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
+        int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
+        if (totalAmountTemp <= payAbleAmountTemp) {
+            twoPayAmount = 0;
+            payableAmount = totalAmountTemp;
+        } else {
+            twoPayAmount = totalAmountTemp - payAbleAmountTemp;
+            payableAmount = payAbleAmountTemp;
+        }
+
+    }
+
+    void updateSRNO() {
+
+        com.JD.StaticData.Static_DATA.srNo += 1;
+    }
+
+    void reset() {
         party_ComboBox.setSelectedItem("Select Party Name");
         pending_ComboBox.setSelectedItem("Load Pending Order");
         product_ComboBox.setSelectedItem("Select Product Name");
@@ -513,20 +779,24 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         grossWeight_TextField.setText("");
         cashMode_ButtonGroup.clearSelection();
         operation_ButtonGroup.clearSelection();
-        
+
         neightWeight_TextField.setEnabled(false);
         grossWeight_TextField.setEnabled(false);
         payAble_TextField.setEnabled(false);
         twoPayAmount_TextField.setEnabled(false);
         update_CheackBox.setEnabled(false);
         cancel_CheackBox.setEnabled(false);
-        
+
         search_TextField.setText("Search.......");
         reset_Cheackbox.setSelected(false);
         proxy_CheackBox.setSelected(false);
+
+        payAble_TextField.setBackground(Color.lightGray);
+        twoPayAmount_TextField.setBackground(Color.lightGray);
+        neightWeight_TextField.setBackground(Color.lightGray);
+        grossWeight_TextField.setBackground(Color.lightGray);
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -574,6 +844,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private javax.swing.JCheckBox cashAndTwoPay_CheackBox;
     private javax.swing.ButtonGroup cashMode_ButtonGroup;
     private javax.swing.JCheckBox cash_CheackBox;
+    private javax.swing.JTable dm_Table;
     private javax.swing.JComboBox driverName_ComboBox;
     private javax.swing.JButton export_Button;
     private javax.swing.JTextField grossWeight_TextField;
@@ -600,7 +871,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox measurement_ComboBox;
     private javax.swing.JTextField neightWeight_TextField;
     private javax.swing.ButtonGroup operation_ButtonGroup;

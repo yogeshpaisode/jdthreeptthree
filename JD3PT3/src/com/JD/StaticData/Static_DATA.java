@@ -53,7 +53,19 @@ public class Static_DATA {
     
     //-----Master ComboBoxFill-----//
     public static javax.swing.JComboBox machinePartyName_ComboBox=null;
-    public static javax.swing.JComboBox driverPartyName_ComboBox=null;
-    
+    public static javax.swing.JComboBox driverPartyName_ComboBox=null;    
     //-----Master ComboBoxFill-----//
+    
+    //-----DM Data----------------------------------//
+    //-----DM SessionFactory------------------------//
+    public static SessionFactory dm_SessionFactory=null;    
+    //-----DM SessionFactory------------------------//
+    
+    public static javax.swing.JComboBox dm_PartyName=null;
+    public static javax.swing.JComboBox dm_ProductName=null;
+    public static javax.swing.JComboBox dm_Size=null;
+    public static javax.swing.JComboBox dm_Measurement=null;
+    
+    //-----DM Data----------------------------------//
+    
 }
