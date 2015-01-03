@@ -6,6 +6,7 @@ package com.JD.PrintReceiptDM.Form;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import java.util.Date;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 
@@ -15,7 +16,41 @@ import javax.swing.JPanel;
  */
 public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
-   
+    //--------------INIT Data for Database----------//
+    String partyLink = "";
+    String productName = "";
+    int productSize = 0;
+    String productMeasurement = "";
+    int productValue = 0;
+    int totalAmount = 0;
+    String paymentType = "";
+    int payableAmount = 0;
+    int twoPayAmount = 0;
+    String driverName = "";
+    String vehicleName = "";
+    String vehicleNumber = "";
+    String royaltyNumber = "";
+    String printProxy = "";
+    double netWeight = 0.0;
+    double grossWeight = 0.0;
+    String pendingStatus = "";
+    String preSRNO = com.JD.StaticData.Static_DATA.prSrNo;
+    int SRNO = com.JD.StaticData.Static_DATA.srNo;
+    String QRCode = "";
+    String printingStatus = "";
+    Date dateOfAddition = null;
+    Date timeOfAddition = null;
+    String location = "";
+    String addedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String addedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
+    String rawField1 = "";
+    String rawField2 = "";
+    String rawField3 = "";
+    String rawField4 = "";
+    String rawField5 = "";
+    String rawField6 = "";
+
+//--------------INIT Data for Database----------//
     public PrintReceipt_Dm_Form() {
         initComponents();
     }
@@ -127,6 +162,4 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     public JPanel getDM_Panel() {
         return DM_Panel;
     }
-
-   
 }
