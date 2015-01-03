@@ -266,6 +266,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="name_TextField">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="name_TextFieldKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -285,6 +288,9 @@
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="address_TextAreaKeyReleased"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -294,6 +300,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="mobile_TextField">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="mobile_TextFieldKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -389,6 +398,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="licence_TextField">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="licence_TextFieldKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="tack_Button">
           <Properties>
@@ -419,6 +431,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadDate_ComboBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="update_CheackBox">
           <Properties>
