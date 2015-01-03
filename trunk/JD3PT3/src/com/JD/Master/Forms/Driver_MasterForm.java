@@ -339,6 +339,16 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
         search_TextField.setText("Search.....");
         search_TextField.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+        search_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                search_TextFieldMouseEntered(evt);
+            }
+        });
+        search_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                search_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
         jLabel10.setText(" Type Driver Name To Search. ");
@@ -626,7 +636,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                     } else {
 //----------------------------------------Cheack For Updated Image--------------------------------------//                                        
                                         if (outputPathTemp.length() > 100) {
-                                            driverPic=outputPathTemp;
+                                            driverPic = outputPathTemp;
                                         } else {
                                             driverPic = convertImageToString(outputPathTemp);
                                         }
@@ -702,17 +712,38 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             outputPathTemp = d.getDriverPic();
             ico = new ImageIcon(convertStringToImageByteArray(d.getDriverPic()));
             photo_Lable.setIcon(ico);
-
         }
-
-
         session.close();
-
     }//GEN-LAST:event_loadDate_ComboBoxActionPerformed
 
     private void driverPartyName_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_driverPartyName_ComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_driverPartyName_ComboBoxActionPerformed
+
+    private void search_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseEntered
+        // TODO add your handling code here:
+        search_TextField.setText("");
+    }//GEN-LAST:event_search_TextFieldMouseEntered
+
+    private void search_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldKeyReleased
+        // TODO add your handling code here:
+        String driverNameTemp = search_TextField.getText().toUpperCase();
+        search_TextField.setText(search_TextField.getText().toUpperCase());
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+        Session session = driverSessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+        cr.add(Restrictions.like("driverName", driverNameTemp+"%"));
+        List results = cr.list();
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{d.getDriverPartyLink(), d.getDriverName(), d.getDriverAddress(), d.getDriverMobile(), d.getDriverBloodGroup(), d.getDriverDateOfJoining(), d.getRawField1(), d.getDriverDateOfAddition(), d.getDriverTimeOfAddition(), d.getDriverAddedByPersonName(), d.getDriverAddedWithRight(), d.getDriverLocation()});
+        }
+        session.close();
+    }//GEN-LAST:event_search_TextFieldKeyReleased
 
     private String convertStringToImageByteArray(String imageString) {
         k += 1;
