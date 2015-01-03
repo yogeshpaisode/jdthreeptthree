@@ -7,6 +7,7 @@ package com.JD.Master.Forms;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Master.Hibernate.config.Drivermaster;
+import com.JD.Validator.Validator;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     //--- File To Be Save ---//
 
     int i = 0;
+    int k = 0;
     String prefix = "INPUT_";
     String outputPathTemp = "";
     URL defaultImageNameURL = getClass().getResource("default.jpg");
@@ -74,6 +76,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
     //----------javax.swing.DefaultComboBoxModel----//
+    //----------Call Validator----------------------//
+    com.JD.Validator.Validator valid = new Validator();
+    //----------Call Validator----------------------//
 
     /**
      * Creates new form Party_MasterForm
@@ -166,14 +171,31 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
         jLabel2.setText("* Driver Name:");
 
+        name_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                name_TextFieldKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("* Address:");
 
         address_TextArea.setColumns(20);
         address_TextArea.setLineWrap(true);
         address_TextArea.setRows(5);
+        address_TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                address_TextAreaKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(address_TextArea);
 
         jLabel4.setText("* Mobile Number:");
+
+        mobile_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                mobile_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel5.setText("* Blood Group:");
 
@@ -213,6 +235,12 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
         jLabel8.setText("* Driving Licence No:");
 
+        licence_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                licence_TextFieldKeyReleased(evt);
+            }
+        });
+
         tack_Button.setText("Tack Image");
         tack_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,6 +258,11 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         });
 
         loadDate_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Load Data To Update" }));
+        loadDate_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadDate_ComboBoxActionPerformed(evt);
+            }
+        });
 
         operation_ButtonGroup.add(update_CheackBox);
         update_CheackBox.setText("Update Driver");
@@ -613,6 +646,79 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    private void name_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name_TextFieldKeyReleased
+        // TODO add your handling code here:
+        name_TextField.setText(valid.stringValidator(name_TextField.getText()).toUpperCase());
+    }//GEN-LAST:event_name_TextFieldKeyReleased
+
+    private void address_TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_address_TextAreaKeyReleased
+        // TODO add your handling code here:
+        address_TextArea.setText(address_TextArea.getText().toUpperCase());
+    }//GEN-LAST:event_address_TextAreaKeyReleased
+
+    private void mobile_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobile_TextFieldKeyReleased
+        // TODO add your handling code here:
+        mobile_TextField.setText(valid.intTypeNumberValidator(mobile_TextField.getText()));
+
+
+    }//GEN-LAST:event_mobile_TextFieldKeyReleased
+
+    private void licence_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_licence_TextFieldKeyReleased
+        // TODO add your handling code here:
+        licence_TextField.setText(licence_TextField.getText().toUpperCase());
+    }//GEN-LAST:event_licence_TextFieldKeyReleased
+
+    private void loadDate_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDate_ComboBoxActionPerformed
+        // TODO add your handling code here:        
+        String driverNameTemp = loadDate_ComboBox.getSelectedItem().toString();
+        Session session = driverSessionFactory.openSession();
+
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+        cr.add(Restrictions.eq("driverName", driverNameTemp));
+        List results = cr.list();
+
+        for (Object object : results) {
+
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+            driverPartyName_ComboBox.setSelectedItem(d.getDriverPartyLink());
+            name_TextField.setText(d.getDriverName());
+            address_TextArea.setText(d.getDriverAddress());
+            mobile_TextField.setText(d.getDriverMobile());
+            bloodGroup_ComboBox.setSelectedItem(d.getDriverBloodGroup());
+            licence_TextField.setText(d.getRawField1());
+            ico = new ImageIcon(convertStringToImageByteArray(d.getDriverPic()));
+            photo_Lable.setIcon(ico);
+
+        }
+
+
+        session.close();
+
+    }//GEN-LAST:event_loadDate_ComboBoxActionPerformed
+
+    private String convertStringToImageByteArray(String imageString) {
+        k += 1;
+        OutputStream outputStream = null;
+        byte[] imageInByteArray = Base64.decodeBase64(imageString);
+        try {
+            outputStream = new FileOutputStream("temp/update" + k + ".jpg");
+            outputStream.write(imageInByteArray);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return "temp/update" + k + ".jpg";
+
+    }
 
     void insert() {
         Session session = driverSessionFactory.openSession();
