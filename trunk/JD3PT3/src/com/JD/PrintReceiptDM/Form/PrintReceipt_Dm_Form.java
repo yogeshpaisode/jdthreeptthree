@@ -25,6 +25,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
+    boolean flag = false;
     //--------------INIT Data for Database----------//
     String partyLink = "";
     String productName = "";
@@ -85,10 +86,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         grossWeight_TextField.setBackground(Color.lightGray);
         presrNo_Lable.setText(preSRNO);
         srNo_Lable.setText(preSRNO + "-" + SRNO);
-        com.JD.StaticData.Static_DATA.dm_PartyName=party_ComboBox;
-        com.JD.StaticData.Static_DATA.dm_ProductName=product_ComboBox;
-        com.JD.StaticData.Static_DATA.dm_Size=size_ComboBox;
-        com.JD.StaticData.Static_DATA.dm_Measurement=measurement_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_PartyName = party_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_ProductName = product_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_Size = size_ComboBox;
+        com.JD.StaticData.Static_DATA.dm_Measurement = measurement_ComboBox;
         defaultTableModel = (DefaultTableModel) dm_Table.getModel();
         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
@@ -138,7 +139,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
 
         //------Load Data From Master---------------------------------//
-
+        flag = true;
 
     }
 
@@ -227,6 +228,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         jLabel1.setText("* Party Name:");
 
         party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+        party_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                party_ComboBoxActionPerformed(evt);
+            }
+        });
 
         webCan_Panel.setBackground(new java.awt.Color(255, 255, 51));
         webCan_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51)));
@@ -743,6 +749,38 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             grossWeight_TextField.setBackground(Color.lightGray);
         }
     }//GEN-LAST:event_proxy_CheackBoxActionPerformed
+
+    private void party_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_party_ComboBoxActionPerformed
+        // TODO add your handling code here:
+
+        if (flag) {
+            String partyNameTemp = party_ComboBox.getSelectedItem().toString();
+            driverName_ComboBox.removeAllItems();
+            vehicleNumber_ComboBox.removeAllItems();
+            driverName_ComboBox.addItem("Select Driver Name");
+            vehicleNumber_ComboBox.addItem("Select Vehicle Number");
+            Session session = masterSessionFactory.openSession();
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+            cr.add(Restrictions.eq("driverPartyLink", partyNameTemp));
+            List results = cr.list();
+
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+                driverName_ComboBox.addItem(d.getDriverName());
+            }
+
+            cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
+            cr.add(Restrictions.eq("machineType", "VEHICLE"));
+            results = cr.list();
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                vehicleNumber_ComboBox.addItem(m.getMachineNumber());
+            }
+            session.close();
+        }
+
+    }//GEN-LAST:event_party_ComboBoxActionPerformed
 
     void calculateAmount() {
         int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
