@@ -26,6 +26,7 @@ import org.hibernate.criterion.Restrictions;
 public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
     boolean flag = false;
+    boolean flag2=false;
     //--------------INIT Data for Database----------//
     String partyLink = "";
     String productName = "";
@@ -334,6 +335,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         jLabel11.setText("* Vehicle Number:");
 
         vehicleNumber_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Vehicle Number" }));
+        vehicleNumber_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vehicleNumber_ComboBoxActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("* Vehicle Name:");
 
@@ -778,9 +784,29 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 vehicleNumber_ComboBox.addItem(m.getMachineNumber());
             }
             session.close();
+            flag2=true;
         }
 
     }//GEN-LAST:event_party_ComboBoxActionPerformed
+
+    private void vehicleNumber_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleNumber_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (flag2) {
+            String vehicleNumberTemp = vehicleNumber_ComboBox.getSelectedItem().toString();
+            Session session = masterSessionFactory.openSession();
+
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machineNumber", vehicleNumberTemp));
+            List results = cr.list();
+
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                vehiclenumber_TextField.setText(m.getMachineName());
+            }
+            session.close();
+        }
+
+    }//GEN-LAST:event_vehicleNumber_ComboBoxActionPerformed
 
     void calculateAmount() {
         int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
