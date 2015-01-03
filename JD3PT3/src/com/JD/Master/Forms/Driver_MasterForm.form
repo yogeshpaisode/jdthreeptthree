@@ -118,7 +118,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="webCan_Panel" max="32767" attributes="0"/>
+                                  <Component id="webCam_Panel" max="32767" attributes="0"/>
                                   <Component id="tack_Button" pref="307" max="32767" attributes="0"/>
                               </Group>
                               <Component id="upload_Button" alignment="0" min="-2" pref="307" max="-2" attributes="0"/>
@@ -232,7 +232,7 @@
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="webCan_Panel" min="-2" max="-2" attributes="0"/>
+                          <Component id="webCam_Panel" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="tack_Button" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -349,7 +349,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JPanel" name="webCan_Panel">
+        <Container class="javax.swing.JPanel" name="webCam_Panel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="33" green="ff" red="ff" type="rgb"/>
@@ -587,11 +587,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Export To Excel"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="print_Button">
           <Properties>
             <Property name="text" type="java.lang.String" value="Print"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="print_ButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="search_TextField">
           <Properties>

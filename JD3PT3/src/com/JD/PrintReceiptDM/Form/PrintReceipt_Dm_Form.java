@@ -6,9 +6,11 @@ package com.JD.PrintReceiptDM.Form;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import com.JD.Validator.Validator;
 import java.util.Date;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -49,10 +51,18 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     String rawField4 = "";
     String rawField5 = "";
     String rawField6 = "";
-
-//--------------INIT Data for Database----------//
+//--------------INIT Data for Database----------//    
+//------ Load Session Factory ------//        
+    SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+//------ Load Session Factory ------//    
+//----------Call Validator----------------------//
+    com.JD.Validator.Validator valid = new Validator();
+//----------Call Validator----------------------//    
     public PrintReceipt_Dm_Form() {
         initComponents();
+         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
+        webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
+         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
     }
 
     /**
@@ -64,9 +74,51 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        operation_ButtonGroup = new javax.swing.ButtonGroup();
         DM_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        party_ComboBox = new javax.swing.JComboBox();
+        webCan_Panel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        product_ComboBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        size_ComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        measurement_ComboBox = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
+        value_TextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        totalAmount_TextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cash_CheackBox = new javax.swing.JCheckBox();
+        twoPay_CheackBox = new javax.swing.JCheckBox();
+        cashAndTwoPay_CheackBox = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        payAble_TextField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        twoPayAmount_TextField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        driverName_ComboBox = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        vehicleNumber_ComboBox = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        vehiclenumber_TextField = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        srNo_Lable = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        update_CheackBox = new javax.swing.JCheckBox();
+        cancel_CheackBox = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+        pending_CheackBox = new javax.swing.JCheckBox();
+        pending_ComboBox = new javax.swing.JComboBox();
+        export_Button = new javax.swing.JButton();
+        print_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,17 +137,257 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jLabel1.setText("* Party Name:");
+
+        party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+
+        webCan_Panel.setBackground(new java.awt.Color(255, 255, 51));
+        webCan_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 204, 51)));
+
+        javax.swing.GroupLayout webCan_PanelLayout = new javax.swing.GroupLayout(webCan_Panel);
+        webCan_Panel.setLayout(webCan_PanelLayout);
+        webCan_PanelLayout.setHorizontalGroup(
+            webCan_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 325, Short.MAX_VALUE)
+        );
+        webCan_PanelLayout.setVerticalGroup(
+            webCan_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jLabel2.setText("* Product Name:");
+
+        product_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Product Name" }));
+
+        jLabel3.setText("* Size In MM:");
+
+        size_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Size" }));
+
+        jLabel4.setText("* Mesurement:");
+
+        measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Measurement" }));
+        measurement_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                measurement_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("* Value:");
+
+        jLabel6.setText("* Total Amount:");
+
+        jLabel7.setText("* Payment Type:");
+
+        cash_CheackBox.setText("Cash");
+
+        twoPay_CheackBox.setText("Two Pay");
+
+        cashAndTwoPay_CheackBox.setText("Cash And Two Pay");
+
+        jLabel8.setText("* PayAble Amount:");
+
+        payAble_TextField.setBackground(new java.awt.Color(255, 204, 255));
+        payAble_TextField.setEditable(false);
+
+        jLabel9.setText("* TwoPay Amount:");
+
+        twoPayAmount_TextField.setBackground(new java.awt.Color(255, 204, 255));
+        twoPayAmount_TextField.setEditable(false);
+
+        jLabel10.setText("* Driver Name:");
+
+        driverName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Driver Name" }));
+
+        jLabel11.setText("* Vehicle Number:");
+
+        vehicleNumber_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Vehicle Number" }));
+
+        jLabel12.setText("* Vehicle Name:");
+
+        vehiclenumber_TextField.setBackground(new java.awt.Color(255, 204, 255));
+        vehiclenumber_TextField.setEditable(false);
+
+        jLabel13.setText("Date:");
+
+        jLabel14.setText("jLabel14");
+        jLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
+        jLabel15.setText("Time:");
+
+        jLabel16.setText("jLabel16");
+        jLabel16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
+        jLabel17.setText("Sr.No : ");
+
+        srNo_Lable.setText("jLabel18");
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/PrintReceiptDM/Form/UP.jpg"))); // NOI18N
+        jLabel19.setText(" Scan QR Code From Receipt To UPDATE/CANCEL Order");
+        jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
+
+        operation_ButtonGroup.add(update_CheackBox);
+        update_CheackBox.setText("Update");
+        update_CheackBox.setEnabled(false);
+
+        operation_ButtonGroup.add(cancel_CheackBox);
+        cancel_CheackBox.setText("Cancel");
+        cancel_CheackBox.setEnabled(false);
+
+        jButton1.setText("Place Order");
+
+        operation_ButtonGroup.add(pending_CheackBox);
+        pending_CheackBox.setText("Pending");
+
+        pending_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Load Pending Order" }));
+
+        export_Button.setText("Export To Excel");
+
+        print_Button.setText("Print");
+
         javax.swing.GroupLayout DM_PanelLayout = new javax.swing.GroupLayout(DM_Panel);
         DM_Panel.setLayout(DM_PanelLayout);
         DM_PanelLayout.setHorizontalGroup(
             DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addGroup(DM_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel13)
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(srNo_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(product_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(totalAmount_TextField)
+                            .addComponent(payAble_TextField)
+                            .addComponent(driverName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(vehicleNumber_ComboBox, 0, 185, Short.MAX_VALUE)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel15)))
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addComponent(update_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancel_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pending_CheackBox)))
+                .addGap(23, 23, 23)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(size_ComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(value_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DM_PanelLayout.createSequentialGroup()
+                        .addComponent(cash_CheackBox)
+                        .addGap(10, 10, 10)
+                        .addComponent(twoPay_CheackBox)
+                        .addGap(10, 10, 10)
+                        .addComponent(cashAndTwoPay_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(twoPayAmount_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vehiclenumber_TextField, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, DM_PanelLayout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(export_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pending_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(webCan_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         DM_PanelLayout.setVerticalGroup(
             DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DM_PanelLayout.createSequentialGroup()
-                .addGap(0, 288, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(DM_PanelLayout.createSequentialGroup()
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pending_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DM_PanelLayout.createSequentialGroup()
+                                .addComponent(size_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(value_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DM_PanelLayout.createSequentialGroup()
+                                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(product_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(measurement_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(totalAmount_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(cash_CheackBox)
+                                        .addComponent(twoPay_CheackBox)
+                                        .addComponent(cashAndTwoPay_CheackBox)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(payAble_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(twoPayAmount_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(driverName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(vehicleNumber_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(vehiclenumber_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)))
+                    .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(update_CheackBox)
+                    .addComponent(cancel_CheackBox)
+                    .addComponent(jButton1)
+                    .addComponent(pending_CheackBox)
+                    .addComponent(jLabel17)
+                    .addComponent(srNo_Lable)
+                    .addComponent(jLabel19)
+                    .addComponent(export_Button)
+                    .addComponent(print_Button))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -111,6 +403,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void measurement_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_measurement_ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_measurement_ComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,8 +451,50 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DM_Panel;
+    private javax.swing.JCheckBox cancel_CheackBox;
+    private javax.swing.JCheckBox cashAndTwoPay_CheackBox;
+    private javax.swing.JCheckBox cash_CheackBox;
+    private javax.swing.JComboBox driverName_ComboBox;
+    private javax.swing.JButton export_Button;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox measurement_ComboBox;
+    private javax.swing.ButtonGroup operation_ButtonGroup;
+    private javax.swing.JComboBox party_ComboBox;
+    private javax.swing.JTextField payAble_TextField;
+    private javax.swing.JCheckBox pending_CheackBox;
+    private javax.swing.JComboBox pending_ComboBox;
+    private javax.swing.JButton print_Button;
+    private javax.swing.JComboBox product_ComboBox;
+    private javax.swing.JComboBox size_ComboBox;
+    private javax.swing.JLabel srNo_Lable;
+    private javax.swing.JTextField totalAmount_TextField;
+    private javax.swing.JTextField twoPayAmount_TextField;
+    private javax.swing.JCheckBox twoPay_CheackBox;
+    private javax.swing.JCheckBox update_CheackBox;
+    private javax.swing.JTextField value_TextField;
+    private javax.swing.JComboBox vehicleNumber_ComboBox;
+    private javax.swing.JTextField vehiclenumber_TextField;
+    private javax.swing.JPanel webCan_Panel;
     // End of variables declaration//GEN-END:variables
 
     public JPanel getDM_Panel() {
