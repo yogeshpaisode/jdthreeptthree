@@ -66,7 +66,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
     SessionFactory initSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     SessionFactory dm_SessionFactory = com.JD.StaticData.Static_DATA.dm_SessionFactory;
-    
 //------ Load Session Factory ------//    
 //----------Call Validator----------------------//
     com.JD.Validator.Validator valid = new Validator();
@@ -87,7 +86,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
         grossWeight_TextField.setBackground(Color.lightGray);
-       
+
         presrNo_Lable.setText(" " + preSRNO + "-");
         srNo_Lable.setText(preSRNO + "-" + SRNO);
         com.JD.StaticData.Static_DATA.dm_PartyName = party_ComboBox;
@@ -141,10 +140,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         session.close();
         //------Load Data From Master---------------------------------//
-        flag = true;       
-        
+        flag = true;
+
         //------Load All Component To sattic Class----//
-        com.JD.StaticData.Static_DATA.addDataToDataBase_Button=addDataToDataBase_Button;
+        com.JD.StaticData.Static_DATA.addDataToDataBase_Button = addDataToDataBase_Button;
         //------Load All Component To sattic Class----//
     }
 
@@ -863,7 +862,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
     private void addDataToDataBase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDataBase_ButtonActionPerformed
         // TODO add your handling code here:
-        
+
         partyLink = party_ComboBox.getSelectedItem().toString();
         productName = product_ComboBox.getSelectedItem().toString();
         String productSizeTemp = size_ComboBox.getSelectedItem().toString();
@@ -996,8 +995,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     void insert() {
         addDataToDataBase_Button.setText("Processing..");
         addDataToDataBase_Button.setEnabled(false);
-        dateOfAddition=new Date();
-        timeOfAddition=new Date();
+        dateOfAddition = new Date();
+        timeOfAddition = new Date();
         String str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         StringBuffer sb = new StringBuffer(10);
         for (int i = 0; i < 10; i++) {
@@ -1011,49 +1010,53 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         session.save(printreceiptdm);
         transaction.commit();
 
-        ArrayList<DataBean> dataBeanList = new ArrayList<DataBean>();
-
-        DataBean d = new DataBean();
-        d.setPartyName(" : " + partyLink);
-        d.setParticular(" : " + productName);
-        d.setRoyaltyNumber(" : " + "AG8HU76HH");
-        d.setSrNo(preSRNO+"-"+SRNO);
-        d.setMeasurement(" : " + sizeTemp);
-        d.setTotalAmount(" : " + totalAmount);
-        d.setPayableAmount(" : " + payableAmount+"");
-        d.setCft(": " + productMeasurement);
-        d.setPendingAmount(twoPayAmount+"");
-        d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
-        if (proxy_CheackBox.isSelected()) {
-            d.setQuantity("TON");
-            d.setNetWeight(" : " + neightWeight_TextField.getText());
-            d.setGrossWeight(" : " + grossWeight_TextField.getText());
+        if (pending_CheackBox.isSelected()) {
+            pending_ComboBox.addItem(SRNO + "");
+            reset();
         } else {
-            d.setQuantity(measurementTemp);
-            d.setNetWeight(" : " + "Not Applied");
-            d.setGrossWeight(" : " + "Not Applied");
-        }
-        if (twoPay_CheackBox.isSelected()) {
-            d.setInvoiceType(" : TwoPay");
-            d.setPendingAmount(" : " + totalAmount);
-        }
-        if (cashAndTwoPay_CheackBox.isSelected()) {
-            d.setInvoiceType(" : Cash and TwoPay");
-            d.setPendingAmount(" : " + twoPayAmount + "");
-        }
+            ArrayList<DataBean> dataBeanList = new ArrayList<DataBean>();
+            DataBean d = new DataBean();
+            d.setPartyName(" : " + partyLink);
+            d.setParticular(" : " + productName);
+            d.setRoyaltyNumber(" : " + "AG8HU76HH");
+            d.setSrNo(preSRNO + "-" + SRNO);
+            d.setMeasurement(" : " + sizeTemp);
+            d.setTotalAmount(" : " + totalAmount);
+            d.setPayableAmount(" : " + payableAmount + "");
+            d.setCft(": " + productMeasurement);
+            d.setPendingAmount(twoPayAmount + "");
+            d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
+            if (proxy_CheackBox.isSelected()) {
+                d.setQuantity("TON");
+                d.setNetWeight(" : " + neightWeight_TextField.getText());
+                d.setGrossWeight(" : " + grossWeight_TextField.getText());
+            } else {
+                d.setQuantity(measurementTemp);
+                d.setNetWeight(" : " + "Not Applied");
+                d.setGrossWeight(" : " + "Not Applied");
+            }
+            if (twoPay_CheackBox.isSelected()) {
+                d.setInvoiceType(" : TwoPay");
+                d.setPendingAmount(" : " + totalAmount);
+            }
+            if (cashAndTwoPay_CheackBox.isSelected()) {
+                d.setInvoiceType(" : Cash and TwoPay");
+                d.setPendingAmount(" : " + twoPayAmount + "");
+            }
 
-        if (cash_CheackBox.isSelected()) {
-            d.setInvoiceType(" : Cash");
-            d.setPendingAmount(" : " + "NO");
+            if (cash_CheackBox.isSelected()) {
+                d.setInvoiceType(" : Cash");
+                d.setPendingAmount(" : " + "NO");
+            }
+            d.setDriverName(" : " + driverName);
+            d.setVehicleNumber(" : " + vehicleNumber);
+            dataBeanList.add(d);
+            new PrintDocumentJD(dataBeanList, QRCode, preSRNO + "-" + preSRNO);
+            com.JD.StaticData.Static_DATA.srNo_TEMP = SRNO;
         }
-        d.setDriverName(" : " + driverName);
-        d.setVehicleNumber(" : " + vehicleNumber);
-        dataBeanList.add(d);
-        new PrintDocumentJD(dataBeanList, QRCode, preSRNO+"-"+preSRNO);
-        com.JD.StaticData.Static_DATA.srNo_TEMP=SRNO;
-        updateSRNO();      
+        updateSRNO();
         session.close();
-        
+
     }
 
     void update() {
