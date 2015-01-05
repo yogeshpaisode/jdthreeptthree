@@ -13,7 +13,10 @@ import org.hibernate.SessionFactory;
  * @author Yogesh
  */
 public class Static_DATA {
-
+    //------TEMP DATA--------//
+    public static int srNo_TEMP=0;
+    //------TEMP DATA--------//
+    
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;
@@ -60,12 +63,14 @@ public class Static_DATA {
     //-----DM SessionFactory------------------------//
     public static SessionFactory dm_SessionFactory=null;    
     //-----DM SessionFactory------------------------//
-    
+    public static com.JD.PrintReceiptDM.Form.PrintReceipt_Dm_Form dm_Form=null;
     public static javax.swing.JComboBox dm_PartyName=null;
     public static javax.swing.JComboBox dm_ProductName=null;
     public static javax.swing.JComboBox dm_Size=null;
     public static javax.swing.JComboBox dm_Measurement=null;
+    public static javax.swing.JComboBox pending_ComboBox=null;
+    public static javax.swing.JButton addDataToDataBase_Button=null;
     
     //-----DM Data----------------------------------//
-    
+   
 }
