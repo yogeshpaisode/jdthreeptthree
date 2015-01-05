@@ -8,15 +8,14 @@ import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
 import java.awt.Color;
+import java.lang.InstantiationException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -85,7 +84,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
         grossWeight_TextField.setBackground(Color.lightGray);
-        presrNo_Lable.setText(" "+preSRNO+"-");
+        presrNo_Lable.setText(" " + preSRNO + "-");
         srNo_Lable.setText(preSRNO + "-" + SRNO);
         com.JD.StaticData.Static_DATA.dm_PartyName = party_ComboBox;
         com.JD.StaticData.Static_DATA.dm_ProductName = product_ComboBox;
@@ -393,6 +392,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         pending_CheackBox.setText("Pending");
 
         pending_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Load Pending Order" }));
+        pending_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pending_ComboBoxActionPerformed(evt);
+            }
+        });
 
         export_Button.setText("Exportl");
 
@@ -852,20 +856,69 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         driverName = driverName_ComboBox.getSelectedItem().toString();
         vehicleNumber = vehicleNumber_ComboBox.getSelectedItem().toString();
         vehicleName = vehicleName_TextField.getText();
-        productMeasurement = size_ComboBox.getSelectedItem().toString();
-
+        productMeasurement = measurement_ComboBox.getSelectedItem().toString();
         boolean proxy = proxyTest();
         boolean payment = paymentOptionTest();
         if (pending_CheackBox.isSelected()) {
             pendingStatus = "TRUE";
         }
 
+        if (partyLink.equals("Select Party Name")) {
+            JOptionPane.showMessageDialog(null, "Please Select Party Name");
+        } else {
+            if (productName.equals("Select Product Name")) {
+                JOptionPane.showMessageDialog(null, "Please Select Product Name");
+            } else {
+                if (productSizeTemp.equals("Select Size")) {
+                    JOptionPane.showMessageDialog(null, "Please Select Product Size");
+                } else {
+                    if (productMeasurement.equals("Select Measurement")) {
+                        JOptionPane.showMessageDialog(null, "Please Select Product Measurement");
+                    } else {
+                        if (productValueTemp.equals("")) {
+                            JOptionPane.showMessageDialog(null, "Please Provide Value");
+                        } else {
+                            if (totalAmountTemp.equals("")) {
+                                JOptionPane.showMessageDialog(null, "Please Provide Total Amount");
+                            } else {
+                                if (payment) {
+                                    if (driverName.equals("Select Driver Name")) {
+                                        JOptionPane.showMessageDialog(null, "Please Select Driver Name");
 
+                                    } else {
+                                        if (vehicleNumber.equals("Select Vehicle Number")) {
+                                            JOptionPane.showMessageDialog(null, "Please Select Vehicle Number");
 
-
-
-
+                                        } else {
+                                            if (pending_CheackBox.isSelected()) {
+                                                if (proxy) {
+                                                    businessLogic();
+                                                } else {
+                                                    JOptionPane.showMessageDialog(null, "Please Provide NET and GROSS Weight");
+                                                }
+                                            } else {
+                                                businessLogic();
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Please Select Payment Type");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_addDataToDataBase_ButtonActionPerformed
+
+    void businessLogic() {
+//----------------------------------------------------Bussiness Logic--------------------------------------------------------------------------//
+        calculateAmount();
+        cheackOperationType();
+//----------------------------------------------------Bussiness Logic--------------------------------------------------------------------------//
+
+    }
 
     private void update_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_CheackBoxActionPerformed
         // TODO add your handling code here:
@@ -890,6 +943,20 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
 
+    private void pending_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pending_ComboBoxActionPerformed
+        // TODO add your handling code here: pendingStatus
+        Session session = dm_SessionFactory.openSession();
+
+        Criteria cr = session.createCriteria(com.JD.InitData.Hibernate.config.Initdata.class);
+        cr.add(Restrictions.eq("pendingStatus", "TRUE"));
+        List results = cr.list();
+        for (Object object : results) {
+            com.JD.InitData.Hibernate.config.Initdata i = (com.JD.InitData.Hibernate.config.Initdata) object;
+            pending_ComboBox.addItem(i.getSrNo());
+        }
+        session.close();
+    }//GEN-LAST:event_pending_ComboBoxActionPerformed
+
     void cheackOperationType() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -902,6 +969,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void insert() {
+        JOptionPane.showMessageDialog(null, "OK");
     }
 
     void update() {
@@ -934,21 +1002,37 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void calculateAmount() {
-        int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
-        int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
-        if (totalAmountTemp <= payAbleAmountTemp) {
-            twoPayAmount = 0;
-            payableAmount = totalAmountTemp;
+        if (payAble_TextField.getText().equals("")) {
+            twoPayAmount=Integer.parseInt(twoPayAmount_TextField.getText());
+            payableAmount=0;
         } else {
-            twoPayAmount = totalAmountTemp - payAbleAmountTemp;
-            payableAmount = payAbleAmountTemp;
+            int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
+            int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
+            if (totalAmountTemp <= payAbleAmountTemp) {
+                twoPayAmount = 0;
+                payableAmount = totalAmountTemp;
+            } else {
+                twoPayAmount = totalAmountTemp - payAbleAmountTemp;
+                payableAmount = payAbleAmountTemp;
+            }
         }
-
     }
 
     void updateSRNO() {
-
-        com.JD.StaticData.Static_DATA.srNo += 1;
+        Session session = initSessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.InitData.Hibernate.config.Initdata.class);
+        cr.add(Restrictions.eq("id", 1));
+        List results = cr.list();
+        Transaction transaction = session.beginTransaction();
+        for (Object object : results) {
+            com.JD.InitData.Hibernate.config.Initdata i = (com.JD.InitData.Hibernate.config.Initdata) object;
+            com.JD.StaticData.Static_DATA.srNo += 1;
+            i.setSrNo(com.JD.StaticData.Static_DATA.srNo);
+            srNo_Lable.setText(com.JD.StaticData.Static_DATA.srNo + "");
+            session.save(i);
+        }
+        transaction.commit();
+        session.close();
     }
 
     void reset() {

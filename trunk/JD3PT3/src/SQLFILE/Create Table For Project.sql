@@ -160,7 +160,7 @@ create table MachineMaster (
    machineCurrentReading int,
    machineServicingNumber double,
    machineServicingReadingPointer int,
-    machineServicingFlag text,
+   machineServicingFlag text,
    machineFuel double, 
    
    machineDateOfAddition date,
