@@ -92,7 +92,7 @@ public class PrintDocumentJD implements Runnable {
                 session.save(printreceiptdm);
                 transaction.commit();
             }
-
+            com.JD.StaticData.Static_DATA.flag3=false;
             Query q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
             com.JD.StaticData.Static_DATA.pending_ComboBox.removeAllItems();
             com.JD.StaticData.Static_DATA.pending_ComboBox.addItem("Load Pending Order");
@@ -102,6 +102,7 @@ public class PrintDocumentJD implements Runnable {
             }
             session.close();
             flag = false;
+            com.JD.StaticData.Static_DATA.flag3=true;
         }
 
         if (flag) {
