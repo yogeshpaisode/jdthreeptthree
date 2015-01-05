@@ -6,6 +6,7 @@ package com.JD.PrintReceiptDM.Form;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm;
 import com.JD.Validator.Validator;
 import java.awt.Color;
 import java.lang.InstantiationException;
@@ -40,7 +41,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     String vehicleName = "";
     String vehicleNumber = "";
     String royaltyNumber = "";
-    String printProxy = "";
+    String printProxy = "FALSE";
     double netWeight = 0.0;
     double grossWeight = 0.0;
     String pendingStatus = "FALSE";
@@ -390,6 +391,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         });
 
         pending_CheackBox.setText("Pending");
+        pending_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pending_CheackBoxActionPerformed(evt);
+            }
+        });
 
         pending_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Load Pending Order" }));
         pending_ComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -785,11 +791,15 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             grossWeight_TextField.setEditable(true);
             grossWeight_TextField.setEnabled(true);
             grossWeight_TextField.setBackground(Color.white);
+            printProxy = "TRUE";
         } else {
             neightWeight_TextField.setEditable(false);
+            neightWeight_TextField.setEnabled(false);
             neightWeight_TextField.setBackground(Color.lightGray);
             grossWeight_TextField.setEditable(false);
+            grossWeight_TextField.setEditable(false);
             grossWeight_TextField.setBackground(Color.lightGray);
+            printProxy = "FALSE";
         }
     }//GEN-LAST:event_proxy_CheackBoxActionPerformed
 
@@ -854,7 +864,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         productName = product_ComboBox.getSelectedItem().toString();
         String productSizeTemp = size_ComboBox.getSelectedItem().toString();
         String productValueTemp = value_TextField.getText();
-        String totalAmountTemp = totalAmount_TextField.getText();        
+        String totalAmountTemp = totalAmount_TextField.getText();
         driverName = driverName_ComboBox.getSelectedItem().toString();
         vehicleNumber = vehicleNumber_ComboBox.getSelectedItem().toString();
         vehicleName = vehicleName_TextField.getText();
@@ -959,6 +969,15 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         session.close();
     }//GEN-LAST:event_pending_ComboBoxActionPerformed
 
+    private void pending_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pending_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (pending_CheackBox.isSelected()) {
+            pendingStatus = "TRUE";
+        } else {
+            pendingStatus = "FALSE";
+        }
+    }//GEN-LAST:event_pending_CheackBoxActionPerformed
+
     void cheackOperationType() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -971,7 +990,14 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void insert() {
+        Session session = dm_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm printreceiptdm = new Printreceiptdm(partyLink, productName, productSize, productMeasurement, productValue, totalAmount, paymentType, payableAmount, twoPayAmount, driverName, vehicleName, vehicleNumber, royaltyNumber, printProxy, netWeight, grossWeight, pendingStatus, preSRNO, SRNO, QRCode, printingStatus, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+        session.save(printreceiptdm);
+        transaction.commit();
+        updateSRNO();
         JOptionPane.showMessageDialog(null, "OK");
+        session.close();
     }
 
     void update() {
@@ -1004,9 +1030,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void calculateAmount() {
+        productSize = Integer.parseInt(size_ComboBox.getSelectedItem().toString());
+        productValue = Integer.parseInt(value_TextField.getText());
+        totalAmount = Integer.parseInt(totalAmount_TextField.getText());
         if (payAble_TextField.getText().equals("")) {
-            twoPayAmount=Integer.parseInt(twoPayAmount_TextField.getText());
-            payableAmount=0;
+            twoPayAmount = Integer.parseInt(twoPayAmount_TextField.getText());
+            payableAmount = 0;
         } else {
             int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
             int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
