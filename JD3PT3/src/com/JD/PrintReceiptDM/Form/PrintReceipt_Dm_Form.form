@@ -633,6 +633,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pending"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pending_CheackBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="pending_ComboBox">
           <Properties>
