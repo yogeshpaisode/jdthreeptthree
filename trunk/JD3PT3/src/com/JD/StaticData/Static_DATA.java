@@ -86,6 +86,9 @@ public class Static_DATA {
     public static javax.swing.JCheckBox update_CheackBox = null;
     public static javax.swing.JCheckBox cancel_CheackBox = null;
     public static javax.swing.JCheckBox clear_CheackBox = null;
+    public static javax.swing.JCheckBox pending_CheackBox=null;
+    public static int SRNO=0;
+    public static String QRCode="";
     
     
     //-----DM Data----------------------------------//
