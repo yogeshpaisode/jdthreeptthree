@@ -780,8 +780,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (proxy_CheackBox.isSelected()) {
             neightWeight_TextField.setEditable(true);
+            neightWeight_TextField.setEnabled(true);
             neightWeight_TextField.setBackground(Color.white);
             grossWeight_TextField.setEditable(true);
+            grossWeight_TextField.setEnabled(true);
             grossWeight_TextField.setBackground(Color.white);
         } else {
             neightWeight_TextField.setEditable(false);
@@ -852,7 +854,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         productName = product_ComboBox.getSelectedItem().toString();
         String productSizeTemp = size_ComboBox.getSelectedItem().toString();
         String productValueTemp = value_TextField.getText();
-        String totalAmountTemp = totalAmount_TextField.getText();
+        String totalAmountTemp = totalAmount_TextField.getText();        
         driverName = driverName_ComboBox.getSelectedItem().toString();
         vehicleNumber = vehicleNumber_ComboBox.getSelectedItem().toString();
         vehicleName = vehicleName_TextField.getText();
@@ -870,7 +872,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Please Select Product Name");
             } else {
                 if (productSizeTemp.equals("Select Size")) {
-                    JOptionPane.showMessageDialog(null, "Please Select Product Size");
+                    JOptionPane.showMessageDialog(null, "Please Provide Product Size");
                 } else {
                     if (productMeasurement.equals("Select Measurement")) {
                         JOptionPane.showMessageDialog(null, "Please Select Product Measurement");
@@ -890,11 +892,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                                             JOptionPane.showMessageDialog(null, "Please Select Vehicle Number");
 
                                         } else {
-                                            if (pending_CheackBox.isSelected()) {
+                                            if (proxy_CheackBox.isSelected()) {
                                                 if (proxy) {
                                                     businessLogic();
                                                 } else {
-                                                    JOptionPane.showMessageDialog(null, "Please Provide NET and GROSS Weight");
+                                                    JOptionPane.showMessageDialog(null, "Please Provide NET Weight and GROSS Weight");
                                                 }
                                             } else {
                                                 businessLogic();
