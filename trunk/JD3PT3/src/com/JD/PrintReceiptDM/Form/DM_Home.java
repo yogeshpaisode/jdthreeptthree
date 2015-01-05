@@ -17,14 +17,15 @@ public class DM_Home extends javax.swing.JFrame {
      * Creates new form DM_Home
      */
     public JPanel DM_Panel = null;
-    
 
     public DM_Home() {
         initComponents();
-        PrintReceipt_Dm_Form dm_Form=new PrintReceipt_Dm_Form();
-        DM_Panel=dm_Form.DM_Panel;        
-        DM_Home_TabbedPane.add("Print Receipt/DM", DM_Panel);   
-     }
+        PrintReceipt_Dm_Form dm_Form = new PrintReceipt_Dm_Form();
+        com.JD.StaticData.Static_DATA.dm_Form = dm_Form;
+        DM_Panel = dm_Form.DM_Panel;
+        DM_Home_TabbedPane.add("Print Receipt/DM", DM_Panel);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,6 +107,4 @@ public class DM_Home extends javax.swing.JFrame {
     public JTabbedPane getDM_Home_TabbedPane() {
         return DM_Home_TabbedPane;
     }
-
-   
 }

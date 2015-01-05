@@ -41,8 +41,8 @@ public class JD_Home extends javax.swing.JFrame {
     //---- All Menu Entry ------//
     com.JD.Master.Forms.MasterHome masterHome = new com.JD.Master.Forms.MasterHome();
     com.JD.PrintReceiptDM.Form.DM_Home dM_Home=new DM_Home();
-
     //---- All Menu Entry ------//
+   
     public JD_Home() {
         initComponents();
 
