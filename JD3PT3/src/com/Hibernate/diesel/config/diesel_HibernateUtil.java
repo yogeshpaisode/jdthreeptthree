@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.JD.Master.Hibernate.config;
+package com.Hibernate.diesel.config;
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Yogesh
  */
-public class Master_HibernateUtil {
+public class diesel_HibernateUtil {
 
     private static final SessionFactory sessionFactory;
     

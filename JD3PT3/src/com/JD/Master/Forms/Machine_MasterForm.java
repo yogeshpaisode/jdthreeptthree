@@ -23,7 +23,7 @@ import org.hibernate.criterion.Restrictions;
 public class Machine_MasterForm extends javax.swing.JFrame {
 
     //--- INIT SESSION FACTORY ---//
-    SessionFactory masterFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory masterFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
     //--- INIT SESSION FACTORY ---//
     //---- Data For DataBase ---//
     String machinePartyLink = "";

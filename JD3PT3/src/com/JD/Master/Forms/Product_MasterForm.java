@@ -47,9 +47,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
     //--- Table Model Object And Index---//
-    //--- INIT SESSION FACTORY ---//
-    //SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
-    SessionFactory masterSessionFactory = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory();
+    //--- INIT SESSION FACTORY ---//    
+    SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //----- Data Collection -----//
     String productNameList = "Raw,Aggrigate,Crush Sand,Bricks";
     String productMeasurementList = "CFT,BRASS,NUMBER,TON,CUM";

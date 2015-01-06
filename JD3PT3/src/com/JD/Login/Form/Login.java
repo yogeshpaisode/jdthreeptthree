@@ -154,7 +154,7 @@ public class Login extends javax.swing.JFrame {
         String userId = user_ID.getText();
         String password = user_Password.getText();
 
-        Session session = com.JD.StaticData.Static_DATA.login_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Criteria cr = session.createCriteria(com.JD.Login.Hibernate.config.Login.class);
         cr.add(Restrictions.eq("userId", userId));

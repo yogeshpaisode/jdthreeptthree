@@ -15,5 +15,6 @@
     <mapping resource="com/JD/Master/Hibernate/config/Drivermaster.hbm.xml"/>
     <mapping resource="com/JD/Master/Hibernate/config/Productmaster.hbm.xml"/>
     <mapping resource="com/JD/PrintReceiptDM/Hibernate/config/Printreceiptdm.hbm.xml"/>
+    <mapping resource="com/Hibernate/diesel/config/Purchasediesel.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
