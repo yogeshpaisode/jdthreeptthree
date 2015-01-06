@@ -73,9 +73,9 @@ public class PrintDocumentJD implements Runnable {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
             JasperPrintManager.printPages(jasperPrint, 0, 1, false);
             JOptionPane.showMessageDialog(null, "Success..! Please Collect Your Receipt");
-
-
-        } catch (Exception ex) {
+            com.JD.StaticData.Static_DATA.dm_Form.reset();    
+           
+           } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Printer Error : Please Cheack Your Printer...");
             int srNo = com.JD.StaticData.Static_DATA.srNo_TEMP;
             Session session = com.JD.StaticData.Static_DATA.dm_SessionFactory.openSession();
@@ -92,22 +92,14 @@ public class PrintDocumentJD implements Runnable {
                 session.save(printreceiptdm);
                 transaction.commit();
             }
-            com.JD.StaticData.Static_DATA.flag3=false;
-            Query q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
-            com.JD.StaticData.Static_DATA.pending_ComboBox.removeAllItems();
-            com.JD.StaticData.Static_DATA.pending_ComboBox.addItem("Load Pending Order");
-            for (Object object : q.list()) {
-                com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm printreceiptdm = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
-                com.JD.StaticData.Static_DATA.pending_ComboBox.addItem(printreceiptdm.getSrno());
-            }
+            com.JD.StaticData.Static_DATA.flag3 = false;
+            com.JD.StaticData.Static_DATA.dm_Form.updatePendingStatus();
             session.close();
             flag = false;
-            com.JD.StaticData.Static_DATA.flag3=true;
+            com.JD.StaticData.Static_DATA.flag3 = true;
         }
 
-        if (flag) {
-            com.JD.StaticData.Static_DATA.dm_Form.reset();
-        }
+
 
     }
 }
