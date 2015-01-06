@@ -188,6 +188,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="master_Button" max="32767" attributes="0"/>
                       <Component id="dm_Button" max="32767" attributes="0"/>
+                      <Component id="diesel_Button" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -203,7 +204,9 @@
                   <Component id="master_Button" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="dm_Button" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="382" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="diesel_Button" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="348" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -232,6 +235,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dm_ButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="diesel_Button">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Diesel"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diesel_ButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
