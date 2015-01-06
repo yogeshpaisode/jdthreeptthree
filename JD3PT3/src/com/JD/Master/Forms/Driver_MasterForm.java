@@ -92,6 +92,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
         com.JD.StaticData.Static_DATA.driverPartyName_ComboBox = driverPartyName_ComboBox;
         webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
+        com.JD.StaticData.Static_DATA.webCam_Panel=webCam_Panel;
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
 
         //--- Add Calender To DatePanel_Panel----//

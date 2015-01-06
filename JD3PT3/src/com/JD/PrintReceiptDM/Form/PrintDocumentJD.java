@@ -37,6 +37,7 @@ public class PrintDocumentJD implements Runnable {
     ArrayList<DataBean> dataBeanList;
     String rawField3;
     String srNo;
+    boolean flag = true;
 
     PrintDocumentJD(ArrayList<DataBean> dataBeanList, String rawField3, String srNo) {
 
@@ -49,7 +50,6 @@ public class PrintDocumentJD implements Runnable {
 
     public void run() {
         InputStream inputStream = null;
-        boolean flag = true;
         try {
             BarCodeBuilder bb = new BarCodeBuilder();
             bb.setCodeText(rawField3);
@@ -59,12 +59,6 @@ public class PrintDocumentJD implements Runnable {
             bb.setSymbologyType(Symbology.QR);
             bb.save("TEMP.jpg");
             new ImageCropper();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error In Printing : Please UnLock Your C Driver.. ");
-        }
-        try {
-
             inputStream = getClass().getResourceAsStream("JdCrusher.jrxml");
             JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(dataBeanList);
             Map parameters = new HashMap();
@@ -73,33 +67,32 @@ public class PrintDocumentJD implements Runnable {
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, beanColDataSource);
             JasperPrintManager.printPages(jasperPrint, 0, 1, false);
             JOptionPane.showMessageDialog(null, "Success..! Please Collect Your Receipt");
-            com.JD.StaticData.Static_DATA.dm_Form.reset();    
-           
-           } catch (Exception ex) {
+            update("Accept", "FALSE");
+            com.JD.StaticData.Static_DATA.dm_Form.reset();
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Printer Error : Please Cheack Your Printer...");
-            int srNo = com.JD.StaticData.Static_DATA.srNo_TEMP;
-            Session session = com.JD.StaticData.Static_DATA.dm_SessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-
-            Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
-            cr.add(Restrictions.eq("SRNO", srNo));
-            List results = cr.list();
-
-            for (Object object : results) {
-                com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm printreceiptdm = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
-                printreceiptdm.setPrintingStatus("Decline");
-                printreceiptdm.setPendingStatus("TRUE");
-                session.save(printreceiptdm);
-                transaction.commit();
-            }
-            com.JD.StaticData.Static_DATA.flag3 = false;
-            com.JD.StaticData.Static_DATA.dm_Form.updatePendingStatus();
-            session.close();
-            flag = false;
-            com.JD.StaticData.Static_DATA.flag3 = true;
+            update("Decline", "TRUE");
         }
+    }
 
-
-
+    void update(String printing, String pending) {
+        int srNo = com.JD.StaticData.Static_DATA.srNo_TEMP;
+        Session session = com.JD.StaticData.Static_DATA.dm_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
+        cr.add(Restrictions.eq("srno", srNo));
+        List results = cr.list();
+        for (Object object : results) {
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm printreceiptdm = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
+            printreceiptdm.setPrintingStatus(printing);
+            printreceiptdm.setPendingStatus(pending);
+            session.save(printreceiptdm);
+            transaction.commit();
+        }
+        com.JD.StaticData.Static_DATA.flag3 = false;
+        com.JD.StaticData.Static_DATA.dm_Form.updatePendingStatus();
+        session.close();
+        flag = false;
+        com.JD.StaticData.Static_DATA.flag3 = true;
     }
 }

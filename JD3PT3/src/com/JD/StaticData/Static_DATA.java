@@ -89,7 +89,11 @@ public class Static_DATA {
     public static javax.swing.JCheckBox pending_CheackBox=null;
     public static int SRNO=0;
     public static String QRCode="";
-    
+     public static javax.swing.JPanel webCam_Panel_Dm=null;
     
     //-----DM Data----------------------------------//
+    //-----Driver Master----------------------------//
+    public static javax.swing.JPanel webCam_Panel=null;
+    //-----Driver Master----------------------------//
+    
 }
