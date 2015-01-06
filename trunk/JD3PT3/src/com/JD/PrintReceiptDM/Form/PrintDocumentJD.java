@@ -77,7 +77,7 @@ public class PrintDocumentJD implements Runnable {
 
     void update(String printing, String pending) {
         int srNo = com.JD.StaticData.Static_DATA.srNo_TEMP;
-        Session session = com.JD.StaticData.Static_DATA.dm_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("srno", srNo));

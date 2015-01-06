@@ -73,7 +73,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     //-- Add Date Panel---//
     //------ Load Session Factory ------//        
-    SessionFactory driverSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory driverSessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
     //------ Load Session Factory ------//    
     //----------javax.swing.DefaultComboBoxModel----//    
     javax.swing.table.DefaultTableModel defaultTableModel;

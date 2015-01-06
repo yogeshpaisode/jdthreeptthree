@@ -244,3 +244,29 @@ create table PrintReceiptDM (
 
    PRIMARY KEY (id)
 );
+
+
+create table PurchaseDiesel(
+   id INT NOT NULL auto_increment,
+
+	lastQuentity double,
+	addedQuantity double,
+	presentQuantity double,	
+	personPresentName text,
+	oilCompanyName text,
+	orderSlipNumber text,
+	
+	dateOfAddition date,
+	timeOfAddition time,
+	location text,
+	addedByPersonName text,
+	addedWithRight text,    
+	rawField1 text,
+	rawField2 text,
+	rawField3 text,
+	rawField4 text,
+	rawField5 text,
+	rawField6 text,
+	
+   PRIMARY KEY (id)
+);

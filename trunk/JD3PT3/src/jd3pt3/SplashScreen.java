@@ -51,9 +51,7 @@ public class SplashScreen extends JWindow {
         try {
             new com.JD.INIT_Data.Init_QRCodeScanner();
             com.JD.StaticData.Static_DATA.init_SessionFactory = com.JD.InitData.Hibernate.config.InitData_HibernateUtil.getSessionFactory();
-            com.JD.StaticData.Static_DATA.master_SessionFactory = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory();
-            com.JD.StaticData.Static_DATA.login_SessionFactory = com.JD.Login.Hibernate.config.Login_HibernateUtil.getSessionFactory();
-            com.JD.StaticData.Static_DATA.dm_SessionFactory=com.JD.PrintReceiptDM.Hibernate.config.DM_HibernateUtil.getSessionFactory();
+           
             new com.JD.INIT_Data.Init_Data();
             new com.JD.Login.Form.Login().setVisible(true);
 

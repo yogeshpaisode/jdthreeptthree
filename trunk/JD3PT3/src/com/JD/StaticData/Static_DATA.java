@@ -29,12 +29,12 @@ public class Static_DATA {
     //------------------------------------------------------------------------//
     //------ Master Hibernate Config ------//
     // PKG: com.JD.Master.Hibernate.config //    
-    public static SessionFactory master_SessionFactory = null;
+   
     //------ Master Hibernate Config ------//
     //------------------------------------------------------------------------//
     //------ Master Hibernate Config ------//
     // PKG: com.JD.Master.Hibernate.config //    
-    public static SessionFactory login_SessionFactory = null;
+  
     //------ Master Hibernate Config ------//
     //------------------------------------------------------------------------//
     // ------ QR Code Scanner ------//
@@ -56,7 +56,7 @@ public class Static_DATA {
     //-----Master ComboBoxFill-----//
     //-----DM Data----------------------------------//
     //-----DM SessionFactory------------------------//
-    public static SessionFactory dm_SessionFactory = null;
+   
     //-----DM SessionFactory------------------------//
     public static com.JD.PrintReceiptDM.Form.PrintReceipt_Dm_Form dm_Form = null;
     public static javax.swing.JComboBox dm_PartyName = null;
@@ -95,5 +95,11 @@ public class Static_DATA {
     //-----Driver Master----------------------------//
     public static javax.swing.JPanel webCam_Panel=null;
     //-----Driver Master----------------------------//
+    
+    //-----Diesel Data-----------------------------//
+   
+    //-----Diesel Data-----------------------------//
+    
+    
     
 }

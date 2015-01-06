@@ -57,9 +57,9 @@ public class Party_MasterForm extends javax.swing.JFrame {
         initComponents();
         defaultTableModel = (DefaultTableModel) party_Table.getModel();
         //--- Load Data To JTable And party_ComboBox---//
-        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
+        // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
-        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         List list = q.list();
@@ -475,8 +475,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
         if (flag == true) {
             String partName = name_ComboBox.getSelectedItem().toString();
 
-            // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
-            Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+            // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+            Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
             cr.add(Restrictions.eq("partyName", partName));
@@ -578,8 +578,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
         indexJTable = -1;
         String partName = name_ComboBox.getSelectedItem().toString();
 
-        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
-        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+        // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.like("partyName", pName));
@@ -618,8 +618,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
     void insert() {
 
-        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
-        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+        // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
 
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
@@ -656,8 +656,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
     void update() {
 
-        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
-        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+        // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.eq("partyName", partyName));
 
@@ -707,9 +707,9 @@ public class Party_MasterForm extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         //--- Load Data To JTable And party_ComboBox---//
-        // Replace : com.JD.StaticData.Static_DATA.master_SessionFactory.openSession();
+        // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
-        Session session = com.JD.Master.Hibernate.config.Master_HibernateUtil.getSessionFactory().openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         name_ComboBox.removeAllItems();
         name_ComboBox.addItem("Select Party Name");
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");

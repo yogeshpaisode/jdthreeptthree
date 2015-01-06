@@ -69,9 +69,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     String rawField6 = "";
 //--------------INIT Data for Database----------//    
 //------ Load Session Factory ------//        
-    SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.master_SessionFactory;
+    SessionFactory masterSessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
     SessionFactory initSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
-    SessionFactory dm_SessionFactory = com.JD.StaticData.Static_DATA.dm_SessionFactory;
+    SessionFactory dm_SessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
 //------ Load Session Factory ------//    
 //----------Call Validator----------------------//
     com.JD.Validator.Validator valid = new Validator();
@@ -1286,7 +1286,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void updatePendingStatus() {
-        Session session = com.JD.StaticData.Static_DATA.dm_SessionFactory.openSession();
+        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         com.JD.StaticData.Static_DATA.flag3 = false;
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
