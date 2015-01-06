@@ -98,6 +98,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) dm_Table.getModel();
         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
+        com.JD.StaticData.Static_DATA.webCam_Panel_Dm=webCan_Panel;
         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//   
         //------Load Data From Master---------------------------------//
 
@@ -1096,7 +1097,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             com.JD.StaticData.Static_DATA.QRCode = dm.getQrcode();
                             srNOtemp = dm.getSrno();
                             qrCodeTemp = dm.getQrcode();
-                            JOptionPane.showMessageDialog(null, "From Loading :" + SRNO + "");
+                            //JOptionPane.showMessageDialog(null, "From Loading :" + SRNO + "");
 
                             srNo_Lable.setText(com.JD.StaticData.Static_DATA.prSrNo + "-" + dm.getSrno() + "");
                             com.JD.StaticData.Static_DATA.update_CheackBox.setEnabled(true);
@@ -1182,6 +1183,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             printReceipt();
             updateSRNO();
         } else {
+            
             update();
         }
         session.close();

@@ -265,15 +265,15 @@ public class JD_Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void master_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_master_ButtonActionPerformed
-        // TODO add your handling code here:   
-
+        // TODO add your handling code here:  
+        
         masterHome.masterHome_TabbedPane.setBounds(0, 0, width, height);
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(masterHome.getMasterHome_TabbedPane());
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Master Window ");
-        
+        com.JD.StaticData.Static_DATA.webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);       
 
     }//GEN-LAST:event_master_ButtonActionPerformed
 
@@ -311,12 +311,12 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void dm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ButtonActionPerformed
         // TODO add your handling code here:
-
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(dM_Home.DM_Home_TabbedPane);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Print Receipt/DM Window ");
+        com.JD.StaticData.Static_DATA.webCam_Panel_Dm.add(com.JD.StaticData.Static_DATA.webPanel);    
 
     }//GEN-LAST:event_dm_ButtonActionPerformed
 
