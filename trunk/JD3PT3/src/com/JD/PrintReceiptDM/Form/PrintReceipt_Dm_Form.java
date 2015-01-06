@@ -11,6 +11,7 @@ import com.JD.Validator.Validator;
 import java.awt.Color;
 import java.lang.InstantiationException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
@@ -30,6 +31,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     boolean flag2 = false;
     boolean flag3 = false;
     public boolean flag4 = false;
+    Calendar now = Calendar.getInstance();
     int srNOtemp = 0;
     String qrCodeTemp = "";
     //--------------INIT Data for Database----------//
@@ -170,6 +172,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.pending_ComboBox = pending_ComboBox;
         //------Load All Component To sattic Class----//
         resetJTable();
+
+        date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
+        time_Lable.setText(now.get(Calendar.HOUR)+":"+now.get(Calendar.MINUTE));
     }
 
     /**
@@ -1159,7 +1164,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         Session session = dm_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("srno", SRNO));
-       
+
         List results = cr.list();
 
         if (results.isEmpty()) {
@@ -1371,7 +1376,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         grossWeight_TextField.setText("");
         cashMode_ButtonGroup.clearSelection();
         operation_ButtonGroup.clearSelection();
-
         neightWeight_TextField.setEnabled(false);
         grossWeight_TextField.setEnabled(false);
         payAble_TextField.setEnabled(false);
@@ -1379,9 +1383,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         update_CheackBox.setEnabled(false);
         cancel_CheackBox.setEnabled(false);
         clear_CheackBox.setEnabled(false);
-
+        date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
+        time_Lable.setText(now.get(Calendar.HOUR)+":"+now.get(Calendar.MINUTE));
         search_TextField.setText("Search.......");
-
         proxy_CheackBox.setSelected(false);
         flag4 = false;
         qrCodeTemp = "";
