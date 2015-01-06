@@ -25,7 +25,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
-    
     //-----------Call Validator--------//
     com.JD.Validator.Validator valid = new Validator();
     //-----------Call Validator--------//
@@ -97,16 +96,17 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             transaction.commit();
         }
         if (com.JD.StaticData.Static_DATA.fuelQuantity_Lable != null) {
+            String status="";
             if (log >= 1) {
-                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("+" + log + "   LTR  ");
-                fuelQuantity_Lable.setText("+" + log + "   LTR  ");
+                status = "+" + log + "   LTR  ";
             } else if (log < 0) {
-                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("-" + log + "   LTR  ");
-                fuelQuantity_Lable.setText("-" + log + "   LTR  ");
+                status = "-" + log + "   LTR  ";
             } else if (log == 0) {
-                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("  " + log + "   LTR  ");
-                fuelQuantity_Lable.setText("  " + log + "   LTR  ");
+                status = "  " + log + "   LTR  ";
             }
+            com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
+            com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
+            fuelQuantity_Lable.setText(status);
         }
 
         session.close();
@@ -374,7 +374,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     }
 
     void resetJTable() {
-        indexJTable=-1;
+        indexJTable = -1;
         Session session = diesel_SessionFactory.openSession();
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);

@@ -6,7 +6,14 @@ package com.JD.Diesel.Forms;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import java.lang.InstantiationException;
+import java.util.Date;
+import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -14,11 +21,57 @@ import javax.swing.JInternalFrame;
  */
 public class Sell_Diesel_Form extends javax.swing.JFrame {
 
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+    boolean flag = false;
+    boolean flag2 = false;
+    //----Load Data For Database----//
+    String partyLink = "";
+    String machineName = "";
+    String machineNumber = "";
+    String driverName = "";
+    double lastQuantity = 0.0;
+    double usedQuantity = 0.0;
+    double presentQuantity = 0.0;
+    String personPresentName = "";
+    Date dateOfAddition = null;
+    Date timeOfAddition = null;
+    String location = com.JD.StaticData.Static_DATA.location;
+    String addedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String addedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
+    String rawField1 = "";
+    String rawField2 = "";
+    String rawField3 = "";
+    String rawField4 = "";
+    String rawField5 = "";
+    String rawField6 = "";
+    //----Load Data For Database----//
+    //----Load Purchase Diesel Object----//
+    PurchaseDiesel_Form purchaseDiesel_Form = com.JD.StaticData.Static_DATA.purchaseDiesel_Form;
+    //----Load Purchase Diesel Object----//  
+    //----Load Session Factory----------//
+    SessionFactory sellDiesel_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
+    //----Load Session Factory----------//
+
     /**
      * Creates new form Party_MasterForm
      */
     public Sell_Diesel_Form() {
         initComponents();
+        com.JD.StaticData.Static_DATA.partyName_Sell_ComboBox = partyName_Sell_ComboBox;
+        com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable = fuelQuantity_Sell_Lable;
+        defaultTableModel = (DefaultTableModel) sellDiesel_Table.getModel();
+        flag = false;
+        Session session = sellDiesel_SessionFactory.openSession();
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
+            partyName_Sell_ComboBox.addItem(p.getPartyName());
+        }
+        session.close();
+        flag = true;
+        resetJTable();
+
     }
 
     /**
@@ -33,6 +86,24 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         sell_Diesel_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         sellDiesel_Table = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        fuelQuantity_Sell_Lable = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        partyName_Sell_ComboBox = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        machineNumber_ComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        machineName_Lable = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        sell_TextField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        personName_TextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        driverName_ComboBox = new javax.swing.JComboBox();
+        addDataToDatabase_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
+        export_Button = new javax.swing.JButton();
+        print_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,17 +122,138 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(sellDiesel_Table);
 
+        jLabel1.setText("* Current Quantity Of Diesel :");
+
+        fuelQuantity_Sell_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
+        fuelQuantity_Sell_Lable.setText(" +134.99 LTR ");
+        fuelQuantity_Sell_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
+        jLabel2.setText("* Party Name:");
+
+        partyName_Sell_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+        partyName_Sell_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                partyName_Sell_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("* Machine Number:");
+
+        machineNumber_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Number" }));
+        machineNumber_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                machineNumber_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("  Machine Name:");
+
+        machineName_Lable.setText(" Please Select Machine Number ^");
+        machineName_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
+        jLabel5.setText("* Diesel Sell Quantity:");
+
+        jLabel6.setText("* Added By Person Name:");
+
+        jLabel7.setText("* Driver Name:");
+
+        driverName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Driver Name" }));
+
+        addDataToDatabase_Button.setText("Add Diesel");
+        addDataToDatabase_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDataToDatabase_ButtonActionPerformed(evt);
+            }
+        });
+
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
+
+        export_Button.setText("Export To Excel");
+
+        print_Button.setText("Print");
+
         javax.swing.GroupLayout sell_Diesel_PanelLayout = new javax.swing.GroupLayout(sell_Diesel_Panel);
         sell_Diesel_Panel.setLayout(sell_Diesel_PanelLayout);
         sell_Diesel_PanelLayout.setHorizontalGroup(
             sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addGap(31, 31, 31)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(reset_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                    .addComponent(fuelQuantity_Sell_Lable)
+                    .addComponent(partyName_Sell_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(machineNumber_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(machineName_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sell_TextField)
+                    .addComponent(personName_TextField)
+                    .addComponent(driverName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(export_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         sell_Diesel_PanelLayout.setVerticalGroup(
             sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sell_Diesel_PanelLayout.createSequentialGroup()
-                .addGap(0, 288, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(fuelQuantity_Sell_Lable))
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jLabel2))
+                    .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(partyName_Sell_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(machineNumber_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(machineName_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(sell_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(personName_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(driverName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addDataToDatabase_Button)
+                    .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(reset_Button)
+                        .addComponent(export_Button)
+                        .addComponent(print_Button)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -77,6 +269,162 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addDataToDatabase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDatabase_ButtonActionPerformed
+        // TODO add your handling code here:
+        partyLink = partyName_Sell_ComboBox.getSelectedItem().toString();
+        driverName = driverName_ComboBox.getSelectedItem().toString();
+        machineNumber = machineNumber_ComboBox.getSelectedItem().toString();
+        machineName = machineName_Lable.getText();
+        lastQuantity = purchaseDiesel_Form.setCurrentDieselLog(0.0);
+        personPresentName = personName_TextField.getText();
+        String usedQuantityTemp = sell_TextField.getText();
+
+        if (usedQuantityTemp.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Provide Diesel Sell Quantity:");
+        } else {
+            usedQuantity = Double.parseDouble(usedQuantityTemp);
+            if (usedQuantity > lastQuantity) {
+                JOptionPane.showMessageDialog(null, "Please Reduce Your Demand");
+            } else {
+                if (partyLink.equals("Select Party Name")) {
+                    JOptionPane.showMessageDialog(null, "Please Provide Party Name");
+                } else {
+                    if (machineNumber.equals("Select Machine Number")) {
+                        JOptionPane.showMessageDialog(null, "Please Provide Machine Number");
+                    } else {
+                        if (driverName.equals("Select Driver Name")) {
+                            JOptionPane.showMessageDialog(null, "Please Provide Driver Name");
+                        } else {
+                            if (personPresentName.equals("")) {
+                                JOptionPane.showMessageDialog(null, "Please Provide Added By Person Name");
+                            } else {
+                                addDieselToMachine();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
+
+    void addDieselToMachine() {
+        Session session = sellDiesel_SessionFactory.openSession();
+
+
+        session.close();
+    }
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
+    private void partyName_Sell_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partyName_Sell_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (flag) {
+            String partyNameTemp = partyName_Sell_ComboBox.getSelectedItem().toString();
+            flag2 = false;
+            driverName_ComboBox.removeAllItems();
+            machineNumber_ComboBox.removeAllItems();
+            driverName_ComboBox.addItem("Select Driver Name");
+            machineNumber_ComboBox.addItem("Select Machine Number");
+            if (partyNameTemp.equals("") || partyNameTemp.equals("Select Party Name")) {
+            } else {
+                Session session = sellDiesel_SessionFactory.openSession();
+                Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+                cr.add(Restrictions.eq("driverPartyLink", partyNameTemp));
+                List results = cr.list();
+                for (Object object : results) {
+                    com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+                    driverName_ComboBox.addItem(d.getDriverName());
+                }
+                cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+                cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
+                results = cr.list();
+                for (Object object : results) {
+                    com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                    machineNumber_ComboBox.addItem(m.getMachineNumber());
+                }
+                session.close();
+            }
+            flag2 = true;
+        }
+    }//GEN-LAST:event_partyName_Sell_ComboBoxActionPerformed
+
+    private void machineNumber_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machineNumber_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (flag2) {
+            String machineNumberTemp = machineNumber_ComboBox.getSelectedItem().toString();
+            if (machineNumberTemp.equals("Select Machine Number") || machineNumberTemp.equals("")) {
+            } else {
+                Session session = sellDiesel_SessionFactory.openSession();
+                Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+                cr.add(Restrictions.eq("machineNumber", machineNumberTemp));
+                List results = cr.list();
+                for (Object object : results) {
+                    com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                    machineName_Lable.setText(m.getMachineName());
+                }
+                session.close();
+            }
+        }
+    }//GEN-LAST:event_machineNumber_ComboBoxActionPerformed
+
+    public double setCurrentDieselLog(double usedQuantity) {
+        double log = 0.0;
+        Session session = sellDiesel_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Currentdisellog.class);
+        cr.add(Restrictions.eq("id", 1));
+        List results = cr.list();
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Currentdisellog c = (com.JD.Master.Hibernate.config.Currentdisellog) object;
+            log = c.getCurrentQuantity() - usedQuantity;
+            c.setCurrentQuantity(log);
+            session.save(c);
+            transaction.commit();
+        }
+        if (com.JD.StaticData.Static_DATA.fuelQuantity_Lable != null) {
+            String status = "";
+            if (log >= 1) {
+                status = "+" + log + "   LTR  ";
+            } else if (log < 0) {
+                status = "-" + log + "   LTR  ";
+            } else if (log == 0) {
+                status = "  " + log + "   LTR  ";
+            }
+            com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
+            com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
+
+        }
+
+        session.close();
+        return log;
+    }
+
+    void reset() {
+        partyName_Sell_ComboBox.setSelectedItem("");
+        machineNumber_ComboBox.setSelectedItem("");
+        driverName_ComboBox.setSelectedItem("");
+        machineName_Lable.setText(" Please Select Machine Number ^");
+        sell_TextField.setText("");
+        personName_TextField.setText("");        
+        driverName_ComboBox.addItem("Select Driver Name");
+        machineNumber_ComboBox.addItem("Select Machine Number");
+        partyName_Sell_ComboBox.setSelectedItem("Select Party Name");
+        resetJTable();
+    }
+
+    void resetJTable() {
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        indexJTable = -1;
+
+
+
+    }
 
     /**
      * @param args the command line arguments
@@ -120,10 +468,26 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDataToDatabase_Button;
+    private javax.swing.JComboBox driverName_ComboBox;
+    private javax.swing.JButton export_Button;
+    private javax.swing.JLabel fuelQuantity_Sell_Lable;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel machineName_Lable;
+    private javax.swing.JComboBox machineNumber_ComboBox;
+    private javax.swing.JComboBox partyName_Sell_ComboBox;
+    private javax.swing.JTextField personName_TextField;
+    private javax.swing.JButton print_Button;
+    private javax.swing.JButton reset_Button;
     private javax.swing.JTable sellDiesel_Table;
     public javax.swing.JPanel sell_Diesel_Panel;
+    private javax.swing.JTextField sell_TextField;
     // End of variables declaration//GEN-END:variables
-
-   
 }

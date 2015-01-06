@@ -270,3 +270,30 @@ create table PurchaseDiesel(
 	
    PRIMARY KEY (id)
 );
+
+create table SellDieselLog(
+   id INT NOT NULL auto_increment,
+        partyLink text,
+	machineName text,
+        machineNumber text,
+        driverName text,
+	lastQuantity double,
+	usedQuantity double,
+	presentQuantity double,	
+	personPresentName text,
+
+	dateOfAddition date,
+	timeOfAddition time,
+	location text,
+	addedByPersonName text,
+	addedWithRight text,    
+	rawField1 text,
+	rawField2 text,
+	rawField3 text,
+	rawField4 text,
+	rawField5 text,
+	rawField6 text,
+
+
+   PRIMARY KEY (id)
+);
