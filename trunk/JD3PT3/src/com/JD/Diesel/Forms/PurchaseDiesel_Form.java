@@ -4,17 +4,17 @@
  */
 package com.JD.Diesel.Forms;
 
+import com.Hibernate.diesel.config.Purchasediesel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
+import java.lang.InstantiationException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import javax.swing.table.DefaultTableModel;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -23,6 +23,9 @@ import org.hibernate.criterion.Restrictions;
  */
 public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    int indexJTable = -1;
+    
     //-----------Call Validator--------//
     com.JD.Validator.Validator valid = new Validator();
     //-----------Call Validator--------//
@@ -38,9 +41,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     String orderSlipNumber = "";
     Date dateOfAddition = null;
     Date timeOfAddition = null;
-    String location = "";
-    String addedByPersonName = "";
-    String addedWithRight = "";
+    String location = com.JD.StaticData.Static_DATA.location;
+    String addedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String addedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
     String rawField1 = "";
     String rawField2 = "";
     String rawField3 = "";
@@ -54,10 +57,10 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     public PurchaseDiesel_Form() {
         initComponents();
-        com.JD.StaticData.Static_DATA.purchaseDiesel_Form=this;
+        com.JD.StaticData.Static_DATA.purchaseDiesel_Form = this;
         currentQuantity = setCurrentDieselLog(0.0);
-
-
+        defaultTableModel = (DefaultTableModel) diesel_Table.getModel();
+        resetJTable();
     }
 
     /**
@@ -86,25 +89,25 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         cr.add(Restrictions.eq("id", 1));
         List results = cr.list();
         for (Object object : results) {
-            com.JD.Master.Hibernate.config.Currentdisellog c = (com.JD.Master.Hibernate.config.Currentdisellog) object;            
+            com.JD.Master.Hibernate.config.Currentdisellog c = (com.JD.Master.Hibernate.config.Currentdisellog) object;
             log = c.getCurrentQuantity() + addedQuantity;
             c.setCurrentQuantity(log);
-          
+
             session.save(c);
             transaction.commit();
         }
         if (com.JD.StaticData.Static_DATA.fuelQuantity_Lable != null) {
             if (log >= 1) {
-                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("+ " + log + "   LTR  ");
-                fuelQuantity_Lable.setText("+ " + log + "   LTR  ");
+                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("+" + log + "   LTR  ");
+                fuelQuantity_Lable.setText("+" + log + "   LTR  ");
             } else if (log < 0) {
-                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("- " + log + "   LTR  ");
-                fuelQuantity_Lable.setText("- " + log + "   LTR  ");
-            } else if(log==0){               
+                com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("-" + log + "   LTR  ");
+                fuelQuantity_Lable.setText("-" + log + "   LTR  ");
+            } else if (log == 0) {
                 com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText("  " + log + "   LTR  ");
                 fuelQuantity_Lable.setText("  " + log + "   LTR  ");
             }
-        }      
+        }
 
         session.close();
         return log;
@@ -127,8 +130,8 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         companyName_TextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         slipNo_TextField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        addDataToDatabase_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -142,11 +145,11 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Current Quantity", "Received", "Total", "Person Name", "Oil Company", "Slip No", "Added By", "DOA", "TOA", "Right", "Location"
+                "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false, false, false
@@ -200,9 +203,14 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Update Diesel Log");
+        addDataToDatabase_Button.setText("Update Diesel Log");
+        addDataToDatabase_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDataToDatabase_ButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Reset");
+        reset_Button.setText("Reset");
 
         jButton3.setText("Export To Excel");
 
@@ -233,9 +241,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                     .addComponent(personName_TextField)
                     .addComponent(companyName_TextField)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dieselMaster_PanelLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(reset_Button)))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -275,8 +283,8 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                     .addComponent(slipNo_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(addDataToDatabase_Button)
+                    .addComponent(reset_Button)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -304,18 +312,82 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     private void personName_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_personName_TextFieldKeyReleased
         // TODO add your handling code here:
-        personName_TextField.setText(valid.stringValidator(personName_TextField.getText()));
+        personName_TextField.setText(valid.stringValidator(personName_TextField.getText()).toUpperCase());
     }//GEN-LAST:event_personName_TextFieldKeyReleased
 
     private void companyName_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_companyName_TextFieldKeyReleased
         // TODO add your handling code here:
-        companyName_TextField.setText(valid.stringValidator(companyName_TextField.getText()));
+        companyName_TextField.setText(valid.stringValidator(companyName_TextField.getText()).toUpperCase());
     }//GEN-LAST:event_companyName_TextFieldKeyReleased
 
     private void slipNo_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_slipNo_TextFieldKeyReleased
         // TODO add your handling code here:
-        slipNo_TextField.setText(slipNo_TextField.getText());
+        slipNo_TextField.setText(slipNo_TextField.getText().toUpperCase());
     }//GEN-LAST:event_slipNo_TextFieldKeyReleased
+
+    private void addDataToDatabase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDatabase_ButtonActionPerformed
+        // TODO add your handling code here:
+        String receivedQuantityTemp = received_TextField.getText();
+        dateOfAddition = new Date();
+        timeOfAddition = new Date();
+        oilCompanyName = companyName_TextField.getText();
+        orderSlipNumber = slipNo_TextField.getText();
+        personPresentName = personName_TextField.getText();
+        if (receivedQuantityTemp.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please Provide Received Quntity");
+        } else {
+            if (personPresentName.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please Provide Person Name");
+            } else {
+                if (oilCompanyName.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please Provide Oil Company Name");
+                } else {
+                    addedQuantity = Double.parseDouble(receivedQuantityTemp);
+                    lastQuentity = setCurrentDieselLog(0.0);
+                    presentQuantity = addedQuantity + lastQuentity;
+                    addData();
+                }
+            }
+        }
+
+    }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
+    void addData() {
+        addDataToDatabase_Button.setText("Processing..");
+        Session session = diesel_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        com.Hibernate.diesel.config.Purchasediesel p = new Purchasediesel(lastQuentity, addedQuantity, presentQuantity, personPresentName, oilCompanyName, orderSlipNumber, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+        session.save(p);
+        transaction.commit();
+        session.close();
+        setCurrentDieselLog(presentQuantity);
+        JOptionPane.showMessageDialog(null, "Diesel Updated Successfully");
+        reset();
+    }
+
+    void reset() {
+        received_TextField.setText("");
+        personName_TextField.setText("");
+        companyName_TextField.setText("");
+        slipNo_TextField.setText("");
+        addDataToDatabase_Button.setText("Update Diesel Log");
+        resetJTable();
+    }
+
+    void resetJTable() {
+        indexJTable=-1;
+        Session session = diesel_SessionFactory.openSession();
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
+
+        for (Object object : q.list()) {
+            com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+        }
+        session.close();
+    }
 
     /**
      * @param args the command line arguments
@@ -359,12 +431,11 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addDataToDatabase_Button;
     private javax.swing.JTextField companyName_TextField;
     public javax.swing.JPanel dieselMaster_Panel;
     private javax.swing.JTable diesel_Table;
     private javax.swing.JLabel fuelQuantity_Lable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
@@ -376,6 +447,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField personName_TextField;
     private javax.swing.JTextField received_TextField;
+    private javax.swing.JButton reset_Button;
     private javax.swing.JTextField slipNo_TextField;
     // End of variables declaration//GEN-END:variables
 }
