@@ -17,13 +17,17 @@ public class Diesel_Home extends javax.swing.JFrame {
     /**
      * Creates new form Diesel_Home
      */
-    public JPanel dieselMaster_Panel = null;
+    PurchaseDiesel_Form purchaseDiesel_Form=new PurchaseDiesel_Form();
+    Sell_Diesel_Form sell_Diesel_Form=new Sell_Diesel_Form();
+    public JPanel dieselMaster_Panel = purchaseDiesel_Form.dieselMaster_Panel;
+    public JPanel sell_Diesel_Panel = sell_Diesel_Form.sell_Diesel_Panel;
+    
 
     public Diesel_Home() {
-        initComponents();
-        PurchaseDiesel_Form purchaseDiesel_Form=new PurchaseDiesel_Form();
-        dieselMaster_Panel = purchaseDiesel_Form.dieselMaster_Panel;
+        initComponents();      
         dieselHome_TabbedPanel.add("Purchase Diesel", dieselMaster_Panel);
+        dieselHome_TabbedPanel.add("Sell Diesel", sell_Diesel_Panel);
+        
     }
 
     /**
