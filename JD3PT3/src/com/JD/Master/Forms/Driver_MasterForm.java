@@ -15,6 +15,7 @@ import java.io.*;
 import java.lang.InstantiationException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
@@ -34,6 +35,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     int i = 0;
     int k = 0;
+    Calendar calendar=Calendar.getInstance();
     Date date = null;
     String prefix = "INPUT_";
     String outputPathTemp = "";
@@ -94,6 +96,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
         //--- Add Calender To DatePanel_Panel----//
         datePanel_Panel.add(date1);
+        date1.getModel().setDay(calendar.get(Calendar.DATE));
+        date1.getModel().setMonth((calendar.get(Calendar.MONTH)));
+        date1.getModel().setYear(calendar.get(Calendar.YEAR));
         //--- Add Calender To DatePanel_Panel----//
 
         //--- Load All Party Name ---//
@@ -719,7 +724,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             mobile_TextField.setText(d.getDriverMobile());
             bloodGroup_ComboBox.setSelectedItem(d.getDriverBloodGroup());
             licence_TextField.setText(d.getRawField1());
-            outputPathTemp = d.getDriverPic();
+            outputPathTemp = d.getDriverPic();            
             ico = new ImageIcon(convertStringToImageByteArray(d.getDriverPic()));
             photo_Lable.setIcon(ico);
         }
@@ -827,7 +832,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             d.setDriverAddedByPersonName(driverAddedByPersonName);
             d.setDriverAddedWithRight(driverAddedWithRight);
             d.setDriverDateOfJoining(driverDateOfJoining);
-            d.setDriverPic(driverPic);
+            d.setDriverPic(driverPic);            
             session.save(d);
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Driver " + driverName + "Updated Successfully.");
@@ -907,6 +912,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         addDataToDatbase_Button.setText("Add Driver");
         loadDate_ComboBox.setSelectedItem("Load Data To Update");
         search_TextField.setText("Search.....");
+        date1.getModel().setDay(calendar.get(Calendar.DATE));
+        date1.getModel().setMonth((calendar.get(Calendar.MONTH)));
+        date1.getModel().setYear(calendar.get(Calendar.YEAR));
     }
 
     /**
