@@ -1108,7 +1108,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                     session.close();
                 }
             }
-
         }
     }//GEN-LAST:event_pending_ComboBoxActionPerformed
 
@@ -1270,12 +1269,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 }
                 session.save(dm);
                 transaction.commit();
-
             }
             printReceipt();
-
         }
-
         session.close();
     }
 
