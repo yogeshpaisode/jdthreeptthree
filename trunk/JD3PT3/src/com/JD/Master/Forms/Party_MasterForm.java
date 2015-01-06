@@ -613,6 +613,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         modification_ButtonGroup.clearSelection();
         name_ComboBox.setSelectedIndex(0);
         search_TextField.setText("Search..................");
+        
 
     }
 
@@ -643,6 +644,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.machinePartyName_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.driverPartyName_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.dm_PartyName.addItem(partyName);
+            com.JD.StaticData.Static_DATA.partyName_Sell_ComboBox.addItem(partyName);
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//     
                         
             reset();

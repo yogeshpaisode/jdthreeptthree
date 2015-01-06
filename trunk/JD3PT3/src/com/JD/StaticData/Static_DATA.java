@@ -19,6 +19,7 @@ public class Static_DATA {
     //------TEMP DATA--------//
     //------Master Home------//
     public static javax.swing.JLabel fuelQuantity_Lable=null;
+    public static javax.swing.JLabel fuelQuantity_Sell_Lable=null;
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;
@@ -100,6 +101,7 @@ public class Static_DATA {
     
     //-----Diesel Data-----------------------------//
     public static com.JD.Diesel.Forms.PurchaseDiesel_Form purchaseDiesel_Form=null;
+    public static javax.swing.JComboBox partyName_Sell_ComboBox=null;
     //-----Diesel Data-----------------------------//
     
     
