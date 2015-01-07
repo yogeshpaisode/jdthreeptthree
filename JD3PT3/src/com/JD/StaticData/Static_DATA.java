@@ -106,6 +106,19 @@ public class Static_DATA {
     public static javax.swing.JComboBox partyName_Sell_ComboBox=null;
     //-----Diesel Data-----------------------------//
     
+    //-------From Search--------------------------//
+    //-----From DM Search-------------------------//
+    public static javax.swing.JComboBox dmSearch_party_ComboBox=null;
+    public static javax.swing.JComboBox dmSearch_srNo_ComboBox=null;
+    public static javax.swing.JComboBox dmsearch_ProductName_ComboBox=null;
+    public static javax.swing.JComboBox dmsearch_size_ComboBox=null;
+    public static javax.swing.JComboBox dmSearch_measurement_ComboBox=null;   
+    
+    //-----From DM Search-------------------------//
+    //-------From Search--------------------------//
+    
+    
+    
     
     
 }

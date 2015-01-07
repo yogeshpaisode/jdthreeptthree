@@ -10,6 +10,7 @@ import java.lang.InstantiationException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.hibernate.*;
@@ -390,6 +391,17 @@ public class Product_MasterForm extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.dm_Measurement.removeAllItems();
         com.JD.StaticData.Static_DATA.dm_Measurement.addItem("Select Measurement");
 
+       
+        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.removeAllItems();
+        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.removeAllItems();
+        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.removeAllItems();
+        
+        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.addItem("Product Name");
+        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.addItem("Size In MM");
+        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.addItem("Measurement");        
+       
+
+
         Session session = masterSessionFactory.openSession();
 
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
@@ -399,18 +411,21 @@ public class Product_MasterForm extends javax.swing.JFrame {
             } else {
                 productNameTemp = productNameTemp + "##" + p.getProductName();
                 com.JD.StaticData.Static_DATA.dm_ProductName.addItem(p.getProductName());
+                com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.addItem(p.getProductName());
             }
 
             if (sizeTemp.contains(p.getProductSize() + "")) {
             } else {
                 sizeTemp = sizeTemp + "##" + p.getProductSize() + "";
                 com.JD.StaticData.Static_DATA.dm_Size.addItem(p.getProductSize() + "");
+                com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.addItem(p.getProductSize() + "");
             }
 
             if (measurementTemp.contains(p.getProductMeasurement())) {
             } else {
                 measurementTemp = measurementTemp + "##" + p.getProductMeasurement();
                 com.JD.StaticData.Static_DATA.dm_Measurement.addItem(p.getProductMeasurement());
+                com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.addItem(p.getProductMeasurement());
             }
 
         }
