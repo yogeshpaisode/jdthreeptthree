@@ -239,10 +239,22 @@ public class JD_Home extends javax.swing.JFrame {
 
         notification_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/notification.png"))); // NOI18N
         notification_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        notification_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        notification_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                notification_LableMouseClicked(evt);
+            }
+        });
 
         fuelQuantity_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
         fuelQuantity_Lable.setText(" +134.99 LTR ");
         fuelQuantity_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        fuelQuantity_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fuelQuantity_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fuelQuantity_LableMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -358,19 +370,30 @@ public class JD_Home extends javax.swing.JFrame {
     }//GEN-LAST:event_dm_ButtonActionPerformed
 
     private void diesel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ButtonActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:        
+        dieselPanel();
+    }//GEN-LAST:event_diesel_ButtonActionPerformed
+    void dieselPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(diesel_Home.dieselHome_TabbedPanel);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Diesel Window ");
-
-    }//GEN-LAST:event_diesel_ButtonActionPerformed
-
+    }
     private void notification_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notification_ButtonActionPerformed
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_ButtonActionPerformed
+
+    private void notification_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_LableMouseClicked
+        // TODO add your handling code here:
+        defultPanel();
+    }//GEN-LAST:event_notification_LableMouseClicked
+
+    private void fuelQuantity_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fuelQuantity_LableMouseClicked
+        // TODO add your handling code here:
+        dieselPanel();
+    }//GEN-LAST:event_fuelQuantity_LableMouseClicked
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
