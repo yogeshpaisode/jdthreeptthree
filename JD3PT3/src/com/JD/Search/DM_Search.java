@@ -11,7 +11,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -24,8 +28,13 @@ public class DM_Search extends javax.swing.JFrame {
     JDatePickerImpl date1 = datePicker.getDateObjectUp();
     JDatePickerImpl date2 = datePicker.getDateObjectDown();
     List queryList = new ArrayList();
+    javax.swing.table.DefaultTableModel defaultTableModel;
+    SessionFactory search_SessionFactory=com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
 
+    String productName="";
+    String size="";
+    String measurement="";
     /**
      * Creates new form Party_MasterForm
      */
@@ -39,8 +48,51 @@ public class DM_Search extends javax.swing.JFrame {
         date_panel.add(date2);
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
+
+        preSrNo_Lable.setText("" + com.JD.StaticData.Static_DATA.prSrNo + "-");
+        defaultTableModel = (DefaultTableModel) party_Table.getModel();
         
-        preSrNo_Lable.setText(""+com.JD.StaticData.Static_DATA.prSrNo+"-");
+        //----------Fill ComboBox----------------------------------------------//
+        Session session=search_SessionFactory.openSession();
+        
+        Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
+            party_ComboBox.addItem(p.getPartyName());
+        }
+        q=session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Productmaster p=(com.JD.Master.Hibernate.config.Productmaster)object;
+            
+            if (productName.contains(p.getProductName())) {                
+            } else {
+                productName=productName+p.getProductName();
+                name_ComboBox.addItem(p.getProductName());
+            }
+            
+            if (size.contains(p.getProductSize()+"")) {                
+            } else {
+                size=size+p.getProductSize();
+                size_ComboBox.addItem(p.getProductSize());
+            }
+            
+            if (measurement.contains(p.getProductMeasurement())) {                
+            } else {
+                measurement=measurement+p.getProductMeasurement();
+                measurement_ComboBox.addItem(p.getProductMeasurement());
+            }           
+            
+        }
+        
+        q=session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
+        for (Object object : q.list()) {
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p=(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm)object;
+            srNo_ComboBox.addItem(p.getSrno());
+        }
+        
+        session.close();
+        //----------Fill ComboBox----------------------------------------------//
+        
     }
 
     /**
@@ -52,6 +104,8 @@ public class DM_Search extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        date_ButtonGroup = new javax.swing.ButtonGroup();
+        paymentType_ButtonGroup = new javax.swing.ButtonGroup();
         DmSearch_Panel = new javax.swing.JPanel();
         date_panel = new javax.swing.JPanel();
         betwee_CheackBox = new javax.swing.JCheckBox();
@@ -60,6 +114,7 @@ public class DM_Search extends javax.swing.JFrame {
         late_CheackBox = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        clear_CheackBox = new javax.swing.JCheckBox();
         party_ComboBox = new javax.swing.JComboBox();
         name_ComboBox = new javax.swing.JComboBox();
         size_ComboBox = new javax.swing.JComboBox();
@@ -71,6 +126,7 @@ public class DM_Search extends javax.swing.JFrame {
         cash_CheackBox = new javax.swing.JCheckBox();
         twoPay_CheackBox = new javax.swing.JCheckBox();
         cashAndTwoPay_CheackBox = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         search_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
         export_Button = new javax.swing.JButton();
@@ -86,6 +142,7 @@ public class DM_Search extends javax.swing.JFrame {
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
 
         betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(betwee_CheackBox);
         betwee_CheackBox.setText("Between");
         betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +152,7 @@ public class DM_Search extends javax.swing.JFrame {
         });
 
         equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(equal_CheackBox);
         equal_CheackBox.setText("Equal");
         equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +162,7 @@ public class DM_Search extends javax.swing.JFrame {
         });
 
         early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(early_CheackBox);
         early_CheackBox.setText("Early");
         early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +172,7 @@ public class DM_Search extends javax.swing.JFrame {
         });
 
         late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(late_CheackBox);
         late_CheackBox.setText("Late");
         late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -124,6 +184,10 @@ public class DM_Search extends javax.swing.JFrame {
         jLabel2.setText("From:");
 
         jLabel3.setText("To:");
+
+        clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(clear_CheackBox);
+        clear_CheackBox.setText("Clear");
 
         javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
         date_panel.setLayout(date_panelLayout);
@@ -139,10 +203,12 @@ public class DM_Search extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(early_CheackBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(late_CheackBox))
+                        .addComponent(late_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clear_CheackBox))
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         date_panelLayout.setVerticalGroup(
             date_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +218,8 @@ public class DM_Search extends javax.swing.JFrame {
                     .addComponent(betwee_CheackBox)
                     .addComponent(equal_CheackBox)
                     .addComponent(early_CheackBox)
-                    .addComponent(late_CheackBox))
+                    .addComponent(late_CheackBox)
+                    .addComponent(clear_CheackBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(29, 29, 29)
@@ -178,13 +245,20 @@ public class DM_Search extends javax.swing.JFrame {
         jLabel1.setText("Payment Type :");
 
         cash_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        paymentType_ButtonGroup.add(cash_CheackBox);
         cash_CheackBox.setText("Cash");
 
         twoPay_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        paymentType_ButtonGroup.add(twoPay_CheackBox);
         twoPay_CheackBox.setText("TwoPay");
 
         cashAndTwoPay_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        paymentType_ButtonGroup.add(cashAndTwoPay_CheackBox);
         cashAndTwoPay_CheackBox.setText("Cash And Two Pay");
+
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 51));
+        paymentType_ButtonGroup.add(jCheckBox1);
+        jCheckBox1.setText("Clear");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,6 +273,8 @@ public class DM_Search extends javax.swing.JFrame {
                 .addComponent(twoPay_CheackBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cashAndTwoPay_CheackBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -209,11 +285,17 @@ public class DM_Search extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(cash_CheackBox)
                     .addComponent(twoPay_CheackBox)
-                    .addComponent(cashAndTwoPay_CheackBox))
+                    .addComponent(cashAndTwoPay_CheackBox)
+                    .addComponent(jCheckBox1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         search_Button.setText("Search");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +340,7 @@ public class DM_Search extends javax.swing.JFrame {
             .addGroup(DmSearch_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(name_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -270,15 +352,15 @@ public class DM_Search extends javax.swing.JFrame {
                         .addComponent(srNo_ComboBox, 0, 181, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DmSearch_PanelLayout.createSequentialGroup()
-                        .addComponent(search_Button)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DmSearch_PanelLayout.createSequentialGroup()
+                        .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reset_Button)
+                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(export_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
         );
@@ -352,7 +434,24 @@ public class DM_Search extends javax.swing.JFrame {
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
+        reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
+    void reset() {
+        party_ComboBox.setSelectedItem("Party Name");
+        name_ComboBox.setSelectedItem("Product Name");
+        size_ComboBox.setSelectedItem("Size In MM");
+        measurement_ComboBox.setSelectedItem("Measurement");
+        srNo_ComboBox.setSelectedItem("Sr. Number");
+        paymentType_ButtonGroup.clearSelection();
+        date_ButtonGroup.clearSelection();
+
+    }
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        // TODO add your handling code here:
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+    }//GEN-LAST:event_search_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -400,10 +499,13 @@ public class DM_Search extends javax.swing.JFrame {
     private javax.swing.JCheckBox betwee_CheackBox;
     private javax.swing.JCheckBox cashAndTwoPay_CheackBox;
     private javax.swing.JCheckBox cash_CheackBox;
+    private javax.swing.JCheckBox clear_CheackBox;
+    private javax.swing.ButtonGroup date_ButtonGroup;
     private javax.swing.JPanel date_panel;
     private javax.swing.JCheckBox early_CheackBox;
     private javax.swing.JCheckBox equal_CheackBox;
     private javax.swing.JButton export_Button;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,6 +516,7 @@ public class DM_Search extends javax.swing.JFrame {
     private javax.swing.JComboBox name_ComboBox;
     private javax.swing.JComboBox party_ComboBox;
     private javax.swing.JTable party_Table;
+    private javax.swing.ButtonGroup paymentType_ButtonGroup;
     private javax.swing.JLabel preSrNo_Lable;
     private javax.swing.JButton print_Button;
     private javax.swing.JButton reset_Button;
