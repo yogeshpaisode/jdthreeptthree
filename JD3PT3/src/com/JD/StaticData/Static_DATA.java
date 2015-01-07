@@ -20,6 +20,8 @@ public class Static_DATA {
     //------Master Home------//
     public static javax.swing.JLabel fuelQuantity_Lable=null;
     public static javax.swing.JLabel fuelQuantity_Sell_Lable=null;
+    public static javax.swing.JLabel fuelQuantity_Purchse_Lable=null;
+    
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;

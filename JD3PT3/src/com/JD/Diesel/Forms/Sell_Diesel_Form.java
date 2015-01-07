@@ -4,8 +4,10 @@
  */
 package com.JD.Diesel.Forms;
 
+import com.Hibernate.diesel.config.Selldiesellog;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import com.JD.Validator.Validator;
 import java.lang.InstantiationException;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +54,9 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
     //----Load Session Factory----------//
     SessionFactory sellDiesel_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //----Load Session Factory----------//
-
+    //-----------Call Validator--------//
+    com.JD.Validator.Validator valid = new Validator();
+    //-----------Call Validator--------//
     /**
      * Creates new form Party_MasterForm
      */
@@ -111,15 +115,27 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
         sellDiesel_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(sellDiesel_Table);
 
         jLabel1.setText("* Current Quantity Of Diesel :");
@@ -153,7 +169,19 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
         jLabel5.setText("* Diesel Sell Quantity:");
 
+        sell_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                sell_TextFieldKeyReleased(evt);
+            }
+        });
+
         jLabel6.setText("* Added By Person Name:");
+
+        personName_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                personName_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel7.setText("* Driver Name:");
 
@@ -279,6 +307,8 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         lastQuantity = purchaseDiesel_Form.setCurrentDieselLog(0.0);
         personPresentName = personName_TextField.getText();
         String usedQuantityTemp = sell_TextField.getText();
+        dateOfAddition=new Date();
+        timeOfAddition=new Date();
 
         if (usedQuantityTemp.equals("")) {
             JOptionPane.showMessageDialog(null, "Please Provide Diesel Sell Quantity:");
@@ -310,9 +340,15 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
     void addDieselToMachine() {
         Session session = sellDiesel_SessionFactory.openSession();
-
-
+        Transaction transaction=session.beginTransaction();
+        presentQuantity=setCurrentDieselLog(usedQuantity);
+        com.Hibernate.diesel.config.Selldiesellog selldiesellog=new Selldiesellog(partyLink, machineName, machineNumber, driverName, lastQuantity, usedQuantity, presentQuantity, personPresentName, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+        session.save(selldiesellog);
+        transaction.commit();     
         session.close();
+        JOptionPane.showMessageDialog(null, "Diesel "+usedQuantity+" Provide To Machine Number "+machineNumber+" Under Party Right "+partyLink);
+        
+        reset();        
     }
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
@@ -371,6 +407,16 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_machineNumber_ComboBoxActionPerformed
 
+    private void personName_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_personName_TextFieldKeyReleased
+        // TODO add your handling code here:
+        personName_TextField.setText(valid.stringValidator(personName_TextField.getText()).toUpperCase());
+    }//GEN-LAST:event_personName_TextFieldKeyReleased
+
+    private void sell_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_TextFieldKeyReleased
+        // TODO add your handling code here:
+        sell_TextField.setText(valid.numberValidator(sell_TextField.getText()));
+    }//GEN-LAST:event_sell_TextFieldKeyReleased
+
     public double setCurrentDieselLog(double usedQuantity) {
         double log = 0.0;
         Session session = sellDiesel_SessionFactory.openSession();
@@ -396,9 +442,8 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             }
             com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
             com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
-
+            com.JD.StaticData.Static_DATA.fuelQuantity_Purchse_Lable.setText(status);
         }
-
         session.close();
         return log;
     }
@@ -420,10 +465,15 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
-        indexJTable = -1;
-
-
-
+        indexJTable = -1;        
+        Session session =sellDiesel_SessionFactory.openSession();        
+        Query q=session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
+        for (Object object : q.list()) {
+           com.Hibernate.diesel.config.Selldiesellog s=(com.Hibernate.diesel.config.Selldiesellog)object;
+            indexJTable+=1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(),s.getMachineNumber(),s.getMachineName(),s.getUsedQuantity(),s.getPersonPresentName(),s.getDriverName(),s.getDateOfAddition(),s.getTimeOfAddition(),s.getAddedByPersonName(),s.getAddedWithRight(),s.getLocation()});
+        }        
+        session.close();
     }
 
     /**

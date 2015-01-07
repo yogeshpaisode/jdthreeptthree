@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 7, 2015 1:29:28 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.Hibernate.diesel.config.Selldiesellog" table="selldiesellog" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="partyLink" type="string">
+            <column name="partyLink" length="65535" />
+        </property>
+        <property name="machineName" type="string">
+            <column name="machineName" length="65535" />
+        </property>
+        <property name="machineNumber" type="string">
+            <column name="machineNumber" length="65535" />
+        </property>
+        <property name="driverName" type="string">
+            <column name="driverName" length="65535" />
+        </property>
+        <property name="lastQuantity" type="java.lang.Double">
+            <column name="lastQuantity" precision="22" scale="0" />
+        </property>
+        <property name="usedQuantity" type="java.lang.Double">
+            <column name="usedQuantity" precision="22" scale="0" />
+        </property>
+        <property name="presentQuantity" type="java.lang.Double">
+            <column name="presentQuantity" precision="22" scale="0" />
+        </property>
+        <property name="personPresentName" type="string">
+            <column name="personPresentName" length="65535" />
+        </property>
+        <property name="dateOfAddition" type="date">
+            <column name="dateOfAddition" length="10" />
+        </property>
+        <property name="timeOfAddition" type="time">
+            <column name="timeOfAddition" length="8" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="65535" />
+        </property>
+        <property name="addedByPersonName" type="string">
+            <column name="addedByPersonName" length="65535" />
+        </property>
+        <property name="addedWithRight" type="string">
+            <column name="addedWithRight" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="string">
+            <column name="rawField6" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

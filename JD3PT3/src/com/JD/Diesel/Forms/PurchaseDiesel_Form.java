@@ -56,6 +56,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     public PurchaseDiesel_Form() {
         initComponents();
+        com.JD.StaticData.Static_DATA.fuelQuantity_Purchse_Lable=fuelQuantity_Purchse_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form = this;
         currentQuantity = setCurrentDieselLog(0.0);
         defaultTableModel = (DefaultTableModel) diesel_Table.getModel();
@@ -106,7 +107,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             }
             com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
             com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
-            fuelQuantity_Lable.setText(status);
+            fuelQuantity_Purchse_Lable.setText(status);
         }
 
         session.close();
@@ -120,7 +121,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         dieselMaster_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         diesel_Table = new javax.swing.JTable();
-        fuelQuantity_Lable = new javax.swing.JLabel();
+        fuelQuantity_Purchse_Lable = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         received_TextField = new javax.swing.JTextField();
@@ -165,9 +166,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(diesel_Table);
 
-        fuelQuantity_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
-        fuelQuantity_Lable.setText(" +134.99 LTR ");
-        fuelQuantity_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        fuelQuantity_Purchse_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
+        fuelQuantity_Purchse_Lable.setText(" +134.99 LTR ");
+        fuelQuantity_Purchse_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         jLabel1.setText("* Current Quantity Of Diesel :");
 
@@ -234,7 +235,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(dieselMaster_PanelLayout.createSequentialGroup()
                         .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fuelQuantity_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(fuelQuantity_Purchse_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(received_TextField))
                         .addGap(5, 5, 5)
                         .addComponent(jLabel6))
@@ -261,7 +262,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(fuelQuantity_Lable))
+                    .addComponent(fuelQuantity_Purchse_Lable))
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dieselMaster_PanelLayout.createSequentialGroup()
                         .addGap(9, 9, 9)
@@ -435,7 +436,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     private javax.swing.JTextField companyName_TextField;
     public javax.swing.JPanel dieselMaster_Panel;
     private javax.swing.JTable diesel_Table;
-    private javax.swing.JLabel fuelQuantity_Lable;
+    private javax.swing.JLabel fuelQuantity_Purchse_Lable;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
