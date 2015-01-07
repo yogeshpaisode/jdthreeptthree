@@ -39,6 +39,8 @@ public class DM_Search extends javax.swing.JFrame {
         date_panel.add(date2);
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
+        
+        preSrNo_Lable.setText(""+com.JD.StaticData.Static_DATA.prSrNo+"-");
     }
 
     /**
@@ -51,8 +53,6 @@ public class DM_Search extends javax.swing.JFrame {
     private void initComponents() {
 
         DmSearch_Panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         date_panel = new javax.swing.JPanel();
         betwee_CheackBox = new javax.swing.JCheckBox();
         equal_CheackBox = new javax.swing.JCheckBox();
@@ -60,23 +60,27 @@ public class DM_Search extends javax.swing.JFrame {
         late_CheackBox = new javax.swing.JCheckBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        party_ComboBox = new javax.swing.JComboBox();
+        name_ComboBox = new javax.swing.JComboBox();
+        size_ComboBox = new javax.swing.JComboBox();
+        measurement_ComboBox = new javax.swing.JComboBox();
+        srNo_ComboBox = new javax.swing.JComboBox();
+        preSrNo_Lable = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        cash_CheackBox = new javax.swing.JCheckBox();
+        twoPay_CheackBox = new javax.swing.JCheckBox();
+        cashAndTwoPay_CheackBox = new javax.swing.JCheckBox();
+        search_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
+        export_Button = new javax.swing.JButton();
+        print_Button = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        party_Table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         DmSearch_Panel.setBackground(new java.awt.Color(255, 255, 51));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
 
         date_panel.setBackground(new java.awt.Color(255, 255, 51));
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
@@ -156,21 +160,153 @@ public class DM_Search extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
+        party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Party Name" }));
+
+        name_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Product Name" }));
+
+        size_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Size In MM" }));
+
+        measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Measurement" }));
+
+        srNo_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sr. Number" }));
+
+        preSrNo_Lable.setText("NA-");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
+        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
+
+        jLabel1.setText("Payment Type :");
+
+        cash_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        cash_CheackBox.setText("Cash");
+
+        twoPay_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        twoPay_CheackBox.setText("TwoPay");
+
+        cashAndTwoPay_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        cashAndTwoPay_CheackBox.setText("Cash And Two Pay");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cash_CheackBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(twoPay_CheackBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cashAndTwoPay_CheackBox)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cash_CheackBox)
+                    .addComponent(twoPay_CheackBox)
+                    .addComponent(cashAndTwoPay_CheackBox))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        search_Button.setText("Search");
+
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
+
+        export_Button.setText("Export to Excel");
+
+        print_Button.setText("Print");
+
+        party_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA/U", "TOA/U", "Location"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(party_Table);
+
         javax.swing.GroupLayout DmSearch_PanelLayout = new javax.swing.GroupLayout(DmSearch_Panel);
         DmSearch_Panel.setLayout(DmSearch_PanelLayout);
         DmSearch_PanelLayout.setHorizontalGroup(
             DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
             .addGroup(DmSearch_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(name_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(size_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(DmSearch_PanelLayout.createSequentialGroup()
+                        .addComponent(preSrNo_Lable)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(srNo_ComboBox, 0, 181, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DmSearch_PanelLayout.createSequentialGroup()
+                        .addComponent(search_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(reset_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(export_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
         );
         DmSearch_PanelLayout.setVerticalGroup(
             DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DmSearch_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DmSearch_PanelLayout.createSequentialGroup()
+                        .addComponent(party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(name_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(DmSearch_PanelLayout.createSequentialGroup()
+                                .addComponent(size_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(measurement_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(srNo_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(preSrNo_Lable)
+                            .addComponent(search_Button)
+                            .addComponent(reset_Button)
+                            .addComponent(export_Button)
+                            .addComponent(print_Button))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
@@ -213,6 +349,10 @@ public class DM_Search extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_late_CheackBoxActionPerformed
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_reset_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,13 +398,28 @@ public class DM_Search extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DmSearch_Panel;
     private javax.swing.JCheckBox betwee_CheackBox;
+    private javax.swing.JCheckBox cashAndTwoPay_CheackBox;
+    private javax.swing.JCheckBox cash_CheackBox;
     private javax.swing.JPanel date_panel;
     private javax.swing.JCheckBox early_CheackBox;
     private javax.swing.JCheckBox equal_CheackBox;
+    private javax.swing.JButton export_Button;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JCheckBox late_CheackBox;
+    private javax.swing.JComboBox measurement_ComboBox;
+    private javax.swing.JComboBox name_ComboBox;
+    private javax.swing.JComboBox party_ComboBox;
+    private javax.swing.JTable party_Table;
+    private javax.swing.JLabel preSrNo_Lable;
+    private javax.swing.JButton print_Button;
+    private javax.swing.JButton reset_Button;
+    private javax.swing.JButton search_Button;
+    private javax.swing.JComboBox size_ComboBox;
+    private javax.swing.JComboBox srNo_ComboBox;
+    private javax.swing.JCheckBox twoPay_CheackBox;
     // End of variables declaration//GEN-END:variables
 }
