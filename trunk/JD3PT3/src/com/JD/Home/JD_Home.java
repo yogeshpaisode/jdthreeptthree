@@ -20,7 +20,6 @@ public class JD_Home extends javax.swing.JFrame {
     /**
      * Creates new form JD_Home
      */
-    
     String hideImageName = "Hide.jpg";
     URL hideImageNameURL = getClass().getResource(hideImageName);
     Toolkit hideImageNametk = Toolkit.getDefaultToolkit();
@@ -47,14 +46,14 @@ public class JD_Home extends javax.swing.JFrame {
 
     public JD_Home() {
         initComponents();
-        com.JD.StaticData.Static_DATA.fuelQuantity_Lable=fuelQuantity_Lable;
+        com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
-        user_Lable.setText("Welcome " + dataTemp[0] + " ");       
-        
+        user_Lable.setText("Welcome " + dataTemp[0] + " ");
+
     }
 
     /**
@@ -80,7 +79,7 @@ public class JD_Home extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         dm_Button = new javax.swing.JButton();
         diesel_Button = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        notification_Button = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
@@ -165,7 +164,12 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Notification");
+        notification_Button.setText("Notification");
+        notification_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notification_ButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Machine Start/Stop");
 
@@ -176,7 +180,7 @@ public class JD_Home extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(notification_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(master_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dm_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(diesel_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -190,7 +194,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(notification_Button)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,13 +310,13 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Master Window ");
         com.JD.StaticData.Static_DATA.webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
-        
+
     }//GEN-LAST:event_master_ButtonActionPerformed
-    
+
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentResized
-    
+
     private void hideUnhide_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideUnhide_LableMouseClicked
         // TODO add your handling code here:
 
@@ -326,7 +330,7 @@ public class JD_Home extends javax.swing.JFrame {
             hideUnhide_Lable.setIcon(hideICO);
         }
     }//GEN-LAST:event_hideUnhide_LableMouseClicked
-    
+
     private void parentComponentHolder_PanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_parentComponentHolder_PanelComponentResized
         // TODO add your handling code here:
         //------ Default Width and Height of parentComponentHolder_Panel------//
@@ -336,9 +340,9 @@ public class JD_Home extends javax.swing.JFrame {
         masterHome.masterHome_TabbedPane.setBounds(0, 0, width, height);
         dM_Home.DM_Home_TabbedPane.setBounds(0, 0, width, height);
         diesel_Home.dieselHome_TabbedPanel.setBounds(0, 0, width, height);
-        
+
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
-    
+
     private void dm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ButtonActionPerformed
         // TODO add your handling code here:
         parentComponentHolder_Panel.removeAll();
@@ -347,9 +351,9 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Print Receipt/DM Window ");
         com.JD.StaticData.Static_DATA.webCam_Panel_Dm.add(com.JD.StaticData.Static_DATA.webPanel);
-        
+
     }//GEN-LAST:event_dm_ButtonActionPerformed
-    
+
     private void diesel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ButtonActionPerformed
         // TODO add your handling code here:
         parentComponentHolder_Panel.removeAll();
@@ -357,8 +361,17 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Diesel Window ");
-        
+
     }//GEN-LAST:event_diesel_ButtonActionPerformed
+
+    private void notification_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notification_ButtonActionPerformed
+        // TODO add your handling code here:
+        parentComponentHolder_Panel.removeAll();
+        //parentComponentHolder_Panel.add(diesel_Home.dieselHome_TabbedPanel);
+        parentComponentHolder_Panel.repaint();
+        parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Notification Window ");
+    }//GEN-LAST:event_notification_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -395,7 +408,7 @@ public class JD_Home extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new JD_Home().setVisible(true);
             }
@@ -407,7 +420,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton dm_Button;
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JLabel hideUnhide_Lable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -425,6 +437,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel logout_Lable;
     private javax.swing.JButton master_Button;
     private javax.swing.JPanel menuItem_Panel;
+    private javax.swing.JButton notification_Button;
     private javax.swing.JLabel notification_Lable;
     private javax.swing.JPanel parentComponentHolder_Panel;
     private javax.swing.JLabel user_Lable;
