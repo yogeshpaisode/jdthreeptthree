@@ -347,7 +347,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         transaction.commit();     
         session.close();
         JOptionPane.showMessageDialog(null, "Diesel "+usedQuantity+" Provide To Machine Number "+machineNumber+" Under Party Right "+partyLink);
-        
+        new GetReceipt(": " + partyLink, ": " + machineName, ": " + machineNumber, ": " + usedQuantity, ": " + personPresentName, ": " + driverName);
         reset();        
     }
 
