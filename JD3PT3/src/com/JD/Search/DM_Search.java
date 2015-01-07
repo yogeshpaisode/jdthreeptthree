@@ -4,9 +4,14 @@
  */
 package com.JD.Search;
 
+import com.JD.DatePicker.DatePicker;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JInternalFrame;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 
 /**
  *
@@ -14,11 +19,26 @@ import javax.swing.JInternalFrame;
  */
 public class DM_Search extends javax.swing.JFrame {
 
+    //---Load Date Panel---//
+    com.JD.DatePicker.DatePicker datePicker = new DatePicker();
+    JDatePickerImpl date1 = datePicker.getDateObjectUp();
+    JDatePickerImpl date2 = datePicker.getDateObjectDown();
+    List queryList = new ArrayList();
+    //---Load Date Panel---//
+
     /**
      * Creates new form Party_MasterForm
      */
     public DM_Search() {
         initComponents();
+        //----Load Calender----//
+        date1.setBounds(17, 51, 200, 50);
+        date1.setBackground(Color.yellow);
+        date2.setBackground(Color.yellow);
+        date_panel.add(date1);
+        date_panel.add(date2);
+        date2.setBounds(17, 102, 200, 40);
+        //----Load Calender----//
     }
 
     /**
@@ -33,6 +53,13 @@ public class DM_Search extends javax.swing.JFrame {
         DmSearch_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        date_panel = new javax.swing.JPanel();
+        betwee_CheackBox = new javax.swing.JCheckBox();
+        equal_CheackBox = new javax.swing.JCheckBox();
+        early_CheackBox = new javax.swing.JCheckBox();
+        late_CheackBox = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,17 +78,101 @@ public class DM_Search extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        date_panel.setBackground(new java.awt.Color(255, 255, 51));
+        date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
+
+        betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        betwee_CheackBox.setText("Between");
+        betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
+        betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                betwee_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        equal_CheackBox.setText("Equal");
+        equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+        equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                equal_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        early_CheackBox.setText("Early");
+        early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
+        early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                early_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        late_CheackBox.setText("Late");
+        late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
+        late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                late_CheackBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("From:");
+
+        jLabel3.setText("To:");
+
+        javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
+        date_panel.setLayout(date_panelLayout);
+        date_panelLayout.setHorizontalGroup(
+            date_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(date_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(date_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(date_panelLayout.createSequentialGroup()
+                        .addComponent(betwee_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(equal_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(early_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(late_CheackBox))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        date_panelLayout.setVerticalGroup(
+            date_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(date_panelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(date_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(betwee_CheackBox)
+                    .addComponent(equal_CheackBox)
+                    .addComponent(early_CheackBox)
+                    .addComponent(late_CheackBox))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel3)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout DmSearch_PanelLayout = new javax.swing.GroupLayout(DmSearch_Panel);
         DmSearch_Panel.setLayout(DmSearch_PanelLayout);
         DmSearch_PanelLayout.setHorizontalGroup(
             DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
+            .addGroup(DmSearch_PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         DmSearch_PanelLayout.setVerticalGroup(
             DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DmSearch_PanelLayout.createSequentialGroup()
-                .addGap(0, 288, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -77,6 +188,31 @@ public class DM_Search extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void betwee_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betwee_CheackBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_betwee_CheackBoxActionPerformed
+
+    private void equal_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equal_CheackBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_equal_CheackBoxActionPerformed
+
+    private void early_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_early_CheackBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_early_CheackBoxActionPerformed
+
+    private void late_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_late_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (late_CheackBox.isSelected()) {
+
+            equal_CheackBox.setSelected(false);
+            early_CheackBox.setSelected(false);
+            betwee_CheackBox.setSelected(false);
+
+
+        } else {
+        }
+    }//GEN-LAST:event_late_CheackBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,9 +257,14 @@ public class DM_Search extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel DmSearch_Panel;
+    private javax.swing.JCheckBox betwee_CheackBox;
+    private javax.swing.JPanel date_panel;
+    private javax.swing.JCheckBox early_CheackBox;
+    private javax.swing.JCheckBox equal_CheackBox;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JCheckBox late_CheackBox;
     // End of variables declaration//GEN-END:variables
-
-   
 }
