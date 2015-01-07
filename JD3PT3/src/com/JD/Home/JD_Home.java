@@ -7,6 +7,7 @@ package com.JD.Home;
 import com.JD.Diesel.Forms.Diesel_Home;
 import com.JD.Notification.Form.Notification;
 import com.JD.PrintReceiptDM.Form.DM_Home;
+import com.JD.Search.Search_Home;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;
@@ -44,6 +45,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.PrintReceiptDM.Form.DM_Home dM_Home = new DM_Home();
     com.JD.Diesel.Forms.Diesel_Home diesel_Home = new Diesel_Home();
     com.JD.Notification.Form.Notification notification = new Notification();
+    com.JD.Search.Search_Home search_Home=new Search_Home();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -86,7 +88,7 @@ public class JD_Home extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jButton2 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        search_Button = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
@@ -183,7 +185,12 @@ public class JD_Home extends javax.swing.JFrame {
 
         jButton2.setText("Machine Start/Stop");
 
-        jButton1.setText("Search");
+        search_Button.setText("Search");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Daily Report ");
 
@@ -204,7 +211,7 @@ public class JD_Home extends javax.swing.JFrame {
             .addComponent(diesel_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator3)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator4)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -233,7 +240,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(search_Button)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
                 .addGap(18, 18, 18)
@@ -391,6 +398,7 @@ public class JD_Home extends javax.swing.JFrame {
         masterHome.masterHome_TabbedPane.setBounds(0, 0, width, height);
         dM_Home.DM_Home_TabbedPane.setBounds(0, 0, width, height);
         diesel_Home.dieselHome_TabbedPanel.setBounds(0, 0, width, height);
+        search_Home.search_TabbedPanel.setBounds(0, 0, width, height);
 
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
 
@@ -430,6 +438,15 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_fuelQuantity_LableMouseClicked
+
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        // TODO add your handling code here:
+        parentComponentHolder_Panel.removeAll();
+        parentComponentHolder_Panel.add(search_Home.search_TabbedPanel);
+        parentComponentHolder_Panel.repaint();
+        parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Search Window ");
+    }//GEN-LAST:event_search_ButtonActionPerformed
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -485,7 +502,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton dm_Button;
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JLabel hideUnhide_Lable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -512,6 +528,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton notification_Button;
     private javax.swing.JLabel notification_Lable;
     private javax.swing.JPanel parentComponentHolder_Panel;
+    private javax.swing.JButton search_Button;
     private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
 }
