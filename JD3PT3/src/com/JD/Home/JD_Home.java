@@ -5,6 +5,7 @@
 package com.JD.Home;
 
 import com.JD.Diesel.Forms.Diesel_Home;
+import com.JD.Notification.Form.Notification;
 import com.JD.PrintReceiptDM.Form.DM_Home;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -42,6 +43,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.Master.Forms.MasterHome masterHome = new com.JD.Master.Forms.MasterHome();
     com.JD.PrintReceiptDM.Form.DM_Home dM_Home = new DM_Home();
     com.JD.Diesel.Forms.Diesel_Home diesel_Home = new Diesel_Home();
+    com.JD.Notification.Form.Notification notification = new Notification();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -53,6 +55,7 @@ public class JD_Home extends javax.swing.JFrame {
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
+        defultPanel();
 
     }
 
@@ -366,12 +369,15 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void notification_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notification_ButtonActionPerformed
         // TODO add your handling code here:
+        defultPanel();
+    }//GEN-LAST:event_notification_ButtonActionPerformed
+    void defultPanel() {
         parentComponentHolder_Panel.removeAll();
-        //parentComponentHolder_Panel.add(diesel_Home.dieselHome_TabbedPanel);
+        parentComponentHolder_Panel.add(notification.notification_Panel);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Notification Window ");
-    }//GEN-LAST:event_notification_ButtonActionPerformed
+    }
 
     /**
      * @param args the command line arguments
