@@ -1355,6 +1355,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.srNo = com.JD.StaticData.Static_DATA.srNo + 1;
             i.setSrNo(com.JD.StaticData.Static_DATA.srNo);
             srNo_Lable.setText(com.JD.StaticData.Static_DATA.prSrNo + "-" + com.JD.StaticData.Static_DATA.srNo + "");
+            com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox.addItem(com.JD.StaticData.Static_DATA.srNo+"");
             session.save(i);
         }
         transaction.commit();

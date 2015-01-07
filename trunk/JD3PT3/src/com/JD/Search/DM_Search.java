@@ -32,9 +32,9 @@ public class DM_Search extends javax.swing.JFrame {
     SessionFactory search_SessionFactory=com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
 
-    String productName="";
-    String size="";
-    String measurement="";
+    String dmSearch_productName="";
+    String dmSearch_size="";
+    String dmSearch_measurement="";
     /**
      * Creates new form Party_MasterForm
      */
@@ -48,51 +48,50 @@ public class DM_Search extends javax.swing.JFrame {
         date_panel.add(date2);
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
-
+        com.JD.StaticData.Static_DATA.dmSearch_party_ComboBox=dmSearch_party_ComboBox;
+        com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox=dmSearch_srNo_ComboBox;
+        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox=dmsearch_ProductName_ComboBox;
+        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox=dmSearch_measurement_ComboBox;
+        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox=dmsearch_size_ComboBox;        
         preSrNo_Lable.setText("" + com.JD.StaticData.Static_DATA.prSrNo + "-");
-        defaultTableModel = (DefaultTableModel) party_Table.getModel();
-        
+        defaultTableModel = (DefaultTableModel) dm_Table.getModel();        
         //----------Fill ComboBox----------------------------------------------//
         Session session=search_SessionFactory.openSession();
         
         Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
-            party_ComboBox.addItem(p.getPartyName());
+            dmSearch_party_ComboBox.addItem(p.getPartyName());
         }
         q=session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p=(com.JD.Master.Hibernate.config.Productmaster)object;
             
-            if (productName.contains(p.getProductName())) {                
+            if (dmSearch_productName.contains(p.getProductName())) {                
             } else {
-                productName=productName+p.getProductName();
-                name_ComboBox.addItem(p.getProductName());
+                dmSearch_productName=dmSearch_productName+p.getProductName();
+                dmsearch_ProductName_ComboBox.addItem(p.getProductName());
             }
             
-            if (size.contains(p.getProductSize()+"")) {                
+            if (dmSearch_size.contains(p.getProductSize()+"")) {                
             } else {
-                size=size+p.getProductSize();
-                size_ComboBox.addItem(p.getProductSize());
+                dmSearch_size=dmSearch_size+p.getProductSize();
+                dmsearch_size_ComboBox.addItem(p.getProductSize());
             }
             
-            if (measurement.contains(p.getProductMeasurement())) {                
+            if (dmSearch_measurement.contains(p.getProductMeasurement())) {                
             } else {
-                measurement=measurement+p.getProductMeasurement();
-                measurement_ComboBox.addItem(p.getProductMeasurement());
-            }           
-            
-        }
-        
+                dmSearch_measurement=dmSearch_measurement+p.getProductMeasurement();
+                dmSearch_measurement_ComboBox.addItem(p.getProductMeasurement());
+            }         
+        }        
         q=session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
         for (Object object : q.list()) {
             com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p=(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm)object;
-            srNo_ComboBox.addItem(p.getSrno());
-        }
-        
+            dmSearch_srNo_ComboBox.addItem(p.getSrno());
+        }        
         session.close();
-        //----------Fill ComboBox----------------------------------------------//
-        
+        //----------Fill ComboBox----------------------------------------------//        
     }
 
     /**
@@ -115,11 +114,11 @@ public class DM_Search extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         clear_CheackBox = new javax.swing.JCheckBox();
-        party_ComboBox = new javax.swing.JComboBox();
-        name_ComboBox = new javax.swing.JComboBox();
-        size_ComboBox = new javax.swing.JComboBox();
-        measurement_ComboBox = new javax.swing.JComboBox();
-        srNo_ComboBox = new javax.swing.JComboBox();
+        dmSearch_party_ComboBox = new javax.swing.JComboBox();
+        dmsearch_ProductName_ComboBox = new javax.swing.JComboBox();
+        dmsearch_size_ComboBox = new javax.swing.JComboBox();
+        dmSearch_measurement_ComboBox = new javax.swing.JComboBox();
+        dmSearch_srNo_ComboBox = new javax.swing.JComboBox();
         preSrNo_Lable = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -132,7 +131,7 @@ public class DM_Search extends javax.swing.JFrame {
         export_Button = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        party_Table = new javax.swing.JTable();
+        dm_Table = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,15 +226,15 @@ public class DM_Search extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Party Name" }));
+        dmSearch_party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Party Name" }));
 
-        name_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Product Name" }));
+        dmsearch_ProductName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Product Name" }));
 
-        size_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Size In MM" }));
+        dmsearch_size_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Size In MM" }));
 
-        measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Measurement" }));
+        dmSearch_measurement_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Measurement" }));
 
-        srNo_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sr. Number" }));
+        dmSearch_srNo_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sr. Number" }));
 
         preSrNo_Lable.setText("NA-");
 
@@ -308,19 +307,19 @@ public class DM_Search extends javax.swing.JFrame {
 
         print_Button.setText("Print");
 
-        party_Table.setModel(new javax.swing.table.DefaultTableModel(
+        dm_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA/U", "TOA/U", "Location"
+                "Sr.No", "Party Name", "Product Name", "Product Size", "Measurement", "Value", "Total Amount", "Payment Type", "Driver Name", "Vehicle Number", "Vehicle Name", "DOO/U", "TOO/U", "Added By", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -331,7 +330,7 @@ public class DM_Search extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(party_Table);
+        jScrollPane1.setViewportView(dm_Table);
 
         javax.swing.GroupLayout DmSearch_PanelLayout = new javax.swing.GroupLayout(DmSearch_Panel);
         DmSearch_Panel.setLayout(DmSearch_PanelLayout);
@@ -342,14 +341,14 @@ public class DM_Search extends javax.swing.JFrame {
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(name_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(size_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dmSearch_party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dmsearch_ProductName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dmsearch_size_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dmSearch_measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(DmSearch_PanelLayout.createSequentialGroup()
                         .addComponent(preSrNo_Lable)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(srNo_ComboBox, 0, 181, Short.MAX_VALUE)))
+                        .addComponent(dmSearch_srNo_ComboBox, 0, 181, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DmSearch_PanelLayout.createSequentialGroup()
@@ -371,19 +370,19 @@ public class DM_Search extends javax.swing.JFrame {
                 .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(DmSearch_PanelLayout.createSequentialGroup()
-                        .addComponent(party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dmSearch_party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(name_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dmsearch_ProductName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(DmSearch_PanelLayout.createSequentialGroup()
-                                .addComponent(size_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dmsearch_size_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(measurement_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dmSearch_measurement_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(DmSearch_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(srNo_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dmSearch_srNo_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(preSrNo_Lable)
                             .addComponent(search_Button)
                             .addComponent(reset_Button)
@@ -437,11 +436,11 @@ public class DM_Search extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
     void reset() {
-        party_ComboBox.setSelectedItem("Party Name");
-        name_ComboBox.setSelectedItem("Product Name");
-        size_ComboBox.setSelectedItem("Size In MM");
-        measurement_ComboBox.setSelectedItem("Measurement");
-        srNo_ComboBox.setSelectedItem("Sr. Number");
+        dmSearch_party_ComboBox.setSelectedItem("Party Name");
+        dmsearch_ProductName_ComboBox.setSelectedItem("Product Name");
+        dmsearch_size_ComboBox.setSelectedItem("Size In MM");
+        dmSearch_measurement_ComboBox.setSelectedItem("Measurement");
+        dmSearch_srNo_ComboBox.setSelectedItem("Sr. Number");
         paymentType_ButtonGroup.clearSelection();
         date_ButtonGroup.clearSelection();
 
@@ -502,6 +501,12 @@ public class DM_Search extends javax.swing.JFrame {
     private javax.swing.JCheckBox clear_CheackBox;
     private javax.swing.ButtonGroup date_ButtonGroup;
     private javax.swing.JPanel date_panel;
+    private javax.swing.JComboBox dmSearch_measurement_ComboBox;
+    private javax.swing.JComboBox dmSearch_party_ComboBox;
+    private javax.swing.JComboBox dmSearch_srNo_ComboBox;
+    private javax.swing.JTable dm_Table;
+    private javax.swing.JComboBox dmsearch_ProductName_ComboBox;
+    private javax.swing.JComboBox dmsearch_size_ComboBox;
     private javax.swing.JCheckBox early_CheackBox;
     private javax.swing.JCheckBox equal_CheackBox;
     private javax.swing.JButton export_Button;
@@ -512,17 +517,11 @@ public class DM_Search extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox late_CheackBox;
-    private javax.swing.JComboBox measurement_ComboBox;
-    private javax.swing.JComboBox name_ComboBox;
-    private javax.swing.JComboBox party_ComboBox;
-    private javax.swing.JTable party_Table;
     private javax.swing.ButtonGroup paymentType_ButtonGroup;
     private javax.swing.JLabel preSrNo_Lable;
     private javax.swing.JButton print_Button;
     private javax.swing.JButton reset_Button;
     private javax.swing.JButton search_Button;
-    private javax.swing.JComboBox size_ComboBox;
-    private javax.swing.JComboBox srNo_ComboBox;
     private javax.swing.JCheckBox twoPay_CheackBox;
     // End of variables declaration//GEN-END:variables
 }
