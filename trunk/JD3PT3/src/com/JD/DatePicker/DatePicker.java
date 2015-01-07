@@ -42,16 +42,11 @@ public class DatePicker {
     int day = Integer.parseInt(dateFormat.format(date2));
 
   public  JDatePickerImpl getDateObjectUp() {
-
-
-
         if (month == 12) {
             month = 1;
-
         } else {
             month = month - 1;
         }
-
 
         JDatePickerImpl datePickerALL;
         UtilDateModel model = new UtilDateModel();
@@ -64,16 +59,12 @@ public class DatePicker {
 
     }
 
-    JDatePickerImpl getDateObjectDown() {
-
-
+   public JDatePickerImpl getDateObjectDown() {
         if (month == 12) {
             month = 1;
-
         } else {
             month = month - 1;
         }
-
         JDatePickerImpl datePickerALL;
         UtilDateModel model = new UtilDateModel();
         model.setDate(year, month, day);
@@ -82,7 +73,5 @@ public class DatePicker {
         datePickerALL = new JDatePickerImpl(datePanel);
         datePickerALL.setBounds(15, 47, 200, 40);
         return datePickerALL;
-
-
     }
 }
