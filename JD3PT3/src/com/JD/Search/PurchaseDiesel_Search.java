@@ -366,7 +366,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
             }
         }
         Session session = search_SessionFactory.openSession();
-        Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
+        Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
             ++indexJTable;
