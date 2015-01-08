@@ -46,6 +46,7 @@ public class DM_Report extends javax.swing.JFrame {
     public DM_Report() {
         initComponents();
         report_Button.setEnabled(false);
+        com.JD.StaticData.Static_DATA.dM_Report=this;
         //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
@@ -423,7 +424,7 @@ public class DM_Report extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
-    void report(String queryMaker) {
+    public void report(String queryMaker) {
         int indexJTable = -1;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);

@@ -32,7 +32,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Yogesh
  */
-public class PrintDocumentJD implements Runnable {
+class PrintDocumentJD implements Runnable {
 
     ArrayList<DataBean> dataBeanList;
     String rawField3;
@@ -68,9 +68,10 @@ public class PrintDocumentJD implements Runnable {
             JasperPrintManager.printPages(jasperPrint, 0, 1, false);
             JOptionPane.showMessageDialog(null, "Success..! Please Collect Your Receipt");
             update("Accept", "FALSE");
-            com.JD.StaticData.Static_DATA.dm_Form.reset();
+            
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Printer Error : Please Cheack Your Printer...");
+            JOptionPane.showMessageDialog(null, "Printer Error : Please Cheack Your Printer...");            
+            System.out.print(ex);
             update("Decline", "TRUE");
         }
     }
@@ -94,5 +95,6 @@ public class PrintDocumentJD implements Runnable {
         session.close();
         flag = false;
         com.JD.StaticData.Static_DATA.flag3 = true;
+        com.JD.StaticData.Static_DATA.dm_Form.reset();
     }
 }
