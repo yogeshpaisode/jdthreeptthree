@@ -61,7 +61,6 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
             } else {
                 oilCompanyNameTemp += "##" + p.getOilCompanyName();
                 com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem(p.getOilCompanyName());
-
             }
             if (personNameTemp.contains(p.getPersonPresentName())) {
             } else {
@@ -69,9 +68,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem(p.getPersonPresentName());
             }
         }
-
         session.close();
-
     }
 
     /**
@@ -83,6 +80,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        date_ButtonGroup = new javax.swing.ButtonGroup();
         purchase_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         diesel_Table = new javax.swing.JTable();
@@ -133,6 +131,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
 
         betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(betwee_CheackBox);
         betwee_CheackBox.setText("Between");
         betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +141,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         });
 
         equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(equal_CheackBox);
         equal_CheackBox.setText("Equal");
         equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +151,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         });
 
         early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(early_CheackBox);
         early_CheackBox.setText("Early");
         early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +161,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         });
 
         late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(late_CheackBox);
         late_CheackBox.setText("Late");
         late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +175,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         jLabel3.setText("To:");
 
         clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
 
         javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
@@ -299,7 +302,84 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
+        int month1 = 0;
+        int month2 = 0;
+        if (date1.getModel().getMonth() == 12) {
+            month1 = 1;
+        } else {
+            month1 = date1.getModel().getMonth() + 1;
+        }
+        if (date2.getModel().getMonth() == 12) {
+            month2 = 1;
+        } else {
+            month2 = date2.getModel().getMonth() + 1;
+        }
+        String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
+        String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
+        queryList.clear();
+        int indexJTable = -1;
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        String queryMaker = "from com.Hibernate.diesel.config.Purchasediesel ";
+        String queryConnector = "where ";
+
+        String oilCompanyQuery = null;
+        String personquery = null;
+        String dateQuery = null;
+        if (betwee_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition BETWEEN '" + date11 + "' and '" + date22 + "' ";
+        } else if (early_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition<='" + date11 + "' ";
+        } else if (late_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition>='" + date11 + "' ";
+        } else if (equal_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition='" + date11 + "' ";
+        }
+        if (purchaseSearch_company_ComboBox.getSelectedIndex() > 0) {
+            oilCompanyQuery = "oilCompanyName='" + purchaseSearch_company_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (purchase_Perseon_Search_ComboBox.getSelectedIndex() > 0) {
+            personquery = "personPresentName='" + purchase_Perseon_Search_ComboBox.getSelectedItem().toString() + "' ";
+        }
+
+        if (dateQuery != null) {
+            queryList.add(dateQuery);
+        }
+        if (oilCompanyQuery != null) {
+            queryList.add(oilCompanyQuery);
+        }
+        if (personquery != null) {
+            queryList.add(personquery);
+        }
+        int listSize = queryList.size();
+        if (listSize > 0) {
+            int counter = 0;
+            queryMaker += queryConnector;
+            for (Object object : queryList) {
+                ++counter;
+                if (counter != listSize) {
+                    queryMaker += object.toString() + "and ";
+                } else {
+                    queryMaker += object.toString();
+                }
+            }
+        }
+        Session session = search_SessionFactory.openSession();
+        Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
+        for (Object object : q.list()) {
+            com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
+            ++indexJTable;
+            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+        }
+        session.close();
+        reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
+    void reset() {
+        purchaseSearch_company_ComboBox.setSelectedIndex(0);
+        purchase_Perseon_Search_ComboBox.setSelectedIndex(0);
+        date_ButtonGroup.clearSelection();
+    }
 
     /**
      * @param args the command line arguments
@@ -345,6 +425,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox betwee_CheackBox;
     private javax.swing.JCheckBox clear_CheackBox;
+    private javax.swing.ButtonGroup date_ButtonGroup;
     private javax.swing.JPanel date_panel;
     private javax.swing.JTable diesel_Table;
     private javax.swing.JCheckBox early_CheackBox;
