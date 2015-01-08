@@ -95,18 +95,14 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 personNameList.add(p.getPersonPresentName());
             }        
             }
-        session.close();
-        
+        session.close();        
         for (Object object : oilCompanyList) {
             companyName_comboBox.addItem(object.toString());
-        }
-   
+        }   
         for (Object object : personNameList) {
             personName_comboBox.addItem(object.toString());
         }
-
         resetJTable();
-
     }
 
     /**
@@ -138,7 +134,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Currentdisellog c = (com.JD.Master.Hibernate.config.Currentdisellog) object;
             log = c.getCurrentQuantity() + addedQuantity;
             c.setCurrentQuantity(log);
-
             session.save(c);
             transaction.commit();
         }
@@ -155,7 +150,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
             fuelQuantity_Purchse_Lable.setText(status);
         }
-
         session.close();
         return log;
     }
@@ -378,7 +372,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
     void addData() {
         addDataToDatabase_Button.setText("Processing..");
@@ -407,13 +400,10 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     void resetPurchaseComboBox() {
         String oilCompanyNameTemp = "";
         String personNameTemp = "";
-
         com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.removeAllItems();
         com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.removeAllItems();
-
         com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem("Oil Company Name");
         com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem("Person Persent");
-
         Session session = diesel_SessionFactory.openSession();
         Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
         for (Object object : q.list()) {
@@ -429,7 +419,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem(p.getPersonPresentName());
             }
         }
-
         session.close();
     }
 
