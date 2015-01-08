@@ -22,6 +22,10 @@ public class Init_Data implements Runnable {
 
     @Override
     public void run() {
+        File file = new File("temp");        
+	if (!file.exists()) {            
+	    file.mkdir();
+	}
         Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Query q = session.createQuery("from com.JD.InitData.Hibernate.config.Initdata");
         List list = q.list();
@@ -34,9 +38,6 @@ public class Init_Data implements Runnable {
             com.JD.StaticData.Static_DATA.registrationNumber = id.getRegistrationNumber();
             com.JD.StaticData.Static_DATA.selfPartyname = id.getRawField1();
         }        
-        File file = new File("temp");        
-	if (!file.exists()) {            
-	    file.mkdir();
-	}
+        
     }
 }
