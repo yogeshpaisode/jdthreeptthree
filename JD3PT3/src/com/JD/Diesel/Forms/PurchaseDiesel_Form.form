@@ -65,12 +65,12 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="personName_TextField" max="32767" attributes="0"/>
-                      <Component id="companyName_TextField" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="addDataToDatabase_Button" pref="142" max="32767" attributes="0"/>
+                          <Component id="addDataToDatabase_Button" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="reset_Button" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="companyName_comboBox" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
@@ -116,9 +116,9 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="companyName_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="slipNo_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="companyName_comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -269,11 +269,6 @@
             <Property name="text" type="java.lang.String" value="* Added From Oil Company Name:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="companyName_TextField">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="companyName_TextFieldKeyReleased"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" value="Oil Slip Number:"/>
@@ -310,6 +305,29 @@
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" value=" In LTR "/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="companyName_comboBox">
+          <Properties>
+            <Property name="editable" type="boolean" value="true"/>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="14">
+                <StringItem index="0" value="Oil Company Name"/>
+                <StringItem index="1" value="Indian Oil Corporation"/>
+                <StringItem index="2" value="Bharat Petroleum"/>
+                <StringItem index="3" value="Hindustan Petroleum"/>
+                <StringItem index="4" value="Indraprastha Gas"/>
+                <StringItem index="5" value="Reliance Petroleum"/>
+                <StringItem index="6" value="Petronet LNG"/>
+                <StringItem index="7" value="IBP (merged subsidiary of Indian Oil)"/>
+                <StringItem index="8" value="Gujarat State Petroleum Corporation"/>
+                <StringItem index="9" value="Oil and Natural Gas Corporation"/>
+                <StringItem index="10" value="Castrol India"/>
+                <StringItem index="11" value="Mahanagar Gas"/>
+                <StringItem index="12" value="Mangalore Refinery and Petrochemicals Limited"/>
+                <StringItem index="13" value="Aban Offshore"/>
+              </StringArray>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>

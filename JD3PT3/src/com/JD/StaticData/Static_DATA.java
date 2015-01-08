@@ -112,9 +112,14 @@ public class Static_DATA {
     public static javax.swing.JComboBox dmSearch_srNo_ComboBox=null;
     public static javax.swing.JComboBox dmsearch_ProductName_ComboBox=null;
     public static javax.swing.JComboBox dmsearch_size_ComboBox=null;
-    public static javax.swing.JComboBox dmSearch_measurement_ComboBox=null;   
-    
+    public static javax.swing.JComboBox dmSearch_measurement_ComboBox=null; 
     //-----From DM Search-------------------------//
+    //-----From Purchase Search-------------------------//
+    public static javax.swing.JComboBox purchaseSearch_company_ComboBox=null; 
+    public static javax.swing.JComboBox purchase_Perseon_Search_ComboBox=null; 
+    
+    //-----From Purchase Search-------------------------//
+   
     //-------From Search--------------------------//
     
     

@@ -421,16 +421,7 @@ public class DM_Search extends javax.swing.JFrame {
     }//GEN-LAST:event_early_CheackBoxActionPerformed
 
     private void late_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_late_CheackBoxActionPerformed
-        // TODO add your handling code here:
-        if (late_CheackBox.isSelected()) {
-
-            equal_CheackBox.setSelected(false);
-            early_CheackBox.setSelected(false);
-            betwee_CheackBox.setSelected(false);
-
-
-        } else {
-        }
+        // TODO add your handling code here:        
     }//GEN-LAST:event_late_CheackBoxActionPerformed
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
