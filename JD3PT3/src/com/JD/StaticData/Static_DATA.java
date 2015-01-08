@@ -123,8 +123,12 @@ public class Static_DATA {
     public static javax.swing.JComboBox sell_Search_person_ComboBox=null;  
     public static javax.swing.JComboBox sell_Search_Machine_Number=null;      
     //-----From Purchase Diesel Search-------------------------//
-    //-------From Search--------------------------//
+    //-----From Search--------------------------//
     
+    
+    //-----From Daily Report-------------------// 
+    
+    public static javax.swing.JComboBox dmReport_party_ComboBox=null;  
     
     
     

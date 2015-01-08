@@ -4,6 +4,7 @@
  */
 package com.JD.Home;
 
+import com.JD.DailyReports.Report_Home;
 import com.JD.Diesel.Forms.Diesel_Home;
 import com.JD.Notification.Form.Notification;
 import com.JD.PrintReceiptDM.Form.DM_Home;
@@ -46,6 +47,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.Diesel.Forms.Diesel_Home diesel_Home = new Diesel_Home();
     com.JD.Notification.Form.Notification notification = new Notification();
     com.JD.Search.Search_Home search_Home=new Search_Home();
+    com.JD.DailyReports.Report_Home report_Home=new Report_Home();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -89,7 +91,7 @@ public class JD_Home extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         search_Button = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        report_Button = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         jButton4 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JSeparator();
@@ -192,7 +194,12 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Daily Report ");
+        report_Button.setText("Daily Report ");
+        report_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_ButtonActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Scanner");
 
@@ -212,7 +219,7 @@ public class JD_Home extends javax.swing.JFrame {
             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator3)
             .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(report_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator4)
             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator5)
@@ -242,7 +249,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search_Button)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(report_Button)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -399,6 +406,7 @@ public class JD_Home extends javax.swing.JFrame {
         dM_Home.DM_Home_TabbedPane.setBounds(0, 0, width, height);
         diesel_Home.dieselHome_TabbedPanel.setBounds(0, 0, width, height);
         search_Home.search_TabbedPanel.setBounds(0, 0, width, height);
+        report_Home.report_TabbedPanel.setBounds(0, 0, width, height);
 
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
 
@@ -447,6 +455,15 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Search Window ");
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void report_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_ButtonActionPerformed
+        // TODO add your handling code here:
+        parentComponentHolder_Panel.removeAll();
+        parentComponentHolder_Panel.add(report_Home.report_TabbedPanel);
+        parentComponentHolder_Panel.repaint();
+        parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Daily Report Window ");
+    }//GEN-LAST:event_report_ButtonActionPerformed
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -503,7 +520,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
@@ -528,6 +544,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton notification_Button;
     private javax.swing.JLabel notification_Lable;
     private javax.swing.JPanel parentComponentHolder_Panel;
+    private javax.swing.JButton report_Button;
     private javax.swing.JButton search_Button;
     private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
