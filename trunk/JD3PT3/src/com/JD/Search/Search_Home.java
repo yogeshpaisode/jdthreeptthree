@@ -20,13 +20,15 @@ public class Search_Home extends javax.swing.JFrame {
     //------Load Data------//
     DM_Search dM_Search=new DM_Search();
     PurchaseDiesel_Search purchaseDiesel_Search=new PurchaseDiesel_Search();
+    SellDiesel_Search sellDiesel_Search=new SellDiesel_Search();
     //------Load Data------//   
    
 
     public Search_Home() {
         initComponents();        
         search_TabbedPanel.add("Receipt/DM Search", dM_Search.DmSearch_Panel);
-        search_TabbedPanel.add("Purchase Diesel Search",purchaseDiesel_Search.purchase_Panel);      
+        search_TabbedPanel.add("Purchase Diesel Search",purchaseDiesel_Search.purchase_Panel);  
+        search_TabbedPanel.add("Sell Diesel Search",sellDiesel_Search.sell_Panel);
     }
 
     /**
