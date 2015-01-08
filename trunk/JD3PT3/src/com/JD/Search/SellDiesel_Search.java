@@ -28,9 +28,10 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class SellDiesel_Search extends javax.swing.JFrame {
-    boolean flag1=false;
-    boolean flag2=false;
-    String personNameTemp="";
+
+    boolean flag1 = false;
+    boolean flag2 = false;
+    String personNameTemp = "";
     //---Load Date Panel---//
     String image = "UP.jpg";
     URL imagemageNameURL = getClass().getResource(image);
@@ -59,11 +60,11 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
         defaultTableModel = (DefaultTableModel) sellDiesel_Table.getModel();
-        com.JD.StaticData.Static_DATA.sell_Search_Party_ComboBox=sell_Search_Party_ComboBox;
-        com.JD.StaticData.Static_DATA.sell_Search_person_ComboBox=sell_Search_person_ComboBox;
-        com.JD.StaticData.Static_DATA.sell_Search_Machine_Number=sell_Search_Machine_Number;
+        com.JD.StaticData.Static_DATA.sell_Search_Party_ComboBox = sell_Search_Party_ComboBox;
+        com.JD.StaticData.Static_DATA.sell_Search_person_ComboBox = sell_Search_person_ComboBox;
+        com.JD.StaticData.Static_DATA.sell_Search_Machine_Number = sell_Search_Machine_Number;
         //--------Fill Party ComboBox----//
-        flag1=false;
+        flag1 = false;
         flag2 = false;
         Session session = search_SessionFactory.openSession();
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
@@ -72,16 +73,16 @@ public class SellDiesel_Search extends javax.swing.JFrame {
             sell_Search_Party_ComboBox.addItem(p.getPartyName());
         }
         q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
-        
+
         for (Object object : q.list()) {
-            com.Hibernate.diesel.config.Selldiesellog s=(com.Hibernate.diesel.config.Selldiesellog)object;
+            com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             if (!personNameTemp.contains(s.getPersonPresentName())) {
-                personNameTemp+="##"+s.getPersonPresentName();
+                personNameTemp += "##" + s.getPersonPresentName();
                 sell_Search_person_ComboBox.addItem(s.getPersonPresentName());
             }
-        }        
+        }
         session.close();
-        flag1=true;        
+        flag1 = true;
     }
 
     /**
@@ -227,6 +228,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(sellDiesel_Table);
+        sellDiesel_Table.getColumnModel().getColumn(0).setPreferredWidth(170);
 
         sell_Search_Party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
         sell_Search_Party_ComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -249,6 +251,11 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         machineName_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         search_Button.setText("Search");
+        search_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                search_ButtonActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Export To Excel");
 
@@ -349,7 +356,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (flag1) {
             flag2 = false;
-            machineName_Lable.setText("");            
+            machineName_Lable.setText("");
             String partyNameTemp = sell_Search_Party_ComboBox.getSelectedItem().toString();
             driverName_ComboBox.removeAllItems();
             sell_Search_Machine_Number.removeAllItems();
@@ -374,12 +381,12 @@ public class SellDiesel_Search extends javax.swing.JFrame {
             session.close();
             flag2 = true;
         }
-         machineName_Lable.setText(" Select Machine Number");
+        machineName_Lable.setText(" Select Machine Number");
     }//GEN-LAST:event_sell_Search_Party_ComboBoxActionPerformed
 
     private void sell_Search_Machine_NumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_Search_Machine_NumberActionPerformed
         // TODO add your handling code here:
-         if (flag2) {
+        if (flag2) {
             String vehicleNumberTemp = sell_Search_Machine_Number.getSelectedItem().toString();
             Session session = search_SessionFactory.openSession();
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
@@ -398,8 +405,98 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
 
-    
-    void reset(){
+    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+        // TODO add your handling code here:
+        int month1 = 0;
+        int month2 = 0;
+        if (date1.getModel().getMonth() == 12) {
+            month1 = 1;
+        } else {
+            month1 = date1.getModel().getMonth() + 1;
+        }
+        if (date2.getModel().getMonth() == 12) {
+            month2 = 1;
+        } else {
+            month2 = date2.getModel().getMonth() + 1;
+        }
+        String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
+        String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
+        queryList.clear();
+        int indexJTable = -1;
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        String queryMaker = "from com.Hibernate.diesel.config.Selldiesellog ";
+        String queryConnector = "where ";
+
+        String dateQuery = null;
+        String partyQuery = null;
+        String personQuery = null;
+        String numberQuery = null;
+        String driverQuery = null;
+
+        if (betwee_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition BETWEEN '" + date11 + "' and '" + date22 + "' ";
+        } else if (early_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition<='" + date11 + "' ";
+        } else if (late_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition>='" + date11 + "' ";
+        } else if (equal_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition='" + date11 + "' ";
+        }
+
+        if (sell_Search_Party_ComboBox.getSelectedIndex() > 0) {
+            partyQuery = "partyLink='" + sell_Search_Party_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (sell_Search_person_ComboBox.getSelectedIndex() > 0) {
+            personQuery = "personPresentName='" + sell_Search_person_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (sell_Search_Machine_Number.getSelectedIndex() > 0) {
+            numberQuery = "machineNumber='" + sell_Search_Machine_Number.getSelectedItem().toString() + "' ";
+        }
+        if (driverName_ComboBox.getSelectedIndex() > 0) {
+            driverQuery = "driverName='" + driverName_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (dateQuery != null) {
+            queryList.add(dateQuery);
+        }
+        if (partyQuery != null) {
+            queryList.add(partyQuery);
+        }
+        if (personQuery != null) {
+            queryList.add(personQuery);
+        }
+        if (driverQuery != null) {
+            queryList.add(driverQuery);
+        }
+        if (numberQuery != null) {
+            queryList.add(numberQuery);
+        }
+        int listSize = queryList.size();
+        if (listSize > 0) {
+            int counter = 0;
+            queryMaker += queryConnector;
+            for (Object object : queryList) {
+                ++counter;
+                if (counter != listSize) {
+                    queryMaker += object.toString() + "and ";
+                } else {
+                    queryMaker += object.toString();
+                }
+            }
+        }
+        Session session = search_SessionFactory.openSession();
+        Query q = session.createQuery(queryMaker);
+        for (Object object : q.list()) {
+            com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
+        }
+        session.close();
+        reset();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    void reset() {
         machineName_Lable.setIcon(imageICO);
         machineName_Lable.setText(" Select Machine Number");
         sell_Search_Party_ComboBox.setSelectedIndex(0);
@@ -407,6 +504,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         sell_Search_Machine_Number.setSelectedIndex(0);
         date_ButtonGroup.clearSelection();
     }
+
     /**
      * @param args the command line arguments
      */
