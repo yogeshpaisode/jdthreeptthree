@@ -10,6 +10,8 @@ import com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm;
 import com.JD.Validator.Validator;
 import java.awt.Color;
 import java.lang.InstantiationException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +36,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     Calendar now = Calendar.getInstance();
     int srNOtemp = 0;
     String qrCodeTemp = "";
+    Date currenTDate = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String datestring = dateFormat.format(currenTDate);
     //--------------INIT Data for Database----------//
     String partyLink = "";
     String productName = "";
@@ -69,9 +74,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     String rawField6 = "";
 //--------------INIT Data for Database----------//    
 //------ Load Session Factory ------//        
-    SessionFactory masterSessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     SessionFactory initSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
-    SessionFactory dm_SessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory dm_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
 //------ Load Session Factory ------//    
 //----------Call Validator----------------------//
     com.JD.Validator.Validator valid = new Validator();
@@ -98,7 +103,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         defaultTableModel = (DefaultTableModel) dm_Table.getModel();
         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//        
         webCan_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
-        com.JD.StaticData.Static_DATA.webCam_Panel_Dm=webCan_Panel;
+        com.JD.StaticData.Static_DATA.webCam_Panel_Dm = webCan_Panel;
         //------ Load WebPanel From com.JD.StaticData.Static_DATA-----//   
         //------Load Data From Master---------------------------------//
 
@@ -175,7 +180,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         resetJTable();
 
         date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
-        time_Lable.setText(now.get(Calendar.HOUR)+":"+now.get(Calendar.MINUTE));
+        time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
     }
 
     /**
@@ -1183,7 +1188,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             printReceipt();
             updateSRNO();
         } else {
-            
+
             update();
         }
         session.close();
@@ -1196,33 +1201,39 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         } else {
             ArrayList<DataBean> dataBeanList = new ArrayList<DataBean>();
+
             DataBean d = new DataBean();
             d.setPartyName(" : " + partyLink);
-            d.setParticular(" : " + productName);
-            d.setRoyaltyNumber(" : " + "AG8HU76HH");
-            d.setSrNo(preSRNO + "-" + SRNO);
-            d.setMeasurement(" : " + sizeTemp);
+            d.setParticular(" : " + "66");
+            d.setRoyaltyNumber(" : " + "66");
+            d.setSrNo("66");
+            d.setMeasurement(" : " + "66");
             d.setTotalAmount(" : " + totalAmount);
-            d.setPayableAmount(" : " + payableAmount + "");
-            d.setCft(": " + productMeasurement);
-            d.setPendingAmount(twoPayAmount + "");
+            d.setPayableAmount(" : " + "66");
+            d.setCft(": " + "66");
+            d.setPendingAmount("66");
             d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
+
             if (proxy_CheackBox.isSelected()) {
                 d.setQuantity("TON");
+
                 d.setNetWeight(" : " + neightWeight_TextField.getText());
-                d.setGrossWeight(" : " + grossWeight_TextField.getText());
+                d.setGrossWeight(" : " + "88");
+
             } else {
-                d.setQuantity(measurementTemp);
+                d.setQuantity("88");
                 d.setNetWeight(" : " + "Not Applied");
                 d.setGrossWeight(" : " + "Not Applied");
             }
+
+
             if (twoPay_CheackBox.isSelected()) {
                 d.setInvoiceType(" : TwoPay");
                 d.setPendingAmount(" : " + totalAmount);
             }
             if (cashAndTwoPay_CheackBox.isSelected()) {
                 d.setInvoiceType(" : Cash and TwoPay");
-                d.setPendingAmount(" : " + twoPayAmount + "");
+                d.setPendingAmount(" : " + "88");
             }
 
             if (cash_CheackBox.isSelected()) {
@@ -1230,9 +1241,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 d.setPendingAmount(" : " + "NO");
             }
             d.setDriverName(" : " + driverName);
-            d.setVehicleNumber(" : " + vehicleNumber);
+            d.setVehicleNumber(" : " + "88");
+
+
             dataBeanList.add(d);
-            new PrintDocumentJD(dataBeanList, QRCode, preSRNO + "-" + preSRNO);
+
+            new PrintDocumentJD(dataBeanList, QRCode, SRNO+"");
             com.JD.StaticData.Static_DATA.srNo_TEMP = SRNO;
         }
     }
@@ -1286,7 +1300,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     void updatePendingStatus() {
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         com.JD.StaticData.Static_DATA.flag3 = false;
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
@@ -1314,13 +1328,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }
 
     boolean paymentOptionTest() {
-
         boolean internalFlag = false;
-
         if (cash_CheackBox.isSelected() || cashAndTwoPay_CheackBox.isSelected() || twoPay_CheackBox.isSelected()) {
             internalFlag = true;
         }
-
         return internalFlag;
     }
 
@@ -1355,7 +1366,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.srNo = com.JD.StaticData.Static_DATA.srNo + 1;
             i.setSrNo(com.JD.StaticData.Static_DATA.srNo);
             srNo_Lable.setText(com.JD.StaticData.Static_DATA.prSrNo + "-" + com.JD.StaticData.Static_DATA.srNo + "");
-            com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox.addItem(com.JD.StaticData.Static_DATA.srNo+"");
+            com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox.addItem(com.JD.StaticData.Static_DATA.srNo + "");
             session.save(i);
         }
         transaction.commit();
@@ -1387,7 +1398,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         cancel_CheackBox.setEnabled(false);
         clear_CheackBox.setEnabled(false);
         date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
-        time_Lable.setText(now.get(Calendar.HOUR)+":"+now.get(Calendar.MINUTE));
+        time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
         search_TextField.setText("Search.......");
         proxy_CheackBox.setSelected(false);
         flag4 = false;
@@ -1402,6 +1413,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         srNo_Lable.setText(com.JD.StaticData.Static_DATA.prSrNo + "-" + com.JD.StaticData.Static_DATA.srNo + "");
         updatePendingStatus();
         resetJTable();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        com.JD.StaticData.Static_DATA.dM_Report.report("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm where dateOfAddition='" + datestring + "'");
+
     }
 
     public void resetJTable() {

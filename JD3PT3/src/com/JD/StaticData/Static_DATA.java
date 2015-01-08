@@ -128,7 +128,10 @@ public class Static_DATA {
     
     //-----From Daily Report-------------------// 
     
-    public static javax.swing.JComboBox dmReport_party_ComboBox=null;  
+    public static javax.swing.JComboBox dmReport_party_ComboBox=null;
+    public static com.JD.DailyReports.DM_Report dM_Report=null;
+    
+    //-----From Daily Report-------------------// 
     
     
     
