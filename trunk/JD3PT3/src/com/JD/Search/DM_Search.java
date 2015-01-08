@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.hibernate.Query;
@@ -29,12 +30,12 @@ public class DM_Search extends javax.swing.JFrame {
     JDatePickerImpl date2 = datePicker.getDateObjectDown();
     List queryList = new ArrayList();
     javax.swing.table.DefaultTableModel defaultTableModel;
-    SessionFactory search_SessionFactory=com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory search_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
+    String dmSearch_productName = "";
+    String dmSearch_size = "";
+    String dmSearch_measurement = "";
 
-    String dmSearch_productName="";
-    String dmSearch_size="";
-    String dmSearch_measurement="";
     /**
      * Creates new form Party_MasterForm
      */
@@ -48,48 +49,48 @@ public class DM_Search extends javax.swing.JFrame {
         date_panel.add(date2);
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
-        com.JD.StaticData.Static_DATA.dmSearch_party_ComboBox=dmSearch_party_ComboBox;
-        com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox=dmSearch_srNo_ComboBox;
-        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox=dmsearch_ProductName_ComboBox;
-        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox=dmSearch_measurement_ComboBox;
-        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox=dmsearch_size_ComboBox;        
+        com.JD.StaticData.Static_DATA.dmSearch_party_ComboBox = dmSearch_party_ComboBox;
+        com.JD.StaticData.Static_DATA.dmSearch_srNo_ComboBox = dmSearch_srNo_ComboBox;
+        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox = dmsearch_ProductName_ComboBox;
+        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox = dmSearch_measurement_ComboBox;
+        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox = dmsearch_size_ComboBox;
         preSrNo_Lable.setText("" + com.JD.StaticData.Static_DATA.prSrNo + "-");
-        defaultTableModel = (DefaultTableModel) dm_Table.getModel();        
+        defaultTableModel = (DefaultTableModel) dm_Table.getModel();
         //----------Fill ComboBox----------------------------------------------//
-        Session session=search_SessionFactory.openSession();
-        
-        Query q=session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
+        Session session = search_SessionFactory.openSession();
+
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Partymaster p=(com.JD.Master.Hibernate.config.Partymaster)object;
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             dmSearch_party_ComboBox.addItem(p.getPartyName());
         }
-        q=session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
+        q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
         for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Productmaster p=(com.JD.Master.Hibernate.config.Productmaster)object;
-            
-            if (dmSearch_productName.contains(p.getProductName())) {                
+            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
+
+            if (dmSearch_productName.contains(p.getProductName())) {
             } else {
-                dmSearch_productName=dmSearch_productName+p.getProductName();
+                dmSearch_productName = dmSearch_productName + p.getProductName();
                 dmsearch_ProductName_ComboBox.addItem(p.getProductName());
             }
-            
-            if (dmSearch_size.contains(p.getProductSize()+"")) {                
+
+            if (dmSearch_size.contains(p.getProductSize() + "")) {
             } else {
-                dmSearch_size=dmSearch_size+p.getProductSize();
+                dmSearch_size = dmSearch_size + p.getProductSize();
                 dmsearch_size_ComboBox.addItem(p.getProductSize());
             }
-            
-            if (dmSearch_measurement.contains(p.getProductMeasurement())) {                
+
+            if (dmSearch_measurement.contains(p.getProductMeasurement())) {
             } else {
-                dmSearch_measurement=dmSearch_measurement+p.getProductMeasurement();
+                dmSearch_measurement = dmSearch_measurement + p.getProductMeasurement();
                 dmSearch_measurement_ComboBox.addItem(p.getProductMeasurement());
-            }         
-        }        
-        q=session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
+            }
+        }
+        q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
         for (Object object : q.list()) {
-            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p=(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm)object;
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
             dmSearch_srNo_ComboBox.addItem(p.getSrno());
-        }        
+        }
         session.close();
         //----------Fill ComboBox----------------------------------------------//        
     }
@@ -331,6 +332,7 @@ public class DM_Search extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(dm_Table);
+        dm_Table.getColumnModel().getColumn(1).setPreferredWidth(170);
 
         javax.swing.GroupLayout DmSearch_PanelLayout = new javax.swing.GroupLayout(DmSearch_Panel);
         DmSearch_Panel.setLayout(DmSearch_PanelLayout);
@@ -447,9 +449,113 @@ public class DM_Search extends javax.swing.JFrame {
     }
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
+        int month1 = 0;
+        int month2 = 0;
+        if (date1.getModel().getMonth() == 12) {
+            month1 = 1;
+        } else {
+            month1 = date1.getModel().getMonth() + 1;
+        }
+        if (date2.getModel().getMonth() == 12) {
+            month2 = 1;
+        } else {
+            month2 = date2.getModel().getMonth() + 1;
+        }
+        String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
+        String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
+        queryList.clear();
+        int indexJTable = -1;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
+
+        String queryMaker = "from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm ";
+        String queryConnector = "where ";
+
+        String dateQuery = null;
+        String partyQuery = null;
+        String nameQuery = null;
+        String sizeQuery = null;
+        String measurementQuery = null;
+        String srNoQuery = null;
+        String paymentTypeQuery = null;
+
+        if (betwee_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition BETWEEN '" + date11 + "' and '" + date22 + "' ";
+        } else if (early_CheackBox.isSelected()) {
+            dateQuery = "dateOfAddition<='" + date11 + "' ";
+        } else if (late_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition>='" + date11 + "' ";
+        } else if (equal_CheackBox.isSelected()) {
+            dateQuery = " dateOfAddition='" + date11 + "' ";
+        }
+        if (dmSearch_party_ComboBox.getSelectedIndex() > 0) {
+            partyQuery = "partyLink='" + dmSearch_party_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (dmsearch_ProductName_ComboBox.getSelectedIndex() > 0) {
+            nameQuery = "productName='" + dmsearch_ProductName_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (dmSearch_srNo_ComboBox.getSelectedIndex() > 0) {
+            srNoQuery = "SRNO=" + dmSearch_srNo_ComboBox.getSelectedItem().toString() + " ";
+        }
+        if (dmSearch_measurement_ComboBox.getSelectedIndex() > 0) {
+            measurementQuery = "productMeasurement='" + dmSearch_measurement_ComboBox.getSelectedItem().toString() + "' ";
+        }
+        if (dmsearch_size_ComboBox.getSelectedIndex() > 0) {
+            sizeQuery = "productSize=" + dmsearch_size_ComboBox.getSelectedItem().toString() + " ";
+        }
+
+        if (cash_CheackBox.isSelected()) {
+            paymentTypeQuery = "paymentType='CASH' ";
+
+        } else if (twoPay_CheackBox.isSelected()) {
+            paymentTypeQuery = "paymentType='TWOPAY' ";
+        } else if (cashAndTwoPay_CheackBox.isSelected()) {
+            paymentTypeQuery = "paymentType='CASHANDTWOPAY' ";
+        }
+        if (dateQuery != null) {
+            queryList.add(dateQuery);
+        }
+        if (partyQuery != null) {
+            queryList.add(partyQuery);
+        }
+        if (nameQuery != null) {
+            queryList.add(nameQuery);
+        }
+        if (sizeQuery != null) {
+            queryList.add(sizeQuery);
+        }
+        if (measurementQuery != null) {
+            queryList.add(measurementQuery);
+        }
+        if (srNoQuery != null) {
+            queryList.add(srNoQuery);
+        }
+        if (paymentTypeQuery != null) {
+            queryList.add(paymentTypeQuery);
+        }
+        int listSize = queryList.size();
+        if (listSize > 0) {
+            int counter = 0;
+            queryMaker += queryConnector;
+            for (Object object : queryList) {
+                ++counter;
+                if (counter != listSize) {
+                    queryMaker += object.toString() + "and ";
+                } else {
+                    queryMaker += object.toString();
+                }
+            }
+        }
+        Session session = search_SessionFactory.openSession();
+        Query q = session.createQuery(queryMaker);
+        for (Object object : q.list()) {
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm d = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{d.getSrno(), d.getPartyLink(), d.getProductName(), d.getProductSize(), d.getProductMeasurement(), d.getProductValue(), d.getTotalAmount(), d.getPaymentType(), d.getDriverName(), d.getVehicleNumber(), d.getVehicleName(), d.getDateOfAddition(), d.getTimeOfAddition(), d.getAddedByPersonName(), d.getPrintingStatus()});
+        }
+        session.close();
+        reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     /**
