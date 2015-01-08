@@ -621,33 +621,29 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
-
-
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.eq("partyName", partyName));
         List results = cr.list();
-
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
             com.JD.Master.Hibernate.config.Partymaster p = new Partymaster(partyName, partyAddress, partyCity, partyPhone, partyMobile, partyEmail, partyDateOfAddition, partyTimeOfAddition, partyLocation, partyAddedByPersonName, partyAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
             session.save(p);
             transaction.commit();
-
             indexJTable = indexJTable + 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{partyName, partyAddress, partyCity, partyMobile, partyPhone, partyEmail, partyAddedByPersonName, partyAddedWithRight, partyDateOfAddition, partyTimeOfAddition, partyLocation});
             JOptionPane.showMessageDialog(null, "Party " + partyName + " Added Successfully..");
             //--- Update Party Name Combobox ---//
             name_ComboBox.addItem(partyName);
-            //--- Update Party Name Combobox ---//
-            
+            //--- Update Party Name Combobox ---//            
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//
             com.JD.StaticData.Static_DATA.machinePartyName_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.driverPartyName_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.dm_PartyName.addItem(partyName);
             com.JD.StaticData.Static_DATA.partyName_Sell_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.dmSearch_party_ComboBox.addItem(partyName);
-            //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//     
-                        
+            com.JD.StaticData.Static_DATA.sell_Search_Party_ComboBox.addItem(partyName);
+            //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//   
+                       
             reset();
             resetJTable();
         } else {
