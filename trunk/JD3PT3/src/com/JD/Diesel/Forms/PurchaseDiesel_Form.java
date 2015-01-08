@@ -25,6 +25,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
+    String oilCompanyNameTempOut="";
     //-----------Call Validator--------//
     com.JD.Validator.Validator valid = new Validator();
     //-----------Call Validator--------//
@@ -128,7 +129,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         personName_TextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        companyName_TextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         slipNo_TextField = new javax.swing.JTextField();
         addDataToDatabase_Button = new javax.swing.JButton();
@@ -136,6 +136,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        companyName_comboBox = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,12 +191,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
         jLabel4.setText("* Added From Oil Company Name:");
 
-        companyName_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                companyName_TextFieldKeyReleased(evt);
-            }
-        });
-
         jLabel5.setText("Oil Slip Number:");
 
         slipNo_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -219,6 +214,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
         jLabel6.setText(" In LTR ");
 
+        companyName_comboBox.setEditable(true);
+        companyName_comboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oil Company Name", "Indian Oil Corporation", "Bharat Petroleum", "Hindustan Petroleum", "Indraprastha Gas", "Reliance Petroleum", "Petronet LNG", "IBP (merged subsidiary of Indian Oil)", "Gujarat State Petroleum Corporation", "Oil and Natural Gas Corporation", "Castrol India", "Mahanagar Gas", "Mangalore Refinery and Petrochemicals Limited", "Aban Offshore" }));
+
         javax.swing.GroupLayout dieselMaster_PanelLayout = new javax.swing.GroupLayout(dieselMaster_Panel);
         dieselMaster_Panel.setLayout(dieselMaster_PanelLayout);
         dieselMaster_PanelLayout.setHorizontalGroup(
@@ -240,11 +238,11 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel6))
                     .addComponent(personName_TextField)
-                    .addComponent(companyName_TextField)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dieselMaster_PanelLayout.createSequentialGroup()
-                        .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                        .addComponent(addDataToDatabase_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reset_Button)))
+                        .addComponent(reset_Button))
+                    .addComponent(companyName_comboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,9 +277,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(companyName_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(slipNo_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(slipNo_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(companyName_comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dieselMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDataToDatabase_Button)
@@ -316,11 +314,6 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         personName_TextField.setText(valid.stringValidator(personName_TextField.getText()).toUpperCase());
     }//GEN-LAST:event_personName_TextFieldKeyReleased
 
-    private void companyName_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_companyName_TextFieldKeyReleased
-        // TODO add your handling code here:
-        companyName_TextField.setText(valid.stringValidator(companyName_TextField.getText()).toUpperCase());
-    }//GEN-LAST:event_companyName_TextFieldKeyReleased
-
     private void slipNo_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_slipNo_TextFieldKeyReleased
         // TODO add your handling code here:
         slipNo_TextField.setText(slipNo_TextField.getText().toUpperCase());
@@ -331,7 +324,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         String receivedQuantityTemp = received_TextField.getText();
         dateOfAddition = new Date();
         timeOfAddition = new Date();
-        oilCompanyName = companyName_TextField.getText();
+        oilCompanyName = companyName_comboBox.getSelectedItem().toString();
         orderSlipNumber = slipNo_TextField.getText();
         personPresentName = personName_TextField.getText();
         if (receivedQuantityTemp.equals("")) {
@@ -340,7 +333,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             if (personPresentName.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please Provide Person Name");
             } else {
-                if (oilCompanyName.equals("")) {
+                if (oilCompanyName.equals("Oil Company Name")) {
                     JOptionPane.showMessageDialog(null, "Please Provide Oil Company Name");
                 } else {
                     addedQuantity = Double.parseDouble(receivedQuantityTemp);
@@ -362,13 +355,45 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         session.close();
         setCurrentDieselLog(presentQuantity);
         JOptionPane.showMessageDialog(null, "Diesel Updated Successfully");
+        oilCompanyNameTempOut=oilCompanyName;
         reset();
+        resetPurchaseComboBox();
     }
 
+    void resetPurchaseComboBox(){
+        String oilCompanyNameTemp="";
+        String personNameTemp="";
+        
+        com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.removeAllItems();
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.removeAllItems();
+       
+        com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem("Oil Company Name");
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem("Person Persent");
+      
+        Session session = diesel_SessionFactory.openSession();
+        Query q=session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
+        for (Object object : q.list()) {
+            com.Hibernate.diesel.config.Purchasediesel p=(com.Hibernate.diesel.config.Purchasediesel)object;           
+            if (oilCompanyNameTemp.contains(p.getOilCompanyName())) {                
+            }
+            else{
+                oilCompanyNameTemp+="##"+p.getOilCompanyName();
+                com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem(p.getOilCompanyName());                
+            }
+            if (personNameTemp.contains(p.getPersonPresentName())) {                
+            } else {
+                personNameTemp+="##"+p.getPersonPresentName();
+                com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem(p.getPersonPresentName());
+            }
+        }      
+              
+        session.close();
+    }
+    
     void reset() {
         received_TextField.setText("");
         personName_TextField.setText("");
-        companyName_TextField.setText("");
+        companyName_comboBox.setSelectedItem("Oil Company Name");
         slipNo_TextField.setText("");
         addDataToDatabase_Button.setText("Update Diesel Log");
         resetJTable();
@@ -433,7 +458,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataToDatabase_Button;
-    private javax.swing.JTextField companyName_TextField;
+    private javax.swing.JComboBox companyName_comboBox;
     public javax.swing.JPanel dieselMaster_Panel;
     private javax.swing.JTable diesel_Table;
     private javax.swing.JLabel fuelQuantity_Purchse_Lable;
