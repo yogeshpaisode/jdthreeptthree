@@ -40,7 +40,7 @@ public class SplashScreen extends JWindow {
         Toolkit tk = Toolkit.getDefaultToolkit();
         Image img = tk.getImage(imgURL);
         JLabel label = new JLabel(new ImageIcon(img));
-        JLabel copyrt = new JLabel("Copyright 2014, © FiberTech InfraCon™ PVT.LTD.", JLabel.CENTER);
+        JLabel copyrt = new JLabel("Copyright 2014 © FiberTech InfraCon™ PVT.LTD.", JLabel.CENTER);
         copyrt.setFont(new Font("Sans-Serif", Font.BOLD, 11));
         content.add(label, BorderLayout.CENTER);
         content.add(copyrt, BorderLayout.SOUTH);
