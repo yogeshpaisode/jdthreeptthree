@@ -86,13 +86,26 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     int indexJTable = -1;
 //----------Table Mode--------------------------//
 //----------Temp Data--------------------------//
-    String productNameTemp = "";
+    List productNameTempList = new ArrayList();
     String sizeTemp = "";
-    String measurementTemp = "";
+    List measurementTempList = new ArrayList();
 //----------Temp Data--------------------------//
 
     public PrintReceipt_Dm_Form() {
         initComponents();
+        //------------Fill Product Name-----------//
+        productNameTempList.add("Raw");
+        productNameTempList.add("Aggrigate");
+        productNameTempList.add("Crush Sand");
+        productNameTempList.add("Bricks");
+
+        measurementTempList.add("CFT");
+        measurementTempList.add("BRASS");
+        measurementTempList.add("NUMBER");
+        measurementTempList.add("TON");
+        measurementTempList.add("CUM");
+
+
         payAble_TextField.setBackground(Color.lightGray);
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
@@ -117,24 +130,25 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
-            if (productNameTemp.contains(p.getProductName())) {
-            } else {
-                productNameTemp = productNameTemp + "##" + p.getProductName();
-                product_ComboBox.addItem(p.getProductName());
-            }
-
             if (sizeTemp.contains(p.getProductSize() + "")) {
             } else {
                 sizeTemp = sizeTemp + "##" + p.getProductSize() + "";
                 size_ComboBox.addItem(p.getProductSize() + "");
             }
-
-            if (measurementTemp.contains(p.getProductMeasurement())) {
-            } else {
-                measurementTemp = measurementTemp + "##" + p.getProductMeasurement();
-                measurement_ComboBox.addItem(p.getProductMeasurement());
+            if (!productNameTempList.contains(p.getProductName())) {
+                productNameTempList.add(p.getProductName());
+            }            
+            if (!measurementTempList.contains(p.getProductMeasurement())) {
+                measurementTempList.add(p.getProductMeasurement());
             }
+        }        
+        for (Object object : productNameTempList) {
+            product_ComboBox.addItem(object.toString());
         }
+        for (Object object : measurementTempList) {
+            measurement_ComboBox.addItem(object.toString());
+        }
+        
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
         List results = cr.list();
@@ -1246,7 +1260,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
             dataBeanList.add(d);
 
-            new PrintDocumentJD(dataBeanList, QRCode, SRNO+"");
+            new PrintDocumentJD(dataBeanList, QRCode, SRNO + "");
             com.JD.StaticData.Static_DATA.srNo_TEMP = SRNO;
         }
     }
