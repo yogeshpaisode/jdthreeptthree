@@ -351,7 +351,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
         cr.add(Restrictions.eq("productSize", productSize));
         cr.add(Restrictions.eq("productMeasurement", productMeasurement));
         List results = cr.list();
-
+        productName=productName.toUpperCase();
+        productMeasurement=productMeasurement.toUpperCase();
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
             indexJTable = indexJTable + 1;
@@ -383,7 +384,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
     void resetDM() {
         String productNameTemp = "";
         String sizeTemp = "";
-        String measurementTemp = "";
+        String measurementTemp = "";        
         com.JD.StaticData.Static_DATA.dm_ProductName.removeAllItems();
         com.JD.StaticData.Static_DATA.dm_ProductName.addItem("Select Product Name");
         com.JD.StaticData.Static_DATA.dm_Size.removeAllItems();
