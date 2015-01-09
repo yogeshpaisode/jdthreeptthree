@@ -15,8 +15,12 @@ import javax.swing.*;
 public class SplashScreen extends JWindow {
 
     private int duration;
+    public javax.swing.JProgressBar progressBar=new JProgressBar();
 
     public SplashScreen(int d) {
+        com.JD.StaticData.Static_DATA.progressBar=progressBar;
+        progressBar.setBounds(0, 280, 549, 5);
+        add(progressBar);
         duration = d;
     }
 
@@ -25,7 +29,7 @@ public class SplashScreen extends JWindow {
     public void showSplash() {
         JPanel content = (JPanel) getContentPane();
         content.setBackground(Color.black);
-
+        progressBar.setValue(5);
         // Set the window's bounds, centering the window
         int width = 550;
         int height = 315;
@@ -47,14 +51,15 @@ public class SplashScreen extends JWindow {
         Color oraRed = new Color(0, 0, 0, 16);
         content.setBorder(BorderFactory.createLineBorder(oraRed, 10));
         // Display it
+        progressBar.setValue(10);
         setVisible(true);
-        try {
-            new com.JD.INIT_Data.Init_QRCodeScanner();
+        try {    
             com.JD.StaticData.Static_DATA.init_SessionFactory = com.JD.InitData.Hibernate.config.InitData_HibernateUtil.getSessionFactory();
-           
             new com.JD.INIT_Data.Init_Data();
+            new com.JD.INIT_Data.Init_QRCodeScanner();
+            Thread.sleep(2000);
+            com.JD.StaticData.Static_DATA.progressBar.setValue(100);
             new com.JD.Login.Form.Login().setVisible(true);
-
             setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something Went Wrong,Software Will Close,If Problem Persist then Please Restart Your Computer..");
@@ -64,16 +69,9 @@ public class SplashScreen extends JWindow {
 
     }
 
-    public void showSplashAndExit() {
-        showSplash();
-
-
-    }
 
     public static void main(String[] args) {
-
         SplashScreen splash = new SplashScreen(5000);
-
-        splash.showSplashAndExit();
+        splash.showSplash();
     }
 }

@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
  */
 public class Static_DATA {
     //------TEMP DATA--------//
-
+    public static javax.swing.JProgressBar progressBar=null;
     public static int srNo_TEMP = 0;
     //------TEMP DATA--------//
     //------Master Home------//

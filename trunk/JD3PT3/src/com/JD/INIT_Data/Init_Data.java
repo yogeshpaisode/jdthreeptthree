@@ -17,6 +17,7 @@ import org.hibernate.Session;
 public class Init_Data implements Runnable {
 
     public Init_Data() {
+        com.JD.StaticData.Static_DATA.progressBar.setValue(20);
         new Thread(this, "INIT DATA").start();
     }
 
@@ -26,6 +27,7 @@ public class Init_Data implements Runnable {
 	if (!file.exists()) {            
 	    file.mkdir();
 	}
+        com.JD.StaticData.Static_DATA.progressBar.setValue(30);
         Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Query q = session.createQuery("from com.JD.InitData.Hibernate.config.Initdata");
         List list = q.list();
@@ -38,6 +40,6 @@ public class Init_Data implements Runnable {
             com.JD.StaticData.Static_DATA.registrationNumber = id.getRegistrationNumber();
             com.JD.StaticData.Static_DATA.selfPartyname = id.getRawField1();
         }        
-        
+        com.JD.StaticData.Static_DATA.progressBar.setValue(40);
     }
 }
