@@ -19,7 +19,7 @@ public class SplashScreen extends JWindow {
 
     public SplashScreen(int d) {
         com.JD.StaticData.Static_DATA.progressBar=progressBar;
-        progressBar.setBounds(0, 280, 549, 5);
+        progressBar.setBounds(0, 280, 549, 6);
         progressBar.setBackground(Color.WHITE);
         progressBar.setForeground(Color.GREEN);
         add(progressBar);
