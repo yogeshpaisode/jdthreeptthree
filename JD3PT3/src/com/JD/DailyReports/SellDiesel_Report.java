@@ -9,25 +9,33 @@ import com.JD.DatePicker.DatePicker;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author Yogesh
  */
-public class PurchaseDiesel_Report extends javax.swing.JFrame {
+public class SellDiesel_Report extends javax.swing.JFrame {
 
-    String oilCompanyNameTemp = "";
+    boolean flag1 = false;
+    boolean flag2 = false;
     String personNameTemp = "";
     //---Load Date Panel---//
     com.JD.DatePicker.DatePicker datePicker = new DatePicker();
@@ -44,12 +52,12 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
     /**
      * Creates new form Party_MasterForm
      */
-    public PurchaseDiesel_Report() {
+    public SellDiesel_Report() {
         initComponents();
+        com.JD.StaticData.Static_DATA.sellDiesel_Report = this;
+        com.JD.StaticData.Static_DATA.sell_Report_Party_ComboBox = sell_Report_Party_ComboBox;
+        com.JD.StaticData.Static_DATA.sell_Report_Machine_Number = sell_Report_Machine_Number;
         //----Load Calender----//
-        com.JD.StaticData.Static_DATA.purchaseDiesel_Report = this;
-        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox = purchaseReport_company_ComboBox;
-        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox = purchase_Perseon_Report_ComboBox;
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
         date2.setBackground(Color.yellow);
@@ -57,29 +65,28 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         date_panel.add(date2);
         date2.setBounds(17, 102, 200, 40);
         //----Load Calender----//
-        defaultTableModel = (DefaultTableModel) diesel_Table.getModel();       
-
+        defaultTableModel = (DefaultTableModel) sellDiesel_Table.getModel();
+        //--------Fill Party ComboBox----//
+        flag1 = false;
+        flag2 = false;
         Session session = search_SessionFactory.openSession();
-        Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
+        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         for (Object object : q.list()) {
-            com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
-            if (oilCompanyNameTemp.contains(p.getOilCompanyName())) {
-            } else {
-                oilCompanyNameTemp += "##" + p.getOilCompanyName();
-                com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox.addItem(p.getOilCompanyName());
-            }
-            if (personNameTemp.contains(p.getPersonPresentName())) {
-            } else {
-                personNameTemp += "##" + p.getPersonPresentName();
-                com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox.addItem(p.getPersonPresentName());
-            }
+            com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
+            sell_Report_Party_ComboBox.addItem(p.getPartyName());
         }
+        q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
+        for (Object object : q.list()) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            sell_Report_Machine_Number.addItem(m.getMachineNumber());
+        }
+
         session.close();
+        flag1 = true;
         currenTDate = new Date();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datestring = dateFormat.format(currenTDate);
-        query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
-
+        query("from com.Hibernate.diesel.config.Selldiesellog where dateOfAddition='" + datestring + "' ");
         report_Button.setEnabled(false);
     }
 
@@ -93,9 +100,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
     private void initComponents() {
 
         date_ButtonGroup = new javax.swing.ButtonGroup();
-        purchase_Panel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        diesel_Table = new javax.swing.JTable();
+        sell_Panel = new javax.swing.JPanel();
         date_panel = new javax.swing.JPanel();
         betwee_CheackBox = new javax.swing.JCheckBox();
         equal_CheackBox = new javax.swing.JCheckBox();
@@ -104,47 +109,24 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         clear_CheackBox = new javax.swing.JCheckBox();
-        purchaseReport_company_ComboBox = new javax.swing.JComboBox();
-        purchase_Perseon_Report_ComboBox = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        sellDiesel_Table = new javax.swing.JTable();
+        sell_Report_Party_ComboBox = new javax.swing.JComboBox();
+        sell_Report_Machine_Number = new javax.swing.JComboBox();
+        machineName_Lable = new javax.swing.JLabel();
         report_Button = new javax.swing.JButton();
-        export_Button = new javax.swing.JButton();
-        print_Button = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        purchase_Panel.setBackground(new java.awt.Color(255, 255, 51));
-
-        diesel_Table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(diesel_Table);
+        sell_Panel.setBackground(new java.awt.Color(255, 255, 51));
 
         date_panel.setBackground(new java.awt.Color(255, 255, 51));
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
 
         betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
-        date_ButtonGroup.add(betwee_CheackBox);
         betwee_CheackBox.setText("Between");
         betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +136,6 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         });
 
         equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
-        date_ButtonGroup.add(equal_CheackBox);
         equal_CheackBox.setText("Equal");
         equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +145,6 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         });
 
         early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
-        date_ButtonGroup.add(early_CheackBox);
         early_CheackBox.setText("Early");
         early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -174,7 +154,6 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         });
 
         late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
-        date_ButtonGroup.add(late_CheackBox);
         late_CheackBox.setText("Late");
         late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +167,6 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         jLabel3.setText("To:");
 
         clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
-        date_ButtonGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
         clear_CheackBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -234,19 +212,49 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        purchaseReport_company_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oil Company Name" }));
-        purchaseReport_company_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+        sellDiesel_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(sellDiesel_Table);
+        sellDiesel_Table.getColumnModel().getColumn(0).setPreferredWidth(170);
+
+        sell_Report_Party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
+        sell_Report_Party_ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchaseReport_company_ComboBoxActionPerformed(evt);
+                sell_Report_Party_ComboBoxActionPerformed(evt);
             }
         });
 
-        purchase_Perseon_Report_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Person Persent" }));
-        purchase_Perseon_Report_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+        sell_Report_Machine_Number.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Number" }));
+        sell_Report_Machine_Number.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                purchase_Perseon_Report_ComboBoxActionPerformed(evt);
+                sell_Report_Machine_NumberActionPerformed(evt);
             }
         });
+
+        machineName_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
+        machineName_Lable.setText(" Select Machine Number");
+        machineName_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         report_Button.setText("Get Report");
         report_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -255,9 +263,9 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
             }
         });
 
-        export_Button.setText("Export To Excel");
+        jButton2.setText("Export To Excel");
 
-        print_Button.setText("Print");
+        jButton3.setText("Print");
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -266,44 +274,49 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout purchase_PanelLayout = new javax.swing.GroupLayout(purchase_Panel);
-        purchase_Panel.setLayout(purchase_PanelLayout);
-        purchase_PanelLayout.setHorizontalGroup(
-            purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
-            .addGroup(purchase_PanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout sell_PanelLayout = new javax.swing.GroupLayout(sell_Panel);
+        sell_Panel.setLayout(sell_PanelLayout);
+        sell_PanelLayout.setHorizontalGroup(
+            sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sell_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(purchase_Perseon_Report_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(purchaseReport_company_ComboBox, 0, 268, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
-                        .addComponent(report_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(sell_Report_Party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sell_Report_Machine_Number, 0, 259, Short.MAX_VALUE)
+                    .addGroup(sell_PanelLayout.createSequentialGroup()
+                        .addComponent(report_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(export_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(reset_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(sell_PanelLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(machineName_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(471, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1263, Short.MAX_VALUE)
         );
-        purchase_PanelLayout.setVerticalGroup(
-            purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
+        sell_PanelLayout.setVerticalGroup(
+            sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(sell_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
-                        .addComponent(purchaseReport_company_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(purchase_Perseon_Report_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sell_PanelLayout.createSequentialGroup()
+                        .addComponent(sell_Report_Party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(sell_Report_Machine_Number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(machineName_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sell_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(report_Button)
-                            .addComponent(export_Button)
-                            .addComponent(print_Button)
-                            .addComponent(reset_Button))))
+                            .addComponent(reset_Button)
+                            .addComponent(jButton2)
+                            .addComponent(jButton3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
@@ -312,11 +325,11 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(purchase_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(sell_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(purchase_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(sell_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -350,6 +363,60 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_late_CheackBoxActionPerformed
 
+    private void sell_Report_Party_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_Report_Party_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (flag1) {
+            flag2 = false;
+            machineName_Lable.setText("");
+            String partyNameTemp = sell_Report_Party_ComboBox.getSelectedItem().toString();
+            sell_Report_Machine_Number.removeAllItems();
+            sell_Report_Machine_Number.addItem("Select Machine Number");
+            Session session = search_SessionFactory.openSession();
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
+            cr.add(Restrictions.eq("machineType", "VEHICLE"));
+            List results = cr.list();
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                sell_Report_Machine_Number.addItem(m.getMachineNumber());
+            }
+            session.close();
+            flag2 = true;
+        }
+        if (sell_Report_Party_ComboBox.getSelectedIndex() > 0) {
+            report_Button.setEnabled(true);
+        }
+        machineName_Lable.setText(" Select Machine Number");
+    }//GEN-LAST:event_sell_Report_Party_ComboBoxActionPerformed
+
+    private void sell_Report_Machine_NumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sell_Report_Machine_NumberActionPerformed
+        // TODO add your handling code here:
+        if (flag2) {
+            String vehicleNumberTemp = sell_Report_Machine_Number.getSelectedItem().toString();
+            Session session = search_SessionFactory.openSession();
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machineNumber", vehicleNumberTemp));
+            List results = cr.list();
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                machineName_Lable.setText(m.getMachineName());
+            }
+            session.close();
+        }
+        if (sell_Report_Machine_Number.getSelectedIndex() > 0) {
+            report_Button.setEnabled(true);
+        }
+    }//GEN-LAST:event_sell_Report_Machine_NumberActionPerformed
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        query("from com.Hibernate.diesel.config.Selldiesellog where dateOfAddition='" + datestring + "' ");
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
     private void report_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_ButtonActionPerformed
         // TODO add your handling code here:
         int month1 = 0;
@@ -367,13 +434,17 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
         String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
         queryList.clear();
-
-        String queryMaker = "from com.Hibernate.diesel.config.Purchasediesel ";
+        int indexJTable = -1;
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
+        String queryMaker = "from com.Hibernate.diesel.config.Selldiesellog ";
         String queryConnector = "where ";
 
-        String oilCompanyQuery = null;
-        String personquery = null;
         String dateQuery = null;
+        String partyQuery = null;
+        String numberQuery = null;
+
         if (betwee_CheackBox.isSelected()) {
             dateQuery = "dateOfAddition BETWEEN '" + date11 + "' and '" + date22 + "' ";
         } else if (early_CheackBox.isSelected()) {
@@ -383,26 +454,26 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         } else if (equal_CheackBox.isSelected()) {
             dateQuery = " dateOfAddition='" + date11 + "' ";
         }
-        if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
-            oilCompanyQuery = "oilCompanyName='" + purchaseReport_company_ComboBox.getSelectedItem().toString() + "' ";
+
+        if (sell_Report_Party_ComboBox.getSelectedIndex() > 0) {
+            partyQuery = "partyLink='" + sell_Report_Party_ComboBox.getSelectedItem().toString() + "' ";
         }
-        if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
-            personquery = "personPresentName='" + purchase_Perseon_Report_ComboBox.getSelectedItem().toString() + "' ";
+
+        if (sell_Report_Machine_Number.getSelectedIndex() > 0) {
+            numberQuery = "machineNumber='" + sell_Report_Machine_Number.getSelectedItem().toString() + "' ";
         }
 
         if (dateQuery != null) {
             queryList.add(dateQuery);
         } else {
-            currenTDate = new Date();
-            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            datestring = dateFormat.format(currenTDate);
             queryList.add("dateOfAddition='" + datestring + "' ");
         }
-        if (oilCompanyQuery != null) {
-            queryList.add(oilCompanyQuery);
+        if (partyQuery != null) {
+            queryList.add(partyQuery);
         }
-        if (personquery != null) {
-            queryList.add(personquery);
+
+        if (numberQuery != null) {
+            queryList.add(numberQuery);
         }
         int listSize = queryList.size();
         if (listSize > 0) {
@@ -421,41 +492,18 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         reset();
     }//GEN-LAST:event_report_ButtonActionPerformed
 
-    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
-        // TODO add your handling code here:
-        reset();
-        currenTDate = new Date();
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        datestring = dateFormat.format(currenTDate);
-        query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
-    }//GEN-LAST:event_reset_ButtonActionPerformed
-
     private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
-        // TODO add your handling code here: report_Button.setEnabled(true);
+        // TODO add your handling code here: 
         if (clear_CheackBox.isSelected()) {
-            if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
+            if (sell_Report_Party_ComboBox.getSelectedIndex() > 0) {
                 report_Button.setEnabled(true);
-            } else if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
+            } else if (sell_Report_Machine_Number.getSelectedIndex() > 0) {
                 report_Button.setEnabled(true);
             } else {
                 report_Button.setEnabled(false);
             }
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
-
-    private void purchaseReport_company_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseReport_company_ComboBoxActionPerformed
-        // TODO add your handling code here:
-        if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
-            report_Button.setEnabled(true);
-        }
-    }//GEN-LAST:event_purchaseReport_company_ComboBoxActionPerformed
-
-    private void purchase_Perseon_Report_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_Perseon_Report_ComboBoxActionPerformed
-        // TODO add your handling code here:
-        if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
-            report_Button.setEnabled(true);
-        }
-    }//GEN-LAST:event_purchase_Perseon_Report_ComboBoxActionPerformed
 
     public void query(String queryMaker) {
         int indexJTable = -1;
@@ -465,16 +513,17 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         Session session = search_SessionFactory.openSession();
         Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
-            com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
-            ++indexJTable;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+            com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
+            indexJTable += 1;
+            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
         }
         session.close();
     }
 
     void reset() {
-        purchaseReport_company_ComboBox.setSelectedIndex(0);
-        purchase_Perseon_Report_ComboBox.setSelectedIndex(0);
+        machineName_Lable.setText(" Select Machine Number");
+        sell_Report_Party_ComboBox.setSelectedIndex(0);
+        sell_Report_Machine_Number.setSelectedIndex(0);
         date_ButtonGroup.clearSelection();
         report_Button.setEnabled(false);
     }
@@ -500,13 +549,13 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SellDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SellDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SellDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SellDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -516,7 +565,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new PurchaseDiesel_Report().setVisible(true);
+                new SellDiesel_Report().setVisible(true);
             }
         });
     }
@@ -525,19 +574,20 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
     private javax.swing.JCheckBox clear_CheackBox;
     private javax.swing.ButtonGroup date_ButtonGroup;
     private javax.swing.JPanel date_panel;
-    private javax.swing.JTable diesel_Table;
     private javax.swing.JCheckBox early_CheackBox;
     private javax.swing.JCheckBox equal_CheackBox;
-    private javax.swing.JButton export_Button;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox late_CheackBox;
-    private javax.swing.JButton print_Button;
-    private javax.swing.JComboBox purchaseReport_company_ComboBox;
-    public javax.swing.JPanel purchase_Panel;
-    private javax.swing.JComboBox purchase_Perseon_Report_ComboBox;
+    private javax.swing.JLabel machineName_Lable;
     private javax.swing.JButton report_Button;
     private javax.swing.JButton reset_Button;
+    private javax.swing.JTable sellDiesel_Table;
+    public javax.swing.JPanel sell_Panel;
+    private javax.swing.JComboBox sell_Report_Machine_Number;
+    private javax.swing.JComboBox sell_Report_Party_ComboBox;
     // End of variables declaration//GEN-END:variables
 }

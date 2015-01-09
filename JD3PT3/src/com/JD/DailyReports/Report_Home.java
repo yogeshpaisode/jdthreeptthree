@@ -21,13 +21,15 @@ public class Report_Home extends javax.swing.JFrame {
     //------Load Data------//
     DM_Report dM_Report=new DM_Report();
     PurchaseDiesel_Report purchaseDiesel_Report=new PurchaseDiesel_Report();
+    SellDiesel_Report sellDiesel_Report=new SellDiesel_Report();
     //------Load Data------//   
    
 
     public Report_Home() {
         initComponents();        
         report_TabbedPanel.add("Print Receipt/DM Daily Report", dM_Report.DmReport_Panel);
-        report_TabbedPanel.add("Purchase Diesel Report", purchaseDiesel_Report.purchase_Panel);       
+        report_TabbedPanel.add("Purchase Diesel Report", purchaseDiesel_Report.purchase_Panel);
+        report_TabbedPanel.add("Sell Diesel Report", sellDiesel_Report.sell_Panel);
     }
 
     /**
