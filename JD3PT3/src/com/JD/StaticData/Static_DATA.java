@@ -18,10 +18,9 @@ public class Static_DATA {
     public static int srNo_TEMP = 0;
     //------TEMP DATA--------//
     //------Master Home------//
-    public static javax.swing.JLabel fuelQuantity_Lable=null;
-    public static javax.swing.JLabel fuelQuantity_Sell_Lable=null;
-    public static javax.swing.JLabel fuelQuantity_Purchse_Lable=null;
-    
+    public static javax.swing.JLabel fuelQuantity_Lable = null;
+    public static javax.swing.JLabel fuelQuantity_Sell_Lable = null;
+    public static javax.swing.JLabel fuelQuantity_Purchse_Lable = null;
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;
@@ -34,12 +33,10 @@ public class Static_DATA {
     //------------------------------------------------------------------------//
     //------ Master Hibernate Config ------//
     // PKG: com.JD.Master.Hibernate.config //    
-   
     //------ Master Hibernate Config ------//
     //------------------------------------------------------------------------//
     //------ Master Hibernate Config ------//
     // PKG: com.JD.Master.Hibernate.config //    
-  
     //------ Master Hibernate Config ------//
     //------------------------------------------------------------------------//
     // ------ QR Code Scanner ------//
@@ -61,7 +58,6 @@ public class Static_DATA {
     //-----Master ComboBoxFill-----//
     //-----DM Data----------------------------------//
     //-----DM SessionFactory------------------------//
-   
     //-----DM SessionFactory------------------------//
     public static com.JD.PrintReceiptDM.Form.PrintReceipt_Dm_Form dm_Form = null;
     public static javax.swing.JComboBox dm_PartyName = null;
@@ -80,7 +76,6 @@ public class Static_DATA {
     public static javax.swing.JLabel date_Lable = null;
     public static javax.swing.JLabel time_Lable = null;
     public static javax.swing.JLabel srNo_Lable = null;
-    
     public static javax.swing.JCheckBox proxy_CheackBox = null;
     public static javax.swing.JTextField neightWeight_TextField = null;
     public static javax.swing.JTextField grossWeight_TextField = null;
@@ -91,49 +86,41 @@ public class Static_DATA {
     public static javax.swing.JCheckBox update_CheackBox = null;
     public static javax.swing.JCheckBox cancel_CheackBox = null;
     public static javax.swing.JCheckBox clear_CheackBox = null;
-    public static javax.swing.JCheckBox pending_CheackBox=null;
-    public static int SRNO=0;
-    public static String QRCode="";
-     public static javax.swing.JPanel webCam_Panel_Dm=null;
-    
+    public static javax.swing.JCheckBox pending_CheackBox = null;
+    public static int SRNO = 0;
+    public static String QRCode = "";
+    public static javax.swing.JPanel webCam_Panel_Dm = null;
     //-----DM Data----------------------------------//
     //-----Driver Master----------------------------//
-    public static javax.swing.JPanel webCam_Panel=null;
+    public static javax.swing.JPanel webCam_Panel = null;
     //-----Driver Master----------------------------//
-    
     //-----Diesel Data-----------------------------//
-    public static com.JD.Diesel.Forms.PurchaseDiesel_Form purchaseDiesel_Form=null;
-    public static javax.swing.JComboBox partyName_Sell_ComboBox=null;
+    public static com.JD.Diesel.Forms.PurchaseDiesel_Form purchaseDiesel_Form = null;
+    public static javax.swing.JComboBox partyName_Sell_ComboBox = null;
     //-----Diesel Data-----------------------------//
-    
     //-------From Search--------------------------//
     //-----From DM Search-------------------------//
-    public static javax.swing.JComboBox dmSearch_party_ComboBox=null;
-    public static javax.swing.JComboBox dmSearch_srNo_ComboBox=null;
-    public static javax.swing.JComboBox dmsearch_ProductName_ComboBox=null;
-    public static javax.swing.JComboBox dmsearch_size_ComboBox=null;
-    public static javax.swing.JComboBox dmSearch_measurement_ComboBox=null; 
+    public static javax.swing.JComboBox dmSearch_party_ComboBox = null;
+    public static javax.swing.JComboBox dmSearch_srNo_ComboBox = null;
+    public static javax.swing.JComboBox dmsearch_ProductName_ComboBox = null;
+    public static javax.swing.JComboBox dmsearch_size_ComboBox = null;
+    public static javax.swing.JComboBox dmSearch_measurement_ComboBox = null;
     //-----From DM Search-------------------------//
     //-----From Purchase Diesel Search-------------------------//
-    public static javax.swing.JComboBox purchaseSearch_company_ComboBox=null; 
-    public static javax.swing.JComboBox purchase_Perseon_Search_ComboBox=null;    
+    public static javax.swing.JComboBox purchaseSearch_company_ComboBox = null;
+    public static javax.swing.JComboBox purchase_Perseon_Search_ComboBox = null;
     //-----From Purchase Diesel Search-------------------------//
     //-----From Purchase Diesel Search-------------------------//
-    public static javax.swing.JComboBox sell_Search_Party_ComboBox=null;    
-    public static javax.swing.JComboBox sell_Search_person_ComboBox=null;  
-    public static javax.swing.JComboBox sell_Search_Machine_Number=null;      
+    public static javax.swing.JComboBox sell_Search_Party_ComboBox = null;
+    public static javax.swing.JComboBox sell_Search_person_ComboBox = null;
+    public static javax.swing.JComboBox sell_Search_Machine_Number = null;
     //-----From Purchase Diesel Search-------------------------//
     //-----From Search--------------------------//
-    
-    
     //-----From Daily Report-------------------// 
-    
-    public static javax.swing.JComboBox dmReport_party_ComboBox=null;
-    public static com.JD.DailyReports.DM_Report dM_Report=null;
-    
+    public static javax.swing.JComboBox dmReport_party_ComboBox = null;
+    public static com.JD.DailyReports.DM_Report dM_Report = null;
+    public static com.JD.DailyReports.PurchaseDiesel_Report purchaseDiesel_Report = null;
+    public static javax.swing.JComboBox purchaseReport_company_ComboBox = null;
+    public static javax.swing.JComboBox purchase_Perseon_Report_ComboBox = null;
     //-----From Daily Report-------------------// 
-    
-    
-    
-    
 }

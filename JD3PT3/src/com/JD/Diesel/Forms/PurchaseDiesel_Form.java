@@ -9,6 +9,8 @@ import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
 import java.lang.InstantiationException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,10 +27,13 @@ import org.hibernate.criterion.Restrictions;
 public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     javax.swing.table.DefaultTableModel defaultTableModel;
-    int indexJTable = -1;   
+    int indexJTable = -1;
     String oilCompanyNameIN = "";
     List oilCompanyList = new ArrayList();
-    List personNameList=new ArrayList();
+    List personNameList = new ArrayList();
+    Date currenTDate = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String datestring = dateFormat.format(currenTDate);
     //-----------Call Validator--------//
     com.JD.Validator.Validator valid = new Validator();
     //-----------Call Validator--------//
@@ -78,27 +83,27 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         oilCompanyList.add("Mahanagar Gas");
         oilCompanyList.add("Mangalore Refinery and Petrochemicals Limited");
         oilCompanyList.add("Aban Offshore");
-        
+
         personNameList.add("Select Person Name");
 
         Session session = diesel_SessionFactory.openSession();
         Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
-            if (oilCompanyList.contains(p.getOilCompanyName()+"")) {                
+            if (oilCompanyList.contains(p.getOilCompanyName() + "")) {
             } else {
                 oilCompanyList.add(p.getOilCompanyName());
             }
-            
-            if (personNameList.contains(p.getPersonPresentName())) {                
+
+            if (personNameList.contains(p.getPersonPresentName())) {
             } else {
                 personNameList.add(p.getPersonPresentName());
-            }        
             }
-        session.close();        
+        }
+        session.close();
         for (Object object : oilCompanyList) {
             companyName_comboBox.addItem(object.toString());
-        }   
+        }
         for (Object object : personNameList) {
             personName_comboBox.addItem(object.toString());
         }
@@ -383,16 +388,16 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         session.close();
         setCurrentDieselLog(presentQuantity);
         JOptionPane.showMessageDialog(null, "Diesel Updated Successfully");
-        if (oilCompanyList.contains(oilCompanyName)) {            
+        if (oilCompanyList.contains(oilCompanyName)) {
         } else {
             companyName_comboBox.addItem(oilCompanyName);
             oilCompanyList.add(oilCompanyName);
-        }        
-        if (personNameList.contains(personPresentName)) {            
+        }
+        if (personNameList.contains(personPresentName)) {
         } else {
             personName_comboBox.addItem(personPresentName);
             personNameList.add(personPresentName);
-        }            
+        }
         reset();
         resetPurchaseComboBox();
     }
@@ -402,8 +407,13 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         String personNameTemp = "";
         com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.removeAllItems();
         com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.removeAllItems();
+
+        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox.removeAllItems();
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox.removeAllItems();
+        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox.addItem("Oil Company Name");
         com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem("Oil Company Name");
         com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem("Person Persent");
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox.addItem("Person Persent");
         Session session = diesel_SessionFactory.openSession();
         Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
         for (Object object : q.list()) {
@@ -412,14 +422,20 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             } else {
                 oilCompanyNameTemp += "##" + p.getOilCompanyName();
                 com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox.addItem(p.getOilCompanyName());
+                com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox.addItem(p.getOilCompanyName());
             }
             if (personNameTemp.contains(p.getPersonPresentName())) {
             } else {
                 personNameTemp += "##" + p.getPersonPresentName();
                 com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox.addItem(p.getPersonPresentName());
+                com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox.addItem(p.getPersonPresentName());
             }
         }
         session.close();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        com.JD.StaticData.Static_DATA.purchaseDiesel_Report.query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
     }
 
     void reset() {
