@@ -2,13 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.JD.Search;
+package com.JD.DailyReports;
 
+import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +25,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Yogesh
  */
-public class PurchaseDiesel_Search extends javax.swing.JFrame {
+public class PurchaseDiesel_Report extends javax.swing.JFrame {
 
     String oilCompanyNameTemp = "";
     String personNameTemp = "";
@@ -33,13 +37,19 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     SessionFactory search_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
+    Date currenTDate = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String datestring = dateFormat.format(currenTDate);
 
     /**
      * Creates new form Party_MasterForm
      */
-    public PurchaseDiesel_Search() {
+    public PurchaseDiesel_Report() {
         initComponents();
         //----Load Calender----//
+        com.JD.StaticData.Static_DATA.purchaseDiesel_Report=this;
+        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox=purchaseReport_company_ComboBox;
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox=purchase_Perseon_Report_ComboBox;
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
         date2.setBackground(Color.yellow);
@@ -49,8 +59,8 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         //----Load Calender----//
         defaultTableModel = (DefaultTableModel) diesel_Table.getModel();
         //----Fill Static Data---------//
-        com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox = purchaseSearch_company_ComboBox;
-        com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox = purchase_Perseon_Search_ComboBox;
+        com.JD.StaticData.Static_DATA.purchaseSearch_company_ComboBox = purchaseReport_company_ComboBox;
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Search_ComboBox = purchase_Perseon_Report_ComboBox;
         //----Fill Static Data---------//
 
         Session session = search_SessionFactory.openSession();
@@ -69,6 +79,10 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
             }
         }
         session.close();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
     }
 
     /**
@@ -92,11 +106,12 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         clear_CheackBox = new javax.swing.JCheckBox();
-        purchaseSearch_company_ComboBox = new javax.swing.JComboBox();
-        purchase_Perseon_Search_ComboBox = new javax.swing.JComboBox();
+        purchaseReport_company_ComboBox = new javax.swing.JComboBox();
+        purchase_Perseon_Report_ComboBox = new javax.swing.JComboBox();
         search_Button = new javax.swing.JButton();
         export_Button = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -216,11 +231,11 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        purchaseSearch_company_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oil Company Name" }));
+        purchaseReport_company_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oil Company Name" }));
 
-        purchase_Perseon_Search_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Person Persent" }));
+        purchase_Perseon_Report_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Person Persent" }));
 
-        search_Button.setText("Search");
+        search_Button.setText("Get Report");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_ButtonActionPerformed(evt);
@@ -230,6 +245,13 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         export_Button.setText("Export To Excel");
 
         print_Button.setText("Print");
+
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout purchase_PanelLayout = new javax.swing.GroupLayout(purchase_Panel);
         purchase_Panel.setLayout(purchase_PanelLayout);
@@ -241,14 +263,16 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(purchase_PanelLayout.createSequentialGroup()
-                        .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(purchase_Perseon_Report_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(purchaseReport_company_ComboBox, 0, 268, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
+                        .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(export_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(print_Button))
-                    .addComponent(purchase_Perseon_Search_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(purchaseSearch_company_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(export_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         purchase_PanelLayout.setVerticalGroup(
@@ -258,14 +282,15 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
-                        .addComponent(purchaseSearch_company_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(purchaseReport_company_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(purchase_Perseon_Search_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(purchase_Perseon_Report_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(search_Button)
                             .addComponent(export_Button)
-                            .addComponent(print_Button))))
+                            .addComponent(print_Button)
+                            .addComponent(reset_Button))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
@@ -317,10 +342,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
         String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
         queryList.clear();
-        int indexJTable = -1;
-        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
-            defaultTableModel.removeRow(i);
-        }
+
         String queryMaker = "from com.Hibernate.diesel.config.Purchasediesel ";
         String queryConnector = "where ";
 
@@ -336,15 +358,20 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         } else if (equal_CheackBox.isSelected()) {
             dateQuery = " dateOfAddition='" + date11 + "' ";
         }
-        if (purchaseSearch_company_ComboBox.getSelectedIndex() > 0) {
-            oilCompanyQuery = "oilCompanyName='" + purchaseSearch_company_ComboBox.getSelectedItem().toString() + "' ";
+        if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
+            oilCompanyQuery = "oilCompanyName='" + purchaseReport_company_ComboBox.getSelectedItem().toString() + "' ";
         }
-        if (purchase_Perseon_Search_ComboBox.getSelectedIndex() > 0) {
-            personquery = "personPresentName='" + purchase_Perseon_Search_ComboBox.getSelectedItem().toString() + "' ";
+        if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
+            personquery = "personPresentName='" + purchase_Perseon_Report_ComboBox.getSelectedItem().toString() + "' ";
         }
 
         if (dateQuery != null) {
             queryList.add(dateQuery);
+        } else {
+            currenTDate = new Date();
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            datestring = dateFormat.format(currenTDate);
+            queryList.add("dateOfAddition='" + datestring + "' ");
         }
         if (oilCompanyQuery != null) {
             queryList.add(oilCompanyQuery);
@@ -365,6 +392,24 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 }
             }
         }
+        query(queryMaker);
+        reset();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
+    public void query(String queryMaker) {
+        int indexJTable = -1;
+        for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
+            defaultTableModel.removeRow(i);
+        }
         Session session = search_SessionFactory.openSession();
         Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
@@ -373,11 +418,11 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
             defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
         }
         session.close();
-        reset();
-    }//GEN-LAST:event_search_ButtonActionPerformed
+    }
+
     void reset() {
-        purchaseSearch_company_ComboBox.setSelectedIndex(0);
-        purchase_Perseon_Search_ComboBox.setSelectedIndex(0);
+        purchaseReport_company_ComboBox.setSelectedIndex(0);
+        purchase_Perseon_Report_ComboBox.setSelectedIndex(0);
         date_ButtonGroup.clearSelection();
     }
 
@@ -402,13 +447,13 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PurchaseDiesel_Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PurchaseDiesel_Report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -418,7 +463,7 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new PurchaseDiesel_Search().setVisible(true);
+                new PurchaseDiesel_Report().setVisible(true);
             }
         });
     }
@@ -436,9 +481,10 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox late_CheackBox;
     private javax.swing.JButton print_Button;
-    private javax.swing.JComboBox purchaseSearch_company_ComboBox;
+    private javax.swing.JComboBox purchaseReport_company_ComboBox;
     public javax.swing.JPanel purchase_Panel;
-    private javax.swing.JComboBox purchase_Perseon_Search_ComboBox;
+    private javax.swing.JComboBox purchase_Perseon_Report_ComboBox;
+    private javax.swing.JButton reset_Button;
     private javax.swing.JButton search_Button;
     // End of variables declaration//GEN-END:variables
 }

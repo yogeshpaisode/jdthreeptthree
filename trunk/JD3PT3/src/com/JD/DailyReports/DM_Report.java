@@ -46,7 +46,7 @@ public class DM_Report extends javax.swing.JFrame {
     public DM_Report() {
         initComponents();
         report_Button.setEnabled(false);
-        com.JD.StaticData.Static_DATA.dM_Report=this;
+        com.JD.StaticData.Static_DATA.dM_Report = this;
         //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
@@ -67,6 +67,9 @@ public class DM_Report extends javax.swing.JFrame {
         }
         session.close();
         //----------Fill ComboBox----------------------------------------------//    
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
         report("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm where dateOfAddition='" + datestring + "'");
     }
 
@@ -257,10 +260,10 @@ public class DM_Report extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(DmReport_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(DmReport_PanelLayout.createSequentialGroup()
-                        .addComponent(report_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(report_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dmReport_party_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(reset_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(dmReport_party_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(export_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -331,6 +334,10 @@ public class DM_Report extends javax.swing.JFrame {
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        report("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm where dateOfAddition='" + datestring + "'");
     }//GEN-LAST:event_reset_ButtonActionPerformed
     void reset() {
         dmReport_party_ComboBox.setSelectedItem("Party Name");
@@ -375,15 +382,14 @@ public class DM_Report extends javax.swing.JFrame {
         if (dmReport_party_ComboBox.getSelectedIndex() > 0) {
             partyQuery = "partyLink='" + dmReport_party_ComboBox.getSelectedItem().toString() + "' ";
         }
-        
+
         if (dateQuery != null) {
             queryList.add(dateQuery);
-        }
-        else{
-            dateQuery="dateOfAddition='" + datestring + "'";
+        } else {
+            dateQuery = "dateOfAddition='" + datestring + "'";
             queryList.add(dateQuery);
         }
-        
+
         if (partyQuery != null) {
             queryList.add(partyQuery);
         }
