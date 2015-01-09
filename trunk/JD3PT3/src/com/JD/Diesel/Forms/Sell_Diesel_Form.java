@@ -9,6 +9,8 @@ import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
 import java.lang.InstantiationException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +25,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class Sell_Diesel_Form extends javax.swing.JFrame {
-    
+
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
     boolean flag = false;
@@ -59,6 +61,9 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
     //-----------Call Validator--------//
     com.JD.Validator.Validator valid = new Validator();
     //-----------Call Validator--------//
+    Date currenTDate = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String datestring = dateFormat.format(currenTDate);
 
     /**
      * Creates new form Party_MasterForm
@@ -75,18 +80,18 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             partyName_Sell_ComboBox.addItem(p.getPartyName());
         }
-        
+
         q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             personList.add(s.getPersonPresentName());
             personName_ComboBox.addItem(s.getPersonPresentName());
-        }        
-        
+        }
+
         session.close();
         flag = true;
         resetJTable();
-        
+
     }
 
     /**
@@ -318,7 +323,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         String usedQuantityTemp = sell_TextField.getText();
         dateOfAddition = new Date();
         timeOfAddition = new Date();
-        
+
         if (usedQuantityTemp.equals("")) {
             JOptionPane.showMessageDialog(null, "Please Provide Diesel Sell Quantity:");
         } else {
@@ -346,14 +351,14 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
-    
+
     void addDieselToMachine() {
         Session session = sellDiesel_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         presentQuantity = setCurrentDieselLog(usedQuantity);
         com.Hibernate.diesel.config.Selldiesellog selldiesellog = new Selldiesellog(partyLink, machineName, machineNumber, driverName, lastQuantity, usedQuantity, presentQuantity, personPresentName, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
         session.save(selldiesellog);
-        transaction.commit();        
+        transaction.commit();
         session.close();
         JOptionPane.showMessageDialog(null, "Diesel " + usedQuantity + " Provide To Machine Number " + machineNumber + " Under Party Right " + partyLink);
         new GetReceipt(": " + partyLink, ": " + machineName, ": " + machineNumber, ": " + usedQuantity, ": " + personPresentName, ": " + driverName);
@@ -361,14 +366,18 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             personName_ComboBox.addItem(personPresentName);
             com.JD.StaticData.Static_DATA.sell_Search_person_ComboBox.addItem(personPresentName);
         }
-        reset();        
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        com.JD.StaticData.Static_DATA.sellDiesel_Report.query("from com.Hibernate.diesel.config.Selldiesellog where dateOfAddition='" + datestring + "' ");
+        reset();
     }
-    
+
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
-    
+
     private void partyName_Sell_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partyName_Sell_ComboBoxActionPerformed
         // TODO add your handling code here:
         if (flag) {
@@ -400,7 +409,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             flag2 = true;
         }
     }//GEN-LAST:event_partyName_Sell_ComboBoxActionPerformed
-    
+
     private void machineNumber_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machineNumber_ComboBoxActionPerformed
         // TODO add your handling code here:
         if (flag2) {
@@ -419,12 +428,12 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_machineNumber_ComboBoxActionPerformed
-    
+
     private void sell_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_TextFieldKeyReleased
         // TODO add your handling code here:
         sell_TextField.setText(valid.numberValidator(sell_TextField.getText()));
     }//GEN-LAST:event_sell_TextFieldKeyReleased
-    
+
     public double setCurrentDieselLog(double usedQuantity) {
         double log = 0.0;
         Session session = sellDiesel_SessionFactory.openSession();
@@ -455,32 +464,32 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         session.close();
         return log;
     }
-    
+
     void reset() {
         partyName_Sell_ComboBox.setSelectedItem("");
         machineNumber_ComboBox.setSelectedItem("");
         driverName_ComboBox.setSelectedItem("");
         machineName_Lable.setText(" Please Select Machine Number  ");
         sell_TextField.setText("");
-        personName_ComboBox.setSelectedIndex(0);        
+        personName_ComboBox.setSelectedIndex(0);
         driverName_ComboBox.addItem("Select Driver Name");
         machineNumber_ComboBox.addItem("Select Machine Number");
         partyName_Sell_ComboBox.setSelectedItem("Select Party Name");
         resetJTable();
     }
-    
+
     void resetJTable() {
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
-        indexJTable = -1;        
-        Session session = sellDiesel_SessionFactory.openSession();        
+        indexJTable = -1;
+        Session session = sellDiesel_SessionFactory.openSession();
         Query q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             indexJTable += 1;
             defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
-        }        
+        }
         session.close();
     }
 
@@ -519,7 +528,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new Sell_Diesel_Form().setVisible(true);
             }

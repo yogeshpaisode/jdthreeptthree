@@ -122,5 +122,9 @@ public class Static_DATA {
     public static com.JD.DailyReports.PurchaseDiesel_Report purchaseDiesel_Report = null;
     public static javax.swing.JComboBox purchaseReport_company_ComboBox = null;
     public static javax.swing.JComboBox purchase_Perseon_Report_ComboBox = null;
+    
+    public static javax.swing.JComboBox sell_Report_Party_ComboBox = null;
+    public static javax.swing.JComboBox sell_Report_Machine_Number = null;
+    public static com.JD.DailyReports.SellDiesel_Report sellDiesel_Report=null;
     //-----From Daily Report-------------------// 
 }

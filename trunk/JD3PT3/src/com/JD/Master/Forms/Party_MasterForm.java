@@ -643,6 +643,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.dmSearch_party_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.sell_Search_Party_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.dmReport_party_ComboBox.addItem(partyName);
+            com.JD.StaticData.Static_DATA.sell_Report_Party_ComboBox.addItem(partyName);
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//   
                        
             reset();
