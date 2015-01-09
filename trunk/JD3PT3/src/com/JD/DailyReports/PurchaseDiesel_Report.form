@@ -58,7 +58,7 @@
                       <Component id="purchase_Perseon_Report_ComboBox" alignment="0" max="32767" attributes="0"/>
                       <Component id="purchaseReport_company_ComboBox" alignment="0" pref="268" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="search_Button" max="32767" attributes="0"/>
+                          <Component id="report_Button" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="reset_Button" min="-2" pref="106" max="-2" attributes="0"/>
                       </Group>
@@ -83,7 +83,7 @@
                           <Component id="purchase_Perseon_Report_ComboBox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="search_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="report_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="export_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="print_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="reset_Button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -350,6 +350,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Clear"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clear_CheackBoxActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -361,6 +364,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="purchaseReport_company_ComboBoxActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="purchase_Perseon_Report_ComboBox">
           <Properties>
@@ -370,13 +376,16 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="purchase_Perseon_Report_ComboBoxActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="search_Button">
+        <Component class="javax.swing.JButton" name="report_Button">
           <Properties>
             <Property name="text" type="java.lang.String" value="Get Report"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_ButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="report_ButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="export_Button">

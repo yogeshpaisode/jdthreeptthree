@@ -47,9 +47,9 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
     public PurchaseDiesel_Report() {
         initComponents();
         //----Load Calender----//
-        com.JD.StaticData.Static_DATA.purchaseDiesel_Report=this;
-        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox=purchaseReport_company_ComboBox;
-        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox=purchase_Perseon_Report_ComboBox;
+        com.JD.StaticData.Static_DATA.purchaseDiesel_Report = this;
+        com.JD.StaticData.Static_DATA.purchaseReport_company_ComboBox = purchaseReport_company_ComboBox;
+        com.JD.StaticData.Static_DATA.purchase_Perseon_Report_ComboBox = purchase_Perseon_Report_ComboBox;
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
         date2.setBackground(Color.yellow);
@@ -83,6 +83,8 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datestring = dateFormat.format(currenTDate);
         query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
+
+        report_Button.setEnabled(false);
     }
 
     /**
@@ -108,7 +110,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         clear_CheackBox = new javax.swing.JCheckBox();
         purchaseReport_company_ComboBox = new javax.swing.JComboBox();
         purchase_Perseon_Report_ComboBox = new javax.swing.JComboBox();
-        search_Button = new javax.swing.JButton();
+        report_Button = new javax.swing.JButton();
         export_Button = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
@@ -192,6 +194,11 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
         date_ButtonGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
+        clear_CheackBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clear_CheackBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
         date_panel.setLayout(date_panelLayout);
@@ -232,13 +239,23 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         );
 
         purchaseReport_company_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Oil Company Name" }));
+        purchaseReport_company_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseReport_company_ComboBoxActionPerformed(evt);
+            }
+        });
 
         purchase_Perseon_Report_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Person Persent" }));
-
-        search_Button.setText("Get Report");
-        search_Button.addActionListener(new java.awt.event.ActionListener() {
+        purchase_Perseon_Report_ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                search_ButtonActionPerformed(evt);
+                purchase_Perseon_Report_ComboBoxActionPerformed(evt);
+            }
+        });
+
+        report_Button.setText("Get Report");
+        report_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                report_ButtonActionPerformed(evt);
             }
         });
 
@@ -266,7 +283,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
                     .addComponent(purchase_Perseon_Report_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(purchaseReport_company_ComboBox, 0, 268, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, purchase_PanelLayout.createSequentialGroup()
-                        .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(report_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -287,7 +304,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
                         .addComponent(purchase_Perseon_Report_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(purchase_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(search_Button)
+                            .addComponent(report_Button)
                             .addComponent(export_Button)
                             .addComponent(print_Button)
                             .addComponent(reset_Button))))
@@ -311,21 +328,33 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
 
     private void betwee_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_betwee_CheackBoxActionPerformed
         // TODO add your handling code here:
+        if (betwee_CheackBox.isSelected()) {
+            report_Button.setEnabled(true);
+        }
     }//GEN-LAST:event_betwee_CheackBoxActionPerformed
 
     private void equal_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equal_CheackBoxActionPerformed
         // TODO add your handling code here:
+        if (equal_CheackBox.isSelected()) {
+            report_Button.setEnabled(true);
+        }
     }//GEN-LAST:event_equal_CheackBoxActionPerformed
 
     private void early_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_early_CheackBoxActionPerformed
         // TODO add your handling code here:
+        if (early_CheackBox.isSelected()) {
+            report_Button.setEnabled(true);
+        }
     }//GEN-LAST:event_early_CheackBoxActionPerformed
 
     private void late_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_late_CheackBoxActionPerformed
         // TODO add your handling code here:
+        if (late_CheackBox.isSelected()) {
+            report_Button.setEnabled(true);
+        }
     }//GEN-LAST:event_late_CheackBoxActionPerformed
 
-    private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
+    private void report_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_ButtonActionPerformed
         // TODO add your handling code here:
         int month1 = 0;
         int month2 = 0;
@@ -394,7 +423,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         }
         query(queryMaker);
         reset();
-    }//GEN-LAST:event_search_ButtonActionPerformed
+    }//GEN-LAST:event_report_ButtonActionPerformed
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
@@ -404,6 +433,33 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         datestring = dateFormat.format(currenTDate);
         query("from com.Hibernate.diesel.config.Purchasediesel where dateOfAddition='" + datestring + "' ");
     }//GEN-LAST:event_reset_ButtonActionPerformed
+
+    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
+        // TODO add your handling code here: report_Button.setEnabled(true);
+        if (clear_CheackBox.isSelected()) {
+            if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
+                report_Button.setEnabled(true);
+            } else if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
+                report_Button.setEnabled(true);
+            } else {
+                report_Button.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    private void purchaseReport_company_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseReport_company_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (purchaseReport_company_ComboBox.getSelectedIndex() > 0) {
+            report_Button.setEnabled(true);
+        }
+    }//GEN-LAST:event_purchaseReport_company_ComboBoxActionPerformed
+
+    private void purchase_Perseon_Report_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchase_Perseon_Report_ComboBoxActionPerformed
+        // TODO add your handling code here:
+        if (purchase_Perseon_Report_ComboBox.getSelectedIndex() > 0) {
+            report_Button.setEnabled(true);
+        }
+    }//GEN-LAST:event_purchase_Perseon_Report_ComboBoxActionPerformed
 
     public void query(String queryMaker) {
         int indexJTable = -1;
@@ -424,6 +480,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         purchaseReport_company_ComboBox.setSelectedIndex(0);
         purchase_Perseon_Report_ComboBox.setSelectedIndex(0);
         date_ButtonGroup.clearSelection();
+        report_Button.setEnabled(false);
     }
 
     /**
@@ -484,7 +541,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
     private javax.swing.JComboBox purchaseReport_company_ComboBox;
     public javax.swing.JPanel purchase_Panel;
     private javax.swing.JComboBox purchase_Perseon_Report_ComboBox;
+    private javax.swing.JButton report_Button;
     private javax.swing.JButton reset_Button;
-    private javax.swing.JButton search_Button;
     // End of variables declaration//GEN-END:variables
 }
