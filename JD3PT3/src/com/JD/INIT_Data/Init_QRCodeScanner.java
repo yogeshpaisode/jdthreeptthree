@@ -45,9 +45,10 @@ public class Init_QRCodeScanner extends JFrame implements Runnable, ThreadFactor
     private JTextArea textarea = null;
 
     public Init_QRCodeScanner() {
+        
         super();
         try {
-
+            com.JD.StaticData.Static_DATA.progressBar.setValue(60);
             setLayout(new FlowLayout());
             setTitle("Read QR / Bar Code With Webcam");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +56,7 @@ public class Init_QRCodeScanner extends JFrame implements Runnable, ThreadFactor
             Dimension size = WebcamResolution.QVGA.getSize();
 
             webcam = Webcam.getDefault();
-
+            com.JD.StaticData.Static_DATA.progressBar.setValue(80);
             if (webcam == null) {
                 JOptionPane.showMessageDialog(this, "Camera Error : Either Camera Is Not Connected Or Connection To Camera Is Loss..");
                 System.exit(0);
@@ -67,6 +68,7 @@ public class Init_QRCodeScanner extends JFrame implements Runnable, ThreadFactor
                 textarea.setEditable(false);
                 textarea.setPreferredSize(size);
                 webcam.open();
+                com.JD.StaticData.Static_DATA.progressBar.setValue(90);
                 add(panel);
                 add(textarea);
                 com.JD.StaticData.Static_DATA.webPanel = panel;
@@ -74,6 +76,7 @@ public class Init_QRCodeScanner extends JFrame implements Runnable, ThreadFactor
                 pack();
                 setVisible(false);
                 executor.execute(this);
+                com.JD.StaticData.Static_DATA.progressBar.setValue(95);
             }
 
         } catch (Exception e) {
