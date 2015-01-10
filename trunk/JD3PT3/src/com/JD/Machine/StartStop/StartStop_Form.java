@@ -9,6 +9,7 @@ import com.JD.Master.Forms.*;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.table.DefaultTableModel;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -62,6 +63,9 @@ public class StartStop_Form extends javax.swing.JFrame {
      */
     public StartStop_Form() {
         initComponents();
+        status_Table_Model=(DefaultTableModel) status_Table.getModel();
+        detailList_Table_Model=(DefaultTableModel) detailList_Table.getModel();
+        reset_Status_Table();
     }
 
     /**
@@ -228,7 +232,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(StartStop_PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         StartStop_PanelLayout.setVerticalGroup(
