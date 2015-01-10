@@ -125,6 +125,11 @@ public class Login extends javax.swing.JFrame {
         restore_Lable.setText(" Click Here To Restore Master BackUp ! ");
         restore_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         restore_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        restore_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                restore_LableMouseClicked(evt);
+            }
+        });
         getContentPane().add(restore_Lable, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 289, -1, -1));
 
         message_Lable.setText(" If You Plan To Formate Your System !");
@@ -186,6 +191,34 @@ public class Login extends javax.swing.JFrame {
             saveBK_Lable.setVisible(false);
         }
     }//GEN-LAST:event_ad_CheacBoxActionPerformed
+
+    private void restore_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_restore_LableMouseClicked
+        // TODO add your handling code here:        
+        String registrationNumber = com.JD.StaticData.Static_DATA.registrationNumber;
+        String userIO = JOptionPane.showInputDialog("Enter Ragistration Number ");
+        if (userIO.equals(registrationNumber)) {
+            File file = new File("MasterBackUpCopy");
+            file.mkdir();
+            JFileChooser fc = new JFileChooser();
+            String path = "";
+            switch (fc.showOpenDialog(this)) {
+                case JFileChooser.APPROVE_OPTION:
+                    path = fc.getSelectedFile() + "";
+                    break;
+
+                case JFileChooser.CANCEL_OPTION:
+                    JOptionPane.showMessageDialog(this, "Cancelled",
+                            "Cancel",
+                            JOptionPane.OK_OPTION);
+                    break;
+
+                case JFileChooser.ERROR_OPTION:
+                    JOptionPane.showMessageDialog(this, "Error",
+                            "Error",
+                            JOptionPane.OK_OPTION);
+            }
+        }
+    }//GEN-LAST:event_restore_LableMouseClicked
 
     void reset() {
         user_ID.setText("");
