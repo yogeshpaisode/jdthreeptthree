@@ -221,6 +221,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         personName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Person Name" }));
 
         currentQuntityOfMachine_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Diesel/Forms/fuel.png"))); // NOI18N
+        currentQuntityOfMachine_Lable.setText(" + 00  LTR  ");
         currentQuntityOfMachine_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         javax.swing.GroupLayout sell_Diesel_PanelLayout = new javax.swing.GroupLayout(sell_Diesel_Panel);
@@ -252,16 +253,13 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                     .addComponent(driverName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(personName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
                         .addComponent(export_Button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sell_Diesel_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(currentQuntityOfMachine_Lable)
-                        .addGap(770, 770, 770))))
+                        .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(currentQuntityOfMachine_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         sell_Diesel_PanelLayout.setVerticalGroup(
             sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +289,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                         .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(sell_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(currentQuntityOfMachine_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(currentQuntityOfMachine_Lable))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -489,7 +487,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         driverName_ComboBox.addItem("Select Driver Name");
         machineNumber_ComboBox.addItem("Select Machine Number");
         partyName_Sell_ComboBox.setSelectedItem("Select Party Name");
-        currentQuntityOfMachine_Lable.setText("");
+        currentQuntityOfMachine_Lable.setText(" + 00  LTR  ");
         resetJTable();
     }
 
