@@ -6,6 +6,7 @@ package com.JD.Home;
 
 import com.JD.DailyReports.Report_Home;
 import com.JD.Diesel.Forms.Diesel_Home;
+import com.JD.Help.Help_Form;
 import com.JD.Notification.Form.Notification;
 import com.JD.PrintReceiptDM.Form.DM_Home;
 import com.JD.Search.Search_Home;
@@ -50,6 +51,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.Search.Search_Home search_Home = new Search_Home();
     com.JD.DailyReports.Report_Home report_Home = new Report_Home();
     com.JD.Setting.Setting_Home setting_Home = new Setting_Home();
+    com.JD.Help.Help_Form help_Form = new Help_Form();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -62,7 +64,7 @@ public class JD_Home extends javax.swing.JFrame {
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
         defultPanel();
-
+        
     }
 
     /**
@@ -115,7 +117,7 @@ public class JD_Home extends javax.swing.JFrame {
         dailyReport_ShortCut = new javax.swing.JMenuItem();
         scanner_ShortCut = new javax.swing.JMenuItem();
         setting_ShortCut = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        help_Menu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crusher Manager");
@@ -162,6 +164,11 @@ public class JD_Home extends javax.swing.JFrame {
         logout_Lable.setText(" Logout ");
         logout_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
         logout_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        logout_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logout_LableMouseClicked(evt);
+            }
+        });
         jToolBar1.add(logout_Lable);
 
         menuItem_Panel.setBackground(new java.awt.Color(51, 102, 255));
@@ -426,8 +433,13 @@ public class JD_Home extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Help");
-        jMenuBar1.add(jMenu2);
+        help_Menu.setText("Help");
+        help_Menu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                help_MenuMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(help_Menu);
 
         setJMenuBar(jMenuBar1);
 
@@ -475,7 +487,7 @@ public class JD_Home extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentResized
-
+    
     private void hideUnhide_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideUnhide_LableMouseClicked
         // TODO add your handling code here:
 
@@ -489,7 +501,7 @@ public class JD_Home extends javax.swing.JFrame {
             hideUnhide_Lable.setIcon(hideICO);
         }
     }//GEN-LAST:event_hideUnhide_LableMouseClicked
-
+    
     private void parentComponentHolder_PanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_parentComponentHolder_PanelComponentResized
         // TODO add your handling code here:
         //------ Default Width and Height of parentComponentHolder_Panel------//
@@ -502,13 +514,13 @@ public class JD_Home extends javax.swing.JFrame {
         search_Home.search_TabbedPanel.setBounds(0, 0, width, height);
         report_Home.report_TabbedPanel.setBounds(0, 0, width, height);
         setting_Home.Setting_Home_TabbedPane.setBounds(0, 0, width, height);
-
+        
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
-
+    
     private void dm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ButtonActionPerformed
         // TODO add your handling code here:
         dmSet();
-
+        
     }//GEN-LAST:event_dm_ButtonActionPerformed
     void dmSet() {
         parentComponentHolder_Panel.removeAll();
@@ -533,17 +545,17 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_ButtonActionPerformed
-
+    
     private void notification_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_LableMouseClicked
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_LableMouseClicked
-
+    
     private void fuelQuantity_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fuelQuantity_LableMouseClicked
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_fuelQuantity_LableMouseClicked
-
+    
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
         searchSet();
@@ -581,40 +593,54 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_ShortCutActionPerformed
-
+    
     private void master_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_master_ShortCutActionPerformed
         // TODO add your handling code here:
         masterSet();
     }//GEN-LAST:event_master_ShortCutActionPerformed
-
+    
     private void dm_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ShortCutActionPerformed
         // TODO add your handling code here:
         dmSet();
     }//GEN-LAST:event_dm_ShortCutActionPerformed
-
+    
     private void diesel_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ShortCutActionPerformed
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_diesel_ShortCutActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void serch_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serch_ShortCutActionPerformed
         // TODO add your handling code here:
         searchSet();
     }//GEN-LAST:event_serch_ShortCutActionPerformed
-
+    
     private void dailyReport_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyReport_ShortCutActionPerformed
         // TODO add your handling code here:
         reportSet();
     }//GEN-LAST:event_dailyReport_ShortCutActionPerformed
-
+    
     private void setting_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_ShortCutActionPerformed
         // TODO add your handling code here:
         settingSet();
     }//GEN-LAST:event_setting_ShortCutActionPerformed
+    
+    private void help_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_MenuMouseClicked
+        // TODO add your handling code here:
+        parentComponentHolder_Panel.removeAll();
+        parentComponentHolder_Panel.add(help_Form.help_Panel);
+        parentComponentHolder_Panel.repaint();
+        parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Help Window ");
+    }//GEN-LAST:event_help_MenuMouseClicked
+    
+    private void logout_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_LableMouseClicked
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_logout_LableMouseClicked
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -658,7 +684,7 @@ public class JD_Home extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new JD_Home().setVisible(true);
             }
@@ -672,6 +698,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton dm_Button;
     private javax.swing.JMenuItem dm_ShortCut;
     private javax.swing.JLabel fuelQuantity_Lable;
+    private javax.swing.JMenu help_Menu;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -681,7 +708,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
