@@ -1207,40 +1207,32 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         session.close();
     }
-
     void printReceipt() {
         if (pending_CheackBox.isSelected()) {
             pending_ComboBox.addItem(SRNO + "");
             reset();
-
         } else {
             ArrayList<DataBean> dataBeanList = new ArrayList<DataBean>();
-
             DataBean d = new DataBean();
             d.setPartyName(" : " + partyLink);
-            d.setParticular(" : " + "66");
-            d.setRoyaltyNumber(" : " + "66");
-            d.setSrNo("66");
-            d.setMeasurement(" : " + "66");
+            d.setParticular(" : " + productName);
+            d.setRoyaltyNumber(" : " + royaltyNumber);
+            d.setSrNo(preSRNO+"-"+SRNO);
+            d.setMeasurement(" : " + productSize);
             d.setTotalAmount(" : " + totalAmount);
-            d.setPayableAmount(" : " + "66");
-            d.setCft(": " + "66");
-            d.setPendingAmount("66");
+            d.setPayableAmount(" : " + payableAmount);
+            d.setCft(": " + productValue);
+            d.setPendingAmount(" : "+twoPayAmount);
             d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
-
             if (proxy_CheackBox.isSelected()) {
                 d.setQuantity("TON");
-
                 d.setNetWeight(" : " + neightWeight_TextField.getText());
                 d.setGrossWeight(" : " + "88");
-
             } else {
-                d.setQuantity("88");
+                d.setQuantity(productMeasurement);
                 d.setNetWeight(" : " + "Not Applied");
                 d.setGrossWeight(" : " + "Not Applied");
             }
-
-
             if (twoPay_CheackBox.isSelected()) {
                 d.setInvoiceType(" : TwoPay");
                 d.setPendingAmount(" : " + totalAmount);
@@ -1249,17 +1241,13 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 d.setInvoiceType(" : Cash and TwoPay");
                 d.setPendingAmount(" : " + "88");
             }
-
             if (cash_CheackBox.isSelected()) {
                 d.setInvoiceType(" : Cash");
                 d.setPendingAmount(" : " + "NO");
             }
             d.setDriverName(" : " + driverName);
-            d.setVehicleNumber(" : " + "88");
-
-
+            d.setVehicleNumber(" : " + vehicleNumber);
             dataBeanList.add(d);
-
             new PrintDocumentJD(dataBeanList, QRCode, SRNO + "");
             com.JD.StaticData.Static_DATA.srNo_TEMP = SRNO;
         }

@@ -17,12 +17,13 @@ public class Setting_Home extends javax.swing.JFrame {
     /**
      * Creates new form DM_Home
      */
-    UpdateUserInformation updateUserInformation=new UpdateUserInformation();
+    UpdateUserInformation updateUserInformation = new UpdateUserInformation();
+    SendEmail_Form sendEmail_Form = new SendEmail_Form();
 
     public Setting_Home() {
         initComponents();
         Setting_Home_TabbedPane.add("Update User Information ", updateUserInformation.user_Panel);
-       
+        Setting_Home_TabbedPane.add("Send Backup File Vie An Email", sendEmail_Form.email_Panel);
     }
 
     /**
