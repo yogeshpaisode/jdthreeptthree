@@ -35,7 +35,6 @@ public class SendAttachmentInEmail {
         // Get the Session object.
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(username, userPassword);
                     }
@@ -72,6 +71,7 @@ public class SendAttachmentInEmail {
             JOptionPane.showMessageDialog(null, "File Sent successfully....");
             com.JD.StaticData.Static_DATA.sendEmail_Form.reset();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
             JOptionPane.showMessageDialog(null, "Email Sending Fail,Please See Error Log Below");
             com.JD.StaticData.Static_DATA.error_TextPanel.setVisible(true);
         }

@@ -85,6 +85,8 @@ public class SendEmail_Form extends javax.swing.JFrame {
         jLabel6.setText("  Body:");
 
         body_TextField.setColumns(20);
+        body_TextField.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        body_TextField.setLineWrap(true);
         body_TextField.setRows(5);
         jScrollPane1.setViewportView(body_TextField);
 
@@ -187,7 +189,6 @@ public class SendEmail_Form extends javax.swing.JFrame {
                 .addGroup(email_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(email_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(email_PanelLayout.createSequentialGroup()
                         .addGroup(email_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -200,7 +201,7 @@ public class SendEmail_Form extends javax.swing.JFrame {
                             .addComponent(attachedFileName_Lable))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, email_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 18, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(163, 163, 163))))
         );
