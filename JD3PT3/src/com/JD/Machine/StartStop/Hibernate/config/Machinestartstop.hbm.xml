@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 10, 2015 6:02:33 PM by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.JD.Machine.StartStop.Hibernate.config.Machinestartstop" table="machinestartstop" catalog="jd3pt3">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="machineNumber" type="string">
+            <column name="machineNumber" length="65535" />
+        </property>
+        <property name="machineName" type="string">
+            <column name="machineName" length="65535" />
+        </property>
+        <property name="startDate" type="date">
+            <column name="startDate" length="10" />
+        </property>
+        <property name="stopDate" type="date">
+            <column name="stopDate" length="10" />
+        </property>
+        <property name="startTime" type="time">
+            <column name="StartTime" length="8" />
+        </property>
+        <property name="stopTime" type="time">
+            <column name="stopTime" length="8" />
+        </property>
+        <property name="totalTime" type="string">
+            <column name="totalTime" length="65535" />
+        </property>
+        <property name="startReading" type="java.lang.Integer">
+            <column name="startReading" />
+        </property>
+        <property name="stopReading" type="java.lang.Integer">
+            <column name="stopReading" />
+        </property>
+        <property name="totalReading" type="java.lang.Integer">
+            <column name="totalReading" />
+        </property>
+        <property name="lastFuel" type="java.lang.Double">
+            <column name="lastFuel" precision="22" scale="0" />
+        </property>
+        <property name="presentFuel" type="java.lang.Double">
+            <column name="presentFuel" precision="22" scale="0" />
+        </property>
+        <property name="consumeFuel" type="java.lang.Double">
+            <column name="consumeFuel" precision="22" scale="0" />
+        </property>
+        <property name="average" type="java.lang.Double">
+            <column name="average" precision="22" scale="0" />
+        </property>
+        <property name="operatorName" type="string">
+            <column name="operatorName" length="65535" />
+        </property>
+        <property name="remark" type="string">
+            <column name="remark" length="65535" />
+        </property>
+        <property name="dateOfAddition" type="date">
+            <column name="dateOfAddition" length="10" />
+        </property>
+        <property name="timeOfAddition" type="time">
+            <column name="timeOfAddition" length="8" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="65535" />
+        </property>
+        <property name="addedByPersonName" type="string">
+            <column name="addedByPersonName" length="65535" />
+        </property>
+        <property name="addedWithRight" type="string">
+            <column name="addedWithRight" length="65535" />
+        </property>
+        <property name="rawField1" type="string">
+            <column name="rawField1" length="65535" />
+        </property>
+        <property name="rawField2" type="string">
+            <column name="rawField2" length="65535" />
+        </property>
+        <property name="rawField3" type="string">
+            <column name="rawField3" length="65535" />
+        </property>
+        <property name="rawField4" type="string">
+            <column name="rawField4" length="65535" />
+        </property>
+        <property name="rawField5" type="string">
+            <column name="rawField5" length="65535" />
+        </property>
+        <property name="rawField6" type="string">
+            <column name="rawField6" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>
