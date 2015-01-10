@@ -297,3 +297,36 @@ create table SellDieselLog(
 
    PRIMARY KEY (id)
 );
+
+create table MachineStartStop (
+   id INT NOT NULL auto_increment,
+   
+   machineName text,
+   startDay date,
+   stopDay date,
+	Start time,
+	stop time,
+	totalTime text,
+	startReading int,
+	stopReading int,
+	totalReading int,
+	operatorName text,
+	numberOfTrip int,
+	average double,
+	remark text,
+	
+	dateOfAddition date,
+   timeOfAddition time,
+   location text,
+   addedByPersonName text,
+   addedWithRight text,    
+   rawField1 text,
+   rawField2 text,
+   rawField3 text,
+   rawField4 text,
+   rawField5 text,
+   rawField6 text,
+
+
+   PRIMARY KEY (id)
+);
