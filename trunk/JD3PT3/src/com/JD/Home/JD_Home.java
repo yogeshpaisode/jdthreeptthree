@@ -7,6 +7,7 @@ package com.JD.Home;
 import com.JD.DailyReports.Report_Home;
 import com.JD.Diesel.Forms.Diesel_Home;
 import com.JD.Help.Help_Form;
+import com.JD.Machine.StartStop.MachineStartStop_Home;
 import com.JD.Notification.Form.Notification;
 import com.JD.PrintReceiptDM.Form.DM_Home;
 import com.JD.Search.Search_Home;
@@ -53,6 +54,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.DailyReports.Report_Home report_Home = new Report_Home();
     com.JD.Setting.Setting_Home setting_Home = new Setting_Home();
     com.JD.Help.Help_Form help_Form = new Help_Form();
+    com.JD.Machine.StartStop.MachineStartStop_Home machineStartStop_Home=new MachineStartStop_Home();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -93,7 +95,7 @@ public class JD_Home extends javax.swing.JFrame {
         diesel_Button = new javax.swing.JButton();
         notification_Button = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton2 = new javax.swing.JButton();
+        startStop_Button = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         search_Button = new javax.swing.JButton();
         report_Button = new javax.swing.JButton();
@@ -210,10 +212,10 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Machine Start/Stop :            F5  ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        startStop_Button.setText("Machine Start/Stop :            F5  ");
+        startStop_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                startStop_ButtonActionPerformed(evt);
             }
         });
 
@@ -251,7 +253,7 @@ public class JD_Home extends javax.swing.JFrame {
             .addComponent(master_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(dm_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(diesel_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(startStop_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator3)
             .addComponent(search_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(report_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -278,7 +280,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(diesel_Button)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(startStop_Button)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -404,6 +406,11 @@ public class JD_Home extends javax.swing.JFrame {
 
         startStop_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
         startStop_ShortCut.setText("Machine Start/Stop");
+        startStop_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startStop_ShortCutActionPerformed(evt);
+            }
+        });
         jMenu1.add(startStop_ShortCut);
 
         serch_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
@@ -520,6 +527,7 @@ public class JD_Home extends javax.swing.JFrame {
         search_Home.search_TabbedPanel.setBounds(0, 0, width, height);
         report_Home.report_TabbedPanel.setBounds(0, 0, width, height);
         setting_Home.Setting_Home_TabbedPane.setBounds(0, 0, width, height);
+        machineStartStop_Home.machineStartStop_TabbedPanel.setBounds(0, 0, width, height);
         
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
     
@@ -614,10 +622,17 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_diesel_ShortCutActionPerformed
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    void startStop() {
+        parentComponentHolder_Panel.removeAll();
+        parentComponentHolder_Panel.add(machineStartStop_Home.machineStartStop_TabbedPanel);
+        parentComponentHolder_Panel.repaint();
+        parentComponentHolder_Panel.revalidate();
+        currentWindow_Labe.setText(" Machine Start Stop Log Window ");
+    }
+    private void startStop_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStop_ButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        startStop();
+    }//GEN-LAST:event_startStop_ButtonActionPerformed
     
     private void serch_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serch_ShortCutActionPerformed
         // TODO add your handling code here:
@@ -652,6 +667,11 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOptionPane.showConfirmDialog(null, "Are You Sure..");
     }//GEN-LAST:event_formWindowClosing
+
+    private void startStop_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startStop_ShortCutActionPerformed
+        // TODO add your handling code here:
+        startStop();
+    }//GEN-LAST:event_startStop_ShortCutActionPerformed
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -711,7 +731,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JMenu help_Menu;
     private javax.swing.JLabel hideUnhide_Lable;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -742,6 +761,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem serch_ShortCut;
     private javax.swing.JButton setting_Button;
     private javax.swing.JMenuItem setting_ShortCut;
+    private javax.swing.JButton startStop_Button;
     private javax.swing.JMenuItem startStop_ShortCut;
     private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
