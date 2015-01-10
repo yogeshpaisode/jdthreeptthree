@@ -124,6 +124,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         export_Button = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
         personName_ComboBox = new javax.swing.JComboBox();
+        currentQuntityOfMachine_Lable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -219,6 +220,9 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         personName_ComboBox.setEditable(true);
         personName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Person Name" }));
 
+        currentQuntityOfMachine_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Diesel/Forms/fuel.png"))); // NOI18N
+        currentQuntityOfMachine_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+
         javax.swing.GroupLayout sell_Diesel_PanelLayout = new javax.swing.GroupLayout(sell_Diesel_Panel);
         sell_Diesel_Panel.setLayout(sell_Diesel_PanelLayout);
         sell_Diesel_PanelLayout.setHorizontalGroup(
@@ -248,10 +252,16 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                     .addComponent(driverName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(personName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(export_Button)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addComponent(export_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(currentQuntityOfMachine_Lable)
+                        .addGap(770, 770, 770))))
         );
         sell_Diesel_PanelLayout.setVerticalGroup(
             sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,13 +282,16 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(machineNumber_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(machineName_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(sell_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(sell_Diesel_PanelLayout.createSequentialGroup()
+                        .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(machineName_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(sell_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(currentQuntityOfMachine_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sell_Diesel_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -423,6 +436,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                 for (Object object : results) {
                     com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
                     machineName_Lable.setText(m.getMachineName());
+                    currentQuntityOfMachine_Lable.setText(" + "+m.getMachineFuel()+"  LTR  ");
                 }
                 session.close();
             }
@@ -475,6 +489,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         driverName_ComboBox.addItem("Select Driver Name");
         machineNumber_ComboBox.addItem("Select Machine Number");
         partyName_Sell_ComboBox.setSelectedItem("Select Party Name");
+        currentQuntityOfMachine_Lable.setText("");
         resetJTable();
     }
 
@@ -536,6 +551,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataToDatabase_Button;
+    private javax.swing.JLabel currentQuntityOfMachine_Lable;
     private javax.swing.JComboBox driverName_ComboBox;
     private javax.swing.JButton export_Button;
     private javax.swing.JLabel fuelQuantity_Sell_Lable;
