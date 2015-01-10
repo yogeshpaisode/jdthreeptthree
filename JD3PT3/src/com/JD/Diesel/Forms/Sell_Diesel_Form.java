@@ -25,7 +25,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class Sell_Diesel_Form extends javax.swing.JFrame {
-
+    
     javax.swing.table.DefaultTableModel defaultTableModel;
     int indexJTable = -1;
     boolean flag = false;
@@ -80,18 +80,18 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             partyName_Sell_ComboBox.addItem(p.getPartyName());
         }
-
+        
         q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             personList.add(s.getPersonPresentName());
             personName_ComboBox.addItem(s.getPersonPresentName());
         }
-
+        
         session.close();
         flag = true;
         resetJTable();
-
+        
     }
 
     /**
@@ -334,7 +334,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         String usedQuantityTemp = sell_TextField.getText();
         dateOfAddition = new Date();
         timeOfAddition = new Date();
-
+        
         if (usedQuantityTemp.equals("")) {
             JOptionPane.showMessageDialog(null, "Please Provide Diesel Sell Quantity:");
         } else {
@@ -362,11 +362,12 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
-
+    
     void addDieselToMachine() {
         Session session = sellDiesel_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         presentQuantity = setCurrentDieselLog(usedQuantity);
+        updateMachieFuel(machineNumber, usedQuantity);
         com.Hibernate.diesel.config.Selldiesellog selldiesellog = new Selldiesellog(partyLink, machineName, machineNumber, driverName, lastQuantity, usedQuantity, presentQuantity, personPresentName, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
         session.save(selldiesellog);
         transaction.commit();
@@ -383,12 +384,12 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.sellDiesel_Report.query("from com.Hibernate.diesel.config.Selldiesellog where dateOfAddition='" + datestring + "' ");
         reset();
     }
-
+    
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
-
+    
     private void partyName_Sell_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partyName_Sell_ComboBoxActionPerformed
         // TODO add your handling code here:
         if (flag) {
@@ -420,7 +421,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             flag2 = true;
         }
     }//GEN-LAST:event_partyName_Sell_ComboBoxActionPerformed
-
+    
     private void machineNumber_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machineNumber_ComboBoxActionPerformed
         // TODO add your handling code here:
         if (flag2) {
@@ -434,18 +435,18 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
                 for (Object object : results) {
                     com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
                     machineName_Lable.setText(m.getMachineName());
-                    currentQuntityOfMachine_Lable.setText(" + "+m.getMachineFuel()+"  LTR  ");
+                    currentQuntityOfMachine_Lable.setText(" + " + m.getMachineFuel() + "  LTR  ");
                 }
                 session.close();
             }
         }
     }//GEN-LAST:event_machineNumber_ComboBoxActionPerformed
-
+    
     private void sell_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sell_TextFieldKeyReleased
         // TODO add your handling code here:
         sell_TextField.setText(valid.numberValidator(sell_TextField.getText()));
     }//GEN-LAST:event_sell_TextFieldKeyReleased
-
+    
     public double setCurrentDieselLog(double usedQuantity) {
         double log = 0.0;
         Session session = sellDiesel_SessionFactory.openSession();
@@ -476,7 +477,23 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         session.close();
         return log;
     }
-
+    
+    void updateMachieFuel(String machineNumber, double usedQuantity) {
+        Session session = sellDiesel_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.eq("machineNumber", machineNumber));
+        List result = cr.list();
+        for (Object object : result) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            double machineFuel = m.getMachineFuel() + usedQuantity;
+            m.setMachineFuel(machineFuel);
+            session.save(m);
+        }
+        transaction.commit();
+        session.close();
+    }
+    
     void reset() {
         partyName_Sell_ComboBox.setSelectedItem("");
         machineNumber_ComboBox.setSelectedItem("");
@@ -490,7 +507,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         currentQuntityOfMachine_Lable.setText(" + 00  LTR  ");
         resetJTable();
     }
-
+    
     void resetJTable() {
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
@@ -541,7 +558,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new Sell_Diesel_Form().setVisible(true);
             }
