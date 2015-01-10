@@ -47,9 +47,9 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.PrintReceiptDM.Form.DM_Home dM_Home = new DM_Home();
     com.JD.Diesel.Forms.Diesel_Home diesel_Home = new Diesel_Home();
     com.JD.Notification.Form.Notification notification = new Notification();
-    com.JD.Search.Search_Home search_Home=new Search_Home();
-    com.JD.DailyReports.Report_Home report_Home=new Report_Home();
-    com.JD.Setting.Setting_Home setting_Home=new Setting_Home();
+    com.JD.Search.Search_Home search_Home = new Search_Home();
+    com.JD.DailyReports.Report_Home report_Home = new Report_Home();
+    com.JD.Setting.Setting_Home setting_Home = new Setting_Home();
     //---- All Menu Entry ------//
 
     public JD_Home() {
@@ -106,6 +106,15 @@ public class JD_Home extends javax.swing.JFrame {
         fuelQuantity_Lable = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        notification_ShortCut = new javax.swing.JMenuItem();
+        master_ShortCut = new javax.swing.JMenuItem();
+        dm_ShortCut = new javax.swing.JMenuItem();
+        diesel_ShortCut = new javax.swing.JMenuItem();
+        startStop_ShortCut = new javax.swing.JMenuItem();
+        serch_ShortCut = new javax.swing.JMenuItem();
+        dailyReport_ShortCut = new javax.swing.JMenuItem();
+        scanner_ShortCut = new javax.swing.JMenuItem();
+        setting_ShortCut = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -188,6 +197,11 @@ public class JD_Home extends javax.swing.JFrame {
         });
 
         jButton2.setText("Machine Start/Stop :            F5  ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         search_Button.setText("Search :                                  F6");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -337,9 +351,81 @@ public class JD_Home extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        notification_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        notification_ShortCut.setText("Notification");
+        notification_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                notification_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(notification_ShortCut);
+
+        master_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        master_ShortCut.setText("Master");
+        master_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                master_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(master_ShortCut);
+
+        dm_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        dm_ShortCut.setText("Print Receipt/DM ");
+        dm_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dm_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(dm_ShortCut);
+
+        diesel_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        diesel_ShortCut.setText("Diesel");
+        diesel_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diesel_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(diesel_ShortCut);
+
+        startStop_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        startStop_ShortCut.setText("Machine Start/Stop");
+        jMenu1.add(startStop_ShortCut);
+
+        serch_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        serch_ShortCut.setText("Search");
+        serch_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                serch_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(serch_ShortCut);
+
+        dailyReport_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
+        dailyReport_ShortCut.setText("Daily Report");
+        dailyReport_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dailyReport_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(dailyReport_ShortCut);
+
+        scanner_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+        scanner_ShortCut.setText("Scanner");
+        jMenu1.add(scanner_ShortCut);
+
+        setting_ShortCut.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F9, 0));
+        setting_ShortCut.setText("Setting");
+        setting_ShortCut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setting_ShortCutActionPerformed(evt);
+            }
+        });
+        jMenu1.add(setting_ShortCut);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Help");
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -374,7 +460,9 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void master_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_master_ButtonActionPerformed
         // TODO add your handling code here:  
-
+        masterSet();
+    }//GEN-LAST:event_master_ButtonActionPerformed
+    void masterSet() {
         masterHome.masterHome_TabbedPane.setBounds(0, 0, width, height);
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(masterHome.getMasterHome_TabbedPane());
@@ -382,9 +470,7 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Master Window ");
         com.JD.StaticData.Static_DATA.webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
-
-    }//GEN-LAST:event_master_ButtonActionPerformed
-
+    }
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentResized
@@ -420,15 +506,17 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void dm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ButtonActionPerformed
         // TODO add your handling code here:
+        dmSet();
+
+    }//GEN-LAST:event_dm_ButtonActionPerformed
+    void dmSet() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(dM_Home.DM_Home_TabbedPane);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Print Receipt/DM Window ");
         com.JD.StaticData.Static_DATA.webCam_Panel_Dm.add(com.JD.StaticData.Static_DATA.webPanel);
-
-    }//GEN-LAST:event_dm_ButtonActionPerformed
-
+    }
     private void diesel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ButtonActionPerformed
         // TODO add your handling code here:        
         dieselPanel();
@@ -457,30 +545,75 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
+        searchSet();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+    void searchSet() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(search_Home.search_TabbedPanel);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Search Window ");
-    }//GEN-LAST:event_search_ButtonActionPerformed
-
+    }
     private void report_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_report_ButtonActionPerformed
         // TODO add your handling code here:
+        reportSet();
+    }//GEN-LAST:event_report_ButtonActionPerformed
+    void reportSet() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(report_Home.report_TabbedPanel);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Daily Report Window ");
-    }//GEN-LAST:event_report_ButtonActionPerformed
-
+    }
     private void setting_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_ButtonActionPerformed
         // TODO add your handling code here:       
+        settingSet();
+    }//GEN-LAST:event_setting_ButtonActionPerformed
+    void settingSet() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(setting_Home.Setting_Home_TabbedPane);
         parentComponentHolder_Panel.repaint();
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Setting Window ");
-    }//GEN-LAST:event_setting_ButtonActionPerformed
+    }
+    private void notification_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notification_ShortCutActionPerformed
+        // TODO add your handling code here:
+        defultPanel();
+    }//GEN-LAST:event_notification_ShortCutActionPerformed
+
+    private void master_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_master_ShortCutActionPerformed
+        // TODO add your handling code here:
+        masterSet();
+    }//GEN-LAST:event_master_ShortCutActionPerformed
+
+    private void dm_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ShortCutActionPerformed
+        // TODO add your handling code here:
+        dmSet();
+    }//GEN-LAST:event_dm_ShortCutActionPerformed
+
+    private void diesel_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ShortCutActionPerformed
+        // TODO add your handling code here:
+        dieselPanel();
+    }//GEN-LAST:event_diesel_ShortCutActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void serch_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serch_ShortCutActionPerformed
+        // TODO add your handling code here:
+        searchSet();
+    }//GEN-LAST:event_serch_ShortCutActionPerformed
+
+    private void dailyReport_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyReport_ShortCutActionPerformed
+        // TODO add your handling code here:
+        reportSet();
+    }//GEN-LAST:event_dailyReport_ShortCutActionPerformed
+
+    private void setting_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_ShortCutActionPerformed
+        // TODO add your handling code here:
+        settingSet();
+    }//GEN-LAST:event_setting_ShortCutActionPerformed
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -532,8 +665,11 @@ public class JD_Home extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel currentWindow_Labe;
+    private javax.swing.JMenuItem dailyReport_ShortCut;
     private javax.swing.JButton diesel_Button;
+    private javax.swing.JMenuItem diesel_ShortCut;
     private javax.swing.JButton dm_Button;
+    private javax.swing.JMenuItem dm_ShortCut;
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JLabel hideUnhide_Lable;
     private javax.swing.JButton jButton2;
@@ -556,13 +692,19 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel logout_Lable;
     private javax.swing.JButton master_Button;
+    private javax.swing.JMenuItem master_ShortCut;
     private javax.swing.JPanel menuItem_Panel;
     private javax.swing.JButton notification_Button;
     private javax.swing.JLabel notification_Lable;
+    private javax.swing.JMenuItem notification_ShortCut;
     private javax.swing.JPanel parentComponentHolder_Panel;
     private javax.swing.JButton report_Button;
+    private javax.swing.JMenuItem scanner_ShortCut;
     private javax.swing.JButton search_Button;
+    private javax.swing.JMenuItem serch_ShortCut;
     private javax.swing.JButton setting_Button;
+    private javax.swing.JMenuItem setting_ShortCut;
+    private javax.swing.JMenuItem startStop_ShortCut;
     private javax.swing.JLabel user_Lable;
     // End of variables declaration//GEN-END:variables
 }
