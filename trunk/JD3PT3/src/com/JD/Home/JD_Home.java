@@ -157,7 +157,7 @@ public class JD_Home extends javax.swing.JFrame {
         menuItem_Panel.setBackground(new java.awt.Color(51, 102, 255));
         menuItem_Panel.setBorder(javax.swing.BorderFactory.createBevelBorder(0));
 
-        master_Button.setText("Master");
+        master_Button.setText("Master :                                 F2");
         master_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 master_ButtonActionPerformed(evt);
@@ -166,46 +166,46 @@ public class JD_Home extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Login/Form/statonary2.gif"))); // NOI18N
 
-        dm_Button.setText("Print Receipt/DM");
+        dm_Button.setText("Print Receipt/DM :                F3 ");
         dm_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dm_ButtonActionPerformed(evt);
             }
         });
 
-        diesel_Button.setText("Diesel");
+        diesel_Button.setText("Diesel :                                   F4 ");
         diesel_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diesel_ButtonActionPerformed(evt);
             }
         });
 
-        notification_Button.setText("Notification");
+        notification_Button.setText("Notification :                         F1");
         notification_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 notification_ButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Machine Start/Stop");
+        jButton2.setText("Machine Start/Stop :            F5  ");
 
-        search_Button.setText("Search");
+        search_Button.setText("Search :                                  F6");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_ButtonActionPerformed(evt);
             }
         });
 
-        report_Button.setText("Daily Report ");
+        report_Button.setText("Daily Report :                         F7");
         report_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 report_ButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Scanner");
+        jButton4.setText("Scanner :                                F8");
 
-        setting_Button.setText("Setting");
+        setting_Button.setText("Setting :                                 F9");
         setting_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setting_ButtonActionPerformed(evt);
@@ -282,7 +282,7 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.setLayout(parentComponentHolder_PanelLayout);
         parentComponentHolder_PanelLayout.setHorizontalGroup(
             parentComponentHolder_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1079, Short.MAX_VALUE)
+            .addGap(0, 1072, Short.MAX_VALUE)
         );
         parentComponentHolder_PanelLayout.setVerticalGroup(
             parentComponentHolder_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
