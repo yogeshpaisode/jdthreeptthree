@@ -69,6 +69,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         status_Table_Model = (DefaultTableModel) status_Table.getModel();
         detailList_Table_Model = (DefaultTableModel) detailList_Table.getModel();
         reset_Status_Table();
+        reset_detailList_Table();
     }
 
     /**
@@ -323,7 +324,14 @@ public class StartStop_Form extends javax.swing.JFrame {
             detailList_Table_Model.removeRow(i);
         }
         index_detailList_Table = -1;
-    }
+        Session session = init_SessionFactory.openSession();   
+        Query q=session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");        
+        for (Object object : q.list()) {
+            com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m=(com.JD.Machine.StartStop.Hibernate.config.Machinestartstop)object;
+            detailList_Table_Model.insertRow(index_detailList_Table,new Object[]{m.getMachineNumber(),m.getMachineName(),m.getOperatorName(),m.getStartDate(),m.getStartTime(),m.getStopDate(),m.getStopTime(),m.getTotalTime(),m.getStartReading(),m.getStopReading(),m.getTotalReading(),m.getLastFuel(),m.getPresentFuel(),m.getConsumeFuel(),m.getAverage()});
+        }        
+        session.close();       
+   }
 
     /**
      * @param args the command line arguments
