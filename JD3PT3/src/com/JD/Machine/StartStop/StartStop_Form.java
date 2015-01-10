@@ -278,7 +278,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
-            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(),m.getMachineName()});           
+            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(),m.getMachineName(),m.getMachineStartDate(),m.getMachineStartTime()});           
         }
         session.close();    
     }

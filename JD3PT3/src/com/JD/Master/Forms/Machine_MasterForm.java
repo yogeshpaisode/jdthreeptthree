@@ -23,7 +23,7 @@ import org.hibernate.criterion.Restrictions;
 public class Machine_MasterForm extends javax.swing.JFrame {
 
     //--- INIT SESSION FACTORY ---//
-    SessionFactory masterFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory masterFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //--- INIT SESSION FACTORY ---//
     //---- Data For DataBase ---//
     String machinePartyLink = "";
@@ -40,6 +40,8 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     int machineServicingReadingPointer = 00;
     double machineFuel = 00;
     String machineServicingFlag = "FALSE";
+    Date machineStartTime = null;
+    Date machineStartDate = null;
     //----------------------------------------//
     Date machineDateOfAddition = null;
     Date machineTimeOfAddition = null;
@@ -691,11 +693,9 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         machineDateOfAddition = new Date();
         machineTimeOfAddition = new Date();
         List results = cr.list();
-
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
-            com.JD.Master.Hibernate.config.Machinemaster m = new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineServicingFlag, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
-
+            com.JD.Master.Hibernate.config.Machinemaster m = new Machinemaster(machinePartyLink, machineIdentification, machineType, machineName, machineNumber, machineServicingLogIn, machineServicingLog, machineExpectedAVG, machineStatus, machineStartTime, machineStartDate, machineCurrentReading, machineServicingNumber, machineServicingReadingPointer, machineServicingFlag, machineFuel, machineDateOfAddition, machineTimeOfAddition, machineLocation, machineAddedByPersonName, machineAddedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
             session.save(m);
             transaction.commit();
             com.JD.StaticData.Static_DATA.sell_Report_Machine_Number.addItem(machineNumber);
