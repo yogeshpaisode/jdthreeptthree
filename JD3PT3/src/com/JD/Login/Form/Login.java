@@ -4,7 +4,9 @@
  */
 package com.JD.Login.Form;
 
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,6 +23,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        restore_Lable.setVisible(false);
+        message_Lable.setVisible(false);
+        saveBK_Lable.setVisible(false);
     }
 
     /**
@@ -41,12 +46,19 @@ public class Login extends javax.swing.JFrame {
         user_Password = new javax.swing.JPasswordField();
         reset_Button = new javax.swing.JButton();
         login_Button = new javax.swing.JButton();
+        ad_CheacBox = new javax.swing.JCheckBox();
+        restore_Lable = new javax.swing.JLabel();
+        message_Lable = new javax.swing.JLabel();
+        saveBK_Lable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LogIn Window");
         setBounds(new java.awt.Rectangle(500, 100, 0, 0));
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Login/Form/login.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 376, -1));
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
 
@@ -57,7 +69,7 @@ public class Login extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(91, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(90, 90, 90))
         );
@@ -69,15 +81,21 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, -1, -1));
+
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel2.setText("* User ID:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 140, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel3.setText("* Password:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 179, -1, -1));
 
         user_ID.setText("Administrator");
+        getContentPane().add(user_ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 138, 188, -1));
 
         user_Password.setText("Administrator");
+        getContentPane().add(user_Password, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 180, 188, -1));
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +103,7 @@ public class Login extends javax.swing.JFrame {
                 reset_ButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(reset_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 218, 90, -1));
 
         login_Button.setText("Login");
         login_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -92,53 +111,30 @@ public class Login extends javax.swing.JFrame {
                 login_ButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(login_Button, new org.netbeans.lib.awtextra.AbsoluteConstraints(137, 218, 88, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(14, 14, 14))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(login_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(user_Password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
-                        .addComponent(user_ID, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(user_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(user_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(reset_Button)
-                    .addComponent(login_Button))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        ad_CheacBox.setText("Show Advance Option");
+        ad_CheacBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ad_CheacBoxActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ad_CheacBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 259, -1, -1));
+
+        restore_Lable.setForeground(new java.awt.Color(0, 0, 255));
+        restore_Lable.setText(" Click Here To Restore Master BackUp ! ");
+        restore_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        restore_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(restore_Lable, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 289, -1, -1));
+
+        message_Lable.setText(" If You Plan To Formate Your System !");
+        getContentPane().add(message_Lable, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 323, -1, -1));
+
+        saveBK_Lable.setForeground(new java.awt.Color(0, 0, 255));
+        saveBK_Lable.setText(" Click Here To Save Master BackUp !     ");
+        saveBK_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        saveBK_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(saveBK_Lable, new org.netbeans.lib.awtextra.AbsoluteConstraints(133, 355, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -154,7 +150,7 @@ public class Login extends javax.swing.JFrame {
         String userId = user_ID.getText();
         String password = user_Password.getText();
 
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Criteria cr = session.createCriteria(com.JD.Login.Hibernate.config.Login.class);
         cr.add(Restrictions.eq("userId", userId));
@@ -169,18 +165,34 @@ public class Login extends javax.swing.JFrame {
                 com.JD.Login.Hibernate.config.Login l = (com.JD.Login.Hibernate.config.Login) object;
                 com.JD.StaticData.Static_DATA.logIn_Priority = l.getUserPriority();
                 com.JD.StaticData.Static_DATA.logIn_UserName = l.getUserName();
-                com.JD.StaticData.Static_DATA.logIn_Right=l.getUserAddedWithRight();
+                com.JD.StaticData.Static_DATA.logIn_Right = l.getUserAddedWithRight();
                 new com.JD.Home.JD_Home().setVisible(true);
             }
-            
+
             dispose();
         }
         session.close();
     }//GEN-LAST:event_login_ButtonActionPerformed
 
+    private void ad_CheacBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ad_CheacBoxActionPerformed
+        // TODO add your handling code here:
+        if (ad_CheacBox.isSelected()) {
+            restore_Lable.setVisible(true);
+            message_Lable.setVisible(true);
+            saveBK_Lable.setVisible(true);
+        } else {
+            restore_Lable.setVisible(false);
+            message_Lable.setVisible(false);
+            saveBK_Lable.setVisible(false);
+        }
+    }//GEN-LAST:event_ad_CheacBoxActionPerformed
+
     void reset() {
         user_ID.setText("");
         user_Password.setText("");
+        restore_Lable.setVisible(false);
+        message_Lable.setVisible(false);
+        saveBK_Lable.setVisible(false);
     }
 
     /**
@@ -225,13 +237,17 @@ public class Login extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox ad_CheacBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton login_Button;
+    private javax.swing.JLabel message_Lable;
     private javax.swing.JButton reset_Button;
+    private javax.swing.JLabel restore_Lable;
+    private javax.swing.JLabel saveBK_Lable;
     private javax.swing.JTextField user_ID;
     private javax.swing.JPasswordField user_Password;
     // End of variables declaration//GEN-END:variables
