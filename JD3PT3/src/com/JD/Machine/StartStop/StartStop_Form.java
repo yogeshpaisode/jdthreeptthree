@@ -22,6 +22,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class StartStop_Form extends javax.swing.JFrame {
 
+    boolean flag=false;
     //---------------Load Data------------//
     String machineNumber = "";
     String machineName = "";
@@ -302,6 +303,9 @@ public class StartStop_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void reset_Status_Table() {
+        flag=false;
+        number_ComboBox.removeAllItems();
+        number_ComboBox.addItem("Select Machine Number");
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
         }
@@ -315,8 +319,10 @@ public class StartStop_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
             status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime()});
+            number_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
+        flag=true;
     }
 
     void reset_detailList_Table() {
