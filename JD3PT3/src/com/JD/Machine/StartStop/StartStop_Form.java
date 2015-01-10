@@ -23,18 +23,21 @@ import org.hibernate.criterion.Restrictions;
 public class StartStop_Form extends javax.swing.JFrame {
 
     //---------------Load Data------------//
+    String machineNumber = "";
     String machineName = "";
-    Date startDay = null;
-    Date stopDay = null;
-    Date Start = null;
-    Date stop = null;
+    Date startDate = null;
+    Date stopDate = null;
+    Date StartTime = null;
+    Date stopTime = null;
     String totalTime = "";
-    int startReading = 0;
-    int stopReading = 0;
-    int totalReading = 0;
-    String operatorName = "";
-    int numberOfTrip = 0;
+    double startReading = 0;
+    double stopReading = 0;
+    double totalReading = 0;
+    double lastFuel = 0.0;
+    double presentFuel = 0.0;
+    double consumeFuel = 0.0;
     double average = 0.0;
+    String operatorName = "";
     String remark = "";
     Date dateOfAddition = null;
     Date timeOfAddition = null;
@@ -49,22 +52,22 @@ public class StartStop_Form extends javax.swing.JFrame {
     String rawField6 = "";
     //---------------Load Data-----------------------//
     //--------------Load Session Factory-------------//
-    SessionFactory init_SessionFactory=com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory init_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //--------------Load Session Factory-------------//    
     //--------------Load Table Model-----------------//
     javax.swing.table.DefaultTableModel status_Table_Model;
     javax.swing.table.DefaultTableModel detailList_Table_Model;
-    int index_status_Table=-1;
-    int index_detailList_Table=-1;
+    int index_status_Table = -1;
+    int index_detailList_Table = -1;
     //--------------Load Table Model-----------------//   
-    
+
     /**
      * Creates new form Party_MasterForm
      */
     public StartStop_Form() {
         initComponents();
-        status_Table_Model=(DefaultTableModel) status_Table.getModel();
-        detailList_Table_Model=(DefaultTableModel) detailList_Table.getModel();
+        status_Table_Model = (DefaultTableModel) status_Table.getModel();
+        detailList_Table_Model = (DefaultTableModel) detailList_Table.getModel();
         reset_Status_Table();
     }
 
@@ -297,30 +300,31 @@ public class StartStop_Form extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    void reset_Status_Table(){
+    void reset_Status_Table() {
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
         }
-        index_status_Table = -1;        
-        Session session = init_SessionFactory.openSession();    
+        index_status_Table = -1;
+        Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
-        cr.add(Restrictions.eq("machineStatus", "ON"));        
+        cr.add(Restrictions.eq("machineStatus", "ON"));
         List results = cr.list();
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
-            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(),m.getMachineName(),m.getMachineStartDate(),m.getMachineStartTime()});           
+            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime()});
         }
-        session.close();    
+        session.close();
     }
-    void reset_detailList_Table(){
+
+    void reset_detailList_Table() {
         for (int i = detailList_Table_Model.getRowCount() - 1; i >= 0; i--) {
             detailList_Table_Model.removeRow(i);
         }
         index_detailList_Table = -1;
     }
-    
+
     /**
      * @param args the command line arguments
      */
