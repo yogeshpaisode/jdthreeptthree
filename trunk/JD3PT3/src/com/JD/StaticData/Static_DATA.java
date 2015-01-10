@@ -16,6 +16,8 @@ public class Static_DATA {
     //------TEMP DATA--------//
     public static javax.swing.JProgressBar progressBar=null;
     public static int srNo_TEMP = 0;
+    public static javax.swing.JTextPane error_TextPanel;
+    public static com.JD.Setting.SendEmail_Form sendEmail_Form;
     //------TEMP DATA--------//
     //------Master Home------//
     public static javax.swing.JLabel fuelQuantity_Lable = null;
