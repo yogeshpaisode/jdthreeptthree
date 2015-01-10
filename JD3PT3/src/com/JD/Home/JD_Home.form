@@ -242,7 +242,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="master_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Master"/>
+            <Property name="text" type="java.lang.String" value="Master :                                 F2"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="master_ButtonActionPerformed"/>
@@ -259,7 +259,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="dm_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Print Receipt/DM"/>
+            <Property name="text" type="java.lang.String" value="Print Receipt/DM :                F3 "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dm_ButtonActionPerformed"/>
@@ -267,7 +267,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="diesel_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Diesel"/>
+            <Property name="text" type="java.lang.String" value="Diesel :                                   F4 "/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diesel_ButtonActionPerformed"/>
@@ -275,7 +275,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="notification_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Notification"/>
+            <Property name="text" type="java.lang.String" value="Notification :                         F1"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="notification_ButtonActionPerformed"/>
@@ -285,14 +285,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Machine Start/Stop"/>
+            <Property name="text" type="java.lang.String" value="Machine Start/Stop :            F5  "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
         </Component>
         <Component class="javax.swing.JButton" name="search_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="text" type="java.lang.String" value="Search :                                  F6"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="search_ButtonActionPerformed"/>
@@ -300,7 +300,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="report_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Daily Report "/>
+            <Property name="text" type="java.lang.String" value="Daily Report :                         F7"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="report_ButtonActionPerformed"/>
@@ -310,14 +310,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Scanner"/>
+            <Property name="text" type="java.lang.String" value="Scanner :                                F8"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator5">
         </Component>
         <Component class="javax.swing.JButton" name="setting_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Setting"/>
+            <Property name="text" type="java.lang.String" value="Setting :                                 F9"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setting_ButtonActionPerformed"/>
@@ -345,7 +345,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1079" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1072" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
