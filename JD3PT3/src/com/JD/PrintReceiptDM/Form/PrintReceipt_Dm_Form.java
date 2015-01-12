@@ -137,18 +137,18 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
             if (!productNameTempList.contains(p.getProductName())) {
                 productNameTempList.add(p.getProductName());
-            }            
+            }
             if (!measurementTempList.contains(p.getProductMeasurement())) {
                 measurementTempList.add(p.getProductMeasurement());
             }
-        }        
+        }
         for (Object object : productNameTempList) {
             product_ComboBox.addItem(object.toString());
         }
         for (Object object : measurementTempList) {
             measurement_ComboBox.addItem(object.toString());
         }
-        
+
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
         List results = cr.list();
@@ -378,6 +378,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         payAble_TextField.setBackground(new java.awt.Color(255, 204, 255));
         payAble_TextField.setEditable(false);
+        payAble_TextField.setDragEnabled(true);
         payAble_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 payAble_TextFieldKeyReleased(evt);
@@ -388,6 +389,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         twoPayAmount_TextField.setBackground(new java.awt.Color(255, 204, 255));
         twoPayAmount_TextField.setEditable(false);
+        twoPayAmount_TextField.setDragEnabled(true);
         twoPayAmount_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 twoPayAmount_TextFieldMouseEntered(evt);
@@ -765,15 +767,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private void twoPay_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoPay_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (twoPay_CheackBox.isSelected()) {
-
             twoPayAmount_TextField.setText(totalAmount_TextField.getText());
             twoPayAmount_TextField.setEditable(false);
             twoPayAmount_TextField.setBackground(Color.white);
-
             payAble_TextField.setText("");
             payAble_TextField.setBackground(Color.lightGray);
             payAble_TextField.setEditable(false);
-
             paymentType = "TWOPAY";
         }
     }//GEN-LAST:event_twoPay_CheackBoxActionPerformed
@@ -1004,6 +1003,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_addDataToDataBase_ButtonActionPerformed
 
     void stage1() {
+        String totalAmountTEMP = totalAmount_TextField.getText();
         String payableTEMP = payAble_TextField.getText();
         String twoPayTEMP = twoPayAmount_TextField.getText();
         if (cashAndTwoPay_CheackBox.isSelected()) {
@@ -1013,11 +1013,42 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 if (twoPayTEMP.equals("")) {
                     JOptionPane.showMessageDialog(null, "Please Provide TwoPay Amount");
                 } else {
-                    businessLogic();
+                    int totalAmountINT = Integer.parseInt(totalAmountTEMP);
+                    int payableINT = Integer.parseInt(payableTEMP);
+                    int twopayINT = Integer.parseInt(twoPayTEMP);
+                    twoPayAmount = totalAmountINT;
+                    payableAmount = payableINT;
+                    twoPayAmount = twopayINT;
+                    if ((payableINT >= twopayINT) && payableINT < totalAmountINT) {
+                        paymentType="CASHANDTWOPAY";
+                        businessLogic();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please Provide Valid Payable Amount And TwoPay Amount");
+                    }
                 }
             }
-        } else {
-            businessLogic();
+        } else if (cash_CheackBox.isSelected()) {
+            if (totalAmountTEMP.equals(payableTEMP)) {
+                int totalAmountINT = Integer.parseInt(totalAmountTEMP);
+                int payableINT = Integer.parseInt(payableTEMP);
+                twoPayAmount = totalAmountINT;
+                payableAmount = payableINT;
+                paymentType="CASH";
+                businessLogic();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please Provide Valid Payable Amount");
+            }
+        } else if (twoPay_CheackBox.isSelected()) {
+            if (totalAmountTEMP.equals(twoPayTEMP)) {
+                int totalAmountINT = Integer.parseInt(totalAmountTEMP);
+                paymentType="TWOPAY";
+                int twopayINT = Integer.parseInt(twoPayTEMP);
+                twoPayAmount = totalAmountINT;               
+                twoPayAmount = twopayINT;
+                businessLogic();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please Provide Valid Two Pay Amount");
+            }
         }
     }
 
@@ -1207,6 +1238,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         session.close();
     }
+
     void printReceipt() {
         if (pending_CheackBox.isSelected()) {
             pending_ComboBox.addItem(SRNO + "");
@@ -1217,12 +1249,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             d.setPartyName(" : " + partyLink);
             d.setParticular(" : " + productName);
             d.setRoyaltyNumber(" : " + royaltyNumber);
-            d.setSrNo(preSRNO+"-"+SRNO);
+            d.setSrNo(preSRNO + "-" + SRNO);
             d.setMeasurement(" : " + productSize);
             d.setTotalAmount(" : " + totalAmount);
             d.setPayableAmount(" : " + payableAmount);
             d.setCft(": " + productValue);
-            d.setPendingAmount(" : "+twoPayAmount);
+            d.setPendingAmount(" : " + twoPayAmount);
             d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
             if (proxy_CheackBox.isSelected()) {
                 d.setQuantity("TON");

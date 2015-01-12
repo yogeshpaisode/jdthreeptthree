@@ -407,7 +407,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(mobile_TextField)
                                     .addComponent(licence_TextField)
-                                    .addComponent(loadDate_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(loadDate_ComboBox, 0, 154, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                     .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -423,8 +423,8 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(delete_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addComponent(clear_CheackBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clear_CheackBox, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
@@ -679,14 +679,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addDataToDatbase_ButtonActionPerformed
 
-    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
-        // TODO add your handling code here:
-        if (clear_CheackBox.isSelected()) {
-            addDataToDatbase_Button.setText("Add Driver");
-        }
-
-    }//GEN-LAST:event_clear_CheackBoxActionPerformed
-
     private void name_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_name_TextFieldKeyReleased
         // TODO add your handling code here:
         name_TextField.setText(valid.stringValidator(name_TextField.getText()).toUpperCase());
@@ -770,6 +762,13 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_print_ButtonActionPerformed
+
+    private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
+        // TODO add your handling code here:
+        if (clear_CheackBox.isSelected()) {
+            addDataToDatbase_Button.setText("Add Driver");
+        }
+    }//GEN-LAST:event_clear_CheackBoxActionPerformed
 
     private String convertStringToImageByteArray(String imageString) {
         k += 1;
