@@ -23,6 +23,7 @@ import org.hibernate.criterion.Restrictions;
 public class StartStop_Form extends javax.swing.JFrame {
 
     boolean flag = false;
+    boolean flag1=false;
     //---------------Load Data------------//
     String machineNumber = "";
     String machineName = "";
@@ -308,6 +309,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void updateComboBox() {
+        flag1=false;
         Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
@@ -322,10 +324,23 @@ public class StartStop_Form extends javax.swing.JFrame {
             operatorName_ComboBox.addItem(d.getDriverName());
         }
         session.close();
+        flag1=true;
     }
 
     private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
         // TODO add your handling code here:
+        if (flag1) {
+            String vehicleNumberTemp = number_ComboBox.getSelectedItem().toString();
+            Session session = init_SessionFactory.openSession();
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machineNumber", vehicleNumberTemp));
+            List results = cr.list();
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                name_Lable.setText("  " + m.getMachineName() + "  ");
+            }
+            session.close();
+        }
     }//GEN-LAST:event_number_ComboBoxActionPerformed
 
     void reset_Status_Table() {
