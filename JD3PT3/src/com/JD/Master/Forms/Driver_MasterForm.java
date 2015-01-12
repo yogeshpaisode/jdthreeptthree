@@ -35,7 +35,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     int i = 0;
     int k = 0;
-    Calendar calendar=Calendar.getInstance();
+    Calendar calendar = Calendar.getInstance();
     Date date = null;
     String prefix = "INPUT_";
     String outputPathTemp = "";
@@ -73,7 +73,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     //-- Add Date Panel---//
     //------ Load Session Factory ------//        
-    SessionFactory driverSessionFactory =  com.JD.StaticData.Static_DATA.init_SessionFactory;
+    SessionFactory driverSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //------ Load Session Factory ------//    
     //----------javax.swing.DefaultComboBoxModel----//    
     javax.swing.table.DefaultTableModel defaultTableModel;
@@ -92,7 +92,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
         com.JD.StaticData.Static_DATA.driverPartyName_ComboBox = driverPartyName_ComboBox;
         webCam_Panel.add(com.JD.StaticData.Static_DATA.webPanel);
-        com.JD.StaticData.Static_DATA.webCam_Panel=webCam_Panel;
+        com.JD.StaticData.Static_DATA.webCam_Panel = webCam_Panel;
         //------ Load PartyName and WebPanel From com.JD.StaticData.Static_DATA-----//
 
         //--- Add Calender To DatePanel_Panel----//
@@ -725,7 +725,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             mobile_TextField.setText(d.getDriverMobile());
             bloodGroup_ComboBox.setSelectedItem(d.getDriverBloodGroup());
             licence_TextField.setText(d.getRawField1());
-            outputPathTemp = d.getDriverPic();            
+            outputPathTemp = d.getDriverPic();
             ico = new ImageIcon(convertStringToImageByteArray(d.getDriverPic()));
             photo_Lable.setIcon(ico);
         }
@@ -751,7 +751,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         indexJTable = -1;
         Session session = driverSessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
-        cr.add(Restrictions.like("driverName", driverNameTemp+"%"));
+        cr.add(Restrictions.like("driverName", driverNameTemp + "%"));
         List results = cr.list();
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
@@ -767,7 +767,6 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
-         
     }//GEN-LAST:event_print_ButtonActionPerformed
 
     private String convertStringToImageByteArray(String imageString) {
@@ -806,6 +805,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             reset();
             resetJTable();
             loadDate_ComboBox.addItem(driverName);
+            if (driverPartyLink.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
+                com.JD.StaticData.Static_DATA.operatorName_ComboBox.addItem(driverName);
+            }
             JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Added Successfully");
         } else {
             JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Already Exist");
@@ -833,7 +835,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             d.setDriverAddedByPersonName(driverAddedByPersonName);
             d.setDriverAddedWithRight(driverAddedWithRight);
             d.setDriverDateOfJoining(driverDateOfJoining);
-            d.setDriverPic(driverPic);            
+            d.setDriverPic(driverPic);
             session.save(d);
             transaction.commit();
             JOptionPane.showMessageDialog(null, "Driver " + driverName + "Updated Successfully.");
