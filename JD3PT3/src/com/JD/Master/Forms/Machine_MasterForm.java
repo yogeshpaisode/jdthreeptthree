@@ -616,26 +616,21 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         Session session = masterFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", macineNumberTemp));
-
         List results = cr.list();
-
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             machinePartyName_ComboBox.setSelectedItem(m.getMachinePartyLink());
             type_ComboBox.setSelectedItem(m.getMachineType());
             machineName_Combobox.setSelectedItem(m.getMachineName());
+            machineName_Combobox.setSelectedIndex(0);
             model_TextField.setText(m.getMachineNumber());
-
-
             if (m.getMachineIdentification().equals("SELF")) {
                 fuelAvilable_TextField.setText(m.getMachineFuel().toString());
                 currentReading_TextField.setText(m.getMachineCurrentReading().toString());
                 servicingStatus_TextField.setText(m.getMachineServicingLog().toString());
                 expectedAverage_TextField.setText(m.getMachineExpectedAvg().toString());
             }
-
         }
-
         session.close();
     }//GEN-LAST:event_loadData_ComboBoxActionPerformed
 
@@ -699,6 +694,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             session.save(m);
             transaction.commit();
             com.JD.StaticData.Static_DATA.sell_Report_Machine_Number.addItem(machineNumber);
+            loadData_ComboBox.addItem(machineNumber);
             if (machinePartyLink.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
                 com.JD.StaticData.Static_DATA.number_ComboBox.addItem(machineNumber);
             } 
