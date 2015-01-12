@@ -386,7 +386,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         session.save(p);
         transaction.commit();
         session.close();
-        setCurrentDieselLog(presentQuantity);
+        setCurrentDieselLog(addedQuantity);
         JOptionPane.showMessageDialog(null, "Diesel Updated Successfully");
         if (oilCompanyList.contains(oilCompanyName)) {
         } else {
