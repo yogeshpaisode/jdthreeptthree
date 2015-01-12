@@ -344,7 +344,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="addDataToDatabase_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Diesel"/>
+            <Property name="text" type="java.lang.String" value="Sell Diesel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addDataToDatabase_ButtonActionPerformed"/>
