@@ -6,6 +6,7 @@ package com.JD.Machine.StartStop;
 
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
@@ -23,7 +24,7 @@ import org.hibernate.criterion.Restrictions;
 public class StartStop_Form extends javax.swing.JFrame {
 
     boolean flag = false;
-    boolean flag1=false;
+    boolean flag1 = false;
     //---------------Load Data------------//
     String machineNumber = "";
     String machineName = "";
@@ -75,6 +76,13 @@ public class StartStop_Form extends javax.swing.JFrame {
         reset_Status_Table();
         reset_detailList_Table();
         updateComboBox();
+        start_Button.setEnabled(false);
+        stop_Button.setEnabled(false);
+        operatorName_ComboBox.setEnabled(false);
+        reading_TextField.setEnabled(false);
+        remark_TextField.setEnabled(false);
+        reading_TextField.setBackground(Color.lightGray);
+        remark_TextField.setBackground(Color.lightGray);
     }
 
     /**
@@ -92,21 +100,24 @@ public class StartStop_Form extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         number_ComboBox = new javax.swing.JComboBox();
         name_Lable = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        load_Button = new javax.swing.JButton();
+        stopMachine_Panel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         operatorName_ComboBox = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        reading_TextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        remark_TextField = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         status_Table = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        start_Button = new javax.swing.JButton();
+        stop_Button = new javax.swing.JButton();
+        reset_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,6 +151,11 @@ public class StartStop_Form extends javax.swing.JFrame {
         jLabel1.setText("* Machine Number:");
 
         number_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Number" }));
+        number_ComboBox.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                number_ComboBoxComponentAdded(evt);
+            }
+        });
         number_ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 number_ComboBoxActionPerformed(evt);
@@ -150,10 +166,10 @@ public class StartStop_Form extends javax.swing.JFrame {
         name_Lable.setText(" Select Machine Number ");
         name_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
-        jButton1.setText("Load Data");
+        load_Button.setText("Load Data");
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 51));
-        jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
+        stopMachine_Panel.setBackground(new java.awt.Color(255, 255, 51));
+        stopMachine_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
 
         jLabel2.setText("Stop Machine:");
 
@@ -165,46 +181,46 @@ public class StartStop_Form extends javax.swing.JFrame {
 
         jLabel6.setText("   Remark:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        remark_TextField.setColumns(20);
+        remark_TextField.setLineWrap(true);
+        remark_TextField.setRows(5);
+        jScrollPane2.setViewportView(remark_TextField);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout stopMachine_PanelLayout = new javax.swing.GroupLayout(stopMachine_Panel);
+        stopMachine_Panel.setLayout(stopMachine_PanelLayout);
+        stopMachine_PanelLayout.setHorizontalGroup(
+            stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stopMachine_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stopMachine_PanelLayout.createSequentialGroup()
+                        .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(operatorName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1)
+                            .addComponent(reading_TextField)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        stopMachine_PanelLayout.setVerticalGroup(
+            stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(stopMachine_PanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(operatorName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(stopMachine_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
@@ -243,6 +259,17 @@ public class StartStop_Form extends javax.swing.JFrame {
 
         jButton3.setText("Print");
 
+        start_Button.setText("Start Machine ");
+
+        stop_Button.setText("Stop Machine");
+
+        reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout StartStop_PanelLayout = new javax.swing.GroupLayout(StartStop_Panel);
         StartStop_Panel.setLayout(StartStop_PanelLayout);
         StartStop_PanelLayout.setHorizontalGroup(
@@ -251,26 +278,32 @@ public class StartStop_Form extends javax.swing.JFrame {
             .addGroup(StartStop_PanelLayout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(StartStop_PanelLayout.createSequentialGroup()
-                            .addComponent(number_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(name_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(StartStop_PanelLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(number_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(name_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(stopMachine_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartStop_PanelLayout.createSequentialGroup()
+                        .addComponent(load_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(reset_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(start_Button)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(stop_Button)))
                 .addGap(18, 18, 18)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(StartStop_PanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 418, Short.MAX_VALUE))))
+                        .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(StartStop_PanelLayout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         StartStop_PanelLayout.setVerticalGroup(
             StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -284,12 +317,15 @@ public class StartStop_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(stopMachine_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(load_Button)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(start_Button)
+                    .addComponent(stop_Button)
+                    .addComponent(reset_Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -309,7 +345,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void updateComboBox() {
-        flag1=false;
+        flag1 = false;
         Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
@@ -324,7 +360,8 @@ public class StartStop_Form extends javax.swing.JFrame {
             operatorName_ComboBox.addItem(d.getDriverName());
         }
         session.close();
-        flag1=true;
+        flag1 = true;
+        name_Lable.setText(" Select Machine Number ");
     }
 
     private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
@@ -338,10 +375,60 @@ public class StartStop_Form extends javax.swing.JFrame {
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
                 name_Lable.setText("  " + m.getMachineName() + "  ");
+                if (m.getMachineStatus().equals("ON")) {
+                    operation(true);
+                    stop_Button.setEnabled(true);
+                } else {
+                    operation(false);
+                    start_Button.setEnabled(true);
+                }
             }
             session.close();
         }
     }//GEN-LAST:event_number_ComboBoxActionPerformed
+
+    void operation(boolean flag) {
+        if (flag) {
+            operatorName_ComboBox.setEnabled(true);
+            reading_TextField.setEnabled(true);
+            remark_TextField.setEnabled(true);
+            reading_TextField.setBackground(Color.white);
+            remark_TextField.setBackground(Color.white);           
+            
+        } else {
+            operatorName_ComboBox.setEnabled(false);
+            reading_TextField.setEnabled(false);
+            remark_TextField.setEnabled(false);
+            reading_TextField.setBackground(Color.lightGray);
+            remark_TextField.setBackground(Color.lightGray);          
+            
+        }
+    }
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
+    private void number_ComboBoxComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_number_ComboBoxComponentAdded
+        // TODO add your handling code here:
+        flag1 = false;
+    }//GEN-LAST:event_number_ComboBoxComponentAdded
+
+    void reset() {
+        start_Button.setEnabled(false);
+        stop_Button.setEnabled(false);
+        name_Lable.setText(" Select Machine Number ");
+        number_ComboBox.setSelectedIndex(0);
+        operatorName_ComboBox.setSelectedIndex(0);
+        reading_TextField.setText("");
+        remark_TextField.setText("");
+        operatorName_ComboBox.setEnabled(false);
+        reading_TextField.setEnabled(false);
+        remark_TextField.setEnabled(false);
+        reading_TextField.setBackground(Color.lightGray);
+        remark_TextField.setBackground(Color.lightGray);
+    }
 
     void reset_Status_Table() {
         flag = false;
@@ -424,7 +511,6 @@ public class StartStop_Form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JPanel StartStop_Panel;
     private javax.swing.JTable detailList_Table;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -433,15 +519,19 @@ public class StartStop_Form extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton load_Button;
     private javax.swing.JLabel name_Lable;
     private javax.swing.JComboBox number_ComboBox;
     private javax.swing.JComboBox operatorName_ComboBox;
+    private javax.swing.JTextField reading_TextField;
+    private javax.swing.JTextArea remark_TextField;
+    private javax.swing.JButton reset_Button;
+    private javax.swing.JButton start_Button;
     private javax.swing.JTable status_Table;
+    private javax.swing.JPanel stopMachine_Panel;
+    private javax.swing.JButton stop_Button;
     // End of variables declaration//GEN-END:variables
 }
