@@ -433,7 +433,6 @@ public class StartStop_Form extends javax.swing.JFrame {
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", machineNumber));
         List results = cr.list();
-
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             if (m.getMachineFuel() <= 0.0) {
@@ -441,9 +440,8 @@ public class StartStop_Form extends javax.swing.JFrame {
             } else {
                 Transaction transaction = session.beginTransaction();
                 m.setMachineStatus("ON");
-                m.setMachineStartDate(new Date());
-                Date startTime = formatter.parse(new SimpleDateFormat("HH:mm:ss").format(new Date()));
-                m.setMachineStartTime(startTime);
+                m.setMachineStartDate(new Date());                
+                m.setMachineStartTime(new Date());
                 session.save(m);
                 transaction.commit();
                 JOptionPane.showMessageDialog(null, "Machine Number " + machineNumber + " Started Successfully.");
@@ -451,12 +449,10 @@ public class StartStop_Form extends javax.swing.JFrame {
                 reset_Status_Table();
             }
         }
-
-        session.close();
-        
+        session.close();        
         }
         catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showMessageDialog(null, "Something Went Wrong..");
         }
 
     }//GEN-LAST:event_start_ButtonActionPerformed
