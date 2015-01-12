@@ -199,7 +199,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
         driverName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Driver Name" }));
 
-        addDataToDatabase_Button.setText("Add Diesel");
+        addDataToDatabase_Button.setText("Sell Diesel");
         addDataToDatabase_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addDataToDatabase_ButtonActionPerformed(evt);
