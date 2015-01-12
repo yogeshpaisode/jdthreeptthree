@@ -130,4 +130,12 @@ public class Static_DATA {
     public static javax.swing.JComboBox sell_Report_Machine_Number = null;
     public static com.JD.DailyReports.SellDiesel_Report sellDiesel_Report=null;
     //-----From Daily Report-------------------// 
+    
+    //-----From Machine Start Stop------------//
+    public static javax.swing.JComboBox number_ComboBox = null;
+    public static javax.swing.JComboBox operatorName_ComboBox = null;
+    
+    //-----From Machine Start Stop------------//
+    
+    
 }

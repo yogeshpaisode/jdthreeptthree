@@ -699,6 +699,9 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             session.save(m);
             transaction.commit();
             com.JD.StaticData.Static_DATA.sell_Report_Machine_Number.addItem(machineNumber);
+            if (machinePartyLink.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
+                com.JD.StaticData.Static_DATA.number_ComboBox.addItem(machineNumber);
+            } 
             reset();
             resetJTable();
         } else {

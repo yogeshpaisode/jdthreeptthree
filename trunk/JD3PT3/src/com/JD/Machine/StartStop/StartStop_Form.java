@@ -22,7 +22,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class StartStop_Form extends javax.swing.JFrame {
 
-    boolean flag=false;
+    boolean flag = false;
     //---------------Load Data------------//
     String machineNumber = "";
     String machineName = "";
@@ -67,10 +67,13 @@ public class StartStop_Form extends javax.swing.JFrame {
      */
     public StartStop_Form() {
         initComponents();
+        com.JD.StaticData.Static_DATA.number_ComboBox = number_ComboBox;
+        com.JD.StaticData.Static_DATA.operatorName_ComboBox = operatorName_ComboBox;
         status_Table_Model = (DefaultTableModel) status_Table.getModel();
         detailList_Table_Model = (DefaultTableModel) detailList_Table.getModel();
         reset_Status_Table();
         reset_detailList_Table();
+        updateComboBox();
     }
 
     /**
@@ -92,7 +95,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        operatorName_ComboBox = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -155,7 +158,7 @@ public class StartStop_Form extends javax.swing.JFrame {
 
         jLabel4.setText("* Operator Name:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Operator Name" }));
+        operatorName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Operator Name" }));
 
         jLabel5.setText("* Current Reading:");
 
@@ -181,7 +184,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(operatorName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField1)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -194,7 +197,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(operatorName_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
@@ -304,12 +307,29 @@ public class StartStop_Form extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void updateComboBox() {
+        Session session = init_SessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
+        for (Object object : cr.list()) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            number_ComboBox.addItem(m.getMachineNumber());
+        }
+        cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
+        cr.add(Restrictions.eq("driverPartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
+        for (Object object : cr.list()) {
+            com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
+            operatorName_ComboBox.addItem(d.getDriverName());
+        }
+        session.close();
+    }
+
     private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_number_ComboBoxActionPerformed
 
     void reset_Status_Table() {
-        flag=false;
+        flag = false;
         number_ComboBox.removeAllItems();
         number_ComboBox.addItem("Select Machine Number");
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
@@ -328,7 +348,7 @@ public class StartStop_Form extends javax.swing.JFrame {
             number_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
-        flag=true;
+        flag = true;
     }
 
     void reset_detailList_Table() {
@@ -336,14 +356,14 @@ public class StartStop_Form extends javax.swing.JFrame {
             detailList_Table_Model.removeRow(i);
         }
         index_detailList_Table = -1;
-        Session session = init_SessionFactory.openSession();   
-        Query q=session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");        
+        Session session = init_SessionFactory.openSession();
+        Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
         for (Object object : q.list()) {
-            com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m=(com.JD.Machine.StartStop.Hibernate.config.Machinestartstop)object;
-            detailList_Table_Model.insertRow(index_detailList_Table,new Object[]{m.getMachineNumber(),m.getMachineName(),m.getOperatorName(),m.getStartDate(),m.getStartTime(),m.getStopDate(),m.getStopTime(),m.getTotalTime(),m.getStartReading(),m.getStopReading(),m.getTotalReading(),m.getLastFuel(),m.getPresentFuel(),m.getConsumeFuel(),m.getAverage()});
-        }        
-        session.close();       
-   }
+            com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
+            detailList_Table_Model.insertRow(index_detailList_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
+        }
+        session.close();
+    }
 
     /**
      * @param args the command line arguments
@@ -392,7 +412,6 @@ public class StartStop_Form extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,6 +426,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel name_Lable;
     private javax.swing.JComboBox number_ComboBox;
+    private javax.swing.JComboBox operatorName_ComboBox;
     private javax.swing.JTable status_Table;
     // End of variables declaration//GEN-END:variables
 }
