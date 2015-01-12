@@ -120,6 +120,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
 
         betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(betwee_CheackBox);
         betwee_CheackBox.setText("Between");
         betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +130,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         });
 
         equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(equal_CheackBox);
         equal_CheackBox.setText("Equal");
         equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +140,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         });
 
         early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(early_CheackBox);
         early_CheackBox.setText("Early");
         early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -147,6 +150,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         });
 
         late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(late_CheackBox);
         late_CheackBox.setText("Late");
         late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +164,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         jLabel3.setText("To:");
 
         clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        date_ButtonGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
 
         javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
