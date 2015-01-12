@@ -136,6 +136,11 @@ public class StartStop_Form extends javax.swing.JFrame {
         jLabel1.setText("* Machine Number:");
 
         number_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Machine Number" }));
+        number_ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                number_ComboBoxActionPerformed(evt);
+            }
+        });
 
         name_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
         name_Lable.setText(" Select Machine Number ");
@@ -298,6 +303,10 @@ public class StartStop_Form extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_number_ComboBoxActionPerformed
 
     void reset_Status_Table() {
         flag=false;
