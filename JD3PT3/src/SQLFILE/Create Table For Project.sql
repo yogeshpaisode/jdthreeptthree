@@ -157,7 +157,7 @@ create table MachineMaster (
    machineExpectedAVG double,
 
    machineStatus text,
-   machineStartTime date,
+   machineStartTime time,
    machineStartDate date,
    machineCurrentReading int,
    machineServicingNumber double,

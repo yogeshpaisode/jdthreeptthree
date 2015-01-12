@@ -7,14 +7,14 @@ package com.JD.Machine.StartStop;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
+import java.lang.InstantiationException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -25,6 +25,7 @@ public class StartStop_Form extends javax.swing.JFrame {
 
     boolean flag = false;
     boolean flag1 = false;
+    SimpleDateFormat formatter;
     //---------------Load Data------------//
     String machineNumber = "";
     String machineName = "";
@@ -75,6 +76,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         detailList_Table_Model = (DefaultTableModel) detailList_Table.getModel();
         reset_Status_Table();
         reset_detailList_Table();
+        flag1 = false;
         updateComboBox();
         start_Button.setEnabled(false);
         stop_Button.setEnabled(false);
@@ -260,6 +262,11 @@ public class StartStop_Form extends javax.swing.JFrame {
         jButton3.setText("Print");
 
         start_Button.setText("Start Machine ");
+        start_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                start_ButtonActionPerformed(evt);
+            }
+        });
 
         stop_Button.setText("Stop Machine");
 
@@ -365,7 +372,8 @@ public class StartStop_Form extends javax.swing.JFrame {
     }
 
     private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:          
+
         if (flag1) {
             String vehicleNumberTemp = number_ComboBox.getSelectedItem().toString();
             Session session = init_SessionFactory.openSession();
@@ -378,9 +386,11 @@ public class StartStop_Form extends javax.swing.JFrame {
                 if (m.getMachineStatus().equals("ON")) {
                     operation(true);
                     stop_Button.setEnabled(true);
+                    start_Button.setEnabled(false);
                 } else {
                     operation(false);
                     start_Button.setEnabled(true);
+                    stop_Button.setEnabled(false);
                 }
             }
             session.close();
@@ -393,15 +403,15 @@ public class StartStop_Form extends javax.swing.JFrame {
             reading_TextField.setEnabled(true);
             remark_TextField.setEnabled(true);
             reading_TextField.setBackground(Color.white);
-            remark_TextField.setBackground(Color.white);           
-            
+            remark_TextField.setBackground(Color.white);
+
         } else {
             operatorName_ComboBox.setEnabled(false);
             reading_TextField.setEnabled(false);
             remark_TextField.setEnabled(false);
             reading_TextField.setBackground(Color.lightGray);
-            remark_TextField.setBackground(Color.lightGray);          
-            
+            remark_TextField.setBackground(Color.lightGray);
+
         }
     }
 
@@ -415,11 +425,47 @@ public class StartStop_Form extends javax.swing.JFrame {
         flag1 = false;
     }//GEN-LAST:event_number_ComboBoxComponentAdded
 
+    private void start_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_ButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+        String machineNumber = number_ComboBox.getSelectedItem().toString();
+        Session session = init_SessionFactory.openSession();
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+        cr.add(Restrictions.eq("machineNumber", machineNumber));
+        List results = cr.list();
+
+        for (Object object : results) {
+            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+            if (m.getMachineFuel() <= 0.0) {
+                JOptionPane.showMessageDialog(null, "Cant Start As No Fuel In Machine Is 0.0 LTR");
+            } else {
+                Transaction transaction = session.beginTransaction();
+                m.setMachineStatus("ON");
+                m.setMachineStartDate(new Date());
+                Date startTime = formatter.parse(new SimpleDateFormat("HH:mm:ss").format(new Date()));
+                m.setMachineStartTime(startTime);
+                session.save(m);
+                transaction.commit();
+                JOptionPane.showMessageDialog(null, "Machine Number " + machineNumber + " Started Successfully.");
+                reset();
+                reset_Status_Table();
+            }
+        }
+
+        session.close();
+        
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }//GEN-LAST:event_start_ButtonActionPerformed
+
     void reset() {
         start_Button.setEnabled(false);
         stop_Button.setEnabled(false);
         name_Lable.setText(" Select Machine Number ");
-        number_ComboBox.setSelectedIndex(0);
+        number_ComboBox.setSelectedItem("Select Machine Number");
         operatorName_ComboBox.setSelectedIndex(0);
         reading_TextField.setText("");
         remark_TextField.setText("");
@@ -432,8 +478,6 @@ public class StartStop_Form extends javax.swing.JFrame {
 
     void reset_Status_Table() {
         flag = false;
-        number_ComboBox.removeAllItems();
-        number_ComboBox.addItem("Select Machine Number");
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
         }
@@ -447,7 +491,6 @@ public class StartStop_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
             status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime()});
-            number_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
         flag = true;
