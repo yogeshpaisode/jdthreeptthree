@@ -75,7 +75,6 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="phone_TextField" max="32767" attributes="0"/>
                       <Component id="city_TextField" max="32767" attributes="0"/>
                       <Component id="name_ComboBox" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
@@ -83,6 +82,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="reset_Button" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="phone_TextField" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
