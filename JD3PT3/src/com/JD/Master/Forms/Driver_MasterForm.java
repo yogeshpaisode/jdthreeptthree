@@ -24,6 +24,8 @@ import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.*;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -794,8 +796,12 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     void insert() {
         Session session = driverSessionFactory.openSession();
-        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
-        cr.add(Restrictions.eq("driverName", driverName));
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);        
+        Criterion dname = Restrictions.eq("driverName", driverName);
+        Criterion rOne = Restrictions.eq("rawField1", rawField1);
+        // To get records matching with OR condistions
+        LogicalExpression or = Restrictions.or(dname, rOne);
+        cr.add(or);
         List results = cr.list();
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
@@ -810,7 +816,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Added Successfully");
         } else {
-            JOptionPane.showMessageDialog(null, "Driver Name " + driverName + " Already Exist");
+            JOptionPane.showMessageDialog(null, "Either Driver Name " + driverName + " Or Driving Licence No: " + rawField1 + " Already Exist");
         }
         session.close();
     }
