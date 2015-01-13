@@ -7,6 +7,7 @@ package com.JD.Machine.StartStop;
 import com.JD.Machine.StartStop.Hibernate.config.Machinestartstop;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
+import com.JD.Validator.Validator;
 import java.awt.Color;
 import java.lang.InstantiationException;
 import java.text.SimpleDateFormat;
@@ -65,7 +66,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     int index_status_Table = -1;
     int index_detailList_Table = -1;
     //--------------Load Table Model-----------------//   
-
+    com.JD.Validator.Validator validator=new Validator();
     /**
      * Creates new form Party_MasterForm
      */
@@ -181,6 +182,12 @@ public class StartStop_Form extends javax.swing.JFrame {
         operatorName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Operator Name" }));
 
         jLabel5.setText("* Current Reading:");
+
+        reading_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                reading_TextFieldKeyReleased(evt);
+            }
+        });
 
         jLabel6.setText("   Remark:");
 
@@ -488,6 +495,11 @@ public class StartStop_Form extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_stop_ButtonActionPerformed
+
+    private void reading_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reading_TextFieldKeyReleased
+        // TODO add your handling code here:
+        reading_TextField.setText(validator.stringValidator(reading_TextField.getText()));
+    }//GEN-LAST:event_reading_TextFieldKeyReleased
 
     void step1() {
 
