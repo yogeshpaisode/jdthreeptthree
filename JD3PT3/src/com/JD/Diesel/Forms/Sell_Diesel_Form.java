@@ -330,7 +330,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         machineNumber = machineNumber_ComboBox.getSelectedItem().toString();
         machineName = machineName_Lable.getText();
         lastQuantity = purchaseDiesel_Form.setCurrentDieselLog(0.0);
-        personPresentName = personName_ComboBox.getSelectedItem().toString();
+        personPresentName = personName_ComboBox.getSelectedItem().toString();        
         String usedQuantityTemp = sell_TextField.getText();
         dateOfAddition = new Date();
         timeOfAddition = new Date();
@@ -369,6 +369,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
 
     void addDieselToMachine() {
+        personPresentName=personPresentName.toUpperCase();
         Session session = sellDiesel_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         presentQuantity = setCurrentDieselLog(usedQuantity);
@@ -381,6 +382,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         new GetReceipt(": " + partyLink, ": " + machineName, ": " + machineNumber, ": " + usedQuantity, ": " + personPresentName, ": " + driverName);
         if (!personList.contains(personPresentName)) {
             personName_ComboBox.addItem(personPresentName);
+            personList.add(personPresentName);
             com.JD.StaticData.Static_DATA.sell_Search_person_ComboBox.addItem(personPresentName);
         }
         currenTDate = new Date();

@@ -388,6 +388,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
     void addData() {
+        personPresentName = personPresentName.toUpperCase();
         addDataToDatabase_Button.setText("Processing..");
         Session session = diesel_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -402,8 +403,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             companyName_comboBox.addItem(oilCompanyName);
             oilCompanyList.add(oilCompanyName);
         }
-        if (personNameList.contains(personPresentName)) {
-        } else {
+        if (!personNameList.contains(personPresentName)) {
             personName_comboBox.addItem(personPresentName);
             personNameList.add(personPresentName);
         }
