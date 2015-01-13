@@ -217,7 +217,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
         jLabel1.setText("* Current Quantity Of Diesel :");
 
-        jLabel2.setText("* Received  Quantity Of Disel:");
+        jLabel2.setText("* Received  Quantity Of Diesel:");
 
         received_TextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -361,19 +361,28 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         oilCompanyName = companyName_comboBox.getSelectedItem().toString();
         orderSlipNumber = slipNo_TextField.getText();
         personPresentName = personName_comboBox.getSelectedItem().toString();
-        if (receivedQuantityTemp.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please Provide Received Quntity");
+
+        if (receivedQuantityTemp.equals("0")) {
+            JOptionPane.showMessageDialog(null, "Please Provide Received Quntity Can Not Be 0 ");
         } else {
-            if (personPresentName.equals("Select Person Name")) {
-                JOptionPane.showMessageDialog(null, "Please Provide Person Name");
+            if (receivedQuantityTemp.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please Provide Received Quntity");
             } else {
-                if (oilCompanyName.equals("Oil Company Name")) {
-                    JOptionPane.showMessageDialog(null, "Please Provide Oil Company Name");
+                addedQuantity = Double.parseDouble(receivedQuantityTemp);
+                if (addedQuantity <= 0) {
+                    JOptionPane.showMessageDialog(null, "Please Provide Valid Received Quantity ");
                 } else {
-                    addedQuantity = Double.parseDouble(receivedQuantityTemp);
-                    lastQuentity = setCurrentDieselLog(0.0);
-                    presentQuantity = addedQuantity + lastQuentity;
-                    addData();
+                    if (personPresentName.equals("Select Person Name")) {
+                        JOptionPane.showMessageDialog(null, "Please Provide Person Name");
+                    } else {
+                        if (oilCompanyName.equals("Oil Company Name")) {
+                            JOptionPane.showMessageDialog(null, "Please Provide Oil Company Name");
+                        } else {
+                            lastQuentity = setCurrentDieselLog(0.0);
+                            presentQuantity = addedQuantity + lastQuentity;
+                            addData();
+                        }
+                    }
                 }
             }
         }
