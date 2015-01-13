@@ -19,17 +19,18 @@ public class Report_Home extends javax.swing.JFrame {
      * Creates new form MasterHome
      */
     //------Load Data------//
-    DM_Report dM_Report=new DM_Report();
-    PurchaseDiesel_Report purchaseDiesel_Report=new PurchaseDiesel_Report();
-    SellDiesel_Report sellDiesel_Report=new SellDiesel_Report();
+    DM_Report dM_Report = new DM_Report();
+    PurchaseDiesel_Report purchaseDiesel_Report = new PurchaseDiesel_Report();
+    SellDiesel_Report sellDiesel_Report = new SellDiesel_Report();
+    StartStop_DailyRport_Form startStop_DailyRport_Form = new StartStop_DailyRport_Form();
     //------Load Data------//   
-   
 
     public Report_Home() {
-        initComponents();        
+        initComponents();
         report_TabbedPanel.add("Print Receipt/DM Daily Report", dM_Report.DmReport_Panel);
         report_TabbedPanel.add("Purchase Diesel Report", purchaseDiesel_Report.purchase_Panel);
         report_TabbedPanel.add("Sell Diesel Report", sellDiesel_Report.sell_Panel);
+        report_TabbedPanel.add("Machine Start Stop Daily Peport", startStop_DailyRport_Form.startStop_Panel);
     }
 
     /**
