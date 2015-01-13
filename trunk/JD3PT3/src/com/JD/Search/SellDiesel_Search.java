@@ -33,7 +33,6 @@ public class SellDiesel_Search extends javax.swing.JFrame {
     boolean flag2 = false;
     String personNameTemp = "";
     //---Load Date Panel---//
-   
     com.JD.DatePicker.DatePicker datePicker = new DatePicker();
     JDatePickerImpl date1 = datePicker.getDateObjectUp();
     JDatePickerImpl date2 = datePicker.getDateObjectDown();
@@ -373,7 +372,6 @@ public class SellDiesel_Search extends javax.swing.JFrame {
             }
             cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
             cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
-            cr.add(Restrictions.eq("machineType", "VEHICLE"));
             results = cr.list();
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
@@ -498,7 +496,7 @@ public class SellDiesel_Search extends javax.swing.JFrame {
     }//GEN-LAST:event_search_ButtonActionPerformed
 
     void reset() {
-     
+
         machineName_Lable.setText(" Select Machine Number");
         sell_Search_Party_ComboBox.setSelectedIndex(0);
         sell_Search_person_ComboBox.setSelectedIndex(0);
