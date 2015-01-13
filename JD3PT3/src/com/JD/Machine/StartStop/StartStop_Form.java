@@ -4,6 +4,7 @@
  */
 package com.JD.Machine.StartStop;
 
+import com.JD.Machine.StartStop.Hibernate.config.Machinestartstop;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
@@ -498,7 +499,7 @@ public class StartStop_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             startReading = m.getMachineCurrentReading();
             stopReading = Integer.parseInt(reading_TextField.getText());
-           
+
             if (startReading < stopReading) {
                 Transaction transaction = session.beginTransaction();
                 totalReading = stopReading - startReading;
@@ -514,7 +515,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                     m.setMachineStatus("OFF");
                     startDate = m.getMachineStartDate();
                     StartTime = m.getMachineStartTime();
-                    JOptionPane.showMessageDialog(null, consumeFuel);
+
                     session.save(m);
                     transaction.commit();
                     step2();
@@ -527,8 +528,28 @@ public class StartStop_Form extends javax.swing.JFrame {
     }
 
     void step2() {
+        // Y M D
+        //D M Y
+        String tempAry[] = (startDate + "").split("-");
+        String startDateTemp = tempAry[2] + "-" + tempAry[1] + "-" + tempAry[0];
+        String StartTimeTemp = startDateTemp + " " + StartTime;
+        String timeStopTemp = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        String dateStopTemp = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        String StopTimeTemp = dateStopTemp + " " + timeStopTemp;
+        stopDate = new Date();
+        stopTime = new Date();
+        machineName = name_Lable.getText();
+        totalTime = new CalculaterTimeInHR().ConvertDifferenceToHrs(StartTimeTemp, StopTimeTemp);
+        Session session = init_SessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = new Machinestartstop(machineNumber, machineName, startDate, stopDate, StartTime, stopTime, totalTime, startReading, stopReading, totalReading, lastFuel, presentFuel, consumeFuel, average, operatorName, remark, dateOfAddition, timeOfAddition, location, addedByPersonName, addedWithRight, rawField1, rawField2, rawField3, rawField4, rawField5, rawField6);
+        session.save(m);
+        transaction.commit();
+        session.close();
+        JOptionPane.showMessageDialog(null, "Success!");
         reset();
         reset_Status_Table();
+        reset_detailList_Table();
     }
 
     void reset() {
@@ -560,7 +581,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
-            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(),m.getMachineCurrentReading(),m.getMachineFuel()});
+            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
         }
         session.close();
         flag = true;
@@ -574,6 +595,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         Session session = init_SessionFactory.openSession();
         Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
         for (Object object : q.list()) {
+            ++index_detailList_Table;
             com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
             detailList_Table_Model.insertRow(index_detailList_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
         }
