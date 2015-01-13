@@ -32,15 +32,18 @@ public class DM_Search extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     SessionFactory search_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
-    String dmSearch_productName = "";
-    String dmSearch_size = "";
-    String dmSearch_measurement = "";
+    List productNameList = new ArrayList();
+    List measurementList = new ArrayList();
+    List sizeList = new ArrayList();
 
     /**
      * Creates new form Party_MasterForm
      */
     public DM_Search() {
         initComponents();
+        com.JD.StaticData.Static_DATA.productNameList=productNameList;
+        com.JD.StaticData.Static_DATA.measurementList=measurementList;
+        com.JD.StaticData.Static_DATA.sizeList=sizeList;
         //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
@@ -64,26 +67,18 @@ public class DM_Search extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             dmSearch_party_ComboBox.addItem(p.getPartyName());
         }
-        q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
+        
+        q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
         for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
-
-            if (dmSearch_productName.contains(p.getProductName())) {
-            } else {
-                dmSearch_productName = dmSearch_productName + p.getProductName();
-                dmsearch_ProductName_ComboBox.addItem(p.getProductName());
+            com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
+            if (!productNameList.contains(p.getProductName())) {
+                productNameList.add(p.getProductName());
             }
-
-            if (dmSearch_size.contains(p.getProductSize() + "")) {
-            } else {
-                dmSearch_size = dmSearch_size + p.getProductSize();
-                dmsearch_size_ComboBox.addItem(p.getProductSize());
+            if (!measurementList.contains(p.getProductMeasurement())) {
+                measurementList.add(p.getProductMeasurement());
             }
-
-            if (dmSearch_measurement.contains(p.getProductMeasurement())) {
-            } else {
-                dmSearch_measurement = dmSearch_measurement + p.getProductMeasurement();
-                dmSearch_measurement_ComboBox.addItem(p.getProductMeasurement());
+            if (!sizeList.contains(p.getProductSize())) {
+                sizeList.add(p.getProductSize());
             }
         }
         q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
@@ -92,6 +87,16 @@ public class DM_Search extends javax.swing.JFrame {
             dmSearch_srNo_ComboBox.addItem(p.getSrno());
         }
         session.close();
+        for (Object object : productNameList) {
+            dmsearch_ProductName_ComboBox.addItem(object.toString());
+        }
+
+        for (Object object : measurementList) {
+            dmSearch_measurement_ComboBox.addItem(object.toString());
+        }
+        for (Object object : sizeList) {
+            dmsearch_size_ComboBox.addItem(object.toString());
+        }
         //----------Fill ComboBox----------------------------------------------//        
     }
 
