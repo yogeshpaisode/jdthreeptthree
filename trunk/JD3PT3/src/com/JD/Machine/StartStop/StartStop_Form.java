@@ -104,7 +104,6 @@ public class StartStop_Form extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         number_ComboBox = new javax.swing.JComboBox();
         name_Lable = new javax.swing.JLabel();
-        load_Button = new javax.swing.JButton();
         stopMachine_Panel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -169,8 +168,6 @@ public class StartStop_Form extends javax.swing.JFrame {
         name_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
         name_Lable.setText(" Select Machine Number ");
         name_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
-
-        load_Button.setText("Load Data");
 
         stopMachine_Panel.setBackground(new java.awt.Color(255, 255, 51));
         stopMachine_Panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 0, 0), 1, true));
@@ -305,14 +302,12 @@ public class StartStop_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(name_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(stopMachine_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StartStop_PanelLayout.createSequentialGroup()
-                        .addComponent(load_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(StartStop_PanelLayout.createSequentialGroup()
+                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reset_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(start_Button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stop_Button)))
+                        .addComponent(start_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(stop_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
@@ -340,7 +335,6 @@ public class StartStop_Form extends javax.swing.JFrame {
                     .addComponent(stopMachine_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(load_Button)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(start_Button)
@@ -498,7 +492,7 @@ public class StartStop_Form extends javax.swing.JFrame {
 
     private void reading_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reading_TextFieldKeyReleased
         // TODO add your handling code here:
-        reading_TextField.setText(validator.stringValidator(reading_TextField.getText()));
+        reading_TextField.setText(validator.intTypeNumberValidator(reading_TextField.getText()));
     }//GEN-LAST:event_reading_TextFieldKeyReleased
 
     void step1() {
@@ -669,7 +663,6 @@ public class StartStop_Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton load_Button;
     private javax.swing.JLabel name_Lable;
     private javax.swing.JComboBox number_ComboBox;
     private javax.swing.JComboBox operatorName_ComboBox;

@@ -57,14 +57,12 @@
                           <Component id="name_Lable" min="-2" pref="206" max="-2" attributes="0"/>
                       </Group>
                       <Component id="stopMachine_Panel" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="load_Button" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="reset_Button" min="-2" pref="134" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="reset_Button" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="start_Button" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="stop_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="start_Button" min="-2" pref="142" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="stop_Button" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -102,7 +100,6 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="load_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="start_Button" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -261,11 +258,6 @@
                 </LineBorder>
               </Border>
             </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="load_Button">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Load Data"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JPanel" name="stopMachine_Panel">
