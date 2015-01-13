@@ -34,9 +34,9 @@ public class StartStop_Form extends javax.swing.JFrame {
     Date StartTime = null;
     Date stopTime = null;
     String totalTime = "";
-    double startReading = 0;
-    double stopReading = 0;
-    double totalReading = 0;
+    int startReading = 0;
+    int stopReading = 0;
+    int totalReading = 0;
     double lastFuel = 0.0;
     double presentFuel = 0.0;
     double consumeFuel = 0.0;
@@ -233,14 +233,14 @@ public class StartStop_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine Number", "Machine Name", "Start Date", "Start Time"
+                "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -269,6 +269,11 @@ public class StartStop_Form extends javax.swing.JFrame {
         });
 
         stop_Button.setText("Stop Machine");
+        stop_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stop_ButtonActionPerformed(evt);
+            }
+        });
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -427,35 +432,104 @@ public class StartStop_Form extends javax.swing.JFrame {
 
     private void start_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_ButtonActionPerformed
         // TODO add your handling code here:
-        try{
-        String machineNumber = number_ComboBox.getSelectedItem().toString();
+        try {
+            String machineNumber = number_ComboBox.getSelectedItem().toString();
+            Session session = init_SessionFactory.openSession();
+            Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
+            cr.add(Restrictions.eq("machineNumber", machineNumber));
+            List results = cr.list();
+            for (Object object : results) {
+                com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
+                if (m.getMachineFuel() <= 0.0) {
+                    JOptionPane.showMessageDialog(null, "Cant Start As No Fuel In Machine Is 0.0 LTR");
+                } else {
+                    Transaction transaction = session.beginTransaction();
+                    m.setMachineStatus("ON");
+                    m.setMachineStartDate(new Date());
+                    m.setMachineStartTime(new Date());
+                    session.save(m);
+                    transaction.commit();
+                    JOptionPane.showMessageDialog(null, "Machine Number " + machineNumber + " Started Successfully.");
+                    reset();
+                    reset_Status_Table();
+                }
+            }
+            session.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong..");
+        }
+
+    }//GEN-LAST:event_start_ButtonActionPerformed
+
+    private void stop_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stop_ButtonActionPerformed
+        // TODO add your handling code here:
+        machineNumber = number_ComboBox.getSelectedItem().toString();
+        operatorName = operatorName_ComboBox.getSelectedItem().toString();
+        String currentReadingTemp = reading_TextField.getText();
+        remark = remark_TextField.getText();
+        if (remark.equals("")) {
+            remark = "NO Remark";
+        }
+
+        if (number_ComboBox.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(null, "Please Provide Machine Number");
+        } else {
+            if (operatorName_ComboBox.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(null, "Please Provide Operator Name");
+            } else {
+                if (currentReadingTemp.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please Provide Current Reading");
+                } else {
+                    step1();
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_stop_ButtonActionPerformed
+
+    void step1() {
+
         Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", machineNumber));
         List results = cr.list();
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
-            if (m.getMachineFuel() <= 0.0) {
-                JOptionPane.showMessageDialog(null, "Cant Start As No Fuel In Machine Is 0.0 LTR");
-            } else {
+            startReading = m.getMachineCurrentReading();
+            stopReading = Integer.parseInt(reading_TextField.getText());
+           
+            if (startReading < stopReading) {
                 Transaction transaction = session.beginTransaction();
-                m.setMachineStatus("ON");
-                m.setMachineStartDate(new Date());                
-                m.setMachineStartTime(new Date());
-                session.save(m);
-                transaction.commit();
-                JOptionPane.showMessageDialog(null, "Machine Number " + machineNumber + " Started Successfully.");
-                reset();
-                reset_Status_Table();
+                totalReading = stopReading - startReading;
+                lastFuel = m.getMachineFuel();
+                average = m.getMachineExpectedAvg();
+                consumeFuel = (totalReading / average);
+                if (consumeFuel > m.getMachineFuel()) {
+                    JOptionPane.showMessageDialog(null, "Fraud IN Fuel,Cant Stop Machine,Firing SMS TO OWNER");
+                } else {
+                    presentFuel = m.getMachineFuel() - consumeFuel;
+                    m.setMachineFuel(presentFuel);
+                    m.setMachineCurrentReading(startReading + totalReading);
+                    m.setMachineStatus("OFF");
+                    startDate = m.getMachineStartDate();
+                    StartTime = m.getMachineStartTime();
+                    JOptionPane.showMessageDialog(null, consumeFuel);
+                    session.save(m);
+                    transaction.commit();
+                    step2();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Reading Entered Is Not Valid");
             }
         }
-        session.close();        
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null, "Something Went Wrong..");
-        }
+        session.close();
+    }
 
-    }//GEN-LAST:event_start_ButtonActionPerformed
+    void step2() {
+        reset();
+        reset_Status_Table();
+    }
 
     void reset() {
         start_Button.setEnabled(false);
@@ -486,7 +560,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
-            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime()});
+            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(),m.getMachineCurrentReading(),m.getMachineFuel()});
         }
         session.close();
         flag = true;
