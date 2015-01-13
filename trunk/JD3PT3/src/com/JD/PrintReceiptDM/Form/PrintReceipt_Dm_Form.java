@@ -966,11 +966,11 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                     if (productMeasurement.equals("Select Measurement")) {
                         JOptionPane.showMessageDialog(null, "Please Select Product Measurement");
                     } else {
-                        if (productValueTemp.equals("")) {
-                            JOptionPane.showMessageDialog(null, "Please Provide Value");
+                        if (productValueTemp.equals("") || productValueTemp.equals("0") || productValueTemp.equals("0.")) {
+                            JOptionPane.showMessageDialog(null, "Please Provide Valid Value");
                         } else {
-                            if (totalAmountTemp.equals("")) {
-                                JOptionPane.showMessageDialog(null, "Please Provide Total Amount");
+                            if (totalAmountTemp.equals("") || totalAmountTemp.equals("0") || totalAmountTemp.equals("0.")) {
+                                JOptionPane.showMessageDialog(null, "Please Provide Valid Total Amount");
                             } else {
                                 if (payment) {
                                     if (driverName.equals("Select Driver Name")) {
@@ -1019,8 +1019,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                     twoPayAmount = totalAmountINT;
                     payableAmount = payableINT;
                     twoPayAmount = twopayINT;
-                    if ((payableINT >= twopayINT) && payableINT < totalAmountINT) {
-                        paymentType="CASHANDTWOPAY";
+                    if ((payableINT != totalAmountINT) && payableINT < totalAmountINT) {
+                        paymentType = "CASHANDTWOPAY";
                         businessLogic();
                     } else {
                         JOptionPane.showMessageDialog(null, "Please Provide Valid Payable Amount And TwoPay Amount");
@@ -1033,7 +1033,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 int payableINT = Integer.parseInt(payableTEMP);
                 twoPayAmount = totalAmountINT;
                 payableAmount = payableINT;
-                paymentType="CASH";
+                paymentType = "CASH";
                 businessLogic();
             } else {
                 JOptionPane.showMessageDialog(null, "Please Provide Valid Payable Amount");
@@ -1041,9 +1041,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         } else if (twoPay_CheackBox.isSelected()) {
             if (totalAmountTEMP.equals(twoPayTEMP)) {
                 int totalAmountINT = Integer.parseInt(totalAmountTEMP);
-                paymentType="TWOPAY";
+                paymentType = "TWOPAY";
                 int twopayINT = Integer.parseInt(twoPayTEMP);
-                twoPayAmount = totalAmountINT;               
+                twoPayAmount = totalAmountINT;
                 twoPayAmount = twopayINT;
                 businessLogic();
             } else {
@@ -1253,13 +1253,14 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             d.setMeasurement(" : " + productSize);
             d.setTotalAmount(" : " + totalAmount);
             d.setPayableAmount(" : " + payableAmount);
-            d.setCft(": " + productValue);
+            d.setCft(": " + productValue);           
             d.setPendingAmount(" : " + twoPayAmount);
+           
             d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
             if (proxy_CheackBox.isSelected()) {
                 d.setQuantity("TON");
                 d.setNetWeight(" : " + neightWeight_TextField.getText());
-                d.setGrossWeight(" : " + "88");
+                d.setGrossWeight(" : " + grossWeight_TextField.getText());
             } else {
                 d.setQuantity(productMeasurement);
                 d.setNetWeight(" : " + "Not Applied");
@@ -1271,7 +1272,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
             if (cashAndTwoPay_CheackBox.isSelected()) {
                 d.setInvoiceType(" : Cash and TwoPay");
-                d.setPendingAmount(" : " + "88");
+                d.setPendingAmount(" : " + twoPayAmount);
             }
             if (cash_CheackBox.isSelected()) {
                 d.setInvoiceType(" : Cash");
