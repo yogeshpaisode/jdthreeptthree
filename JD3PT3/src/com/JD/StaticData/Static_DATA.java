@@ -6,6 +6,7 @@ package com.JD.StaticData;
 
 import com.JD.INIT_Data.WebcamPanel;
 import com.github.sarxos.webcam.Webcam;
+import java.util.List;
 import org.hibernate.SessionFactory;
 
 /**
@@ -61,6 +62,9 @@ public class Static_DATA {
     //-----DM Data----------------------------------//
     //-----DM SessionFactory------------------------//
     //-----DM SessionFactory------------------------//
+     public static List productNameTempList=null;
+    public static List sizeTemp=null;
+    public static List measurementTempList=null;
     public static com.JD.PrintReceiptDM.Form.PrintReceipt_Dm_Form dm_Form = null;
     public static javax.swing.JComboBox dm_PartyName = null;
     public static javax.swing.JComboBox dm_ProductName = null;
@@ -108,6 +112,11 @@ public class Static_DATA {
     public static javax.swing.JComboBox dmsearch_ProductName_ComboBox = null;
     public static javax.swing.JComboBox dmsearch_size_ComboBox = null;
     public static javax.swing.JComboBox dmSearch_measurement_ComboBox = null;
+    
+    public static List productNameList=null;
+    public static List measurementList=null;
+    public static List sizeList=null;
+    
     //-----From DM Search-------------------------//
     //-----From Purchase Diesel Search-------------------------//
     public static javax.swing.JComboBox purchaseSearch_company_ComboBox = null;

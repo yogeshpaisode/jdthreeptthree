@@ -351,8 +351,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
         cr.add(Restrictions.eq("productSize", productSize));
         cr.add(Restrictions.eq("productMeasurement", productMeasurement));
         List results = cr.list();
-        productName=productName.toUpperCase();
-        productMeasurement=productMeasurement.toUpperCase();
+        productName = productName.toUpperCase();
+        productMeasurement = productMeasurement.toUpperCase();
         if (results.isEmpty()) {
             Transaction transaction = session.beginTransaction();
             indexJTable = indexJTable + 1;
@@ -382,55 +382,18 @@ public class Product_MasterForm extends javax.swing.JFrame {
     }
 
     void resetDM() {
-        String productNameTemp = "";
-        String sizeTemp = "";
-        String measurementTemp = "";        
-        com.JD.StaticData.Static_DATA.dm_ProductName.removeAllItems();
-        com.JD.StaticData.Static_DATA.dm_ProductName.addItem("Select Product Name");
-        com.JD.StaticData.Static_DATA.dm_Size.removeAllItems();
-        com.JD.StaticData.Static_DATA.dm_Size.addItem("Select Size");
-        com.JD.StaticData.Static_DATA.dm_Measurement.removeAllItems();
-        com.JD.StaticData.Static_DATA.dm_Measurement.addItem("Select Measurement");
-
-       
-        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.removeAllItems();
-        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.removeAllItems();
-        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.removeAllItems();
-        
-        com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.addItem("Product Name");
-        com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.addItem("Size In MM");
-        com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.addItem("Measurement");        
-       
-
-
-        Session session = masterSessionFactory.openSession();
-
-        Query q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
-        for (Object object : q.list()) {
-            com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
-            if (productNameTemp.contains(p.getProductName())) {
-            } else {
-                productNameTemp = productNameTemp + "##" + p.getProductName();
-                com.JD.StaticData.Static_DATA.dm_ProductName.addItem(p.getProductName());
-                com.JD.StaticData.Static_DATA.dmsearch_ProductName_ComboBox.addItem(p.getProductName());
-            }
-
-            if (sizeTemp.contains(p.getProductSize() + "")) {
-            } else {
-                sizeTemp = sizeTemp + "##" + p.getProductSize() + "";
-                com.JD.StaticData.Static_DATA.dm_Size.addItem(p.getProductSize() + "");
-                com.JD.StaticData.Static_DATA.dmsearch_size_ComboBox.addItem(p.getProductSize() + "");
-            }
-
-            if (measurementTemp.contains(p.getProductMeasurement())) {
-            } else {
-                measurementTemp = measurementTemp + "##" + p.getProductMeasurement();
-                com.JD.StaticData.Static_DATA.dm_Measurement.addItem(p.getProductMeasurement());
-                com.JD.StaticData.Static_DATA.dmSearch_measurement_ComboBox.addItem(p.getProductMeasurement());
-            }
-
+        if (!com.JD.StaticData.Static_DATA.productNameTempList.contains(productName)) {
+            com.JD.StaticData.Static_DATA.productNameTempList.add(productName);
+            com.JD.StaticData.Static_DATA.dm_ProductName.addItem(productName);
         }
-        session.close();
+        if (!com.JD.StaticData.Static_DATA.measurementTempList.contains(productMeasurement)) {
+            com.JD.StaticData.Static_DATA.measurementTempList.add(productMeasurement);
+            com.JD.StaticData.Static_DATA.dm_Measurement.addItem(productMeasurement);
+        }
+        if (!com.JD.StaticData.Static_DATA.sizeTemp.contains(productSize)) {
+            com.JD.StaticData.Static_DATA.sizeTemp.add(productSize);
+            com.JD.StaticData.Static_DATA.dm_Size.addItem(productSize);
+        }
     }
 
     void reset() {
