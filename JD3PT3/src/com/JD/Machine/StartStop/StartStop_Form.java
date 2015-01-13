@@ -47,9 +47,9 @@ public class StartStop_Form extends javax.swing.JFrame {
     String remark = "";
     Date dateOfAddition = null;
     Date timeOfAddition = null;
-    String location = "";
-    String addedByPersonName = "";
-    String addedWithRight = "";
+    String location = com.JD.StaticData.Static_DATA.location;
+    String addedByPersonName = com.JD.StaticData.Static_DATA.logIn_UserName;
+    String addedWithRight = com.JD.StaticData.Static_DATA.logIn_Right;
     String rawField1 = "";
     String rawField2 = "";
     String rawField3 = "";
@@ -536,6 +536,8 @@ public class StartStop_Form extends javax.swing.JFrame {
     void step2() {
         // Y M D
         //D M Y
+        dateOfAddition=new Date();
+        timeOfAddition=new Date();
         String tempAry[] = (startDate + "").split("-");
         String startDateTemp = tempAry[2] + "-" + tempAry[1] + "-" + tempAry[0];
         String StartTimeTemp = startDateTemp + " " + StartTime;
