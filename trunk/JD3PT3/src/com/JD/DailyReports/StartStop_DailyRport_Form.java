@@ -2,13 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.JD.Search;
+package com.JD.DailyReports;
 
+import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
@@ -24,9 +28,10 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Yogesh
  */
-public class StartStop_Search_Form extends javax.swing.JFrame {
+public class StartStop_DailyRport_Form extends javax.swing.JFrame {
 
     //---Load Date Panel---//
+    int indexJTable = -1;
     com.JD.DatePicker.DatePicker datePicker = new DatePicker();
     JDatePickerImpl date1 = datePicker.getDateObjectUp();
     JDatePickerImpl date2 = datePicker.getDateObjectDown();
@@ -34,13 +39,16 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     SessionFactory search_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
+    Date currenTDate = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String datestring = dateFormat.format(currenTDate);
 
     /**
      * Creates new form Party_MasterForm
      */
-    public StartStop_Search_Form() {
+    public StartStop_DailyRport_Form() {
         initComponents();
-          //----Load Calender----//
+        //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
         date2.setBackground(Color.yellow);
@@ -58,6 +66,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
             number_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "dateOfAddition='" + datestring + "'");
     }
 
     /**
@@ -210,7 +219,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         name_Lable.setToolTipText("Select Machine Number");
         name_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 51)));
 
-        search_Button.setText("Search");
+        search_Button.setText("Get Report");
         search_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 search_ButtonActionPerformed(evt);
@@ -218,6 +227,11 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         });
 
         reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout startStop_PanelLayout = new javax.swing.GroupLayout(startStop_Panel);
         startStop_Panel.setLayout(startStop_PanelLayout);
@@ -304,6 +318,9 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
 
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
         int month1 = 0;
         int month2 = 0;
         if (date1.getModel().getMonth() == 12) {
@@ -319,7 +336,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         String date11 = date1.getModel().getYear() + "-" + month1 + "-" + date1.getModel().getDay();
         String date22 = date2.getModel().getYear() + "-" + month2 + "-" + date2.getModel().getDay();
         queryList.clear();
-        int indexJTable = -1;
+        indexJTable = -1;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -337,6 +354,9 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
             dateQuery = "startDate='" + date11 + "' ";
         }
         if (dateQuery != null) {
+            queryList.add(dateQuery);
+        } else {
+            dateQuery = "startDate='" + datestring + "'";
             queryList.add(dateQuery);
         }
         if (number_ComboBox.getSelectedIndex() > 0) {
@@ -358,6 +378,18 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
                 }
             }
         }
+        resetJTable(queryMaker);
+        reset();
+    }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "dateOfAddition='" + datestring + "'");
+    }//GEN-LAST:event_reset_ButtonActionPerformed
+
+    void resetJTable(String queryMaker) {
+        indexJTable = -1;
         Session session = search_SessionFactory.openSession();
         Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
@@ -366,8 +398,8 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
         }
         session.close();
-        reset();
-    }//GEN-LAST:event_search_ButtonActionPerformed
+    }
+
     void reset() {
         number_ComboBox.setSelectedIndex(0);
         name_Lable.setText("  Select Machine Number  ");
@@ -394,13 +426,13 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StartStop_Search_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StartStop_DailyRport_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StartStop_Search_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StartStop_DailyRport_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StartStop_Search_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StartStop_DailyRport_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StartStop_Search_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StartStop_DailyRport_Form.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -410,7 +442,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new StartStop_Search_Form().setVisible(true);
+                new StartStop_DailyRport_Form().setVisible(true);
             }
         });
     }
