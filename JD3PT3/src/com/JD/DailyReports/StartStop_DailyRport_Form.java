@@ -66,7 +66,10 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
             number_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
-        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "dateOfAddition='" + datestring + "'");
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");
     }
 
     /**
@@ -385,7 +388,10 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
-        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "dateOfAddition='" + datestring + "'");
+        currenTDate = new Date();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        datestring = dateFormat.format(currenTDate);
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");
     }//GEN-LAST:event_reset_ButtonActionPerformed
 
     void resetJTable(String queryMaker) {
