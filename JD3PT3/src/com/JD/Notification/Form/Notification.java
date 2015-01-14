@@ -27,30 +27,157 @@ public class Notification extends javax.swing.JFrame {
     private void initComponents() {
 
         notification_Panel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        fuelQuantity_Lable1 = new javax.swing.JLabel();
+        running_Lable1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        status_Table = new javax.swing.JTable();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        servicing_Table = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         notification_Panel.setBackground(new java.awt.Color(255, 102, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/notification.png"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        jLabel6.setText("1: Current Quantity Of Diesel :");
+
+        jLabel7.setText("2: Machine Already Running List :");
+
+        fuelQuantity_Lable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/purched.png"))); // NOI18N
+        fuelQuantity_Lable1.setText(" +134.99 LTR ");
+        fuelQuantity_Lable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        fuelQuantity_Lable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        fuelQuantity_Lable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                fuelQuantity_Lable1MouseClicked(evt);
+            }
+        });
+
+        running_Lable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/running.png"))); // NOI18N
+        running_Lable1.setText("  + 023 Machine Running");
+        running_Lable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        running_Lable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        running_Lable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                running_Lable1MouseClicked(evt);
+            }
+        });
+
+        status_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(status_Table);
+
+        jLabel1.setText("3: Machine Servicing Log ");
+
+        servicing_Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(servicing_Table);
+
+        jLabel2.setText("jLabel2");
 
         javax.swing.GroupLayout notification_PanelLayout = new javax.swing.GroupLayout(notification_Panel);
         notification_Panel.setLayout(notification_PanelLayout);
         notification_PanelLayout.setHorizontalGroup(
             notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator7)
+            .addComponent(jSeparator1)
             .addGroup(notification_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(1148, Short.MAX_VALUE))
+                .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(notification_PanelLayout.createSequentialGroup()
+                        .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(99, 99, 99)
+                        .addComponent(jScrollPane4))
+                    .addGroup(notification_PanelLayout.createSequentialGroup()
+                        .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(notification_PanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(75, 75, 75)
+                                .addComponent(fuelQuantity_Lable1))
+                            .addGroup(notification_PanelLayout.createSequentialGroup()
+                                .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(running_Lable1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(53, 53, 53)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         notification_PanelLayout.setVerticalGroup(
             notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(notification_PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(fuelQuantity_Lable1))
+                .addGap(14, 14, 14)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(notification_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(running_Lable1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(notification_PanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -66,6 +193,14 @@ public class Notification extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fuelQuantity_Lable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fuelQuantity_Lable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fuelQuantity_Lable1MouseClicked
+
+    private void running_Lable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_running_Lable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_running_Lable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -109,7 +244,18 @@ public class Notification extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel fuelQuantity_Lable1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator7;
     public javax.swing.JPanel notification_Panel;
+    private javax.swing.JLabel running_Lable1;
+    private javax.swing.JTable servicing_Table;
+    private javax.swing.JTable status_Table;
     // End of variables declaration//GEN-END:variables
 }
