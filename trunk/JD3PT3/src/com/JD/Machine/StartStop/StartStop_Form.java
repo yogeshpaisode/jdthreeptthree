@@ -72,6 +72,7 @@ public class StartStop_Form extends javax.swing.JFrame {
      */
     public StartStop_Form() {
         initComponents();
+        com.JD.StaticData.Static_DATA.startStop_Form=this;
         com.JD.StaticData.Static_DATA.number_ComboBox = number_ComboBox;
         com.JD.StaticData.Static_DATA.operatorName_ComboBox = operatorName_ComboBox;
         status_Table_Model = (DefaultTableModel) status_Table.getModel();
@@ -575,7 +576,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         remark_TextField.setBackground(Color.lightGray);
     }
 
-    void reset_Status_Table() {
+    public void reset_Status_Table() {
         flag = false;
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
