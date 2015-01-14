@@ -22,7 +22,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class Machine_MasterForm extends javax.swing.JFrame {
-    
+
     //--- INIT SESSION FACTORY ---//
     SessionFactory masterFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //--- INIT SESSION FACTORY ---//
@@ -621,7 +621,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                                 machineServicingFlag = "TRUE";
                                             }
 //-----------------------------------------Servicing Logic----------------------------------------------------------------------------------------------------------------------//                                            
-                                            chkOperation();
+                                            if (machineExpectedAVG > 15) {
+                                                JOptionPane.showMessageDialog(null, "Please Provide Valid Average");
+                                            } else {
+                                                chkOperation();
+                                            }
                                         }
                                     }
                                 }
@@ -631,7 +635,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                 }
             }
         }
-//---------------------------------------------------------------------------------------------------------------------        
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------        
 
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
 
@@ -707,7 +711,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         try {
             machine_JTable.print();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
         }
     }//GEN-LAST:event_printActionPerformed
 
@@ -737,7 +741,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             loadData_ComboBox.addItem(machineNumber);
             if (machinePartyLink.equals(com.JD.StaticData.Static_DATA.selfPartyname)) {
                 com.JD.StaticData.Static_DATA.number_ComboBox.addItem(machineNumber);
-            } 
+            }
             reset();
             resetJTable();
         } else {
