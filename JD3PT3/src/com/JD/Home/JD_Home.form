@@ -486,7 +486,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="running_Lable" min="-2" pref="172" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="readyMachine_Lable" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel7" max="32767" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -506,7 +506,7 @@
                           <Component id="notification_Lable" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="running_Lable" alignment="3" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" max="-2" attributes="0"/>
+                              <Component id="readyMachine_Lable" alignment="3" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -588,7 +588,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="running_LableMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="readyMachine_Lable">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/JD/Home/servi.png"/>

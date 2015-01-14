@@ -145,5 +145,11 @@ public class Static_DATA {
     //-----From Notification-----------------// notification_running_Lable
     public static javax.swing.JTable Notification_status_Table = null;
     public static javax.swing.JLabel notification_running_Lable = null;
+    public static javax.swing.JLabel readyMachine_Lable = null;
+    public static com.JD.Notification.Form.Notification notification=null;
+    public static javax.swing.JLabel notification_fuelQuantity_Lable = null;
+    
+    
+    
     //-----From Notification-----------------//
 }

@@ -62,14 +62,17 @@ public class JD_Home extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
         com.JD.StaticData.Static_DATA.running_Lable=running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
+        com.JD.StaticData.Static_DATA.readyMachine_Lable=readyMachine_Lable;
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
         notification=new Notification();
+        com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable=notification.notification_fuelQuantity_Lable;
         defultPanel();     
         machineStartStop_Home=new MachineStartStop_Home();
+        
         
     }
 
@@ -113,7 +116,7 @@ public class JD_Home extends javax.swing.JFrame {
         notification_Lable = new javax.swing.JLabel();
         fuelQuantity_Lable = new javax.swing.JLabel();
         running_Lable = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        readyMachine_Lable = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -359,9 +362,9 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/servi.png"))); // NOI18N
-        jLabel6.setText("  + 056 Machine Ready For Servicing   ");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        readyMachine_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/servi.png"))); // NOI18N
+        readyMachine_Lable.setText("  + 056 Machine Ready For Servicing   ");
+        readyMachine_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/reay.png"))); // NOI18N
         jLabel7.setText("   + 076 Machine Close To Servicing   ");
@@ -378,7 +381,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(running_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addComponent(readyMachine_Lable)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -396,7 +399,7 @@ public class JD_Home extends javax.swing.JFrame {
                         .addComponent(notification_Lable)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(running_Lable)
-                            .addComponent(jLabel6)))))
+                            .addComponent(readyMachine_Lable)))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7))
@@ -778,7 +781,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
@@ -798,6 +800,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel notification_Lable;
     private javax.swing.JMenuItem notification_ShortCut;
     private javax.swing.JPanel parentComponentHolder_Panel;
+    private javax.swing.JLabel readyMachine_Lable;
     private javax.swing.JButton report_Button;
     private javax.swing.JLabel running_Lable;
     private javax.swing.JMenuItem scanner_ShortCut;

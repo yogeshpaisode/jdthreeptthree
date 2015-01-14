@@ -155,6 +155,10 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
             com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
             fuelQuantity_Purchse_Lable.setText(status);
+            if (com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable != null) {
+                com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable.setText(status);
+            }
+
         }
         session.close();
         return log;
@@ -409,7 +413,7 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
         try {
             diesel_Table.print();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
     void addData() {
