@@ -390,6 +390,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         datestring = dateFormat.format(currenTDate);
         com.JD.StaticData.Static_DATA.sellDiesel_Report.query("from com.Hibernate.diesel.config.Selldiesellog where dateOfAddition='" + datestring + "' ");
         reset();
+        com.JD.StaticData.Static_DATA.startStop_Form.reset_Status_Table();
     }
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed

@@ -143,7 +143,7 @@ public class Static_DATA {
     //-----From Machine Start Stop------------//
     public static javax.swing.JComboBox number_ComboBox = null;
     public static javax.swing.JComboBox operatorName_ComboBox = null;
-    
+    public static com.JD.Machine.StartStop.StartStop_Form startStop_Form=null;
     //-----From Machine Start Stop------------//
     
     
