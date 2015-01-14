@@ -149,8 +149,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         for (Object object : measurementTempList) {
             measurement_ComboBox.addItem(object.toString());
-        }        
-       
+        }
+
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
         List results = cr.list();
@@ -274,14 +274,14 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Sr.No", "Party Name", "Product Name", "Product Size", "Measurement", "Value", "Total Amount", "Payment Type", "Driver Name", "Vehicle Number", "Vehicle Name", "DOO/U", "TOO/U", "Added By", "Status"
+                "Sr.No", "Party Name", "Product Name", "Product Size", "Measurement", "Value", "Total Amount", "Payment Type", "PayAble", "TwoPay", "Driver Name", "Vehicle Number", "Vehicle Name", "DOO/U", "TOO/U", "Added By", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1474,7 +1474,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm d = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{d.getSrno(), d.getPartyLink(), d.getProductName(), d.getProductSize(), d.getProductMeasurement(), d.getProductValue(), d.getTotalAmount(), d.getPaymentType(), d.getDriverName(), d.getVehicleNumber(), d.getVehicleName(), d.getDateOfAddition(), d.getTimeOfAddition(), d.getAddedByPersonName(), d.getPrintingStatus()});
+            defaultTableModel.insertRow(indexJTable, new Object[]{d.getSrno(), d.getPartyLink(), d.getProductName(), d.getProductSize(), d.getProductMeasurement(), d.getProductValue(), d.getTotalAmount(), d.getPaymentType(), d.getPayableAmount(), d.getTwoPayAmount(), d.getDriverName(), d.getVehicleNumber(), d.getVehicleName(), d.getDateOfAddition(), d.getTimeOfAddition(), d.getAddedByPersonName(), d.getPrintingStatus()});
         }
         session.close();
     }

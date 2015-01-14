@@ -277,7 +277,7 @@
             <Component class="javax.swing.JTable" name="dm_Table">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="15" rowCount="0">
+                  <Table columnCount="17" rowCount="0">
                     <Column editable="false" title="Sr.No" type="java.lang.String"/>
                     <Column editable="false" title="Party Name" type="java.lang.String"/>
                     <Column editable="false" title="Product Name" type="java.lang.String"/>
@@ -286,17 +286,29 @@
                     <Column editable="false" title="Value" type="java.lang.String"/>
                     <Column editable="false" title="Total Amount" type="java.lang.String"/>
                     <Column editable="false" title="Payment Type" type="java.lang.String"/>
+                    <Column editable="false" title="PayAble" type="java.lang.String"/>
+                    <Column editable="false" title="TwoPay" type="java.lang.Object"/>
                     <Column editable="false" title="Driver Name" type="java.lang.String"/>
                     <Column editable="false" title="Vehicle Number" type="java.lang.String"/>
                     <Column editable="false" title="Vehicle Name" type="java.lang.String"/>
                     <Column editable="false" title="DOO/U" type="java.lang.String"/>
                     <Column editable="false" title="TOO/U" type="java.lang.String"/>
-                    <Column editable="true" title="Added By" type="java.lang.String"/>
+                    <Column editable="false" title="Added By" type="java.lang.String"/>
                     <Column editable="false" title="Status" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0">
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
