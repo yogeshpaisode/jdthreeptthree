@@ -1105,7 +1105,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             com.JD.StaticData.Static_DATA.dm_Measurement.setSelectedItem(dm.getProductMeasurement() + "");
                             com.JD.StaticData.Static_DATA.dm_value_TextField.setText(dm.getProductValue() + "");
                             com.JD.StaticData.Static_DATA.totalAmount_TextField.setText(dm.getTotalAmount() + "");
-
+                            size_ComboBox.setSelectedItem(dm.getProductSize());
                             if (dm.getPaymentType().equals("CASH")) {
                                 com.JD.StaticData.Static_DATA.cash_CheackBox.setSelected(true);
                                 com.JD.StaticData.Static_DATA.twoPayAmount_TextField.setText("");
