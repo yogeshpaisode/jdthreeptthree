@@ -507,6 +507,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.fuelQuantity_Lable.setText(status);
             com.JD.StaticData.Static_DATA.fuelQuantity_Sell_Lable.setText(status);
             com.JD.StaticData.Static_DATA.fuelQuantity_Purchse_Lable.setText(status);
+            com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable.setText(status);
         }
         session.close();
         return log;
