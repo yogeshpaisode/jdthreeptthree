@@ -49,7 +49,7 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.Master.Forms.MasterHome masterHome = new com.JD.Master.Forms.MasterHome();
     com.JD.PrintReceiptDM.Form.DM_Home dM_Home = new DM_Home();
     com.JD.Diesel.Forms.Diesel_Home diesel_Home = new Diesel_Home();
-    com.JD.Notification.Form.Notification notification = new Notification();
+    com.JD.Notification.Form.Notification notification;
     com.JD.Search.Search_Home search_Home = new Search_Home();
     com.JD.DailyReports.Report_Home report_Home = new Report_Home();
     com.JD.Setting.Setting_Home setting_Home = new Setting_Home();
@@ -67,8 +67,10 @@ public class JD_Home extends javax.swing.JFrame {
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
+        notification=new Notification();
         defultPanel();     
         machineStartStop_Home=new MachineStartStop_Home();
+        
     }
 
     /**
