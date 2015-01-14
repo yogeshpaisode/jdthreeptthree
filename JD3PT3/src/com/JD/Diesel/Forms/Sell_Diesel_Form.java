@@ -84,10 +84,11 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
-            personList.add(s.getPersonPresentName());
-            personName_ComboBox.addItem(s.getPersonPresentName());
+            if (!personList.contains(s.getPersonPresentName())) {
+                personList.add(s.getPersonPresentName());
+                personName_ComboBox.addItem(s.getPersonPresentName());
+            }
         }
-
         session.close();
         flag = true;
         resetJTable();
@@ -330,7 +331,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         machineNumber = machineNumber_ComboBox.getSelectedItem().toString();
         machineName = machineName_Lable.getText();
         lastQuantity = purchaseDiesel_Form.setCurrentDieselLog(0.0);
-        personPresentName = personName_ComboBox.getSelectedItem().toString();        
+        personPresentName = personName_ComboBox.getSelectedItem().toString();
         String usedQuantityTemp = sell_TextField.getText();
         dateOfAddition = new Date();
         timeOfAddition = new Date();
@@ -369,7 +370,7 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
     }//GEN-LAST:event_addDataToDatabase_ButtonActionPerformed
 
     void addDieselToMachine() {
-        personPresentName=personPresentName.toUpperCase();
+        personPresentName = personPresentName.toUpperCase();
         Session session = sellDiesel_SessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         presentQuantity = setCurrentDieselLog(usedQuantity);
