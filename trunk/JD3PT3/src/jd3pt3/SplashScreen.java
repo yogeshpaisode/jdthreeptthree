@@ -66,11 +66,8 @@ public class SplashScreen extends JWindow {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something Went Wrong,Software Will Close,If Problem Persist then Please Restart Your Computer..");
             System.exit(0);
-
         }
-
     }
-
 
     public static void main(String[] args) {
         SplashScreen splash = new SplashScreen(5000);
