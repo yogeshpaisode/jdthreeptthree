@@ -4,6 +4,7 @@
  */
 package com.JD.Master.Forms;
 
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Master.Hibernate.config.Drivermaster;
@@ -34,7 +35,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class Driver_MasterForm extends javax.swing.JFrame {
     //--- File To Be Save ---//
-
+    
     int i = 0;
     int k = 0;
     Calendar calendar = Calendar.getInstance();
@@ -165,8 +166,8 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         reset_Button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         driverTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        print_Button = new javax.swing.JButton();
+        export = new javax.swing.JButton();
+        print = new javax.swing.JButton();
         search_TextField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
 
@@ -341,17 +342,17 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(driverTable);
 
-        jButton1.setText("Export To Excel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        export.setText("Export To Excel");
+        export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                exportActionPerformed(evt);
             }
         });
 
-        print_Button.setText("Print");
-        print_Button.addActionListener(new java.awt.event.ActionListener() {
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                print_ButtonActionPerformed(evt);
+                printActionPerformed(evt);
             }
         });
 
@@ -412,9 +413,9 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                     .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                         .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(driverMaster_PanelLayout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(export)
                                 .addGap(4, 4, 4)
-                                .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(driverMaster_PanelLayout.createSequentialGroup()
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(update_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
@@ -504,8 +505,8 @@ public class Driver_MasterForm extends javax.swing.JFrame {
                                     .addComponent(reset_Button))
                                 .addGap(22, 22, 22)
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1)
-                                    .addComponent(print_Button)))
+                                    .addComponent(export)
+                                    .addComponent(print)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, driverMaster_PanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(driverMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -755,13 +756,19 @@ public class Driver_MasterForm extends javax.swing.JFrame {
         session.close();
     }//GEN-LAST:event_search_TextFieldKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        new ExportToExcel().saveToExcel(driverTable);
+    }//GEN-LAST:event_exportActionPerformed
 
-    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_print_ButtonActionPerformed
+        try {
+            driverTable.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_printActionPerformed
 
     private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
         // TODO add your handling code here:
@@ -976,7 +983,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     public javax.swing.JPanel driverMaster_Panel;
     private javax.swing.JComboBox driverPartyName_ComboBox;
     private javax.swing.JTable driverTable;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton export;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -995,7 +1002,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
     private javax.swing.JTextField name_TextField;
     private javax.swing.ButtonGroup operation_ButtonGroup;
     private javax.swing.JLabel photo_Lable;
-    private javax.swing.JButton print_Button;
+    private javax.swing.JButton print;
     private javax.swing.JButton reset_Button;
     private javax.swing.JTextField search_TextField;
     private javax.swing.JButton tack_Button;

@@ -4,6 +4,7 @@
  */
 package com.JD.Machine.StartStop;
 
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Machine.StartStop.Hibernate.config.Machinestartstop;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
@@ -66,13 +67,14 @@ public class StartStop_Form extends javax.swing.JFrame {
     int index_status_Table = -1;
     int index_detailList_Table = -1;
     //--------------Load Table Model-----------------//   
-    com.JD.Validator.Validator validator=new Validator();
+    com.JD.Validator.Validator validator = new Validator();
+
     /**
      * Creates new form Party_MasterForm
      */
     public StartStop_Form() {
         initComponents();
-        com.JD.StaticData.Static_DATA.startStop_Form=this;
+        com.JD.StaticData.Static_DATA.startStop_Form = this;
         com.JD.StaticData.Static_DATA.number_ComboBox = number_ComboBox;
         com.JD.StaticData.Static_DATA.operatorName_ComboBox = operatorName_ComboBox;
         status_Table_Model = (DefaultTableModel) status_Table.getModel();
@@ -118,7 +120,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         status_Table = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        print = new javax.swing.JButton();
         start_Button = new javax.swing.JButton();
         stop_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
@@ -264,8 +266,18 @@ public class StartStop_Form extends javax.swing.JFrame {
         jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         jButton2.setText("Export To Excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Print");
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
 
         start_Button.setText("Start Machine ");
         start_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -318,7 +330,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                             .addGroup(StartStop_PanelLayout.createSequentialGroup()
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         StartStop_PanelLayout.setVerticalGroup(
@@ -337,7 +349,7 @@ public class StartStop_Form extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(StartStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(print)
                     .addComponent(start_Button)
                     .addComponent(stop_Button)
                     .addComponent(reset_Button))
@@ -496,6 +508,20 @@ public class StartStop_Form extends javax.swing.JFrame {
         reading_TextField.setText(validator.intTypeNumberValidator(reading_TextField.getText()));
     }//GEN-LAST:event_reading_TextFieldKeyReleased
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(status_Table);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+        try {
+            detailList_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+        }
+    }//GEN-LAST:event_printActionPerformed
+
     void step1() {
 
         Session session = init_SessionFactory.openSession();
@@ -537,8 +563,8 @@ public class StartStop_Form extends javax.swing.JFrame {
     void step2() {
         // Y M D
         //D M Y
-        dateOfAddition=new Date();
-        timeOfAddition=new Date();
+        dateOfAddition = new Date();
+        timeOfAddition = new Date();
         String tempAry[] = (startDate + "").split("-");
         String startDateTemp = tempAry[2] + "-" + tempAry[1] + "-" + tempAry[0];
         String StartTimeTemp = startDateTemp + " " + StartTime;
@@ -656,7 +682,6 @@ public class StartStop_Form extends javax.swing.JFrame {
     public javax.swing.JPanel StartStop_Panel;
     private javax.swing.JTable detailList_Table;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -669,6 +694,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     private javax.swing.JLabel name_Lable;
     private javax.swing.JComboBox number_ComboBox;
     private javax.swing.JComboBox operatorName_ComboBox;
+    private javax.swing.JButton print;
     private javax.swing.JTextField reading_TextField;
     private javax.swing.JTextArea remark_TextField;
     private javax.swing.JButton reset_Button;

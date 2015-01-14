@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.hibernate.Criteria;
@@ -258,8 +259,18 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         });
 
         jButton2.setText("Export To Excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Print");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -494,6 +505,24 @@ public class SellDiesel_Search extends javax.swing.JFrame {
         session.close();
         reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            sellDiesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            sellDiesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     void reset() {
 

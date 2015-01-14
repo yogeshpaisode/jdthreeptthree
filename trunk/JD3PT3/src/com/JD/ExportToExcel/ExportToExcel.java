@@ -77,7 +77,7 @@ public class ExportToExcel extends javax.swing.JFrame {
         }
     }
 
-    public void forDispatch(JTable table) {
+    public void saveToExcel_forDispatch(JTable table) {
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("cellstyle");

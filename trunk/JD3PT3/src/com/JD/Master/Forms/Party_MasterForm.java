@@ -4,6 +4,7 @@
  */
 package com.JD.Master.Forms;
 
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Master.Hibernate.config.Partymaster;
 import com.JD.Validator.Validator;
 import java.util.Date;
@@ -110,8 +111,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
         deleteData_CheacBox = new javax.swing.JCheckBox();
         addDataToDatabas_Button = new javax.swing.JButton();
         clear_CheackBox = new javax.swing.JCheckBox();
-        reset_Button = new javax.swing.JButton();
-        exportToExcel_Button = new javax.swing.JButton();
+        print = new javax.swing.JButton();
+        export = new javax.swing.JButton();
         print_Button = new javax.swing.JButton();
         search_TextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -239,17 +240,17 @@ public class Party_MasterForm extends javax.swing.JFrame {
             }
         });
 
-        reset_Button.setText("Reset");
-        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+        print.setText("Reset");
+        print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reset_ButtonActionPerformed(evt);
+                printActionPerformed(evt);
             }
         });
 
-        exportToExcel_Button.setText("Export To Excel");
-        exportToExcel_Button.addActionListener(new java.awt.event.ActionListener() {
+        export.setText("Export To Excel");
+        export.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exportToExcel_ButtonActionPerformed(evt);
+                exportActionPerformed(evt);
             }
         });
 
@@ -314,7 +315,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, partyMaster_PanelLayout.createSequentialGroup()
                         .addComponent(addDataToDatabas_Button, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(reset_Button))
+                        .addComponent(print))
                     .addComponent(phone_TextField))
                 .addGap(18, 18, 18)
                 .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +326,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
                     .addComponent(mobile_TextField)
                     .addComponent(emailID_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addGroup(partyMaster_PanelLayout.createSequentialGroup()
-                        .addComponent(exportToExcel_Button)
+                        .addComponent(export)
                         .addGap(18, 18, 18)
                         .addComponent(print_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -369,9 +370,9 @@ public class Party_MasterForm extends javax.swing.JFrame {
                         .addComponent(clear_CheackBox))
                     .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addDataToDatabas_Button)
-                        .addComponent(reset_Button))
+                        .addComponent(print))
                     .addGroup(partyMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(exportToExcel_Button)
+                        .addComponent(export)
                         .addComponent(print_Button)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
@@ -533,10 +534,10 @@ public class Party_MasterForm extends javax.swing.JFrame {
         mobile_TextField.setText(valid.intTypeNumberValidator(mobile_TextField.getText()));
     }//GEN-LAST:event_mobile_TextFieldKeyReleased
 
-    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
         reset();
-    }//GEN-LAST:event_reset_ButtonActionPerformed
+    }//GEN-LAST:event_printActionPerformed
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
@@ -547,12 +548,12 @@ public class Party_MasterForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_print_ButtonActionPerformed
 
-    private void exportToExcel_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportToExcel_ButtonActionPerformed
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:  party_Table
 
         new com.JD.ExportToExcel.ExportToExcel().saveToExcel(party_Table);
 
-    }//GEN-LAST:event_exportToExcel_ButtonActionPerformed
+    }//GEN-LAST:event_exportActionPerformed
 
     private void search_TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseClicked
         // TODO add your handling code here:
@@ -777,7 +778,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox clear_CheackBox;
     private javax.swing.JCheckBox deleteData_CheacBox;
     private javax.swing.JTextField emailID_TextField;
-    private javax.swing.JButton exportToExcel_Button;
+    private javax.swing.JButton export;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -794,8 +795,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
     public javax.swing.JPanel partyMaster_Panel;
     private javax.swing.JTable party_Table;
     private javax.swing.JTextField phone_TextField;
+    private javax.swing.JButton print;
     private javax.swing.JButton print_Button;
-    private javax.swing.JButton reset_Button;
     private javax.swing.JTextField search_TextField;
     private javax.swing.JCheckBox updateData_CheacBox;
     // End of variables declaration//GEN-END:variables

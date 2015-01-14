@@ -5,6 +5,7 @@
 package com.JD.Diesel.Forms;
 
 import com.Hibernate.diesel.config.Selldiesellog;
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import com.JD.Validator.Validator;
@@ -215,8 +216,18 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         });
 
         export_Button.setText("Export To Excel");
+        export_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_ButtonActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         personName_ComboBox.setEditable(true);
         personName_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Person Name" }));
@@ -455,6 +466,20 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
         sell_TextField.setText(valid.numberValidator(sell_TextField.getText()));
     }//GEN-LAST:event_sell_TextFieldKeyReleased
+
+    private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(sellDiesel_Table);
+    }//GEN-LAST:event_export_ButtonActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            sellDiesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+        }
+    }//GEN-LAST:event_print_ButtonActionPerformed
 
     public double setCurrentDieselLog(double usedQuantity) {
         double log = 0.0;
