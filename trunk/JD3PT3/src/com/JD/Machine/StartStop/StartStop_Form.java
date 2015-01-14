@@ -550,9 +550,9 @@ public class StartStop_Form extends javax.swing.JFrame {
                     m.setMachineStatus("OFF");
                     startDate = m.getMachineStartDate();
                     StartTime = m.getMachineStartTime();
-                    int diff = m.getMachineServicingLog();
-                    
-                    int currentReadingTemp=startReading + totalReading;
+                    int diff = m.getMachineServicingLog();     
+                   
+                    int currentReadingTemp=m.getMachineCurrentReading() + totalReading;
                     double machineServicingNumber=0;
                     int machineServicingReadingPointer=0;
                     String machineServicingFlag="FALSE";                    
@@ -562,11 +562,11 @@ public class StartStop_Form extends javax.swing.JFrame {
                     } else if (currentReadingTemp < diff) {
                         machineServicingReadingPointer = currentReadingTemp;
                     } else {
-                        machineServicingFlag = "TRUE";
-                    }
+                        machineServicingFlag = "TRUE";                         
+                    }                    
                     m.setMachineServicingNumber(machineServicingNumber);
                     m.setMachineServicingReadingPointer(machineServicingReadingPointer);
-                    m.setMachineServicingReadingPointer(machineServicingReadingPointer);
+                    m.setMachineServicingFlag(machineServicingFlag);
                     session.save(m);
                     transaction.commit();
                     com.JD.StaticData.Static_DATA.notification.resetServicingTable();
