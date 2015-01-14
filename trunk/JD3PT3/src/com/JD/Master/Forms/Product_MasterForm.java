@@ -300,6 +300,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
+        reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
 
     private void size_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_size_TextFieldKeyReleased

@@ -54,20 +54,21 @@ public class JD_Home extends javax.swing.JFrame {
     com.JD.DailyReports.Report_Home report_Home = new Report_Home();
     com.JD.Setting.Setting_Home setting_Home = new Setting_Home();
     com.JD.Help.Help_Form help_Form = new Help_Form();
-    com.JD.Machine.StartStop.MachineStartStop_Home machineStartStop_Home=new MachineStartStop_Home();
+    com.JD.Machine.StartStop.MachineStartStop_Home machineStartStop_Home;
     //---- All Menu Entry ------//
 
     public JD_Home() {
         initComponents();
         com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
+        com.JD.StaticData.Static_DATA.running_Lable=running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
-        defultPanel();
-        
+        defultPanel();     
+        machineStartStop_Home=new MachineStartStop_Home();
     }
 
     /**
@@ -109,6 +110,7 @@ public class JD_Home extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         notification_Lable = new javax.swing.JLabel();
         fuelQuantity_Lable = new javax.swing.JLabel();
+        running_Lable = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         notification_ShortCut = new javax.swing.JMenuItem();
@@ -343,6 +345,16 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
+        running_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/running.png"))); // NOI18N
+        running_Lable.setText("  + 023 Machine Running");
+        running_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        running_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        running_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                running_LableMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -351,6 +363,8 @@ public class JD_Home extends javax.swing.JFrame {
                 .addComponent(notification_Lable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(fuelQuantity_Lable)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(running_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -361,9 +375,10 @@ public class JD_Home extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fuelQuantity_Lable)
-                        .addComponent(notification_Lable))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(fuelQuantity_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(notification_Lable)
+                        .addComponent(running_Lable))))
         );
 
         jMenu1.setText("File");
@@ -672,6 +687,11 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         startStop();
     }//GEN-LAST:event_startStop_ShortCutActionPerformed
+
+    private void running_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_running_LableMouseClicked
+        // TODO add your handling code here:
+         startStop();
+    }//GEN-LAST:event_running_LableMouseClicked
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -756,6 +776,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem notification_ShortCut;
     private javax.swing.JPanel parentComponentHolder_Panel;
     private javax.swing.JButton report_Button;
+    private javax.swing.JLabel running_Lable;
     private javax.swing.JMenuItem scanner_ShortCut;
     private javax.swing.JButton search_Button;
     private javax.swing.JMenuItem serch_ShortCut;

@@ -603,7 +603,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     }
 
     public void reset_Status_Table() {
-        flag = false;
+        flag = false;       
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
         }
@@ -618,6 +618,9 @@ public class StartStop_Form extends javax.swing.JFrame {
             index_status_Table = index_status_Table + 1;
             status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
         }
+        if (com.JD.StaticData.Static_DATA.running_Lable!=null) {
+             com.JD.StaticData.Static_DATA.running_Lable.setText("  + "+results.size()+" Machine Running");
+        }       
         session.close();
         flag = true;
     }
