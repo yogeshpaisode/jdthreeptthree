@@ -15,6 +15,8 @@ public class Notification extends javax.swing.JFrame {
      */
     public Notification() {
         initComponents();
+        com.JD.StaticData.Static_DATA.Notification_status_Table=Notification_status_Table;
+        com.JD.StaticData.Static_DATA.notification_running_Lable=notification_running_Lable;
     }
 
     /**
@@ -30,9 +32,9 @@ public class Notification extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         fuelQuantity_Lable1 = new javax.swing.JLabel();
-        running_Lable1 = new javax.swing.JLabel();
+        notification_running_Lable = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        status_Table = new javax.swing.JTable();
+        Notification_status_Table = new javax.swing.JTable();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
@@ -58,17 +60,17 @@ public class Notification extends javax.swing.JFrame {
             }
         });
 
-        running_Lable1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/running.png"))); // NOI18N
-        running_Lable1.setText("  + 023 Machine Running");
-        running_Lable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
-        running_Lable1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        running_Lable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        notification_running_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/running.png"))); // NOI18N
+        notification_running_Lable.setText("  + 023 Machine Running");
+        notification_running_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        notification_running_Lable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        notification_running_Lable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                running_Lable1MouseClicked(evt);
+                notification_running_LableMouseClicked(evt);
             }
         });
 
-        status_Table.setModel(new javax.swing.table.DefaultTableModel(
+        Notification_status_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -91,7 +93,7 @@ public class Notification extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(status_Table);
+        jScrollPane3.setViewportView(Notification_status_Table);
 
         jLabel1.setText("3: Machine Servicing Log ");
 
@@ -146,7 +148,7 @@ public class Notification extends javax.swing.JFrame {
                             .addGroup(notification_PanelLayout.createSequentialGroup()
                                 .addGroup(notification_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(running_Lable1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(notification_running_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(53, 53, 53)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 884, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -166,7 +168,7 @@ public class Notification extends javax.swing.JFrame {
                     .addGroup(notification_PanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(running_Lable1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(notification_running_Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,9 +200,9 @@ public class Notification extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fuelQuantity_Lable1MouseClicked
 
-    private void running_Lable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_running_Lable1MouseClicked
+    private void notification_running_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_running_LableMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_running_Lable1MouseClicked
+    }//GEN-LAST:event_notification_running_LableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -244,6 +246,7 @@ public class Notification extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Notification_status_Table;
     private javax.swing.JLabel fuelQuantity_Lable1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -254,8 +257,7 @@ public class Notification extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator7;
     public javax.swing.JPanel notification_Panel;
-    private javax.swing.JLabel running_Lable1;
+    private javax.swing.JLabel notification_running_Lable;
     private javax.swing.JTable servicing_Table;
-    private javax.swing.JTable status_Table;
     // End of variables declaration//GEN-END:variables
 }

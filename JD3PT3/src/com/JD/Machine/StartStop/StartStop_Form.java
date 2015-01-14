@@ -64,6 +64,7 @@ public class StartStop_Form extends javax.swing.JFrame {
     //--------------Load Table Model-----------------//
     javax.swing.table.DefaultTableModel status_Table_Model;
     javax.swing.table.DefaultTableModel detailList_Table_Model;
+    javax.swing.table.DefaultTableModel notificationList_Table_Model;
     int index_status_Table = -1;
     int index_detailList_Table = -1;
     //--------------Load Table Model-----------------//   
@@ -79,6 +80,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.operatorName_ComboBox = operatorName_ComboBox;
         status_Table_Model = (DefaultTableModel) status_Table.getModel();
         detailList_Table_Model = (DefaultTableModel) detailList_Table.getModel();
+        notificationList_Table_Model = (DefaultTableModel) com.JD.StaticData.Static_DATA.Notification_status_Table.getModel();
         reset_Status_Table();
         reset_detailList_Table();
         flag1 = false;
@@ -603,9 +605,13 @@ public class StartStop_Form extends javax.swing.JFrame {
     }
 
     public void reset_Status_Table() {
-        flag = false;       
+        flag = false;
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
+        }
+        // notificationList_Table_Model
+        for (int i = notificationList_Table_Model.getRowCount() - 1; i >= 0; i--) {
+            notificationList_Table_Model.removeRow(i);
         }
         index_status_Table = -1;
         Session session = init_SessionFactory.openSession();
@@ -617,10 +623,12 @@ public class StartStop_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
             status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
+            notificationList_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
         }
-        if (com.JD.StaticData.Static_DATA.running_Lable!=null) {
-             com.JD.StaticData.Static_DATA.running_Lable.setText("  + "+results.size()+" Machine Running");
-        }       
+        if (com.JD.StaticData.Static_DATA.running_Lable != null) {
+            com.JD.StaticData.Static_DATA.running_Lable.setText("  + " + results.size() + " Machine Running");
+            com.JD.StaticData.Static_DATA.notification_running_Lable.setText("  + " + results.size() + " Machine Running");
+        }
         session.close();
         flag = true;
     }

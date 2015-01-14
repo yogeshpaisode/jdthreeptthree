@@ -15,7 +15,8 @@ import org.hibernate.SessionFactory;
  */
 public class Static_DATA {
     //------TEMP DATA--------//
-    public static javax.swing.JProgressBar progressBar=null;
+
+    public static javax.swing.JProgressBar progressBar = null;
     public static int srNo_TEMP = 0;
     public static javax.swing.JTextPane error_TextPanel;
     public static com.JD.Setting.SendEmail_Form sendEmail_Form;
@@ -25,7 +26,6 @@ public class Static_DATA {
     public static javax.swing.JLabel fuelQuantity_Sell_Lable = null;
     public static javax.swing.JLabel fuelQuantity_Purchse_Lable = null;
     public static javax.swing.JLabel running_Lable = null;
-    
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;
@@ -64,9 +64,9 @@ public class Static_DATA {
     //-----DM Data----------------------------------//
     //-----DM SessionFactory------------------------//
     //-----DM SessionFactory------------------------//
-     public static List productNameTempList=null;
-    public static List sizeTemp=null;
-    public static List measurementTempList=null;
+    public static List productNameTempList = null;
+    public static List sizeTemp = null;
+    public static List measurementTempList = null;
     public static com.JD.PrintReceiptDM.Form.PrintReceipt_Dm_Form dm_Form = null;
     public static javax.swing.JComboBox dm_PartyName = null;
     public static javax.swing.JComboBox dm_ProductName = null;
@@ -97,8 +97,7 @@ public class Static_DATA {
     public static javax.swing.JCheckBox pending_CheackBox = null;
     public static int SRNO = 0;
     public static String QRCode = "";
-    public static javax.swing.JPanel webCam_Panel_Dm = null;  
-    
+    public static javax.swing.JPanel webCam_Panel_Dm = null;
     //-----DM Data----------------------------------//
     //-----Driver Master----------------------------//
     public static javax.swing.JPanel webCam_Panel = null;
@@ -114,11 +113,9 @@ public class Static_DATA {
     public static javax.swing.JComboBox dmsearch_ProductName_ComboBox = null;
     public static javax.swing.JComboBox dmsearch_size_ComboBox = null;
     public static javax.swing.JComboBox dmSearch_measurement_ComboBox = null;
-    
-    public static List productNameList=null;
-    public static List measurementList=null;
-    public static List sizeList=null;
-    
+    public static List productNameList = null;
+    public static List measurementList = null;
+    public static List sizeList = null;
     //-----From DM Search-------------------------//
     //-----From Purchase Diesel Search-------------------------//
     public static javax.swing.JComboBox purchaseSearch_company_ComboBox = null;
@@ -136,17 +133,17 @@ public class Static_DATA {
     public static com.JD.DailyReports.PurchaseDiesel_Report purchaseDiesel_Report = null;
     public static javax.swing.JComboBox purchaseReport_company_ComboBox = null;
     public static javax.swing.JComboBox purchase_Perseon_Report_ComboBox = null;
-    
     public static javax.swing.JComboBox sell_Report_Party_ComboBox = null;
     public static javax.swing.JComboBox sell_Report_Machine_Number = null;
-    public static com.JD.DailyReports.SellDiesel_Report sellDiesel_Report=null;
+    public static com.JD.DailyReports.SellDiesel_Report sellDiesel_Report = null;
     //-----From Daily Report-------------------// 
-    
     //-----From Machine Start Stop------------//
     public static javax.swing.JComboBox number_ComboBox = null;
     public static javax.swing.JComboBox operatorName_ComboBox = null;
-    public static com.JD.Machine.StartStop.StartStop_Form startStop_Form=null;
+    public static com.JD.Machine.StartStop.StartStop_Form startStop_Form = null;
     //-----From Machine Start Stop------------//
-    
-    
+    //-----From Notification-----------------// notification_running_Lable
+    public static javax.swing.JTable Notification_status_Table = null;
+    public static javax.swing.JLabel notification_running_Lable = null;
+    //-----From Notification-----------------//
 }
