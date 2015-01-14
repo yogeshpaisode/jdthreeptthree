@@ -373,8 +373,7 @@ public class SellDiesel_Report extends javax.swing.JFrame {
             sell_Report_Machine_Number.addItem("Select Machine Number");
             Session session = search_SessionFactory.openSession();
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
-            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
-            cr.add(Restrictions.eq("machineType", "VEHICLE"));
+            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));           
             List results = cr.list();
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
