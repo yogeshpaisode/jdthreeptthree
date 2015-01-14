@@ -28,7 +28,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
-    
+
     boolean flag = false;
     boolean flag2 = false;
     boolean flag3 = false;
@@ -87,33 +87,33 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 //----------Table Mode--------------------------//
 //----------Temp Data--------------------------//
     List productNameTempList = new ArrayList();
-    List sizeTemp =new ArrayList();
+    List sizeTemp = new ArrayList();
     List measurementTempList = new ArrayList();
 //----------Temp Data--------------------------//
 
     public PrintReceipt_Dm_Form() {
         initComponents();
-        com.JD.StaticData.Static_DATA.productNameTempList=productNameTempList;
-        com.JD.StaticData.Static_DATA.sizeTemp=sizeTemp;
-        com.JD.StaticData.Static_DATA.measurementTempList=measurementTempList;
+        com.JD.StaticData.Static_DATA.productNameTempList = productNameTempList;
+        com.JD.StaticData.Static_DATA.sizeTemp = sizeTemp;
+        com.JD.StaticData.Static_DATA.measurementTempList = measurementTempList;
         //------------Fill Product Name-----------//
         productNameTempList.add("Raw");
         productNameTempList.add("Aggrigate");
         productNameTempList.add("Crush Sand");
         productNameTempList.add("Bricks");
-        
+
         measurementTempList.add("CFT");
         measurementTempList.add("BRASS");
         measurementTempList.add("NUMBER");
         measurementTempList.add("TON");
         measurementTempList.add("CUM");
-        
-        
+
+
         payAble_TextField.setBackground(Color.lightGray);
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
         grossWeight_TextField.setBackground(Color.lightGray);
-        
+
         presrNo_Lable.setText(" " + preSRNO + "-");
         srNo_Lable.setText(preSRNO + "-" + SRNO);
         defaultTableModel = (DefaultTableModel) dm_Table.getModel();
@@ -124,7 +124,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         //------Load Data From Master---------------------------------//
 
         Session session = masterSessionFactory.openSession();
-        
+
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
@@ -133,10 +133,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
-            if (sizeTemp.contains(p.getProductSize() + "")) {
+            if (!sizeTemp.contains(p.getProductSize() + "")) {
                 sizeTemp.add(p.getProductSize());
                 size_ComboBox.addItem(p.getProductSize());
-            } 
+            }
             if (!productNameTempList.contains(p.getProductName())) {
                 productNameTempList.add(p.getProductName());
             }
@@ -149,17 +149,17 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         for (Object object : measurementTempList) {
             measurement_ComboBox.addItem(object.toString());
-        }
-        
+        }        
+       
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
         cr.add(Restrictions.eq("pendingStatus", "TRUE"));
         List results = cr.list();
-        
+
         for (Object object : results) {
             com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
             pending_ComboBox.addItem(p.getSrno());
         }
-        
+
         session.close();
         //------Load Data From Master---------------------------------//
         flag = true;
@@ -194,7 +194,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.pending_ComboBox = pending_ComboBox;
         //------Load All Component To sattic Class----//
         resetJTable();
-        
+
         date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
         time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
     }
@@ -737,12 +737,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private void measurement_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_measurement_ComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_measurement_ComboBoxActionPerformed
-    
+
     private void search_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_search_TextFieldMouseEntered
         // TODO add your handling code here:
         search_TextField.setText("");
     }//GEN-LAST:event_search_TextFieldMouseEntered
-    
+
     private void cash_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (cash_CheackBox.isSelected()) {
@@ -754,7 +754,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             paymentType = "CASH";
         }
     }//GEN-LAST:event_cash_CheackBoxActionPerformed
-    
+
     private void totalAmount_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_totalAmount_TextFieldKeyReleased
         // TODO add your handling code here:        
         totalAmount_TextField.setText(valid.intTypeNumberValidator(totalAmount_TextField.getText()));
@@ -763,9 +763,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         } else if (twoPay_CheackBox.isSelected()) {
             twoPayAmount_TextField.setText(totalAmount_TextField.getText());
         }
-        
+
     }//GEN-LAST:event_totalAmount_TextFieldKeyReleased
-    
+
     private void twoPay_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoPay_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (twoPay_CheackBox.isSelected()) {
@@ -778,7 +778,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             paymentType = "TWOPAY";
         }
     }//GEN-LAST:event_twoPay_CheackBoxActionPerformed
-    
+
     private void cashAndTwoPay_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cashAndTwoPay_CheackBoxActionPerformed
         // TODO add your handling code here:
 
@@ -791,16 +791,16 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             payAble_TextField.setEditable(true);
             payAble_TextField.setEnabled(true);
             paymentType = "CASHANDTWOPAY";
-            
+
         }
-        
+
     }//GEN-LAST:event_cashAndTwoPay_CheackBoxActionPerformed
-    
+
     private void twoPayAmount_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_twoPayAmount_TextFieldMouseEntered
         // TODO add your handling code here:
         int totalAmountTemp = Integer.parseInt(totalAmount_TextField.getText());
         int payAbleAmountTemp = Integer.parseInt(payAble_TextField.getText());
-        
+
         if (totalAmountTemp <= payAbleAmountTemp) {
             cash_CheackBox.setSelected(true);
             twoPayAmount_TextField.setText("");
@@ -814,27 +814,27 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             twoPayAmount_TextField.setText(twoPayAmount + "");
         }
     }//GEN-LAST:event_twoPayAmount_TextFieldMouseEntered
-    
+
     private void value_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_value_TextFieldKeyReleased
         // TODO add your handling code here:
         value_TextField.setText(valid.intTypeNumberValidator(value_TextField.getText()));
     }//GEN-LAST:event_value_TextFieldKeyReleased
-    
+
     private void payAble_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_payAble_TextFieldKeyReleased
         // TODO add your handling code here:
         payAble_TextField.setText(valid.intTypeNumberValidator(payAble_TextField.getText()));
     }//GEN-LAST:event_payAble_TextFieldKeyReleased
-    
+
     private void neightWeight_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_neightWeight_TextFieldKeyReleased
         // TODO add your handling code here:
         neightWeight_TextField.setText(valid.numberValidator(neightWeight_TextField.getText()));
     }//GEN-LAST:event_neightWeight_TextFieldKeyReleased
-    
+
     private void grossWeight_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_grossWeight_TextFieldKeyReleased
         // TODO add your handling code here:
         grossWeight_TextField.setText(valid.numberValidator(grossWeight_TextField.getText()));
     }//GEN-LAST:event_grossWeight_TextFieldKeyReleased
-    
+
     private void search_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_search_TextFieldKeyReleased
         // TODO add your handling code here:
         search_TextField.setText(valid.intTypeNumberValidator(search_TextField.getText()));
@@ -859,7 +859,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             session.close();
         }
     }//GEN-LAST:event_search_TextFieldKeyReleased
-    
+
     private void proxy_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proxy_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (proxy_CheackBox.isSelected()) {
@@ -880,7 +880,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             printProxy = "FALSE";
         }
     }//GEN-LAST:event_proxy_CheackBoxActionPerformed
-    
+
     private void party_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_party_ComboBoxActionPerformed
         // TODO add your handling code here:
 
@@ -896,12 +896,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
             cr.add(Restrictions.eq("driverPartyLink", partyNameTemp));
             List results = cr.list();
-            
+
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Drivermaster d = (com.JD.Master.Hibernate.config.Drivermaster) object;
                 driverName_ComboBox.addItem(d.getDriverName());
             }
-            
+
             cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
             cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
             cr.add(Restrictions.eq("machineType", "VEHICLE"));
@@ -913,28 +913,28 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             session.close();
             flag2 = true;
         }
-        
+
     }//GEN-LAST:event_party_ComboBoxActionPerformed
-    
+
     private void vehicleNumber_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vehicleNumber_ComboBoxActionPerformed
         // TODO add your handling code here:
         if (flag2) {
             String vehicleNumberTemp = vehicleNumber_ComboBox.getSelectedItem().toString();
             Session session = masterSessionFactory.openSession();
-            
+
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
             cr.add(Restrictions.eq("machineNumber", vehicleNumberTemp));
             List results = cr.list();
-            
+
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
                 vehicleName_TextField.setText(m.getMachineName());
             }
             session.close();
         }
-        
+
     }//GEN-LAST:event_vehicleNumber_ComboBoxActionPerformed
-    
+
     private void addDataToDataBase_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataToDataBase_ButtonActionPerformed
         // TODO add your handling code here:
         SRNO = com.JD.StaticData.Static_DATA.srNo;
@@ -955,7 +955,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         if (pending_CheackBox.isSelected()) {
             pendingStatus = "TRUE";
         }
-        
+
         if (partyLink.equals("Select Party Name")) {
             JOptionPane.showMessageDialog(null, "Please Select Party Name");
         } else {
@@ -977,7 +977,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                                 if (payment) {
                                     if (driverName.equals("Select Driver Name")) {
                                         JOptionPane.showMessageDialog(null, "Please Select Driver Name");
-                                        
+
                                     } else {
                                         if (vehicleNumber.equals("Select Vehicle Number")) {
                                             JOptionPane.showMessageDialog(null, "Please Select Vehicle Number");
@@ -1003,7 +1003,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_addDataToDataBase_ButtonActionPerformed
-    
+
     void stage1() {
         String totalAmountTEMP = totalAmount_TextField.getText();
         String payableTEMP = payAble_TextField.getText();
@@ -1021,7 +1021,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                     twoPayAmount = totalAmountINT;
                     payableAmount = payableINT;
                     twoPayAmount = twopayINT;
-                    if ((payableINT != totalAmountINT) && payableINT < totalAmountINT) {
+                    if ((payableINT != totalAmountINT) && payableINT < totalAmountINT && payableINT != 0) {
                         paymentType = "CASHANDTWOPAY";
                         businessLogic();
                     } else {
@@ -1053,7 +1053,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void businessLogic() {
 //----------------------------------------------------Bussiness Logic--------------------------------------------------------------------------//
         calculateAmount();
@@ -1061,30 +1061,30 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 //----------------------------------------------------Bussiness Logic--------------------------------------------------------------------------//
 
     }
-    
+
     private void update_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_CheackBoxActionPerformed
         // TODO add your handling code here:
 
         if (update_CheackBox.isSelected()) {
             addDataToDataBase_Button.setText("Update Order");
         }
-        
+
     }//GEN-LAST:event_update_CheackBoxActionPerformed
-    
+
     private void cancel_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancel_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (cancel_CheackBox.isSelected()) {
             addDataToDataBase_Button.setText("Cancel Order");
         }
     }//GEN-LAST:event_cancel_CheackBoxActionPerformed
-    
+
     private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (clear_CheackBox.isSelected()) {
             addDataToDataBase_Button.setText("Place Order");
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
-    
+
     private void pending_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pending_ComboBoxActionPerformed
         // TODO add your handling code here: pendingStatus
         if (flag3) {
@@ -1105,7 +1105,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             com.JD.StaticData.Static_DATA.dm_Measurement.setSelectedItem(dm.getProductMeasurement() + "");
                             com.JD.StaticData.Static_DATA.dm_value_TextField.setText(dm.getProductValue() + "");
                             com.JD.StaticData.Static_DATA.totalAmount_TextField.setText(dm.getTotalAmount() + "");
-                            
+
                             if (dm.getPaymentType().equals("CASH")) {
                                 com.JD.StaticData.Static_DATA.cash_CheackBox.setSelected(true);
                                 com.JD.StaticData.Static_DATA.twoPayAmount_TextField.setText("");
@@ -1127,7 +1127,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                                 com.JD.StaticData.Static_DATA.payAble_TextField.setText("");
                                 com.JD.StaticData.Static_DATA.payAble_TextField.setEditable(false);
                             }
-                            
+
                             com.JD.StaticData.Static_DATA.driverName_ComboBox.setSelectedItem(dm.getDriverName());
                             com.JD.StaticData.Static_DATA.vehicleNumber_ComboBox.setSelectedItem(dm.getVehicleNumber());
                             com.JD.StaticData.Static_DATA.vehicleName_TextField.setText(dm.getVehicleName());
@@ -1158,7 +1158,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             if (dm.getPendingStatus().equals("TRUE")) {
                                 com.JD.StaticData.Static_DATA.pending_CheackBox.setSelected(true);
                             }
-                            
+
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(null, e);
                         }
@@ -1168,7 +1168,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_pending_ComboBoxActionPerformed
-    
+
     private void pending_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pending_CheackBoxActionPerformed
         // TODO add your handling code here:
         if (pending_CheackBox.isSelected()) {
@@ -1179,13 +1179,13 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             printingStatus = "Accept";
         }
     }//GEN-LAST:event_pending_CheackBoxActionPerformed
-    
+
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
-    
-    void cheackOperationType() {        
+
+    void cheackOperationType() {
         if (pending_CheackBox.isSelected()) {
             pendingStatus = "TRUE";
             printingStatus = "Decline";
@@ -1195,27 +1195,27 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         if (update_CheackBox.isSelected()) {
             update();
-            
+
         } else if (cancel_CheackBox.isSelected()) {
             cancel();
-            
+
         } else {
             insert();
         }
     }
-    
+
     void insert() {
         addDataToDataBase_Button.setText("Processing..");
         addDataToDataBase_Button.setEnabled(false);
         if (flag4) {
             QRCode = qrCodeTemp;
             SRNO = srNOtemp;
-            rawField1 = SRNO + "";            
+            rawField1 = SRNO + "";
         }
         Session session = dm_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
-        cr.add(Restrictions.eq("srno", SRNO));        
-        List results = cr.list();        
+        cr.add(Restrictions.eq("srno", SRNO));
+        List results = cr.list();
         if (results.isEmpty()) {
             String str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             StringBuffer sb = new StringBuffer(10);
@@ -1242,12 +1242,12 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             transaction.commit();
             printReceipt();
             updateSRNO();
-        } else {            
+        } else {
             update();
         }
         session.close();
     }
-    
+
     void printReceipt() {
         if (pending_CheackBox.isSelected()) {
             pending_ComboBox.addItem(SRNO + "");
@@ -1262,9 +1262,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             d.setMeasurement(" : " + productSize);
             d.setTotalAmount(" : " + totalAmount);
             d.setPayableAmount(" : " + payableAmount);
-            d.setCft(": " + productValue);            
+            d.setCft(": " + productValue);
             d.setPendingAmount(" : " + twoPayAmount);
-            
+
             d.setPath(System.getProperty("user.dir") + "\\TEMP1.jpg");
             if (proxy_CheackBox.isSelected()) {
                 d.setQuantity("TON");
@@ -1294,17 +1294,17 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.srNo_TEMP = SRNO;
         }
     }
-    
+
     void update() {
         addDataToDataBase_Button.setText("Processing..");
         addDataToDataBase_Button.setEnabled(false);
         Session session = dm_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
-        
+
         cr.add(Restrictions.eq("srno", SRNO));
         cr.add(Restrictions.eq("qrcode", QRCode));
         List results = cr.list();
-        
+
         if (results.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Cant Update ! No Data Found For Sr No " + preSRNO + "-" + SRNO);
             reset();
@@ -1339,10 +1339,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         session.close();
     }
-    
+
     void cancel() {
     }
-    
+
     void updatePendingStatus() {
         Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         com.JD.StaticData.Static_DATA.flag3 = false;
@@ -1358,7 +1358,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.flag3 = true;
         session.close();
     }
-    
+
     boolean proxyTest() {
         String ntWtTemp = "";
         String grWtTemp = "";
@@ -1370,7 +1370,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             return true;
         }
     }
-    
+
     boolean paymentOptionTest() {
         boolean internalFlag = false;
         if (cash_CheackBox.isSelected() || cashAndTwoPay_CheackBox.isSelected() || twoPay_CheackBox.isSelected()) {
@@ -1378,7 +1378,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         }
         return internalFlag;
     }
-    
+
     void calculateAmount() {
         productSize = Integer.parseInt(size_ComboBox.getSelectedItem().toString());
         productValue = Integer.parseInt(value_TextField.getText());
@@ -1398,7 +1398,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         }
     }
-    
+
     void updateSRNO() {
         Session session = initSessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.InitData.Hibernate.config.Initdata.class);
@@ -1416,7 +1416,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         transaction.commit();
         session.close();
     }
-    
+
     public void reset() {
         party_ComboBox.setSelectedItem("Select Party Name");
         pending_ComboBox.setSelectedItem("Load Pending Order");
@@ -1461,9 +1461,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datestring = dateFormat.format(currenTDate);
         com.JD.StaticData.Static_DATA.dM_Report.report("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm where dateOfAddition='" + datestring + "'");
-        
+
     }
-    
+
     public void resetJTable() {
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
@@ -1514,7 +1514,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new PrintReceipt_Dm_Form().setVisible(true);
             }
