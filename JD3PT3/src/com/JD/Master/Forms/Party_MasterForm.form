@@ -80,7 +80,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="addDataToDatabas_Button" pref="103" max="32767" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="reset_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="print" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="phone_TextField" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -94,7 +94,7 @@
                       <Component id="mobile_TextField" max="32767" attributes="0"/>
                       <Component id="emailID_TextField" pref="198" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="exportToExcel_Button" min="-2" max="-2" attributes="0"/>
+                          <Component id="export" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="print_Button" max="32767" attributes="0"/>
                       </Group>
@@ -152,10 +152,10 @@
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="addDataToDatabas_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="reset_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="print" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="exportToExcel_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="export" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="print_Button" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -386,20 +386,20 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clear_CheackBoxActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="reset_Button">
+        <Component class="javax.swing.JButton" name="print">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reset_ButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="exportToExcel_Button">
+        <Component class="javax.swing.JButton" name="export">
           <Properties>
             <Property name="text" type="java.lang.String" value="Export To Excel"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportToExcel_ButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="print_Button">

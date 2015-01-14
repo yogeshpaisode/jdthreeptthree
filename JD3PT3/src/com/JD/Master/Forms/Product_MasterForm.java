@@ -4,6 +4,7 @@
  */
 package com.JD.Master.Forms;
 
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Master.Hibernate.config.Productmaster;
 import com.JD.Validator.Validator;
 import java.lang.InstantiationException;
@@ -123,6 +124,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
         reset_Button = new javax.swing.JButton();
         search_Button = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        export = new javax.swing.JButton();
+        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +207,20 @@ public class Product_MasterForm extends javax.swing.JFrame {
         jLabel5.setText(" Enter Product Name To Search ");
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
+        export.setText("Export To Excel");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
+
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout productMaster_PanelLayout = new javax.swing.GroupLayout(productMaster_Panel);
         productMaster_Panel.setLayout(productMaster_PanelLayout);
         productMaster_PanelLayout.setHorizontalGroup(
@@ -224,16 +241,20 @@ public class Product_MasterForm extends javax.swing.JFrame {
                     .addComponent(productName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(measurement_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(size_TextField))
-                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(productMaster_PanelLayout.createSequentialGroup()
+                .addGroup(productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productMaster_PanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3))
-                    .addGroup(productMaster_PanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, productMaster_PanelLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
+                        .addComponent(export)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(print, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)))
-                .addContainerGap(519, Short.MAX_VALUE))
+                .addContainerGap())
         );
         productMaster_PanelLayout.setVerticalGroup(
             productMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +277,9 @@ public class Product_MasterForm extends javax.swing.JFrame {
                     .addComponent(addDataToDatabase_Button)
                     .addComponent(reset_Button)
                     .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(export)
+                    .addComponent(print))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
         );
@@ -343,6 +366,20 @@ public class Product_MasterForm extends javax.swing.JFrame {
         session.close();
 
     }//GEN-LAST:event_search_ButtonKeyReleased
+
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(prductTable_JTable);
+    }//GEN-LAST:event_exportActionPerformed
+
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+        try {
+            prductTable_JTable.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+        }
+    }//GEN-LAST:event_printActionPerformed
 
     void addData() {
         Session session = masterSessionFactory.openSession();
@@ -458,6 +495,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataToDatabase_Button;
+    private javax.swing.JButton export;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -466,6 +504,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox measurement_ComboBox;
     private javax.swing.JTable prductTable_JTable;
+    private javax.swing.JButton print;
     public javax.swing.JPanel productMaster_Panel;
     private javax.swing.JComboBox productName_ComboBox;
     private javax.swing.JButton reset_Button;

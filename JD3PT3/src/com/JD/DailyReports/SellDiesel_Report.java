@@ -6,6 +6,7 @@ package com.JD.DailyReports;
 
 import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
@@ -269,8 +270,18 @@ public class SellDiesel_Report extends javax.swing.JFrame {
         });
 
         jButton2.setText("Export To Excel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Print");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -508,6 +519,20 @@ public class SellDiesel_Report extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            sellDiesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(sellDiesel_Table);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void query(String queryMaker) {
         int indexJTable = -1;

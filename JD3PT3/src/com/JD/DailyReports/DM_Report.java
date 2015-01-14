@@ -6,6 +6,7 @@ package com.JD.DailyReports;
 
 import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
@@ -221,8 +222,18 @@ public class DM_Report extends javax.swing.JFrame {
         });
 
         export_Button.setText("Export to Excel");
+        export_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_ButtonActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         dm_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -430,6 +441,20 @@ public class DM_Report extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_clear_CheackBoxActionPerformed
+
+    private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(dm_Table);
+    }//GEN-LAST:event_export_ButtonActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            dm_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_print_ButtonActionPerformed
     public void report(String queryMaker) {
         int indexJTable = -1;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {

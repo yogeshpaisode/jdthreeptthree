@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.hibernate.Query;
@@ -228,8 +229,18 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         });
 
         export_Button.setText("Export To Excel");
+        export_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_ButtonActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout purchase_PanelLayout = new javax.swing.GroupLayout(purchase_Panel);
         purchase_Panel.setLayout(purchase_PanelLayout);
@@ -375,6 +386,24 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
         session.close();
         reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+           diesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_export_ButtonActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            diesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_print_ButtonActionPerformed
     void reset() {
         purchaseSearch_company_ComboBox.setSelectedIndex(0);
         purchase_Perseon_Search_ComboBox.setSelectedIndex(0);

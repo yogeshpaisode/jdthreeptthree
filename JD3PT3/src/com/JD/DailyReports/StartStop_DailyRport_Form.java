@@ -6,6 +6,7 @@ package com.JD.DailyReports;
 
 import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
@@ -107,6 +108,8 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
         name_Lable = new javax.swing.JLabel();
         search_Button = new javax.swing.JButton();
         reset_Button = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +255,20 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Export To Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Print");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout startStop_PanelLayout = new javax.swing.GroupLayout(startStop_Panel);
         startStop_Panel.setLayout(startStop_PanelLayout);
         startStop_PanelLayout.setHorizontalGroup(
@@ -261,11 +278,15 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(date_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(startStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(startStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(startStop_PanelLayout.createSequentialGroup()
                         .addComponent(search_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(reset_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(startStop_PanelLayout.createSequentialGroup()
                         .addComponent(number_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -285,7 +306,9 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(startStop_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(search_Button)
-                            .addComponent(reset_Button))))
+                            .addComponent(reset_Button)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
         );
@@ -410,6 +433,20 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
         resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");
     }//GEN-LAST:event_reset_ButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(detailList_Table);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        try {
+            detailList_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     void resetJTable(String queryMaker) {
         indexJTable = -1;
         Session session = search_SessionFactory.openSession();
@@ -481,6 +518,8 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
     private javax.swing.JTable detailList_Table;
     private javax.swing.JCheckBox early_CheackBox;
     private javax.swing.JCheckBox equal_CheackBox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;

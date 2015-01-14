@@ -310,8 +310,18 @@ public class DM_Search extends javax.swing.JFrame {
         });
 
         export_Button.setText("Export to Excel");
+        export_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_ButtonActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         dm_Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -553,6 +563,24 @@ public class DM_Search extends javax.swing.JFrame {
         session.close();
         reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            dm_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_export_ButtonActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            dm_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_print_ButtonActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,7 @@
  */
 package com.JD.Master.Forms;
 
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Master.Forms.*;
 import com.JD.Master.Hibernate.config.Machinemaster;
 import java.awt.Color;
@@ -21,7 +22,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class Machine_MasterForm extends javax.swing.JFrame {
-
+    
     //--- INIT SESSION FACTORY ---//
     SessionFactory masterFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //--- INIT SESSION FACTORY ---//
@@ -142,6 +143,8 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         reset_Button = new javax.swing.JButton();
         search_TextFields = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        export = new javax.swing.JButton();
+        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -273,6 +276,20 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         jLabel5.setText(" Enter Machine Number To Search ");
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
+        export.setText("Export To Excel");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
+
+        print.setText("Print");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout machineMaster_PanelLayout = new javax.swing.GroupLayout(machineMaster_Panel);
         machineMaster_Panel.setLayout(machineMaster_PanelLayout);
         machineMaster_PanelLayout.setHorizontalGroup(
@@ -281,7 +298,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,8 +331,11 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(model_TextField, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                            .addComponent(servicingStatus_TextField))
-                        .addGap(292, 292, 292))
+                            .addComponent(servicingStatus_TextField)
+                            .addComponent(search_TextFields))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))
                     .addGroup(machineMaster_PanelLayout.createSequentialGroup()
                         .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(machineMaster_PanelLayout.createSequentialGroup()
@@ -325,18 +345,19 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                 .addGap(116, 116, 116)
                                 .addComponent(loadData_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                                    .addComponent(export)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(print, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
                                     .addComponent(update_CheackBox)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(delete_CheackBox)
                                     .addGap(18, 18, 18)
-                                    .addComponent(clear_CheackBox))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(machineName_Combobox, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(currentReading_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
+                                    .addComponent(clear_CheackBox))))
                         .addContainerGap())))
         );
         machineMaster_PanelLayout.setVerticalGroup(
@@ -364,21 +385,26 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                     .addComponent(servicing_Lable)
                     .addComponent(servicingStatus_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(average_Lable)
-                    .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(update_CheackBox)
-                    .addComponent(delete_CheackBox)
-                    .addComponent(clear_CheackBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addDataToDatabase_Button)
-                        .addComponent(reset_Button))
-                    .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(machineMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(average_Lable)
+                            .addComponent(expectedAverage_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(update_CheackBox)
+                            .addComponent(delete_CheackBox)
+                            .addComponent(clear_CheackBox))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addDataToDatabase_Button)
+                            .addComponent(reset_Button)
+                            .addComponent(export)
+                            .addComponent(print))
+                        .addGap(11, 11, 11))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, machineMaster_PanelLayout.createSequentialGroup()
+                        .addGroup(machineMaster_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(search_TextFields, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -671,6 +697,20 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         model_TextField.setText(model_TextField.getText().toUpperCase());
     }//GEN-LAST:event_model_TextFieldKeyReleased
 
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(machine_JTable);
+    }//GEN-LAST:event_exportActionPerformed
+
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+        // TODO add your handling code here:
+        try {
+            machine_JTable.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_printActionPerformed
+
     void chkOperation() {
         if (update_CheackBox.isSelected()) {
             update();
@@ -838,6 +878,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private javax.swing.JCheckBox delete_CheackBox;
     private javax.swing.ButtonGroup design_ButtonGroup;
     private javax.swing.JTextField expectedAverage_TextField;
+    private javax.swing.JButton export;
     private javax.swing.JTextField fuelAvilable_TextField;
     private javax.swing.JLabel fuel_Lable;
     private javax.swing.JLabel jLabel1;
@@ -852,6 +893,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
     private javax.swing.JComboBox machinePartyName_ComboBox;
     private javax.swing.JTable machine_JTable;
     private javax.swing.JTextField model_TextField;
+    private javax.swing.JButton print;
     private javax.swing.JLabel reading_Lable;
     private javax.swing.JButton reset_Button;
     private javax.swing.JTextField search_TextFields;

@@ -6,6 +6,7 @@ package com.JD.DailyReports;
 
 import com.JD.Search.*;
 import com.JD.DatePicker.DatePicker;
+import com.JD.ExportToExcel.ExportToExcel;
 import com.JD.Test.*;
 import com.JD.Master.Forms.*;
 import java.awt.Color;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import org.hibernate.Query;
@@ -256,8 +258,18 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         });
 
         export_Button.setText("Export To Excel");
+        export_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                export_ButtonActionPerformed(evt);
+            }
+        });
 
         print_Button.setText("Print");
+        print_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                print_ButtonActionPerformed(evt);
+            }
+        });
 
         reset_Button.setText("Reset");
         reset_Button.addActionListener(new java.awt.event.ActionListener() {
@@ -456,6 +468,20 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
             report_Button.setEnabled(true);
         }
     }//GEN-LAST:event_purchase_Perseon_Report_ComboBoxActionPerformed
+
+    private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            diesel_Table.print();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        }
+    }//GEN-LAST:event_print_ButtonActionPerformed
+
+    private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
+        // TODO add your handling code here:
+        new ExportToExcel().saveToExcel(diesel_Table);
+    }//GEN-LAST:event_export_ButtonActionPerformed
 
     public void query(String queryMaker) {
         int indexJTable = -1;

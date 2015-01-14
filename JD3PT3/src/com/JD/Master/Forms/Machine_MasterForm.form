@@ -53,7 +53,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -98,8 +98,11 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="model_TextField" pref="188" max="32767" attributes="0"/>
                               <Component id="servicingStatus_TextField" max="32767" attributes="0"/>
+                              <Component id="search_TextFields" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="199" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -111,6 +114,15 @@
                                   <Component id="loadData_ComboBox" min="-2" pref="202" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="export" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="print" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                      <Component id="machineName_Combobox" min="-2" pref="202" max="-2" attributes="0"/>
+                                      <Component id="currentReading_TextField" min="-2" pref="201" max="-2" attributes="0"/>
+                                  </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Component id="update_CheackBox" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
@@ -118,15 +130,8 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="clear_CheackBox" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Component id="machineName_Combobox" min="-2" pref="202" max="-2" attributes="0"/>
-                                      <Component id="currentReading_TextField" min="-2" pref="201" max="-2" attributes="0"/>
-                                  </Group>
                               </Group>
-                              <Component id="search_TextFields" alignment="1" min="-2" pref="201" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -161,25 +166,32 @@
                       <Component id="servicingStatus_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="average_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="expectedAverage_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="update_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="delete_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="clear_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="addDataToDatabase_Button" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="reset_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="average_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="expectedAverage_TextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="update_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="delete_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="clear_CheackBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="addDataToDatabase_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="reset_Button" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="export" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="print" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="search_TextFields" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="search_TextFields" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="470" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -473,6 +485,22 @@
               </Border>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="export">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Export To Excel"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="print">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Print"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
