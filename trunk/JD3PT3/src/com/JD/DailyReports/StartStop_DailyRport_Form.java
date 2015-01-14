@@ -42,6 +42,7 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
     Date currenTDate = new Date();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String datestring = dateFormat.format(currenTDate);
+    List machineList = new ArrayList();
 
     /**
      * Creates new form Party_MasterForm
@@ -64,12 +65,21 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             number_ComboBox.addItem(m.getMachineNumber());
-        }
-        session.close();
+        }        
         currenTDate = new Date();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        datestring = dateFormat.format(currenTDate);
-        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");
+        datestring = dateFormat.format(currenTDate);          
+        Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
+        results = q.list();
+        for (Object object : results) {
+            com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
+            if (!machineList.contains(m.getMachineNumber())) {
+                number_ComboBox.addItem(m.getMachineNumber());
+                machineList.add(m.getMachineNumber());
+            }
+        }
+        session.close();
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");   
     }
 
     /**
@@ -81,6 +91,7 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DateGroup = new javax.swing.ButtonGroup();
         startStop_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         detailList_Table = new javax.swing.JTable();
@@ -402,6 +413,10 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
             com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
             ++indexJTable;
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
+            if (!machineList.contains(m.getMachineNumber())) {
+                number_ComboBox.addItem(m.getMachineNumber());
+                machineList.add(m.getMachineNumber());
+            }
         }
         session.close();
     }
@@ -409,6 +424,7 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
     void reset() {
         number_ComboBox.setSelectedIndex(0);
         name_Lable.setText("  Select Machine Number  ");
+        DateGroup.clearSelection();
     }
 
     /**
@@ -453,6 +469,7 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup DateGroup;
     private javax.swing.JCheckBox betwee_CheackBox;
     private javax.swing.JCheckBox clear_CheackBox;
     private javax.swing.JPanel date_panel;

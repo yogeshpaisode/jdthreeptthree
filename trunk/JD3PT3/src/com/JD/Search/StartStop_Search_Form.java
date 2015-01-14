@@ -34,13 +34,14 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
     javax.swing.table.DefaultTableModel defaultTableModel;
     SessionFactory search_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //---Load Date Panel---//
+    List machineList = new ArrayList();
 
     /**
      * Creates new form Party_MasterForm
      */
     public StartStop_Search_Form() {
         initComponents();
-          //----Load Calender----//
+        //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
         date2.setBackground(Color.yellow);
@@ -50,12 +51,15 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         //----Load Calender----//
         defaultTableModel = (DefaultTableModel) detailList_Table.getModel();
         Session session = search_SessionFactory.openSession();
-        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
-        cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
-        List results = cr.list();
+
+        Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
+        List results = q.list();
         for (Object object : results) {
-            com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
-            number_ComboBox.addItem(m.getMachineNumber());
+            com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
+            if (!machineList.contains(m.getMachineNumber())) {
+                number_ComboBox.addItem(m.getMachineNumber());
+                machineList.add(m.getMachineNumber());
+            }
         }
         session.close();
     }
@@ -69,6 +73,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateGroup = new javax.swing.ButtonGroup();
         startStop_Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         detailList_Table = new javax.swing.JTable();
@@ -118,6 +123,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         date_panel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 51, 0), 1, true));
 
         betwee_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        dateGroup.add(betwee_CheackBox);
         betwee_CheackBox.setText("Between");
         betwee_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         betwee_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +133,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         });
 
         equal_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        dateGroup.add(equal_CheackBox);
         equal_CheackBox.setText("Equal");
         equal_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         equal_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +143,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         });
 
         early_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        dateGroup.add(early_CheackBox);
         early_CheackBox.setText("Early");
         early_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 0, 255)));
         early_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +153,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         });
 
         late_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        dateGroup.add(late_CheackBox);
         late_CheackBox.setText("Late");
         late_CheackBox.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 255)));
         late_CheackBox.addActionListener(new java.awt.event.ActionListener() {
@@ -158,6 +167,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         jLabel3.setText("To:");
 
         clear_CheackBox.setBackground(new java.awt.Color(255, 255, 51));
+        dateGroup.add(clear_CheackBox);
         clear_CheackBox.setText("Clear");
 
         javax.swing.GroupLayout date_panelLayout = new javax.swing.GroupLayout(date_panel);
@@ -218,6 +228,11 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         });
 
         reset_Button.setText("Reset");
+        reset_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reset_ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout startStop_PanelLayout = new javax.swing.GroupLayout(startStop_Panel);
         startStop_Panel.setLayout(startStop_PanelLayout);
@@ -364,13 +379,23 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
             com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
             ++indexJTable;
             defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
+            if (!machineList.contains(m.getMachineNumber())) {
+                number_ComboBox.addItem(m.getMachineNumber());
+                machineList.add(m.getMachineNumber());
+            }        
         }
         session.close();
         reset();
     }//GEN-LAST:event_search_ButtonActionPerformed
+
+    private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
+        // TODO add your handling code here:
+        reset();
+    }//GEN-LAST:event_reset_ButtonActionPerformed
     void reset() {
         number_ComboBox.setSelectedIndex(0);
         name_Lable.setText("  Select Machine Number  ");
+        dateGroup.clearSelection();
     }
 
     /**
@@ -417,6 +442,7 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox betwee_CheackBox;
     private javax.swing.JCheckBox clear_CheackBox;
+    private javax.swing.ButtonGroup dateGroup;
     private javax.swing.JPanel date_panel;
     private javax.swing.JTable detailList_Table;
     private javax.swing.JCheckBox early_CheackBox;
