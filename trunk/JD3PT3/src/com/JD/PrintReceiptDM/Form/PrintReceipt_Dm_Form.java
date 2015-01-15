@@ -434,7 +434,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         srNo_Lable.setText("jLabel18");
 
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/PrintReceiptDM/Form/UP.jpg"))); // NOI18N
-        jLabel19.setText(" Scan QR Code From Receipt To UPDATE/CANCEL Order");
+        jLabel19.setText(" Scan QR Code To UPDATE/CANCEL Order");
         jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51)));
 
         operation_ButtonGroup.add(update_CheackBox);
@@ -533,7 +533,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         });
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/Hide.jpg"))); // NOI18N
-        jLabel21.setText("Type Order Number To Search");
+        jLabel21.setText("Order Number To Search");
         jLabel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         operation_ButtonGroup.add(clear_CheackBox);
@@ -636,16 +636,17 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(print_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(webCan_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DM_PanelLayout.createSequentialGroup()
-                        .addComponent(presrNo_Lable)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(DM_PanelLayout.createSequentialGroup()
+                            .addComponent(presrNo_Lable)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(search_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         DM_PanelLayout.setVerticalGroup(
             DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -147,18 +147,20 @@
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="webCan_Panel" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" pref="346" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="presrNo_Lable" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="search_TextField" min="-2" pref="91" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel21" max="32767" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="presrNo_Lable" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="search_TextField" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel21" min="-2" pref="170" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="166" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -672,7 +674,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/JD/PrintReceiptDM/Form/UP.jpg"/>
             </Property>
-            <Property name="text" type="java.lang.String" value=" Scan QR Code From Receipt To UPDATE/CANCEL Order"/>
+            <Property name="text" type="java.lang.String" value=" Scan QR Code To UPDATE/CANCEL Order"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
@@ -817,7 +819,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/JD/Home/Hide.jpg"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Type Order Number To Search"/>
+            <Property name="text" type="java.lang.String" value="Order Number To Search"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder>
