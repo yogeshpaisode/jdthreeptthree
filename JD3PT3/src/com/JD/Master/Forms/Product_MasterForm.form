@@ -135,7 +135,7 @@
                     <Column editable="false" title="Measurement" type="java.lang.String"/>
                     <Column editable="false" title="DOA" type="java.lang.String"/>
                     <Column editable="false" title="TOA" type="java.lang.String"/>
-                    <Column editable="false" title="AddedBy" type="java.lang.String"/>
+                    <Column editable="false" title="Added By" type="java.lang.String"/>
                     <Column editable="false" title="UserRight" type="java.lang.String"/>
                     <Column editable="false" title="Location" type="java.lang.String"/>
                   </Table>
