@@ -110,6 +110,7 @@ public class JD_Home extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         setting_Button = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
+        setting_Button1 = new javax.swing.JButton();
         parentComponentHolder_Panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -251,6 +252,13 @@ public class JD_Home extends javax.swing.JFrame {
             }
         });
 
+        setting_Button1.setText("Servicing :                     F10");
+        setting_Button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setting_Button1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menuItem_PanelLayout = new javax.swing.GroupLayout(menuItem_Panel);
         menuItem_Panel.setLayout(menuItem_PanelLayout);
         menuItem_PanelLayout.setHorizontalGroup(
@@ -271,6 +279,7 @@ public class JD_Home extends javax.swing.JFrame {
             .addComponent(jSeparator5)
             .addComponent(setting_Button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator6)
+            .addComponent(setting_Button1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuItem_PanelLayout.setVerticalGroup(
             menuItem_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,9 +313,11 @@ public class JD_Home extends javax.swing.JFrame {
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(setting_Button)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(setting_Button1)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         parentComponentHolder_Panel.setBackground(new java.awt.Color(255, 102, 51));
@@ -325,7 +336,7 @@ public class JD_Home extends javax.swing.JFrame {
         );
         parentComponentHolder_PanelLayout.setVerticalGroup(
             parentComponentHolder_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 453, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel1.setBackground(new java.awt.Color(51, 102, 255));
@@ -716,6 +727,10 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
          startStop();
     }//GEN-LAST:event_running_LableMouseClicked
+
+    private void setting_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_Button1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setting_Button1ActionPerformed
     void defultPanel() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(notification.notification_Panel);
@@ -807,6 +822,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JButton search_Button;
     private javax.swing.JMenuItem serch_ShortCut;
     private javax.swing.JButton setting_Button;
+    private javax.swing.JButton setting_Button1;
     private javax.swing.JMenuItem setting_ShortCut;
     private javax.swing.JButton startStop_Button;
     private javax.swing.JMenuItem startStop_ShortCut;
