@@ -98,10 +98,10 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.sizeTemp = sizeTemp;
         com.JD.StaticData.Static_DATA.measurementTempList = measurementTempList;
         //------------Fill Product Name-----------//
-        productNameTempList.add("Raw");
-        productNameTempList.add("Aggrigate");
-        productNameTempList.add("Crush Sand");
-        productNameTempList.add("Bricks");
+        productNameTempList.add("RAW");
+        productNameTempList.add("AGGRIGATE");
+        productNameTempList.add("CRUSH SAND");
+        productNameTempList.add("BRICKS");
         
         measurementTempList.add("CFT");
         measurementTempList.add("BRASS");

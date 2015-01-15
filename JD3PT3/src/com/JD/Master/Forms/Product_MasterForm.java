@@ -52,7 +52,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
     //--- INIT SESSION FACTORY ---//    
     SessionFactory masterSessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     //----- Data Collection -----//
-    String productNameList = "Raw,Aggrigate,Crush Sand,Bricks";
+    String productNameList = "RAW,AGGRIGATE,CRUSH SAND,BRICKS";
     String productMeasurementList = "CFT,BRASS,NUMBER,TON,CUM";
     //----- Data Collection -----//
 
