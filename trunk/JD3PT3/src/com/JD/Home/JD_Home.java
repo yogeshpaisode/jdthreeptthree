@@ -14,7 +14,12 @@ import com.JD.Search.Search_Home;
 import com.JD.Setting.Setting_Home;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -60,21 +65,34 @@ public class JD_Home extends javax.swing.JFrame {
     public JD_Home() {
         initComponents();
         com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
-        com.JD.StaticData.Static_DATA.running_Lable=running_Lable;
+        com.JD.StaticData.Static_DATA.running_Lable = running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
-        com.JD.StaticData.Static_DATA.readyMachine_Lable=readyMachine_Lable;
+        com.JD.StaticData.Static_DATA.readyMachine_Lable = readyMachine_Lable;
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
         //------ Default Width and Height of parentComponentHolder_Panel------//
         user_Lable.setText("Welcome " + dataTemp[0] + " ");
-        notification=new Notification();
-        com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable=notification.notification_fuelQuantity_Lable;
-        defultPanel();     
-        machineStartStop_Home=new MachineStartStop_Home();
-        
-        
+        notification = new Notification();
+        com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable = notification.notification_fuelQuantity_Lable;
+        defultPanel();
+        machineStartStop_Home = new MachineStartStop_Home();
+        Timer timer = new Timer(500, actListner);
+        timer.start();
+
+
     }
+    ActionListener actListner = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent event) {            
+            String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
+            String date = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
+            home_Date_Lable.setText("  "+date+"  ");
+            com.JD.StaticData.Static_DATA.dm_date_Lable.setText(" "+date+" ");
+            home_timer_Lable.setText("   "+time+"   ");
+            com.JD.StaticData.Static_DATA.dm_time_Lable.setText("  "+time);
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,6 +108,10 @@ public class JD_Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         currentWindow_Labe = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        home_timer_Lable = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        home_Date_Lable = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         user_Lable = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         logout_Lable = new javax.swing.JLabel();
@@ -167,8 +189,24 @@ public class JD_Home extends javax.swing.JFrame {
         currentWindow_Labe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
         jToolBar1.add(currentWindow_Labe);
 
-        jLabel3.setText("                                                                                                                                                                                                                   ");
+        jLabel3.setText("                                                                                                ");
         jToolBar1.add(jLabel3);
+
+        home_timer_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/clock.png"))); // NOI18N
+        home_timer_Lable.setText("   01:23:23   ");
+        home_timer_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        jToolBar1.add(home_timer_Lable);
+
+        jLabel8.setText("                       ");
+        jToolBar1.add(jLabel8);
+
+        home_Date_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/date.png"))); // NOI18N
+        home_Date_Lable.setText("  21-JHhhh-2015  ");
+        home_Date_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        jToolBar1.add(home_Date_Lable);
+
+        jLabel9.setText("                       ");
+        jToolBar1.add(jLabel9);
 
         user_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/user.png"))); // NOI18N
         user_Lable.setText(" Welcome Yogesh Paisode ");
@@ -550,7 +588,7 @@ public class JD_Home extends javax.swing.JFrame {
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentResized
-    
+
     private void hideUnhide_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideUnhide_LableMouseClicked
         // TODO add your handling code here:
 
@@ -564,7 +602,7 @@ public class JD_Home extends javax.swing.JFrame {
             hideUnhide_Lable.setIcon(hideICO);
         }
     }//GEN-LAST:event_hideUnhide_LableMouseClicked
-    
+
     private void parentComponentHolder_PanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_parentComponentHolder_PanelComponentResized
         // TODO add your handling code here:
         //------ Default Width and Height of parentComponentHolder_Panel------//
@@ -578,13 +616,13 @@ public class JD_Home extends javax.swing.JFrame {
         report_Home.report_TabbedPanel.setBounds(0, 0, width, height);
         setting_Home.Setting_Home_TabbedPane.setBounds(0, 0, width, height);
         machineStartStop_Home.machineStartStop_TabbedPanel.setBounds(0, 0, width, height);
-        
+
     }//GEN-LAST:event_parentComponentHolder_PanelComponentResized
-    
+
     private void dm_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ButtonActionPerformed
         // TODO add your handling code here:
         dmSet();
-        
+
     }//GEN-LAST:event_dm_ButtonActionPerformed
     void dmSet() {
         parentComponentHolder_Panel.removeAll();
@@ -609,17 +647,17 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_ButtonActionPerformed
-    
+
     private void notification_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_LableMouseClicked
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_LableMouseClicked
-    
+
     private void fuelQuantity_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fuelQuantity_LableMouseClicked
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_fuelQuantity_LableMouseClicked
-    
+
     private void search_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_ButtonActionPerformed
         // TODO add your handling code here:
         searchSet();
@@ -657,17 +695,17 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         defultPanel();
     }//GEN-LAST:event_notification_ShortCutActionPerformed
-    
+
     private void master_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_master_ShortCutActionPerformed
         // TODO add your handling code here:
         masterSet();
     }//GEN-LAST:event_master_ShortCutActionPerformed
-    
+
     private void dm_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dm_ShortCutActionPerformed
         // TODO add your handling code here:
         dmSet();
     }//GEN-LAST:event_dm_ShortCutActionPerformed
-    
+
     private void diesel_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diesel_ShortCutActionPerformed
         // TODO add your handling code here:
         dieselPanel();
@@ -683,22 +721,22 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         startStop();
     }//GEN-LAST:event_startStop_ButtonActionPerformed
-    
+
     private void serch_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_serch_ShortCutActionPerformed
         // TODO add your handling code here:
         searchSet();
     }//GEN-LAST:event_serch_ShortCutActionPerformed
-    
+
     private void dailyReport_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dailyReport_ShortCutActionPerformed
         // TODO add your handling code here:
         reportSet();
     }//GEN-LAST:event_dailyReport_ShortCutActionPerformed
-    
+
     private void setting_ShortCutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_ShortCutActionPerformed
         // TODO add your handling code here:
         settingSet();
     }//GEN-LAST:event_setting_ShortCutActionPerformed
-    
+
     private void help_MenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_help_MenuMouseClicked
         // TODO add your handling code here:
         parentComponentHolder_Panel.removeAll();
@@ -707,7 +745,7 @@ public class JD_Home extends javax.swing.JFrame {
         parentComponentHolder_Panel.revalidate();
         currentWindow_Labe.setText(" Help Window ");
     }//GEN-LAST:event_help_MenuMouseClicked
-    
+
     private void logout_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logout_LableMouseClicked
         // TODO add your handling code here:
         System.exit(0);
@@ -725,7 +763,7 @@ public class JD_Home extends javax.swing.JFrame {
 
     private void running_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_running_LableMouseClicked
         // TODO add your handling code here:
-         startStop();
+        startStop();
     }//GEN-LAST:event_running_LableMouseClicked
 
     private void setting_Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setting_Button1ActionPerformed
@@ -774,7 +812,7 @@ public class JD_Home extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new JD_Home().setVisible(true);
             }
@@ -790,6 +828,8 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel fuelQuantity_Lable;
     private javax.swing.JMenu help_Menu;
     private javax.swing.JLabel hideUnhide_Lable;
+    private javax.swing.JLabel home_Date_Lable;
+    private javax.swing.JLabel home_timer_Lable;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -797,6 +837,8 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;

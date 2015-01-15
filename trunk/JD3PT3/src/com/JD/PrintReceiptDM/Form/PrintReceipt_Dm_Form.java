@@ -97,6 +97,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.productNameTempList = productNameTempList;
         com.JD.StaticData.Static_DATA.sizeTemp = sizeTemp;
         com.JD.StaticData.Static_DATA.measurementTempList = measurementTempList;
+        com.JD.StaticData.Static_DATA.dm_time_Lable=dm_time_Lable;
+        com.JD.StaticData.Static_DATA.dm_date_Lable=dm_date_Lable;
         //------------Fill Product Name-----------//
         productNameTempList.add("RAW");
         productNameTempList.add("AGGRIGATE");
@@ -182,8 +184,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.driverName_ComboBox = driverName_ComboBox;
         com.JD.StaticData.Static_DATA.vehicleNumber_ComboBox = vehicleNumber_ComboBox;
         com.JD.StaticData.Static_DATA.vehicleName_TextField = vehicleName_TextField;
-        com.JD.StaticData.Static_DATA.date_Lable = date_Lable;
-        com.JD.StaticData.Static_DATA.time_Lable = time_Lable;
+        com.JD.StaticData.Static_DATA.date_Lable = dm_date_Lable;
+        com.JD.StaticData.Static_DATA.time_Lable = dm_time_Lable;
         com.JD.StaticData.Static_DATA.proxy_CheackBox = proxy_CheackBox;
         com.JD.StaticData.Static_DATA.neightWeight_TextField = neightWeight_TextField;
         com.JD.StaticData.Static_DATA.grossWeight_TextField = grossWeight_TextField;
@@ -196,8 +198,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         //------Load All Component To sattic Class----//
         resetJTable();
         
-        date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
-        time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
+        dm_date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
+        dm_time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
     }
 
     /**
@@ -242,9 +244,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         vehicleName_TextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        date_Lable = new javax.swing.JLabel();
+        dm_date_Lable = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        time_Lable = new javax.swing.JLabel();
+        dm_time_Lable = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         srNo_Lable = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -419,13 +421,13 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         jLabel13.setText("Date:");
 
-        date_Lable.setText("jLabel14");
-        date_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        dm_date_Lable.setText("jLabel14");
+        dm_date_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         jLabel15.setText("Time:");
 
-        time_Lable.setText("jLabel16");
-        time_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
+        dm_time_Lable.setText("jLabel16");
+        dm_time_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0)));
 
         jLabel17.setText("Sr.No : ");
 
@@ -587,7 +589,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                             .addComponent(payAble_TextField)
                             .addComponent(driverName_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(vehicleNumber_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(date_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dm_date_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(proxy_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -623,7 +625,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                         .addComponent(cashAndTwoPay_CheackBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(twoPayAmount_TextField)
                     .addComponent(vehicleName_TextField)
-                    .addComponent(time_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dm_time_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pending_ComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DM_PanelLayout.createSequentialGroup()
                         .addComponent(neightWeight_TextField)
@@ -698,9 +700,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(date_Lable)
+                            .addComponent(dm_date_Lable)
                             .addComponent(jLabel15)
-                            .addComponent(time_Lable)))
+                            .addComponent(dm_time_Lable)))
                     .addComponent(webCan_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DM_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1466,8 +1468,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         update_CheackBox.setEnabled(false);
         cancel_CheackBox.setEnabled(false);
         clear_CheackBox.setEnabled(false);
-        date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
-        time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
+        dm_date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
+        dm_time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
         search_TextField.setText("Search.......");
         proxy_CheackBox.setSelected(false);
         flag4 = false;
@@ -1553,8 +1555,9 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private javax.swing.ButtonGroup cashMode_ButtonGroup;
     private javax.swing.JCheckBox cash_CheackBox;
     private javax.swing.JCheckBox clear_CheackBox;
-    private javax.swing.JLabel date_Lable;
     private javax.swing.JTable dm_Table;
+    private javax.swing.JLabel dm_date_Lable;
+    private javax.swing.JLabel dm_time_Lable;
     private javax.swing.JComboBox driverName_ComboBox;
     private javax.swing.JButton export_Button;
     private javax.swing.JTextField grossWeight_TextField;
@@ -1593,7 +1596,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
     private javax.swing.JTextField search_TextField;
     private javax.swing.JComboBox size_ComboBox;
     private javax.swing.JLabel srNo_Lable;
-    private javax.swing.JLabel time_Lable;
     private javax.swing.JTextField totalAmount_TextField;
     private javax.swing.JTextField twoPayAmount_TextField;
     private javax.swing.JCheckBox twoPay_CheackBox;

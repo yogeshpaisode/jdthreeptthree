@@ -98,6 +98,8 @@ public class Static_DATA {
     public static int SRNO = 0;
     public static String QRCode = "";
     public static javax.swing.JPanel webCam_Panel_Dm = null;
+    public static javax.swing.JLabel dm_time_Lable = null;  
+    public static javax.swing.JLabel dm_date_Lable = null; 
     //-----DM Data----------------------------------//
     //-----Driver Master----------------------------//
     public static javax.swing.JPanel webCam_Panel = null;
