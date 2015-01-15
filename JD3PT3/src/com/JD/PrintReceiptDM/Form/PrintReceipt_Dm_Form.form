@@ -86,7 +86,7 @@
                               <Component id="payAble_TextField" max="32767" attributes="0"/>
                               <Component id="driverName_ComboBox" max="32767" attributes="0"/>
                               <Component id="vehicleNumber_ComboBox" max="32767" attributes="0"/>
-                              <Component id="date_Lable" max="32767" attributes="0"/>
+                              <Component id="dm_date_Lable" max="32767" attributes="0"/>
                               <Component id="proxy_CheackBox" pref="185" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -131,7 +131,7 @@
                       </Group>
                       <Component id="twoPayAmount_TextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="vehicleName_TextField" alignment="0" max="32767" attributes="0"/>
-                      <Component id="time_Lable" alignment="0" max="32767" attributes="0"/>
+                      <Component id="dm_time_Lable" alignment="0" max="32767" attributes="0"/>
                       <Component id="pending_ComboBox" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="neightWeight_TextField" max="32767" attributes="0"/>
@@ -224,9 +224,9 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="date_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dm_date_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="time_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="dm_time_Lable" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="webCan_Panel" max="32767" attributes="0"/>
@@ -623,7 +623,7 @@
             <Property name="text" type="java.lang.String" value="Date:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="date_Lable">
+        <Component class="javax.swing.JLabel" name="dm_date_Lable">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel14"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -640,7 +640,7 @@
             <Property name="text" type="java.lang.String" value="Time:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="time_Lable">
+        <Component class="javax.swing.JLabel" name="dm_time_Lable">
           <Properties>
             <Property name="text" type="java.lang.String" value="jLabel16"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
