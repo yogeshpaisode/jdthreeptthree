@@ -136,7 +136,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Size", "Measurement", "DOA", "TOA", "AddedBy", "UserRight", "Location"
+                "Product Name", "Size", "Measurement", "DOA", "TOA", "Added By", "UserRight", "Location"
             }
         ) {
             Class[] types = new Class [] {
