@@ -407,7 +407,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="tack_Button">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tack Image"/>
+            <Property name="text" type="java.lang.String" value="Take Image"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tack_ButtonActionPerformed"/>

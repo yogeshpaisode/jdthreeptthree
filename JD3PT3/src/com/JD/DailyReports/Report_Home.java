@@ -30,7 +30,7 @@ public class Report_Home extends javax.swing.JFrame {
         report_TabbedPanel.add("Print Receipt/DM Daily Report", dM_Report.DmReport_Panel);
         report_TabbedPanel.add("Purchase Diesel Report", purchaseDiesel_Report.purchase_Panel);
         report_TabbedPanel.add("Sell Diesel Report", sellDiesel_Report.sell_Panel);
-        report_TabbedPanel.add("Machine Start Stop Daily Peport", startStop_DailyRport_Form.startStop_Panel);
+        report_TabbedPanel.add("Machine Start Stop Daily Report", startStop_DailyRport_Form.startStop_Panel);
     }
 
     /**

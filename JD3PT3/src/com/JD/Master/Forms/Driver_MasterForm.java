@@ -256,7 +256,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
             }
         });
 
-        tack_Button.setText("Tack Image");
+        tack_Button.setText("Take Image");
         tack_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tack_ButtonActionPerformed(evt);
