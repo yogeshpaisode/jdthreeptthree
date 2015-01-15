@@ -113,13 +113,6 @@
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="addDataToDataBase_Button" pref="104" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="export_Button" min="-2" pref="119" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="print_Button" min="-2" pref="62" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="size_ComboBox" alignment="0" max="32767" attributes="0"/>
                       <Component id="value_TextField" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -127,18 +120,30 @@
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Component id="twoPay_CheackBox" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                          <Component id="cashAndTwoPay_CheackBox" max="32767" attributes="0"/>
+                          <Component id="cashAndTwoPay_CheackBox" pref="171" max="32767" attributes="0"/>
                       </Group>
                       <Component id="twoPayAmount_TextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="vehicleName_TextField" alignment="0" max="32767" attributes="0"/>
                       <Component id="dm_time_Lable" alignment="0" max="32767" attributes="0"/>
                       <Component id="pending_ComboBox" alignment="1" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="neightWeight_TextField" max="32767" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                          <Component id="grossWeight_TextField" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="addDataToDataBase_Button" max="32767" attributes="0"/>
+                              <Component id="neightWeight_TextField" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                  <Component id="grossWeight_TextField" min="-2" pref="112" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="export_Button" min="-2" pref="107" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="print_Button" min="-2" pref="62" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
