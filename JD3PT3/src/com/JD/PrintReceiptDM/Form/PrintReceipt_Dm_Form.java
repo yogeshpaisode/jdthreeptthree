@@ -474,7 +474,7 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             }
         });
 
-        export_Button.setText("Exportl");
+        export_Button.setText("Export");
         export_Button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 export_ButtonActionPerformed(evt);
