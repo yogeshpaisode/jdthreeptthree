@@ -68,6 +68,7 @@ public class JD_Home extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.running_Lable = running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
         com.JD.StaticData.Static_DATA.readyMachine_Lable = readyMachine_Lable;
+        com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable=machinec_CloseTo_Lable;
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
@@ -140,7 +141,7 @@ public class JD_Home extends javax.swing.JFrame {
         fuelQuantity_Lable = new javax.swing.JLabel();
         running_Lable = new javax.swing.JLabel();
         readyMachine_Lable = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        machinec_CloseTo_Lable = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         notification_ShortCut = new javax.swing.JMenuItem();
@@ -415,9 +416,9 @@ public class JD_Home extends javax.swing.JFrame {
         readyMachine_Lable.setText("  + 056 Machine Ready For Servicing   ");
         readyMachine_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/reay.png"))); // NOI18N
-        jLabel7.setText("   + 076 Machine Close To Servicing   ");
-        jLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        machinec_CloseTo_Lable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/JD/Home/reay.png"))); // NOI18N
+        machinec_CloseTo_Lable.setText("   + 076 Machine Close To Servicing   ");
+        machinec_CloseTo_Lable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -432,7 +433,7 @@ public class JD_Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(readyMachine_Lable)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(machinec_CloseTo_Lable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -451,7 +452,7 @@ public class JD_Home extends javax.swing.JFrame {
                             .addComponent(readyMachine_Lable)))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7))
+                .addComponent(machinec_CloseTo_Lable))
         );
 
         jMenu1.setText("File");
@@ -836,7 +837,6 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -850,6 +850,7 @@ public class JD_Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel logout_Lable;
+    private javax.swing.JLabel machinec_CloseTo_Lable;
     private javax.swing.JButton master_Button;
     private javax.swing.JMenuItem master_ShortCut;
     private javax.swing.JPanel menuItem_Panel;

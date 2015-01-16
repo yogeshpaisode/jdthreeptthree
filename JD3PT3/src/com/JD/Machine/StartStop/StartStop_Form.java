@@ -563,13 +563,23 @@ public class StartStop_Form extends javax.swing.JFrame {
                         machineServicingReadingPointer = currentReadingTemp;
                     } else {
                         machineServicingFlag = "TRUE";                         
-                    }                    
+                    }  
+                    int log=diff-500;
+                    if (m.getMachineServicingLog()>=log) {
+                        m.setRawField1("TRUE");
+                    }
+                    else{
+                        m.setRawField1("FALSE");
+                    }               
+                    
+                    
                     m.setMachineServicingNumber(machineServicingNumber);
                     m.setMachineServicingReadingPointer(machineServicingReadingPointer);
                     m.setMachineServicingFlag(machineServicingFlag);
                     session.save(m);
                     transaction.commit();
                     com.JD.StaticData.Static_DATA.notification.resetServicingTable();
+                    com.JD.StaticData.Static_DATA.notification.resetcloseTo_servicing_Table();
                     step2();
                 }
             } else {

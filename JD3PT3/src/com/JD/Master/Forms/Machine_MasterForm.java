@@ -620,6 +620,14 @@ public class Machine_MasterForm extends javax.swing.JFrame {
                                             } else {
                                                 machineServicingFlag = "TRUE";
                                             }
+                                            int log = diff - 500;
+                                            if (machineServicingLog >= log) {
+                                                rawField1="TRUE";
+                                            } else {
+                                                rawField2="FALSE";
+                                            }
+                                            com.JD.StaticData.Static_DATA.notification.resetcloseTo_servicing_Table();
+                                            com.JD.StaticData.Static_DATA.notification.resetServicingTable();
 //-----------------------------------------Servicing Logic----------------------------------------------------------------------------------------------------------------------//                                            
                                             if (machineExpectedAVG > 15) {
                                                 JOptionPane.showMessageDialog(null, "Please Provide Valid Average");
