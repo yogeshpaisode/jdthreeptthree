@@ -26,6 +26,7 @@ public class Static_DATA {
     public static javax.swing.JLabel fuelQuantity_Sell_Lable = null;
     public static javax.swing.JLabel fuelQuantity_Purchse_Lable = null;
     public static javax.swing.JLabel running_Lable = null;
+    public static javax.swing.JLabel machinec_CloseTo_Lable=null;
     //------ INIT DATA ------//
     // PKG: com.JD.INIT_Data , com.JD.InitData.Hibernate.config//
     public static SessionFactory init_SessionFactory = null;
@@ -150,8 +151,7 @@ public class Static_DATA {
     public static javax.swing.JLabel readyMachine_Lable = null;
     public static com.JD.Notification.Form.Notification notification=null;
     public static javax.swing.JLabel notification_fuelQuantity_Lable = null;
-    
-    
-    
+    public static javax.swing.JLabel  notification_Close_Lable= null; 
+       
     //-----From Notification-----------------//
 }

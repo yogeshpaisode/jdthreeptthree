@@ -539,7 +539,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="readyMachine_Lable" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel7" max="32767" attributes="0"/>
+                  <Component id="machinec_CloseTo_Lable" max="32767" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jLabel5" min="-2" pref="195" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -564,7 +564,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel7" max="-2" attributes="0"/>
+                  <Component id="machinec_CloseTo_Lable" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -654,7 +654,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="machinec_CloseTo_Lable">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/com/JD/Home/reay.png"/>
