@@ -110,8 +110,19 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         measurementTempList.add("NUMBER");
         measurementTempList.add("TON");
         measurementTempList.add("CUM");
-
-
+        
+        sizeTemp.add("00");
+        sizeTemp.add("10");
+        sizeTemp.add("20");
+        sizeTemp.add("30");
+        sizeTemp.add("40");
+        sizeTemp.add("50");
+        sizeTemp.add("60");
+        sizeTemp.add("70");
+        sizeTemp.add("80");
+        sizeTemp.add("90");
+        sizeTemp.add("100");      
+              
         payAble_TextField.setBackground(Color.lightGray);
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
