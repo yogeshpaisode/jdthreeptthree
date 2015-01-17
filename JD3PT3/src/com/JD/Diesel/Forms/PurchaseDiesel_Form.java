@@ -395,6 +395,9 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
                         } else {
                             lastQuentity = setCurrentDieselLog(0.0);
                             presentQuantity = addedQuantity + lastQuentity;
+                            if (orderSlipNumber.equals("")) {
+                                orderSlipNumber="NO";
+                            }
                             addData();
                         }
                     }
