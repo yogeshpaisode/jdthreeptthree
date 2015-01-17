@@ -508,20 +508,26 @@ public class SellDiesel_Search extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try {
-            sellDiesel_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
-        }
+        if (sellDiesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+		new com.JD.ExportToExcel.ExportToExcel().saveToExcel(sellDiesel_Table);
+		}
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try {
+        if (sellDiesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+		try {
             sellDiesel_Table.print();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
         }
+		}
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     void reset() {

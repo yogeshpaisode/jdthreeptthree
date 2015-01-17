@@ -444,16 +444,26 @@ public class DM_Report extends javax.swing.JFrame {
 
     private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(dm_Table);
+        if (dm_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(dm_Table);
+        }
+
     }//GEN-LAST:event_export_ButtonActionPerformed
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            dm_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (dm_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                dm_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_print_ButtonActionPerformed
     public void report(String queryMaker) {
         int indexJTable = -1;

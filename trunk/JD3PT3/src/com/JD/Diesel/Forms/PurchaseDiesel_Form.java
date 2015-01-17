@@ -405,16 +405,26 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(diesel_Table);
+        if (diesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(diesel_Table);
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        try {
-            diesel_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+        if (diesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                diesel_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton4ActionPerformed
     void addData() {
         personPresentName = personPresentName.toUpperCase();

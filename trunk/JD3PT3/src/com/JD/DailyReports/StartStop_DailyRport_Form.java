@@ -66,10 +66,10 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             number_ComboBox.addItem(m.getMachineNumber());
-        }        
+        }
         currenTDate = new Date();
         dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        datestring = dateFormat.format(currenTDate);          
+        datestring = dateFormat.format(currenTDate);
         Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
         results = q.list();
         for (Object object : results) {
@@ -80,7 +80,7 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
             }
         }
         session.close();
-        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");   
+        resetJTable("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop where " + "startDate='" + datestring + "'");
     }
 
     /**
@@ -435,16 +435,26 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(detailList_Table);
+        if (detailList_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(detailList_Table);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try {
-            detailList_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (detailList_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                detailList_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     void resetJTable(String queryMaker) {

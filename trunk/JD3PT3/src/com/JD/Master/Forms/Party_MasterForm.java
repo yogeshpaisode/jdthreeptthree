@@ -60,7 +60,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         //--- Load Data To JTable And party_ComboBox---//
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         List list = q.list();
@@ -477,7 +477,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
             String partName = name_ComboBox.getSelectedItem().toString();
 
             // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
-            Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+            Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
             cr.add(Restrictions.eq("partyName", partName));
@@ -541,17 +541,26 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            party_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Printer Error,Can't Print.");
+        if (party_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                party_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Printer Error,Can't Print.");
+            }
         }
+
     }//GEN-LAST:event_print_ButtonActionPerformed
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:  party_Table
+        if (party_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new com.JD.ExportToExcel.ExportToExcel().saveToExcel(party_Table);
+        }
 
-        new com.JD.ExportToExcel.ExportToExcel().saveToExcel(party_Table);
 
     }//GEN-LAST:event_exportActionPerformed
 
@@ -580,7 +589,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         String partName = name_ComboBox.getSelectedItem().toString();
 
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.like("partyName", pName));
@@ -614,14 +623,14 @@ public class Party_MasterForm extends javax.swing.JFrame {
         modification_ButtonGroup.clearSelection();
         name_ComboBox.setSelectedIndex(0);
         search_TextField.setText("Search..................");
-        
+
 
     }
 
     void insert() {
 
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.eq("partyName", partyName));
         List results = cr.list();
@@ -646,7 +655,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
             com.JD.StaticData.Static_DATA.dmReport_party_ComboBox.addItem(partyName);
             com.JD.StaticData.Static_DATA.sell_Report_Party_ComboBox.addItem(partyName);
             //---Fill JComboboxes from com.JD.StaticData.Static_DATA Class ---//   
-                       
+
             reset();
             resetJTable();
         } else {
@@ -659,7 +668,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
     void update() {
 
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Partymaster.class);
         cr.add(Restrictions.eq("partyName", partyName));
 
@@ -711,7 +720,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         //--- Load Data To JTable And party_ComboBox---//
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
 
-        Session session =  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
+        Session session = com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
         name_ComboBox.removeAllItems();
         name_ComboBox.addItem("Select Party Name");
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
