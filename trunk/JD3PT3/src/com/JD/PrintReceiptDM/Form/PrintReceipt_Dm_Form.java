@@ -99,30 +99,8 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
         com.JD.StaticData.Static_DATA.measurementTempList = measurementTempList;
         com.JD.StaticData.Static_DATA.dm_time_Lable = dm_time_Lable;
         com.JD.StaticData.Static_DATA.dm_date_Lable = dm_date_Lable;
-        //------------Fill Product Name-----------//
-        productNameTempList.add("RAW");
-        productNameTempList.add("AGGRIGATE");
-        productNameTempList.add("CRUSH SAND");
-        productNameTempList.add("BRICKS");
+        //------------Fill Product Name-----------//        
 
-        measurementTempList.add("CFT");
-        measurementTempList.add("BRASS");
-        measurementTempList.add("NUMBER");
-        measurementTempList.add("TON");
-        measurementTempList.add("CUM");
-        
-        sizeTemp.add("00");
-        sizeTemp.add("10");
-        sizeTemp.add("20");
-        sizeTemp.add("30");
-        sizeTemp.add("40");
-        sizeTemp.add("50");
-        sizeTemp.add("60");
-        sizeTemp.add("70");
-        sizeTemp.add("80");
-        sizeTemp.add("90");
-        sizeTemp.add("100");      
-              
         payAble_TextField.setBackground(Color.lightGray);
         twoPayAmount_TextField.setBackground(Color.lightGray);
         neightWeight_TextField.setBackground(Color.lightGray);
@@ -149,7 +127,6 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             if (!sizeTemp.contains(p.getProductSize() + "")) {
                 sizeTemp.add(p.getProductSize());
-                size_ComboBox.addItem(p.getProductSize());
             }
             if (!productNameTempList.contains(p.getProductName())) {
                 productNameTempList.add(p.getProductName());
@@ -158,11 +135,37 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
                 measurementTempList.add(p.getProductMeasurement());
             }
         }
+        sizeTemp.add("00");
+        sizeTemp.add("10");
+        sizeTemp.add("20");
+        sizeTemp.add("30");
+        sizeTemp.add("40");
+        sizeTemp.add("50");
+        sizeTemp.add("60");
+        sizeTemp.add("70");
+        sizeTemp.add("80");
+        sizeTemp.add("90");
+        sizeTemp.add("100");
+
+        productNameTempList.add("RAW");
+        productNameTempList.add("AGGRIGATE");
+        productNameTempList.add("CRUSH SAND");
+        productNameTempList.add("BRICKS");
+
+        measurementTempList.add("CFT");
+        measurementTempList.add("BRASS");
+        measurementTempList.add("NUMBER");
+        measurementTempList.add("TON");
+        measurementTempList.add("CUM");
+        
         for (Object object : productNameTempList) {
             product_ComboBox.addItem(object.toString());
         }
         for (Object object : measurementTempList) {
             measurement_ComboBox.addItem(object.toString());
+        }
+        for (Object object : sizeTemp) {
+            size_ComboBox.addItem(object.toString());
         }
 
         Criteria cr = session.createCriteria(com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm.class);
