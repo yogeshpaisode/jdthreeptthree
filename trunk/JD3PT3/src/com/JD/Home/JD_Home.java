@@ -64,6 +64,7 @@ public class JD_Home extends javax.swing.JFrame {
 
     public JD_Home() {
         initComponents();
+        com.JD.StaticData.Static_DATA.jD_Home=this;
         com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
         com.JD.StaticData.Static_DATA.running_Lable = running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
@@ -711,7 +712,7 @@ public class JD_Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         dieselPanel();
     }//GEN-LAST:event_diesel_ShortCutActionPerformed
-    void startStop() {
+    public void startStop() {
         parentComponentHolder_Panel.removeAll();
         parentComponentHolder_Panel.add(machineStartStop_Home.machineStartStop_TabbedPanel);
         parentComponentHolder_Panel.repaint();

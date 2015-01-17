@@ -389,6 +389,7 @@ public class Notification extends javax.swing.JFrame {
 
     private void notification_running_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_running_LableMouseClicked
         // TODO add your handling code here:
+        com.JD.StaticData.Static_DATA.jD_Home.startStop();
     }//GEN-LAST:event_notification_running_LableMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
