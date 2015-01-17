@@ -41,9 +41,9 @@ public class DM_Search extends javax.swing.JFrame {
      */
     public DM_Search() {
         initComponents();
-        com.JD.StaticData.Static_DATA.productNameList=productNameList;
-        com.JD.StaticData.Static_DATA.measurementList=measurementList;
-        com.JD.StaticData.Static_DATA.sizeList=sizeList;
+        com.JD.StaticData.Static_DATA.productNameList = productNameList;
+        com.JD.StaticData.Static_DATA.measurementList = measurementList;
+        com.JD.StaticData.Static_DATA.sizeList = sizeList;
         //----Load Calender----//
         date1.setBounds(17, 51, 200, 50);
         date1.setBackground(Color.yellow);
@@ -67,7 +67,7 @@ public class DM_Search extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             dmSearch_party_ComboBox.addItem(p.getPartyName());
         }
-        
+
         q = session.createQuery("from com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm");
         for (Object object : q.list()) {
             com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm p = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
@@ -566,20 +566,26 @@ public class DM_Search extends javax.swing.JFrame {
 
     private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            dm_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (dm_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new com.JD.ExportToExcel.ExportToExcel().saveToExcel_forDispatch(dm_Table);
         }
+
     }//GEN-LAST:event_export_ButtonActionPerformed
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            dm_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (dm_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                dm_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_print_ButtonActionPerformed
 
     /**

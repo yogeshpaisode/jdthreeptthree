@@ -18,7 +18,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class Notification extends javax.swing.JFrame {
-    
+
     SessionFactory init_SessionFactory = com.JD.StaticData.Static_DATA.init_SessionFactory;
     javax.swing.table.DefaultTableModel servicing_DefaultModel;
     javax.swing.table.DefaultTableModel closeTo_servicing_Defaultmodel;
@@ -30,7 +30,7 @@ public class Notification extends javax.swing.JFrame {
         initComponents();
         com.JD.StaticData.Static_DATA.notification_Close_Lable = notification_Close_Lable;
         com.JD.StaticData.Static_DATA.Notification_status_Table = Notification_status_Table;
-        com.JD.StaticData.Static_DATA.notification_running_Lable = notification_running_Lable;        
+        com.JD.StaticData.Static_DATA.notification_running_Lable = notification_running_Lable;
         com.JD.StaticData.Static_DATA.notification = this;
         com.JD.StaticData.Static_DATA.notification_fuelQuantity_Lable = notification_fuelQuantity_Lable;
         servicing_DefaultModel = (DefaultTableModel) servicing_Table.getModel();
@@ -58,7 +58,7 @@ public class Notification extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             ++j;
             servicing_DefaultModel.insertRow(j, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
-        }        
+        }
         com.JD.StaticData.Static_DATA.readyMachine_Lable.setText("  + " + results.size() + " Machine Ready For Servicing   ");
         localServicing_Lable.setText(" + " + results.size() + " Machine");
         session.close();
@@ -77,12 +77,12 @@ public class Notification extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             ++j;
             closeTo_servicing_Defaultmodel.insertRow(j, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
-        }        
+        }
         com.JD.StaticData.Static_DATA.notification_Close_Lable.setText(" + " + results.size() + " Machine");
-        com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable.setText("   + "+results.size()+" Machine Close To Servicing   ");
+        com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable.setText("   + " + results.size() + " Machine Close To Servicing   ");
         session.close();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -386,51 +386,81 @@ public class Notification extends javax.swing.JFrame {
     private void notification_fuelQuantity_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_fuelQuantity_LableMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_notification_fuelQuantity_LableMouseClicked
-    
+
     private void notification_running_LableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_notification_running_LableMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_notification_running_LableMouseClicked
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(Notification_status_Table);
+        if (Notification_status_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(Notification_status_Table);
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(servicing_Table);
+        if (servicing_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(servicing_Table);
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
-    
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(closeTo_servicing_Table);
+        if (closeTo_servicing_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(closeTo_servicing_Table);
+        }
+
     }//GEN-LAST:event_jButton5ActionPerformed
-    
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try {
-            Notification_status_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");            
+        if (Notification_status_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                Notification_status_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        try {
-            servicing_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");            
+        if (servicing_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                servicing_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton4ActionPerformed
-    
+
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        try {
-            closeTo_servicing_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");            
+        if (closeTo_servicing_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                closeTo_servicing_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -468,7 +498,7 @@ public class Notification extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            
+
             public void run() {
                 new Notification().setVisible(true);
             }

@@ -711,16 +711,26 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(machine_JTable);
+        if (machine_JTable.getModel().getRowCount()==0) {
+             JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(machine_JTable);
+        }
+        
     }//GEN-LAST:event_exportActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
-        try {
+         if (machine_JTable.getModel().getRowCount()==0) {
+             JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+             try {
             machine_JTable.print();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
         }
+        }
+        
     }//GEN-LAST:event_printActionPerformed
 
     void chkOperation() {

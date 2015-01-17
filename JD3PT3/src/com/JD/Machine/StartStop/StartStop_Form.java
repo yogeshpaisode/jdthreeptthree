@@ -512,16 +512,26 @@ public class StartStop_Form extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(status_Table);
+        if (detailList_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(status_Table);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
-        try {
-            detailList_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+        if (detailList_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                detailList_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_printActionPerformed
 
     void step1() {
@@ -550,29 +560,28 @@ public class StartStop_Form extends javax.swing.JFrame {
                     m.setMachineStatus("OFF");
                     startDate = m.getMachineStartDate();
                     StartTime = m.getMachineStartTime();
-                    int diff = m.getMachineServicingLog();     
-                   
-                    int currentReadingTemp=m.getMachineCurrentReading() + totalReading;
-                    double machineServicingNumber=0;
-                    int machineServicingReadingPointer=0;
-                    String machineServicingFlag="FALSE";                    
+                    int diff = m.getMachineServicingLog();
+
+                    int currentReadingTemp = m.getMachineCurrentReading() + totalReading;
+                    double machineServicingNumber = 0;
+                    int machineServicingReadingPointer = 0;
+                    String machineServicingFlag = "FALSE";
                     if (currentReadingTemp > diff) {
                         machineServicingNumber = currentReadingTemp / diff;
                         machineServicingReadingPointer = currentReadingTemp % diff;
                     } else if (currentReadingTemp < diff) {
                         machineServicingReadingPointer = currentReadingTemp;
                     } else {
-                        machineServicingFlag = "TRUE";                         
-                    }  
-                    int log=diff-500;
-                    if (m.getMachineServicingLog()>=log) {
-                        m.setRawField1("TRUE");
+                        machineServicingFlag = "TRUE";
                     }
-                    else{
+                    int log = diff - 500;
+                    if (m.getMachineServicingLog() >= log) {
+                        m.setRawField1("TRUE");
+                    } else {
                         m.setRawField1("FALSE");
-                    }               
-                    
-                    
+                    }
+
+
                     m.setMachineServicingNumber(machineServicingNumber);
                     m.setMachineServicingReadingPointer(machineServicingReadingPointer);
                     m.setMachineServicingFlag(machineServicingFlag);

@@ -389,20 +389,26 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
 
     private void export_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_export_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-           diesel_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (diesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new com.JD.ExportToExcel.ExportToExcel().saveToExcel(diesel_Table);
         }
+
     }//GEN-LAST:event_export_ButtonActionPerformed
 
     private void print_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print_ButtonActionPerformed
         // TODO add your handling code here:
-        try {
-            diesel_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (diesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                diesel_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_print_ButtonActionPerformed
     void reset() {
         purchaseSearch_company_ComboBox.setSelectedIndex(0);

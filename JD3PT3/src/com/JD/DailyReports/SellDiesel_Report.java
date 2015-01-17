@@ -389,7 +389,7 @@ public class SellDiesel_Report extends javax.swing.JFrame {
             sell_Report_Machine_Number.addItem("Select Machine Number");
             Session session = search_SessionFactory.openSession();
             Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
-            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));           
+            cr.add(Restrictions.eq("machinePartyLink", partyNameTemp));
             List results = cr.list();
             for (Object object : results) {
                 com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
@@ -522,16 +522,26 @@ public class SellDiesel_Report extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        try {
-            sellDiesel_Table.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (sellDiesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                sellDiesel_Table.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(sellDiesel_Table);
+        if (sellDiesel_Table.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(sellDiesel_Table);
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public void query(String queryMaker) {

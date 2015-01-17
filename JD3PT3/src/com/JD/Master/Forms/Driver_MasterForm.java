@@ -35,7 +35,7 @@ import org.hibernate.criterion.Restrictions;
  */
 public class Driver_MasterForm extends javax.swing.JFrame {
     //--- File To Be Save ---//
-    
+
     int i = 0;
     int k = 0;
     Calendar calendar = Calendar.getInstance();
@@ -758,16 +758,26 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
         // TODO add your handling code here:
-        new ExportToExcel().saveToExcel(driverTable);
+        if (driverTable.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Export ! No Data In The Table");
+        } else {
+            new ExportToExcel().saveToExcel(driverTable);
+        }
+
     }//GEN-LAST:event_exportActionPerformed
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
-        try {
-            driverTable.print();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");        
+        if (driverTable.getModel().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Cant Print ! No Data In The Table");
+        } else {
+            try {
+                driverTable.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
+            }
         }
+
     }//GEN-LAST:event_printActionPerformed
 
     private void clear_CheackBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clear_CheackBoxActionPerformed
@@ -802,7 +812,7 @@ public class Driver_MasterForm extends javax.swing.JFrame {
 
     void insert() {
         Session session = driverSessionFactory.openSession();
-        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);        
+        Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Drivermaster.class);
         Criterion dname = Restrictions.eq("driverName", driverName);
         Criterion rOne = Restrictions.eq("rawField1", rawField1);
         // To get records matching with OR condistions
