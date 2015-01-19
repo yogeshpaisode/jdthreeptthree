@@ -64,12 +64,12 @@ public class JD_Home extends javax.swing.JFrame {
 
     public JD_Home() {
         initComponents();
-        com.JD.StaticData.Static_DATA.jD_Home=this;
+        com.JD.StaticData.Static_DATA.jD_Home = this;
         com.JD.StaticData.Static_DATA.fuelQuantity_Lable = fuelQuantity_Lable;
         com.JD.StaticData.Static_DATA.running_Lable = running_Lable;
         com.JD.StaticData.Static_DATA.purchaseDiesel_Form.setCurrentDieselLog(0.0);
         com.JD.StaticData.Static_DATA.readyMachine_Lable = readyMachine_Lable;
-        com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable=machinec_CloseTo_Lable;
+        com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable = machinec_CloseTo_Lable;
         //------ Default Width and Height of parentComponentHolder_Panel------//
         width = parentComponentHolder_Panel.getWidth();
         height = parentComponentHolder_Panel.getHeight();
@@ -81,18 +81,28 @@ public class JD_Home extends javax.swing.JFrame {
         machineStartStop_Home = new MachineStartStop_Home();
         Timer timer = new Timer(500, actListner);
         timer.start();
-
-
+        int priority = com.JD.StaticData.Static_DATA.logIn_Priority;
+        if (priority == 3) {
+            search_Button.setEnabled(false);
+            report_Button.setEnabled(false);
+            setting_Button.setEnabled(false);
+        }
+        if (priority == 1) {
+            setting_Button.setEnabled(true);
+        } else {
+            setting_Button.setEnabled(false);
+        }
     }
     ActionListener actListner = new ActionListener() {
+
         @Override
-        public void actionPerformed(ActionEvent event) {            
+        public void actionPerformed(ActionEvent event) {
             String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
             String date = new SimpleDateFormat("dd-MMM-yyyy").format(new Date());
-            home_Date_Lable.setText("  "+date+"  ");
-            com.JD.StaticData.Static_DATA.dm_date_Lable.setText(" "+date+" ");
-            home_timer_Lable.setText("   "+time+"   ");
-            com.JD.StaticData.Static_DATA.dm_time_Lable.setText("  "+time);
+            home_Date_Lable.setText("  " + date + "  ");
+            com.JD.StaticData.Static_DATA.dm_date_Lable.setText(" " + date + " ");
+            home_timer_Lable.setText("   " + time + "   ");
+            com.JD.StaticData.Static_DATA.dm_time_Lable.setText("  " + time);
         }
     };
 
