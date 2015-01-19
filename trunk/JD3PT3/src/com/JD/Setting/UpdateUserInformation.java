@@ -248,6 +248,11 @@ public class UpdateUserInformation extends javax.swing.JFrame {
 
         showPassword_CheacBox.setBackground(new java.awt.Color(255, 255, 51));
         showPassword_CheacBox.setText("Show Password");
+        showPassword_CheacBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showPassword_CheacBoxActionPerformed(evt);
+            }
+        });
 
         updatePassword_CheacBox.setBackground(new java.awt.Color(255, 255, 51));
         updatePassword_CheacBox.setText("Update Password");
@@ -440,6 +445,8 @@ public class UpdateUserInformation extends javax.swing.JFrame {
         userMob = mobile_TextField.getText();
         userEmail = email_TextField.getText();
         userAddress = address_TextField.getText();
+        userDateOfAddition=new Date();
+        userTimeOfAddition=new Date();
 
         if (userName.equals("")) {
             JOptionPane.showMessageDialog(null, "Please Provide User Name");
@@ -573,10 +580,20 @@ public class UpdateUserInformation extends javax.swing.JFrame {
     private void operator_CheacBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operator_CheacBoxActionPerformed
         // TODO add your handling code here:
         if (operator_CheacBox.isSelected()) {
-            priority=3;
+            priority = 3;
             loadData();
         }
     }//GEN-LAST:event_operator_CheacBoxActionPerformed
+
+    private void showPassword_CheacBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPassword_CheacBoxActionPerformed
+        // TODO add your handling code here:
+        if (showPassword_CheacBox.isSelected()) {
+            currentPassword_TextField.setText(userId);
+        } else {
+            currentPassword_TextField.setText("*************");
+        }
+
+    }//GEN-LAST:event_showPassword_CheacBoxActionPerformed
     void perfromUpdation() {
         if (flag2 && confirmation_CheacBox.isSelected()) {
             Session session = init_SessionFactory.openSession();
@@ -597,14 +614,15 @@ public class UpdateUserInformation extends javax.swing.JFrame {
                 l.setUserLocation(userLocation);
                 l.setUserAddedByPersonName(userAddedByPersonName);
                 l.setUserAddedWithRight(userAddedWithRight);
+                l.setUserDateOfAddition(userDateOfAddition);
+                l.setUserTimeOfAddition(userTimeOfAddition);
                 session.save(l);
             }
             transaction.commit();
             session.close();
             JOptionPane.showMessageDialog(null, "User Name " + userName + " Updated Successfully..");
             reset();
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Please Agrre To Update Data");
         }
     }

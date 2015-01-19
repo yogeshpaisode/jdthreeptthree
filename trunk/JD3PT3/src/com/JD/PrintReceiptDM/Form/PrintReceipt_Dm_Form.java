@@ -214,6 +214,16 @@ public class PrintReceipt_Dm_Form extends javax.swing.JFrame {
 
         dm_date_Lable.setText(now.get(Calendar.DATE) + "-" + (now.get(Calendar.MONTH) + 1) + "-" + now.get(Calendar.YEAR));
         dm_time_Lable.setText(now.get(Calendar.HOUR) + ":" + now.get(Calendar.MINUTE));
+        
+        int priority = com.JD.StaticData.Static_DATA.logIn_Priority;
+
+        if (priority == 3) {
+            dm_Table.setVisible(false);
+            export_Button.setEnabled(false);
+            print_Button.setEnabled(false);
+            search_TextField.setEditable(false);            
+        }
+        
     }
 
     /**
