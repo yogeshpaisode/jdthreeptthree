@@ -120,14 +120,14 @@ public class StartStop_DailyRport_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine No", "Machine Name", "Operator Name", "Start Date", "Start Time", "Stop Date", "Stop Time", "Total Time", "Start Reading", "Stop Reading", "Total Reading", "Last Fuel", "Present Fuel", "Consume Fuel", "Average"
+                "Sr.No.", "Machine No", "Machine Name", "Operator Name", "Start Date", "Start Time", "Stop Date", "Stop Time", "Total Time", "Start Reading", "Stop Reading", "Total Reading", "Last Fuel", "Present Fuel", "Consume Fuel", "Average"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

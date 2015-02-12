@@ -196,14 +196,14 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
+                "Sr.No.", "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -505,11 +505,12 @@ public class PurchaseDiesel_Form extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         Query q = session.createQuery("from com.Hibernate.diesel.config.Purchasediesel");
-
+        int j=0;
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+            ++j;
+            defaultTableModel.insertRow(indexJTable, new Object[]{j,p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
         }
         session.close();
     }

@@ -223,14 +223,14 @@ public class SellDiesel_Report extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
+                "Sr.No.", "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -242,7 +242,7 @@ public class SellDiesel_Report extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(sellDiesel_Table);
-        sellDiesel_Table.getColumnModel().getColumn(0).setPreferredWidth(170);
+        sellDiesel_Table.getColumnModel().getColumn(1).setPreferredWidth(170);
 
         sell_Report_Party_ComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Party Name" }));
         sell_Report_Party_ComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -546,6 +546,7 @@ public class SellDiesel_Report extends javax.swing.JFrame {
 
     public void query(String queryMaker) {
         int indexJTable = -1;
+        int j=0;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -554,7 +555,8 @@ public class SellDiesel_Report extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
+            ++j;
+            defaultTableModel.insertRow(indexJTable, new Object[]{j,s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
         }
         session.close();
     }

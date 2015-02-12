@@ -1,5 +1,5 @@
 
-drop database if exist JD3PT3;
+drop database if exists JD3PT3;
 
 create database JD3PT3;
 

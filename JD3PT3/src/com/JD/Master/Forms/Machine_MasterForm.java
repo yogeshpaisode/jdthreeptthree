@@ -96,11 +96,12 @@ public class Machine_MasterForm extends javax.swing.JFrame {
         }
 
         q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
-
+        int k=0;
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
             loadData_ComboBox.addItem(m.getMachineNumber());
         }
         session.close();
@@ -155,14 +156,14 @@ public class Machine_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Machine Type", "Machine Name", "Machine Number", "Identification", "Fuel Avilable", "Current Reading", "Expected Average", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
+                "Sr.No.", "Party Name", "Machine Type", "Machine Name", "Machine Number", "Identification", "Fuel Avilable", "Current Reading", "Expected Average", "DOA/U", "TOA/U", "Added By", "Added With Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -174,7 +175,7 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(machine_JTable);
-        machine_JTable.getColumnModel().getColumn(0).setPreferredWidth(130);
+        machine_JTable.getColumnModel().getColumn(1).setPreferredWidth(130);
 
         jLabel1.setText("* Party Name:");
 
@@ -689,11 +690,14 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         indexJTable = -1;
+        int k=0;
         List results = cr.list();
-        indexJTable += 1;
+        
         for (Object object : results) {
+            ++k;
+            indexJTable += 1;
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
-            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
         }
         session.close();
 
@@ -807,13 +811,15 @@ public class Machine_MasterForm extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         indexJTable = -1;
+        int k=0;
         Session session = masterFactory.openSession();
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Machinemaster");
 
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,m.getMachinePartyLink(), m.getMachineType(), m.getMachineName(), m.getMachineNumber(), m.getMachineIdentification(), m.getMachineFuel(), m.getMachineCurrentReading(), m.getMachineExpectedAvg(), m.getMachineDateOfAddition(), m.getMachineTimeOfAddition(), m.getMachineAddedByPersonName(), m.getMachineAddedWithRight(), m.getMachineLocation()});
 
         }
         session.close();

@@ -122,14 +122,14 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
+                "Sr.No.", "Last", "Received", "Present", "Person Name", "Oil Company", "Slip No", "DOA", "TOA", "Added By", "Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -495,6 +495,7 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
 
     public void query(String queryMaker) {
         int indexJTable = -1;
+        int j=0;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -503,7 +504,8 @@ public class PurchaseDiesel_Report extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
             ++indexJTable;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+            ++j;
+            defaultTableModel.insertRow(indexJTable, new Object[]{j,p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
         }
         session.close();
     }

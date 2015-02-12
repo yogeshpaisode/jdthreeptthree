@@ -63,11 +63,12 @@ public class Product_MasterForm extends javax.swing.JFrame {
         Session session = masterSessionFactory.openSession();
 
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Productmaster");
-
+        int k=0;
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
 
 
             if (productNameList.contains(p.getProductName())) {
@@ -136,14 +137,14 @@ public class Product_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product Name", "Size", "Measurement", "DOA", "TOA", "Added By", "UserRight", "Location"
+                "Sr.No.", "Product Name", "Size", "Measurement", "DOA", "TOA", "Added By", "UserRight", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -358,10 +359,12 @@ public class Product_MasterForm extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         indexJTable = -1;
+        int k=0;
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
 
         }
         session.close();
@@ -450,6 +453,7 @@ public class Product_MasterForm extends javax.swing.JFrame {
         measurement_ComboBox.setSelectedItem("Select Measurement");
         search_Button.setText("Search.........");
         indexJTable = -1;
+        int k=0;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -458,7 +462,8 @@ public class Product_MasterForm extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.JD.Master.Hibernate.config.Productmaster p = (com.JD.Master.Hibernate.config.Productmaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getProductName(), p.getProductSize(), p.getProductMeasurement(), p.getProductDateOfAddition(), p.getProductTimeOfAddition(), p.getProductAddedByPersonName(), p.getProductAddedWithRight(), p.getProductLocation()});
         }
         session.close();
     }

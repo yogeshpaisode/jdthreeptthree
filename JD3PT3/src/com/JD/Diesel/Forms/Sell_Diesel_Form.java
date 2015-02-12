@@ -137,14 +137,14 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
+                "Sr.No.", "Party Name", "Machine Number", "Machine Name", "Diesel Issued", "Person Present", "Driver Name", "DOA", "TOA", "Added By", "Right", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -558,12 +558,14 @@ public class Sell_Diesel_Form extends javax.swing.JFrame {
             defaultTableModel.removeRow(i);
         }
         indexJTable = -1;
+        int j=0;
         Session session = sellDiesel_SessionFactory.openSession();
         Query q = session.createQuery("from com.Hibernate.diesel.config.Selldiesellog");
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
+            ++j;
+            defaultTableModel.insertRow(indexJTable, new Object[]{j,s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
         }
         session.close();
     }
