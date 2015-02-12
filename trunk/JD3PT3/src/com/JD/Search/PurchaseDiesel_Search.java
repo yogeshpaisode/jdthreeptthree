@@ -377,11 +377,13 @@ public class PurchaseDiesel_Search extends javax.swing.JFrame {
             }
         }
         Session session = search_SessionFactory.openSession();
+        int k=0;
         Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Purchasediesel p = (com.Hibernate.diesel.config.Purchasediesel) object;
             ++indexJTable;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getLastQuentity(), p.getAddedQuantity(), p.getPresentQuantity(), p.getPersonPresentName(), p.getOilCompanyName(), p.getOrderSlipNumber(), p.getDateOfAddition(), p.getTimeOfAddition(), p.getAddedByPersonName(), p.getAddedWithRight(), p.getLocation()});
         }
         session.close();
         reset();

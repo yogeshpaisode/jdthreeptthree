@@ -25,7 +25,7 @@ import org.hibernate.criterion.Restrictions;
  * @author Yogesh
  */
 public class StartStop_Form extends javax.swing.JFrame {
-
+    
     boolean flag = false;
     boolean flag1 = false;
     SimpleDateFormat formatter;
@@ -136,14 +136,14 @@ public class StartStop_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine No", "Machine Name", "Operator Name", "Start Date", "Start Time", "Stop Date", "Stop Time", "Total Time", "Start Reading", "Stop Reading", "Total Reading", "Last Fuel", "Present Fuel", "Consume Fuel", "Average"
+                "Sr.No", "Machine No", "Machine Name", "Operator Name", "Start Date", "Start Time", "Stop Date", "Stop Time", "Total Time", "Start Reading", "Stop Reading", "Total Reading", "Last Fuel", "Present Fuel", "Consume Fuel", "Average"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -243,14 +243,14 @@ public class StartStop_Form extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
+                "Sr.No", "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -392,7 +392,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         flag1 = true;
         name_Lable.setText(" Select Machine Number ");
     }
-
+    
     private void number_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_number_ComboBoxActionPerformed
         // TODO add your handling code here:          
 
@@ -418,7 +418,7 @@ public class StartStop_Form extends javax.swing.JFrame {
             session.close();
         }
     }//GEN-LAST:event_number_ComboBoxActionPerformed
-
+    
     void operation(boolean flag) {
         if (flag) {
             operatorName_ComboBox.setEnabled(true);
@@ -426,27 +426,27 @@ public class StartStop_Form extends javax.swing.JFrame {
             remark_TextField.setEnabled(true);
             reading_TextField.setBackground(Color.white);
             remark_TextField.setBackground(Color.white);
-
+            
         } else {
             operatorName_ComboBox.setEnabled(false);
             reading_TextField.setEnabled(false);
             remark_TextField.setEnabled(false);
             reading_TextField.setBackground(Color.lightGray);
             remark_TextField.setBackground(Color.lightGray);
-
+            
         }
     }
-
+    
     private void reset_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reset_ButtonActionPerformed
         // TODO add your handling code here:
         reset();
     }//GEN-LAST:event_reset_ButtonActionPerformed
-
+    
     private void number_ComboBoxComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_number_ComboBoxComponentAdded
         // TODO add your handling code here:
         flag1 = false;
     }//GEN-LAST:event_number_ComboBoxComponentAdded
-
+    
     private void start_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_start_ButtonActionPerformed
         // TODO add your handling code here:
         try {
@@ -475,9 +475,9 @@ public class StartStop_Form extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Something Went Wrong..");
         }
-
+        
     }//GEN-LAST:event_start_ButtonActionPerformed
-
+    
     private void stop_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stop_ButtonActionPerformed
         // TODO add your handling code here:
         machineNumber = number_ComboBox.getSelectedItem().toString();
@@ -487,7 +487,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         if (remark.equals("")) {
             remark = "NO Remark";
         }
-
+        
         if (number_ComboBox.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Please Provide Machine Number");
         } else {
@@ -501,15 +501,15 @@ public class StartStop_Form extends javax.swing.JFrame {
                 }
             }
         }
-
-
+        
+        
     }//GEN-LAST:event_stop_ButtonActionPerformed
-
+    
     private void reading_TextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_reading_TextFieldKeyReleased
         // TODO add your handling code here:
         reading_TextField.setText(validator.intTypeNumberValidator(reading_TextField.getText()));
     }//GEN-LAST:event_reading_TextFieldKeyReleased
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         if (detailList_Table.getModel().getRowCount() == 0) {
@@ -517,9 +517,9 @@ public class StartStop_Form extends javax.swing.JFrame {
         } else {
             new ExportToExcel().saveToExcel(status_Table);
         }
-
+        
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
         if (detailList_Table.getModel().getRowCount() == 0) {
@@ -531,11 +531,11 @@ public class StartStop_Form extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Something Went Wrong ! Please Cheack your Printer");
             }
         }
-
+        
     }//GEN-LAST:event_printActionPerformed
-
+    
     void step1() {
-
+        
         Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machineNumber", machineNumber));
@@ -544,7 +544,7 @@ public class StartStop_Form extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             startReading = m.getMachineCurrentReading();
             stopReading = Integer.parseInt(reading_TextField.getText());
-
+            
             if (startReading < stopReading) {
                 Transaction transaction = session.beginTransaction();
                 totalReading = stopReading - startReading;
@@ -561,28 +561,34 @@ public class StartStop_Form extends javax.swing.JFrame {
                     startDate = m.getMachineStartDate();
                     StartTime = m.getMachineStartTime();
                     int diff = m.getMachineServicingLog();
-
+                    
                     int currentReadingTemp = m.getMachineCurrentReading() + totalReading;
                     double machineServicingNumber = 0;
+                    double tempNo = m.getMachineServicingNumber();
+                    double tempNo1 = 0;
                     int machineServicingReadingPointer = 0;
                     String machineServicingFlag = "FALSE";
                     if (currentReadingTemp > diff) {
-                        machineServicingNumber = currentReadingTemp / diff;
+                        tempNo1 = currentReadingTemp / diff;
                         machineServicingReadingPointer = currentReadingTemp % diff;
                     } else if (currentReadingTemp < diff) {
                         machineServicingReadingPointer = currentReadingTemp;
                     } else {
                         machineServicingFlag = "TRUE";
+                    }                    
+                    if (tempNo < tempNo1) {
+                        machineServicingFlag = "TRUE";
+                    }                   
+                    
+                    if (!machineServicingFlag.equals("TRUE")) {
+                        int log = diff - 500;
+                        if (m.getMachineServicingLog() >= log) {
+                            m.setRawField1("TRUE");
+                        } else {
+                            m.setRawField1("FALSE");
+                        }                        
                     }
-                    int log = diff - 500;
-                    if (m.getMachineServicingLog() >= log) {
-                        m.setRawField1("TRUE");
-                    } else {
-                        m.setRawField1("FALSE");
-                    }
-
-
-                    m.setMachineServicingNumber(machineServicingNumber);
+                    
                     m.setMachineServicingReadingPointer(machineServicingReadingPointer);
                     m.setMachineServicingFlag(machineServicingFlag);
                     session.save(m);
@@ -597,7 +603,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         }
         session.close();
     }
-
+    
     void step2() {
         // Y M D
         //D M Y
@@ -624,7 +630,7 @@ public class StartStop_Form extends javax.swing.JFrame {
         reset_Status_Table();
         reset_detailList_Table();
     }
-
+    
     void reset() {
         start_Button.setEnabled(false);
         stop_Button.setEnabled(false);
@@ -639,9 +645,11 @@ public class StartStop_Form extends javax.swing.JFrame {
         reading_TextField.setBackground(Color.lightGray);
         remark_TextField.setBackground(Color.lightGray);
     }
-
+    
     public void reset_Status_Table() {
         flag = false;
+        int j = 0;
+        int k = 0;
         for (int i = status_Table_Model.getRowCount() - 1; i >= 0; i--) {
             status_Table_Model.removeRow(i);
         }
@@ -650,6 +658,7 @@ public class StartStop_Form extends javax.swing.JFrame {
             notificationList_Table_Model.removeRow(i);
         }
         index_status_Table = -1;
+        ++k;
         Session session = init_SessionFactory.openSession();
         Criteria cr = session.createCriteria(com.JD.Master.Hibernate.config.Machinemaster.class);
         cr.add(Restrictions.eq("machinePartyLink", com.JD.StaticData.Static_DATA.selfPartyname));
@@ -658,8 +667,8 @@ public class StartStop_Form extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             index_status_Table = index_status_Table + 1;
-            status_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
-            notificationList_Table_Model.insertRow(index_status_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
+            status_Table_Model.insertRow(index_status_Table, new Object[]{k, m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
+            notificationList_Table_Model.insertRow(index_status_Table, new Object[]{k, m.getMachineNumber(), m.getMachineName(), m.getMachineStartDate(), m.getMachineStartTime(), m.getMachineCurrentReading(), m.getMachineFuel()});
         }
         if (com.JD.StaticData.Static_DATA.running_Lable != null) {
             com.JD.StaticData.Static_DATA.running_Lable.setText("  + " + results.size() + " Machine Running");
@@ -668,18 +677,20 @@ public class StartStop_Form extends javax.swing.JFrame {
         session.close();
         flag = true;
     }
-
+    
     void reset_detailList_Table() {
         for (int i = detailList_Table_Model.getRowCount() - 1; i >= 0; i--) {
             detailList_Table_Model.removeRow(i);
         }
         index_detailList_Table = -1;
+        int k = 0;
         Session session = init_SessionFactory.openSession();
         Query q = session.createQuery("from com.JD.Machine.StartStop.Hibernate.config.Machinestartstop");
         for (Object object : q.list()) {
             ++index_detailList_Table;
+            ++k;
             com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
-            detailList_Table_Model.insertRow(index_detailList_Table, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
+            detailList_Table_Model.insertRow(index_detailList_Table, new Object[]{k, m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
         }
         session.close();
     }
@@ -719,7 +730,7 @@ public class StartStop_Form extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
+            
             public void run() {
                 new StartStop_Form().setVisible(true);
             }

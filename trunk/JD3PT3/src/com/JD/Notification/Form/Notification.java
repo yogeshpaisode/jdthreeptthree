@@ -47,6 +47,7 @@ public class Notification extends javax.swing.JFrame {
      */
     public void resetServicingTable() {
         int j = -1;
+        int k=0;
         for (int i = servicing_DefaultModel.getRowCount() - 1; i >= 0; i--) {
             servicing_DefaultModel.removeRow(i);
         }
@@ -57,7 +58,8 @@ public class Notification extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             ++j;
-            servicing_DefaultModel.insertRow(j, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
+            ++k;
+            servicing_DefaultModel.insertRow(j, new Object[]{k,m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
         }
         com.JD.StaticData.Static_DATA.readyMachine_Lable.setText("  + " + results.size() + " Machine Ready For Servicing   ");
         localServicing_Lable.setText(" + " + results.size() + " Machine");
@@ -66,6 +68,7 @@ public class Notification extends javax.swing.JFrame {
 
     public void resetcloseTo_servicing_Table() {
         int j = -1;
+        int k=0;
         for (int i = closeTo_servicing_Defaultmodel.getRowCount() - 1; i >= 0; i--) {
             closeTo_servicing_Defaultmodel.removeRow(i);
         }
@@ -76,7 +79,8 @@ public class Notification extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Machinemaster m = (com.JD.Master.Hibernate.config.Machinemaster) object;
             ++j;
-            closeTo_servicing_Defaultmodel.insertRow(j, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
+            ++k;
+            closeTo_servicing_Defaultmodel.insertRow(j, new Object[]{k,m.getMachineNumber(), m.getMachineName(), m.getMachineCurrentReading(), m.getMachineFuel(), m.getMachineServicingNumber()});
         }
         com.JD.StaticData.Static_DATA.notification_Close_Lable.setText(" + " + results.size() + " Machine");
         com.JD.StaticData.Static_DATA.machinec_CloseTo_Lable.setText("   + " + results.size() + " Machine Close To Servicing   ");
@@ -145,14 +149,14 @@ public class Notification extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
+                "Sr.No.", "Machine Number", "Machine Name", "Start Date", "Start Time", "Current Reading", "Fuel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -172,14 +176,14 @@ public class Notification extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine Number", "Machine Name", "Current", "Fuel", "No Of Servicing"
+                "Sr.No.", "Machine Number", "Machine Name", "Current", "Fuel", "No Of Servicing"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -201,14 +205,14 @@ public class Notification extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Machine Number", "Machine Name", "Current"
+                "Sr.No.", "Machine Number", "Machine Name", "Current"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {

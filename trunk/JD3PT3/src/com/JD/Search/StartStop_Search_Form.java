@@ -397,10 +397,12 @@ public class StartStop_Search_Form extends javax.swing.JFrame {
         }
         Session session = search_SessionFactory.openSession();
         Query q = session.createQuery(queryMaker);
+        int k=0;
         for (Object object : q.list()) {
             com.JD.Machine.StartStop.Hibernate.config.Machinestartstop m = (com.JD.Machine.StartStop.Hibernate.config.Machinestartstop) object;
             ++indexJTable;
-            defaultTableModel.insertRow(indexJTable, new Object[]{m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,m.getMachineNumber(), m.getMachineName(), m.getOperatorName(), m.getStartDate(), m.getStartTime(), m.getStopDate(), m.getStopTime(), m.getTotalTime(), m.getStartReading(), m.getStopReading(), m.getTotalReading(), m.getLastFuel(), m.getPresentFuel(), m.getConsumeFuel(), m.getAverage()});
             if (!machineList.contains(m.getMachineNumber())) {
                 number_ComboBox.addItem(m.getMachineNumber());
                 machineList.add(m.getMachineNumber());

@@ -496,11 +496,13 @@ public class SellDiesel_Search extends javax.swing.JFrame {
             }
         }
         Session session = search_SessionFactory.openSession();
+        int k=0;
         Query q = session.createQuery(queryMaker);
         for (Object object : q.list()) {
             com.Hibernate.diesel.config.Selldiesellog s = (com.Hibernate.diesel.config.Selldiesellog) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,s.getPartyLink(), s.getMachineNumber(), s.getMachineName(), s.getUsedQuantity(), s.getPersonPresentName(), s.getDriverName(), s.getDateOfAddition(), s.getTimeOfAddition(), s.getAddedByPersonName(), s.getAddedWithRight(), s.getLocation()});
         }
         session.close();
         reset();

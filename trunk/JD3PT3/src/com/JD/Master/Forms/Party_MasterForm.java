@@ -64,12 +64,13 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
         Query q = session.createQuery("from com.JD.Master.Hibernate.config.Partymaster");
         List list = q.list();
-
+        int k=0;
         for (Object object : list) {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             name_ComboBox.addItem(p.getPartyName());
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
         }
 
         session.close();
@@ -126,14 +127,14 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA/U", "TOA/U", "Location"
+                "Sr.No.", "Party Name", "Address", "City", "Mobile", "Phone", "Email ID", "Added By", "User Right", "DOA/U", "TOA/U", "Location"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -586,6 +587,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
         search_TextField.setText(search_TextField.getText().toUpperCase());
         resetJtableOnSEARCH();
         indexJTable = -1;
+        int k=0;
         String partName = name_ComboBox.getSelectedItem().toString();
 
         // Replace :  com.JD.StaticData.Static_DATA.init_SessionFactory.openSession();
@@ -598,7 +600,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
         for (Object object : results) {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
         }
         session.close();
 
@@ -714,6 +717,7 @@ public class Party_MasterForm extends javax.swing.JFrame {
 
         flag = false;
         indexJTable = -1;
+        int k=0;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -730,7 +734,8 @@ public class Party_MasterForm extends javax.swing.JFrame {
             com.JD.Master.Hibernate.config.Partymaster p = (com.JD.Master.Hibernate.config.Partymaster) object;
             name_ComboBox.addItem(p.getPartyName());
             indexJTable = indexJTable + 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
+            ++k;
+            defaultTableModel.insertRow(indexJTable, new Object[]{k,p.getPartyName(), p.getPartyAddress(), p.getPartyCity(), p.getPartyCity(), p.getPartyPhone(), p.getPartyEmail(), p.getPartyAddedByPersonName(), p.getPartyAddedWithRight(), p.getPartyDateOfAddition(), p.getPartyTimeOfAddition(), p.getPartyLocation()});
         }
         session.close();
         flag = true;

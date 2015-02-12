@@ -467,6 +467,7 @@ public class DM_Report extends javax.swing.JFrame {
     }//GEN-LAST:event_print_ButtonActionPerformed
     public void report(String queryMaker) {
         int indexJTable = -1;
+        int j=0;
         for (int i = defaultTableModel.getRowCount() - 1; i >= 0; i--) {
             defaultTableModel.removeRow(i);
         }
@@ -475,7 +476,8 @@ public class DM_Report extends javax.swing.JFrame {
         for (Object object : q.list()) {
             com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm d = (com.JD.PrintReceiptDM.Hibernate.config.Printreceiptdm) object;
             indexJTable += 1;
-            defaultTableModel.insertRow(indexJTable, new Object[]{d.getSrno(), d.getPartyLink(), d.getProductName(), d.getProductSize(), d.getProductMeasurement(), d.getProductValue(), d.getTotalAmount(), d.getPaymentType(), d.getDriverName(), d.getVehicleNumber(), d.getVehicleName(), d.getDateOfAddition(), d.getTimeOfAddition(), d.getAddedByPersonName(), d.getPrintingStatus()});
+            ++j;
+            defaultTableModel.insertRow(indexJTable, new Object[]{j,d.getSrno(), d.getPartyLink(), d.getProductName(), d.getProductSize(), d.getProductMeasurement(), d.getProductValue(), d.getTotalAmount(), d.getPaymentType(), d.getDriverName(), d.getVehicleNumber(), d.getVehicleName(), d.getDateOfAddition(), d.getTimeOfAddition(), d.getAddedByPersonName(), d.getPrintingStatus()});
         }
         session.close();
     }
